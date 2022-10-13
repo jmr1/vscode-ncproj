@@ -1,0 +1,728 @@
+{
+    "version": "1.0",
+    "operations" : ["SIN", "COS", "TAN", "ATAN", "SQRT", "ABS", "ROUND", "FIX", "FUP", "OR", "XOR", "AND", "BIN", "BCD", "OR", "XOR", "AND", "IF", "WHILE", "DO", "END", "EQ", "NE", "GT", "GE", "LT", "LE"],
+    "imperial": {
+        ",C": {
+            "word": ",C",
+            "range_from": -999,
+            "range_to": 999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "misc"
+        },
+        ",R": {
+            "word": ",R",
+            "range_from": -999,
+            "range_to": 999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "misc"
+        },
+        ":": {
+            "word": ":",
+            "range_from": 0,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "numbering"
+        },
+        "#": {
+            "word": "#",
+            "range_from": 0,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "macro"
+        },
+        "=": {
+            "word": "=",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "+": {
+            "word": "+",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "-": {
+            "word": "-",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "*": {
+            "word": "*",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "/": {
+            "word": "/",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "A": {
+            "word": "A",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "angle"
+        },
+        "A2": {
+            "word": "A2",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "assignable"
+        },
+        "B": {
+            "word": "B",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "angle"
+        },
+        "B2": {
+            "word": "B2",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "assignable"
+        },
+        "C": {
+            "word": "C",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "angle"
+        },
+        "C2": {
+            "word": "C2",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "assignable"
+        },
+        "D": {
+            "word": "D",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 999,
+            "unique": false,
+            "type": "misc"
+        },
+        "F": {
+            "word": "F",
+            "range_from": 0,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "feed"
+        },
+        "G": {
+            "word": "G",
+            "range_from": 0,
+            "range_to": 999,
+            "decimal_from": 0,
+            "decimal_to": 9,
+            "unique": false,
+            "type": "code"
+        },
+        "H": {
+            "word": "H",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "misc"
+        },
+        "I": {
+            "word": "I",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "J": {
+            "word": "J",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "K": {
+            "word": "K",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "L": {
+            "word": "L",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "misc"
+        },
+        "M": {
+            "word": "M",
+            "range_from": 0,
+            "range_to": 999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "code"
+        },
+        "N": {
+            "word": "N",
+            "range_from": 1,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "numbering"
+        },
+        "P": {
+            "word": "P",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 999,
+            "unique": false,
+            "type": "misc"
+        },
+        "Q": {
+            "word": "Q",
+            "range_from": -999,
+            "range_to": 999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "misc"
+        },
+        "R": {
+            "word": "R",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "S": {
+            "word": "S",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "misc"
+        },
+        "S1": {
+            "word": "S1",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "assignable"
+        },
+        "S2": {
+            "word": "S2",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "assignable"
+        },
+        "S3": {
+            "word": "S3",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "assignable"
+        },
+        "T": {
+            "word": "T",
+            "range_from": 0,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "misc"
+        },
+        "X": {
+            "word": "X",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "Y": {
+            "word": "Y",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "Z": {
+            "word": "Z",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "U": {
+            "word": "U",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "V": {
+            "word": "V",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "W": {
+            "word": "W",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "GOTO": {
+            "word": "GOTO",
+            "range_from": 1,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "misc"
+        }
+    },
+    "metric": {
+        ",C": {
+            "word": ",C",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 999,
+            "unique": false,
+            "type": "misc"
+        },
+        ",R": {
+            "word": ",R",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 999,
+            "unique": false,
+            "type": "misc"
+        },
+        ":": {
+            "word": ":",
+            "range_from": 0,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "numbering"
+        },
+        "#": {
+            "word": "#",
+            "range_from": 0,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "macro"
+        },
+        "=": {
+            "word": "=",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "+": {
+            "word": "+",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "-": {
+            "word": "-",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "*": {
+            "word": "*",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "/": {
+            "word": "/",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": false,
+            "type": "calc"
+        },
+        "A": {
+            "word": "A",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "angle"
+        },
+        "A2": {
+            "word": "A2",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "assignable"
+        },
+        "B": {
+            "word": "B",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "angle"
+        },
+        "B2": {
+            "word": "B2",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "assignable"
+        },
+        "C": {
+            "word": "C",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "angle"
+        },
+        "C2": {
+            "word": "C2",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "assignable"
+        },
+        "D": {
+            "word": "D",
+            "range_from": -999,
+            "range_to": 999,
+            "decimal_from": 0,
+            "decimal_to": 999,
+            "unique": false,
+            "type": "misc"
+        },
+        "F": {
+            "word": "F",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 99999,
+            "unique": false,
+            "type": "feed"
+        },
+        "G": {
+            "word": "G",
+            "range_from": 0,
+            "range_to": 999,
+            "decimal_from": 0,
+            "decimal_to": 9,
+            "unique": false,
+            "type": "code"
+        },
+        "H": {
+            "word": "H",
+            "range_from": -999,
+            "range_to": 999,
+            "decimal_from": 0,
+            "decimal_to": 999,
+            "unique": false,
+            "type": "misc"
+        },
+        "I": {
+            "word": "I",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "J": {
+            "word": "J",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "K": {
+            "word": "K",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "L": {
+            "word": "L",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "misc"
+        },
+        "M": {
+            "word": "M",
+            "range_from": 0,
+            "range_to": 999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "code"
+        },
+        "N": {
+            "word": "N",
+            "range_from": 1,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "numbering"
+        },
+        "P": {
+            "word": "P",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 999,
+            "unique": false,
+            "type": "misc"
+        },
+        "Q": {
+            "word": "Q",
+            "range_from": -9999,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 999,
+            "unique": false,
+            "type": "misc"
+        },
+        "R": {
+            "word": "R",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "S": {
+            "word": "S",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "misc"
+        },
+        "S1": {
+            "word": "S1",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "assignable"
+        },
+        "S2": {
+            "word": "S2",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "assignable"
+        },
+        "S3": {
+            "word": "S3",
+            "range_from": 0,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "assignable"
+        },
+        "T": {
+            "word": "T",
+            "range_from": 0,
+            "range_to": 9999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "misc"
+        },
+        "X": {
+            "word": "X",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "Y": {
+            "word": "Y",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "Z": {
+            "word": "Z",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "U": {
+            "word": "U",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "V": {
+            "word": "V",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "W": {
+            "word": "W",
+            "range_from": -99999,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 9999,
+            "unique": true,
+            "type": "length"
+        },
+        "GOTO": {
+            "word": "GOTO",
+            "range_from": 1,
+            "range_to": 99999,
+            "decimal_from": 0,
+            "decimal_to": 0,
+            "unique": false,
+            "type": "misc"
+        }
+    }
+}

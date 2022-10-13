@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="SidePanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="SidePanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 122</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SidePanel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;SidePanel.Name" xml:space="preserve">
+    <value>SidePanel</value>
+  </data>
+  <data name="&gt;&gt;SidePanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SidePanel.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;SidePanel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonProgramista.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="buttonProgramista.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Franklin Gothic Medium, 11.25pt</value>
+  </data>
+  <data name="buttonProgramista.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMoLHMy0s4AAADmSURBVGhD7ZJBCoMwFAU9Xe+/7S2678IiGBA7
+        IUn9eb6UDMxO8uaDy+RveTzXL4eAws/aQrE57aDIklZQYEkbKK5WCyisVgsorFYLKKxWCyisVhsorqQV
+        FFjSDorMaQvFnh2CYcMnLgz5C1F0TjsosqQFELa+X1np+/2lm4AgCk/S9/tLN0Axu9XxSTkUcbD5gE0p
+        FHBwHtAVGgeb4pMSaBicB3SDhsHhD9hsit+UQMMZ5wFdoOEoJdBwlBJoOEoJNBylBBqOUgINRymBhqOU
+        QeNXlUIBV5VDEb96GxTTqgUUVnKyLB9Z0GxY+M5FhQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="buttonProgramista.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonProgramista.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 488</value>
+  </data>
+  <data name="buttonProgramista.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 122</value>
+  </data>
+  <data name="buttonProgramista.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="buttonProgramista.Text" xml:space="preserve">
+    <value>Programmer</value>
+  </data>
+  <data name="buttonProgramista.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonProgramista.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;buttonProgramista.Name" xml:space="preserve">
+    <value>buttonProgramista</value>
+  </data>
+  <data name="&gt;&gt;buttonProgramista.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonProgramista.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;buttonProgramista.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonObszarRoboczy.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="buttonObszarRoboczy.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Franklin Gothic Medium, 11.25pt</value>
+  </data>
+  <data name="buttonObszarRoboczy.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMrCRMbVUoAAAEbSURBVGhD7Y9BCgMxDAP3df3/ta9p6cEggpLI
+        sWkcyMBASW1Z+1wuu3i9P2lugRVZtSTlC47A8kd+xNEfwMqbR8CKm+VhpVtLwwq3loWV7VmeraUzDmLx
+        zDyJzINoBFdG5kE0gisj8yAawZWhDEcLtSj35JujYftPDhOZ5bpusmF7QzOZ5bO3Ljhsv1UV2N5I3JHA
+        Za8KbE9Vgi2qKrA9VQm2qKrA9lQlcBiXFRXY3kjckWDD9oZmMstnb11Gw/afHCYyy3XdVIblMBHlnnzT
+        NdzBMtAIrozMg2gEV0bmQTSCKyPzIBohI8MFFv/78VVY6Z5lYWVbS8MKt5aHlTaPgBU3j+Ho8j+O/4Af
+        5ctjwahbYEVWvVwuizzPF2S17/aOAiUMAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="buttonObszarRoboczy.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonObszarRoboczy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 366</value>
+  </data>
+  <data name="buttonObszarRoboczy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 122</value>
+  </data>
+  <data name="buttonObszarRoboczy.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="buttonObszarRoboczy.Text" xml:space="preserve">
+    <value>Machine Points</value>
+  </data>
+  <data name="buttonObszarRoboczy.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonObszarRoboczy.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;buttonObszarRoboczy.Name" xml:space="preserve">
+    <value>buttonObszarRoboczy</value>
+  </data>
+  <data name="&gt;&gt;buttonObszarRoboczy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonObszarRoboczy.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;buttonObszarRoboczy.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonParametry.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="buttonParametry.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Franklin Gothic Medium, 11.25pt</value>
+  </data>
+  <data name="buttonParametry.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMsCCtd8xsAAACjSURBVGhD7dNBqkJBEEPRWp37n7oLd/BE6RIp
+        aEw1hGfrPZCBUrHzBz8AAGi7XI9ntsR4t9lIZXzeOCOpx2o575yRrRRrx5GWpRLwB7b+32C822ykMj5v
+        nJHUY7Wcd87IVoq140jLUgnA6W4RxyPj48vs+69Ux241PuVodXy9d2Q8pesU3x9yZTyl6ZbrvSPjqc9q
+        of0DZ5qN3eqPAAAA+HkRd70EVa5EaurPAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="buttonParametry.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonParametry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 244</value>
+  </data>
+  <data name="buttonParametry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 122</value>
+  </data>
+  <data name="buttonParametry.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="buttonParametry.Text" xml:space="preserve">
+    <value>Initial Parameters</value>
+  </data>
+  <data name="buttonParametry.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonParametry.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;buttonParametry.Name" xml:space="preserve">
+    <value>buttonParametry</value>
+  </data>
+  <data name="&gt;&gt;buttonParametry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonParametry.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;buttonParametry.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="buttonKinematyka.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="buttonKinematyka.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Franklin Gothic Medium, 11.25pt</value>
+  </data>
+  <data name="buttonKinematyka.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMqE/dinXEAAAEkSURBVGhD7ZBRisMwDERzut7/d0/TogXBVIyN
+        ZDtWVPzg/Y1Hk1yHQxVef+9/S6LjS36EHa8+As8YHI2m4x1kc2o63kE2p6bjHWRzag9vLgSWZjgNK93p
+        NKx0p8vxHrA5tYc3NwUe6R2yObWHNzcFHukdsjm1hzc3TXQM2sOb2wKOQXt4c9vAQZ5Rkew2IoMe+QER
+        zgdkgcOtJWDD1VLcNnzX37jlA7B0aTFh+R0sRO9i+Q0sRFt4cy1m3lKwEGWwnBhh9F0TLEQZLCdGGH3X
+        BAtRBsuJEUbfNcFClMFyYoTRd19gyRMMw0oyDcNKMp2CFYoMlhMjjL5rgoUog+XEVNggkcFyYipskMhg
+        OTEVNkhs4c1tww5SS1F6vFJ6/OHwi1zXB3FqSPFztDEiAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="buttonKinematyka.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonKinematyka.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 122</value>
+  </data>
+  <data name="buttonKinematyka.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 122</value>
+  </data>
+  <data name="buttonKinematyka.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="buttonKinematyka.Text" xml:space="preserve">
+    <value>Kinematics</value>
+  </data>
+  <data name="buttonKinematyka.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonKinematyka.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;buttonKinematyka.Name" xml:space="preserve">
+    <value>buttonKinematyka</value>
+  </data>
+  <data name="&gt;&gt;buttonKinematyka.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonKinematyka.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;buttonKinematyka.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Franklin Gothic Medium, 11.25pt</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMrJSHDOakAAAEjSURBVGhD7Y9LCgMxDEPndL3/tqdpVwYRXuJ8
+        auNCHggGxbY0z+VyufR5vT9LMkZvaVCJU6VB4b9SCjthWrLdJy+UnTAt2e6TF8pOmJZs98kLRQNPZJAX
+        jobuyiAvBQ32ZMx6qWgBrwjNkJeKhntF7F1nyEtFw70i9q4z5KWiBbwiNENeOrMlaI68slBZ8spCZckr
+        C5UlryxUlryyUFnyykJlySsLlSWvLFSWvLJQWfLKQmXJW0IPRMmY9abR5Wi1eQZ502wvLqAZ9q2Z5E2z
+        vbiAZti3ZpI3jS5Hq80zyFtCD0TJmPWO0IO76kEz5B1xcszbtXedIe+Ik2Perr339BPo8Kp60KzKhZYq
+        aQgtVFSX4WMR3B/4Bw2hhUq6XC7C83wB5hhTxIZEcn8AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 0</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 122</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.Text" xml:space="preserve">
+    <value>CNC Machine Tool</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;buttonObrabiarkaCNC.Name" xml:space="preserve">
+    <value>buttonObrabiarkaCNC</value>
+  </data>
+  <data name="&gt;&gt;buttonObrabiarkaCNC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonObrabiarkaCNC.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;buttonObrabiarkaCNC.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 611</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="buttonDefault.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="buttonDefault.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 572</value>
+  </data>
+  <data name="buttonDefault.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="buttonDefault.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="buttonDefault.Text" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="&gt;&gt;buttonDefault.Name" xml:space="preserve">
+    <value>buttonDefault</value>
+  </data>
+  <data name="&gt;&gt;buttonDefault.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonDefault.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonDefault.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>506, 572</value>
+  </data>
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>294, 572</value>
+  </data>
+  <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="buttonExport.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="buttonExport.Text" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="&gt;&gt;buttonExport.Name" xml:space="preserve">
+    <value>buttonExport</value>
+  </data>
+  <data name="&gt;&gt;buttonExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonExport.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonExport.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonImport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>198, 572</value>
+  </data>
+  <data name="buttonImport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="buttonImport.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="buttonImport.Text" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="&gt;&gt;buttonImport.Name" xml:space="preserve">
+    <value>buttonImport</value>
+  </data>
+  <data name="&gt;&gt;buttonImport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonImport.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonImport.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="openFileDialog1.Filter" xml:space="preserve">
+    <value>NCSetting Files|*.ncsetting|All Files|*.*</value>
+  </data>
+  <data name="openFileDialog1.Title" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>157, 17</value>
+  </metadata>
+  <data name="saveFileDialog1.Filter" xml:space="preserve">
+    <value>NCSetting Files|*.ncsetting|All Files|*.*</value>
+  </data>
+  <data name="saveFileDialog1.Title" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>829, 611</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Control and Machine Tool configuration</value>
+  </data>
+  <data name="&gt;&gt;openFileDialog1.Name" xml:space="preserve">
+    <value>openFileDialog1</value>
+  </data>
+  <data name="&gt;&gt;openFileDialog1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveFileDialog1.Name" xml:space="preserve">
+    <value>saveFileDialog1</value>
+  </data>
+  <data name="&gt;&gt;saveFileDialog1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>NCSettingsForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

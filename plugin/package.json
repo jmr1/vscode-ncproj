@@ -1,0 +1,84 @@
+{
+    "name": "ncproj",
+    "displayName": "NC Project",
+    "description": "NC Project is an integrated programming environment for text files dedicated to numerically controlled machine tools, the syntax of which is based on G-codes.",
+    "author": "Janusz Rupar, Marcin Cieślik",
+    "homepage": "https://gitlab.com/nceditor/nceditor/-/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.com/nceditor/nceditor.git"
+    },
+    "license": "Apache 2.0",
+    "version": "0.0.1",
+    "icon": "images/icon.png",
+    "publisher": "BeeCAM",
+    "categories": [],
+    "activationEvents": [
+        "onLanguage:ncproj",
+        "onCommand:ncproj.ncsettings"
+    ],
+    "contributes": {
+        "configuration": {
+            "title": "NC Project VSCode Language Server Configuration",
+            "type": "object",
+            "properties": {
+                "ncproj.args": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Specifies the arguments to be passed to the ncproj language server. Requires a VSCode restart to take effect."
+                }
+            }
+        },
+        "languages": [
+            {
+                "id": "ncproj",
+                "extensions": [
+                    ".nc",
+                    ".txt",
+                    ".ptp",
+                    ".dat",
+                    ".mcd",
+                    ".spf"
+                ],
+                "aliases": [
+                    "NC Project",
+                    "ncproj"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "debuggers": [],
+        "commands": [
+            {
+                "command": "ncproj.ncsettings",
+                "title": "NC Project: Control and Machine Tool configuration"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "ncproj",
+                "path": "./snippets.json"
+            }
+        ]
+    },
+    "main": "./vscode-client/out/extension",
+    "scripts": {
+        "vscode:prepublish": "cd vscode-client && npm run compile && cd ..",
+        "compile": "cd vscode-client && tsc -p ./ && cd ..",
+        "watch": "cd vscode-client && tsc -watch -p ./ && cd .."
+    },
+    "dependencies": {
+        "path-exists": "^4.0.0",
+        "vscode-languageclient": "^7.0.0-next.12"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.32",
+        "@types/node": "^6.0.40",
+        "@types/vscode": "1.53.0",
+        "vscode-test": "1.5.1",
+        "typescript": "^3.6.4"
+    },
+    "engines": {
+        "vscode": "^1.53.0"
+    }
+}

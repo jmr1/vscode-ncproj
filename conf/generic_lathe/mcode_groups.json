@@ -1,0 +1,55 @@
+{
+    "version": "1.0",
+	"groups": {
+		"0": [{
+			"code": 0,
+			"rest": 0
+		}, {
+			"code": 1,
+			"rest": 0
+		}, {
+			"code": 2,
+			"rest": 0
+		}, {
+			"code": 30,
+			"rest": 0
+		}],
+		"1": [{
+			"code": 3,
+			"rest": 0
+		}, {
+			"code": 4,
+			"rest": 0
+		}, {
+			"code": 5,
+			"rest": 0
+		}],
+		"2": [{
+			"code": 7,
+			"rest": 0
+		}, {
+			"code": 8,
+			"rest": 0
+		}, {
+			"code": 9,
+			"rest": 0
+		}],
+		"3": [{
+			"code": 13,
+			"rest": 0
+		}, {
+			"code": 14,
+			"rest": 0
+		}],
+		"4": [{
+			"code": 97,
+			"rest": 0
+		}, {
+			"code": 98,
+			"rest": 0
+		}, {
+			"code": 99,
+			"rest": 0
+		}]
+	}
+}

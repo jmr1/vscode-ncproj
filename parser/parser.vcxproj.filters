@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\fanuc">
+      <UniqueIdentifier>{15320942-5042-4b7e-9adc-055623985562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\heidenhain">
+      <UniqueIdentifier>{0fd9531c-d9c4-4e7a-a7ed-f5d3f57e9769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fanuc">
+      <UniqueIdentifier>{3b886b9b-6f81-47e1-a51b-191325d5baf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\heidenhain">
+      <UniqueIdentifier>{60f88776-7a70-4325-bced-9d33fa6a3a63}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parser_export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="get_spirit_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AllAttributesParserBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneralParserDefines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\AllAttributesParser.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="heidenhain\AllAttributesParser.h">
+      <Filter>Header Files\heidenhain</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\AllAttributesParserDefines.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="heidenhain\AllAttributesParserDefines.h">
+      <Filter>Header Files\heidenhain</Filter>
+    </ClInclude>
+    <ClInclude Include="heidenhain\AllAttributesParserGrammar.h">
+      <Filter>Header Files\heidenhain</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\AllAttributesParserGrammar.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\AllAttributesParserWrapper.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="heidenhain\AllAttributesParserWrapper.h">
+      <Filter>Header Files\heidenhain</Filter>
+    </ClInclude>
+    <ClInclude Include="AllAttributesParserWrapperBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\AttributesPathCalculator.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\AxesRotator.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\CodeGroupsDefines.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\CodeGroupsVerifier.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\FileSplitter.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\GrammarSelector.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\MacroDefines.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\MacroEvaluatedCodeVerifier.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\MacroEvaluator.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\MathUtils.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\MessageText.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\MessageTextImpl.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\OrderAttributeParser.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\PathCalculator.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\RangeVerifier.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\Renumberer.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\UniqueCode.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\UnitConverter.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\ValueCalculator.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\SameWordInBlockVerifier.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneralParserDefines.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="heidenhain\AllAttributesParser.cpp">
+      <Filter>Source Files\heidenhain</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\AllAttributesParser.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\AllAttributesParserDefines.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\AllAttributesParserGrammar.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="heidenhain\AllAttributesParserGrammar.cpp">
+      <Filter>Source Files\heidenhain</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\AllAttributesParserWrapper.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\AttributesPathCalculator.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\AxesRotator.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\CodeGroupsVerifier.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\FileSplitter.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\GrammarSelector.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\MacroEvaluatedCodeVerifier.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\MacroEvaluator.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\MessageText.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\MessageText_en.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\MessageText_pl.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\OrderAttributeParser.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\PathCalculator.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\RangeVerifier.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\Renumberer.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\UniqueCode.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\UnitConverter.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\ValueCalculator.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="heidenhain\AllAttributesParserWrapper.cpp">
+      <Filter>Source Files\heidenhain</Filter>
+    </ClCompile>
+    <ClCompile Include="AllAttributesParserWrapperBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\SameWordInBlockVerifier.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="heidenhain\AllAttributesParserDefines.cpp">
+      <Filter>Source Files\heidenhain</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="parser.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

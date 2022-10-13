@@ -1,0 +1,14 @@
+.vscode/**
+tests/**
+.github
+.settings
+.project
+vscode-client/src
+**/.gitignore
+**/*.vsix
+**/*.pdb
+**/gtest*.dll
+**/gmock*.dll
+**/*_ut.exe
+src/build/**
+src/dist/**

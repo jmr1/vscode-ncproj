@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonProgramista.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMoLHMy0s4AAADmSURBVGhD7ZJBCoMwFAU9Xe+/7S2678IiGBA7
+        IUn9eb6UDMxO8uaDy+RveTzXL4eAws/aQrE57aDIklZQYEkbKK5WCyisVgsorFYLKKxWCyisVhsorqQV
+        FFjSDorMaQvFnh2CYcMnLgz5C1F0TjsosqQFELa+X1np+/2lm4AgCk/S9/tLN0Axu9XxSTkUcbD5gE0p
+        FHBwHtAVGgeb4pMSaBicB3SDhsHhD9hsit+UQMMZ5wFdoOEoJdBwlBJoOEoJNBylBBqOUgINRymBhqOU
+        QeNXlUIBV5VDEb96GxTTqgUUVnKyLB9Z0GxY+M5FhQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="buttonProgramista.Text" xml:space="preserve">
+    <value>Programista</value>
+  </data>
+  <data name="buttonObszarRoboczy.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMrCRMbVUoAAAEbSURBVGhD7Y9BCgMxDAP3df3/ta9p6cEggpLI
+        sWkcyMBASW1Z+1wuu3i9P2lugRVZtSTlC47A8kd+xNEfwMqbR8CKm+VhpVtLwwq3loWV7VmeraUzDmLx
+        zDyJzINoBFdG5kE0gisj8yAawZWhDEcLtSj35JujYftPDhOZ5bpusmF7QzOZ5bO3Ljhsv1UV2N5I3JHA
+        Za8KbE9Vgi2qKrA9VQm2qKrA9lQlcBiXFRXY3kjckWDD9oZmMstnb11Gw/afHCYyy3XdVIblMBHlnnzT
+        NdzBMtAIrozMg2gEV0bmQTSCKyPzIBohI8MFFv/78VVY6Z5lYWVbS8MKt5aHlTaPgBU3j+Ho8j+O/4Af
+        5ctjwahbYEVWvVwuizzPF2S17/aOAiUMAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="buttonObszarRoboczy.Text" xml:space="preserve">
+    <value>Punkty Obrabiarki</value>
+  </data>
+  <data name="buttonParametry.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMsCCtd8xsAAACjSURBVGhD7dNBqkJBEEPRWp37n7oLd/BE6RIp
+        aEw1hGfrPZCBUrHzBz8AAGi7XI9ntsR4t9lIZXzeOCOpx2o575yRrRRrx5GWpRLwB7b+32C822ykMj5v
+        nJHUY7Wcd87IVoq140jLUgnA6W4RxyPj48vs+69Ux241PuVodXy9d2Q8pesU3x9yZTyl6ZbrvSPjqc9q
+        of0DZ5qN3eqPAAAA+HkRd70EVa5EaurPAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="buttonParametry.Text" xml:space="preserve">
+    <value>Parametry Początkowe</value>
+  </data>
+  <data name="buttonKinematyka.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMqE/dinXEAAAEkSURBVGhD7ZBRisMwDERzut7/d0/TogXBVIyN
+        ZDtWVPzg/Y1Hk1yHQxVef+9/S6LjS36EHa8+As8YHI2m4x1kc2o63kE2p6bjHWRzag9vLgSWZjgNK93p
+        NKx0p8vxHrA5tYc3NwUe6R2yObWHNzcFHukdsjm1hzc3TXQM2sOb2wKOQXt4c9vAQZ5Rkew2IoMe+QER
+        zgdkgcOtJWDD1VLcNnzX37jlA7B0aTFh+R0sRO9i+Q0sRFt4cy1m3lKwEGWwnBhh9F0TLEQZLCdGGH3X
+        BAtRBsuJEUbfNcFClMFyYoTRd19gyRMMw0oyDcNKMp2CFYoMlhMjjL5rgoUog+XEVNggkcFyYipskMhg
+        OTEVNkhs4c1tww5SS1F6vFJ6/OHwi1zXB3FqSPFztDEiAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="buttonKinematyka.Text" xml:space="preserve">
+    <value>Kinematyka</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMrJSHDOakAAAEjSURBVGhD7Y9LCgMxDEPndL3/tqdpVwYRXuJ8
+        auNCHggGxbY0z+VyufR5vT9LMkZvaVCJU6VB4b9SCjthWrLdJy+UnTAt2e6TF8pOmJZs98kLRQNPZJAX
+        jobuyiAvBQ32ZMx6qWgBrwjNkJeKhntF7F1nyEtFw70i9q4z5KWiBbwiNENeOrMlaI68slBZ8spCZckr
+        C5UlryxUlryyUFnyykJlySsLlSWvLFSWvLJQWfLKQmXJW0IPRMmY9abR5Wi1eQZ502wvLqAZ9q2Z5E2z
+        vbiAZti3ZpI3jS5Hq80zyFtCD0TJmPWO0IO76kEz5B1xcszbtXedIe+Ik2Perr339BPo8Kp60KzKhZYq
+        aQgtVFSX4WMR3B/4Bw2hhUq6XC7C83wB5hhTxIZEcn8AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="buttonObrabiarkaCNC.Text" xml:space="preserve">
+    <value>Obrabiarka CNC</value>
+  </data>
+  <data name="buttonApply.Text" xml:space="preserve">
+    <value>Zastosuj</value>
+  </data>
+  <data name="buttonDefault.Text" xml:space="preserve">
+    <value>Domyślne</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="buttonExport.Text" xml:space="preserve">
+    <value>Eksport</value>
+  </data>
+  <data name="openFileDialog1.Filter" xml:space="preserve">
+    <value>Pliki NCSetting|*.ncsetting|Wszystkie pliki|*.*</value>
+  </data>
+  <data name="saveFileDialog1.Filter" xml:space="preserve">
+    <value>Pliki NCSetting|*.ncsetting|Wszystkie pliki|*.*</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Konfiguracja sterownika i obrabiarki</value>
+  </data>
+</root>

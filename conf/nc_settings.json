@@ -1,0 +1,2058 @@
+{
+  "version": "1.0",
+  "driver_default": "fanuc_mill",
+  "driver_list": [
+    "fanuc_mill",
+    "fanuc_lathe",
+    "generic_mill",
+    "generic_lathe",
+    "haas_mill",
+    "haas_lathe",
+    "heidenhain",
+    "makino_mill"
+  ],
+  "machine_tool_default": "mill_3axis",
+  "machine_tool_id": "",
+  "cnc_default_values_list": {
+    "default_motion": [
+      "rapid_traverse",
+      "linear_interpolation"
+    ],
+    "default_work_plane": [
+      "XY",
+      "XZ",
+      "YZ"
+    ],
+    "default_driver_units": [
+      "millimeter",
+      "inch"
+    ],
+    "default_programming": [
+      "absolute",
+      "incremental"
+    ],
+    "default_feed_mode": [
+      "feed_per_minute",
+      "feed_per_revolution"
+    ],
+    "default_rotation_direction": [
+      "right",
+      "left"
+    ],
+    "drill_cycle_z_value": [
+      "absolute",
+      "incremental"
+    ],
+    "drill_cycle_return_value": [
+      "beginning",
+      "point_r"
+    ]
+  },
+  "kinematics_list": {
+    "pallet_exchange_code": [
+      "",
+      "M",
+      "O"
+    ],
+    "tool_measurement_code": [
+      "",
+      "M",
+      "O"
+    ]
+  },
+  "machine_tool": {
+    "mill_3axis": {
+      "extras": {
+        "cnc_probe": false,
+        "pallet_changer": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_4axis": {
+      "extras": {
+        "cnc_probe": false,
+        "pallet_changer": false,
+        "turning_option": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_4axis_horizontal": {
+      "extras": {
+        "cnc_probe": false,
+        "pallet_changer": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "B"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_4axis_horizontal_pinola": {
+      "extras": {
+        "cnc_probe": false,
+        "pallet_changer": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "B",
+        "W"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "W": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_4axis_head_gantry": {
+      "extras": {
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_5axis_head_head_gantry": {
+      "extras": {
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A",
+        "C"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_5axis_head_table_gantry": {
+      "extras": {
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A",
+        "C"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_5axis_table_table": {
+      "extras": {
+        "cnc_probe": false,
+        "pallet_changer": false,
+        "turning_option": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A",
+        "C"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_5axis_table_tilt": {
+      "extras": {
+        "cnc_probe": false,
+        "pallet_changer": false,
+        "turning_option": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A",
+        "B"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "B": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_5axis_head_table": {
+      "extras": {
+        "cnc_probe": false,
+        "pallet_changer": false,
+        "turning_option": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "B",
+        "C"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_5axis_horizontal_table_table": {
+      "extras": {
+        "cnc_probe": false,
+        "pallet_changer": false,
+        "turning_option": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A",
+        "B"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill_5axis_horizontal_table_table_pinola": {
+      "extras": {
+        "cnc_probe": false,
+        "pallet_changer": false,
+        "turning_option": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A",
+        "B",
+        "W"
+      ],
+      "type": "mill",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "W": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "lathe_zx": {
+      "extras": {
+        "additional_tools": false
+      },
+      "axes": [
+        "X",
+        "Z",
+        "W"
+      ],
+      "type": "lathe",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "W": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XZ",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "lathe_zxc": {
+      "extras": {
+        "additional_tools": false
+      },
+      "axes": [
+        "X",
+        "Z",
+        "C",
+        "W"
+      ],
+      "type": "lathe",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          },
+          "W": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XZ",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "lathe_zxcy": {
+      "extras": {
+        "additional_tools": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "C",
+        "W"
+      ],
+      "type": "lathe",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          },
+          "W": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XZ",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "lathe_zxcy_steady": {
+      "extras": {
+        "additional_tools": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "C",
+        "U",
+        "W"
+      ],
+      "type": "lathe",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          },
+          "U": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          },
+          "W": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XZ",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill-turn_XYZBC": {
+      "extras": {
+        "additional_tools": false,
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "B",
+        "C"
+      ],
+      "type": "millturn",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill-turn_XYZBC_steady": {
+      "extras": {
+        "additional_tools": false,
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "B",
+        "C",
+        "W"
+      ],
+      "type": "millturn",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          },
+          "W": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill-turn_XYZBC_C2": {
+      "extras": {
+        "additional_tools": false,
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "B",
+        "C",
+        "C2"
+      ],
+      "type": "millturn",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          },
+          "C2": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill-turn_XYZBC_C2_steady": {
+      "extras": {
+        "additional_tools": false,
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "B",
+        "C",
+        "C2",
+        "W"
+      ],
+      "type": "millturn",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          },
+          "C2": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          },
+          "W": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill-turn_XYZBC_C2_Lower_Left_Turret": {
+      "extras": {
+        "additional_tools": false,
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A",
+        "B",
+        "C",
+        "C2"
+      ],
+      "type": "millturn",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          },
+          "C2": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill-turn_XYZBC_C2_Lower_Right_Turret": {
+      "extras": {
+        "additional_tools": false,
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A",
+        "B",
+        "C",
+        "C2"
+      ],
+      "type": "millturn",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          },
+          "C2": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    },
+    "mill-turn_XYZBC_C2_Lower_LeftRight_Turret": {
+      "extras": {
+        "additional_tools": false,
+        "cnc_probe": false
+      },
+      "axes": [
+        "X",
+        "Y",
+        "Z",
+        "A",
+        "A2",
+        "B",
+        "C",
+        "C2"
+      ],
+      "type": "millturn",
+      "kinematics": {
+        "cartesian_system_axis": {
+          "X": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Y": {
+            "range_min": -500.0,
+            "range_max": 500.0
+          },
+          "Z": {
+            "range_min": 0.0,
+            "range_max": 1000.0
+          },
+          "A": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "A2": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "B": {
+            "range_min": -180.0,
+            "range_max": 180.0
+          },
+          "C": {
+            "range_min": 0.0,
+            "range_max": 360.0
+          },
+          "C2": {
+            "range_min": 0.0,
+            "range_max": 0.0
+          }
+        },
+        "max_working_feed": 20000,
+        "max_fast_feed": 20000,
+        "maximum_spindle_speed": 10000,
+        "numer_of_items_in_the_warehouse": 30,
+        "tool_exchange_time": 6,
+        "pallet_exchange_time": 0,
+        "tool_measurement_time": 0,
+        "diameter_programming_2x": false,
+        "auto_measure_after_tool_selection": false,
+        "pallet_exchange_code": "",
+        "pallet_exchange_code_value": "",
+        "tool_measurement_code": "",
+        "tool_measurement_code_value": ""
+      },
+      "cnc_default_values": {
+        "default_motion": "rapid_traverse",
+        "default_work_plane": "XY",
+        "default_driver_units": "millimeter",
+        "default_programming": "absolute",
+        "default_feed_mode": "feed_per_minute",
+        "rapid_traverse_cancel_cycle": false,
+        "linear_interpolation_cancel_cycle": false,
+        "circular_interpolation_cw_cancel_cycle": false,
+        "circular_interpolation_ccw_cancel_cycle": false,
+        "cycle_cancel_starts_rapid_traverse": false,
+        "operator_turns_on_rotation": false,
+        "default_rotation": 0,
+        "default_rotation_direction": "right",
+        "tool_number_executes_exchange": false,
+        "auto_rapid_traverse_after_tool_exchange": false,
+        "drill_cycle_z_value": "absolute",
+        "drill_cycle_return_value": "beginning"
+      },
+      "machine_points_data": {
+        "tool_exchange_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0
+        },
+        "machine_base_point": {
+          "X": 0.0,
+          "Y": 0.0,
+          "Z": 500.0,
+          "I": 0.0,
+          "J": 0.0,
+          "K": 0.0
+        }
+      }
+    }
+  },
+  "author": {
+    "name": "",
+    "surname": "",
+    "position": "",
+    "department": "",
+    "phone1": "",
+    "phone2": "",
+    "email": "",
+    "other": "",
+    "document_header": "",
+    "document_footer": "",
+    "comment": "",
+    "working_time_at_end": false
+  }
+}

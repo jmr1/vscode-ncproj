@@ -1,0 +1,33 @@
+{
+	"version": "1.0",
+	"descriptions": {
+		"0": "Program stop",
+		"1": "Optional program stop",
+		"2": "End of program",
+		"3": "Spindle start forward CW",
+		"4": "Spindle start reverse CCW",
+		"5": "Spindle stop",
+		"6": "Tool change",
+		"7": "Coolant ON – Mist",
+		"8": "Coolant ON – Flood coolant",
+		"9": "Coolant OFF",
+		"10": "Rotary B axis clamp ON",
+		"11": "Rotary B axis clamp OFF",
+		"12": "Rotary C axis clamp ON",
+		"13": "Rotary C axis clamp OFF",
+		"14": "Probe sensor set",
+		"15": "Index table reverse",
+		"16": "4th axis mirror image on",
+		"18": "Return probe sensor",
+		"19": "Spindle off, orient",
+		"21": "X axis mirror image ON",
+		"22": "Y axis mirror image ON",
+		"23": "Mirror image OFF",
+		"26": "Trough spindle coolant on",
+		"30": "End of program (Reset)",
+		"56": "Tool offset data trnasfer command",
+		"98": "Subprogram call",
+		"99": "End of subprogram",
+		"198": "Subroutine call"
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"version": "1.0",
+	"descriptions": {
+		"0": "Program stop",
+		"1": "Optional program stop",
+		"2": "End of program",
+		"3": "Spindle start forward CW",
+		"4": "Spindle start reverse CCW",
+		"5": "Spindle stop",
+		"8": "Coolant ON",
+		"9": "Coolant OFF",
+		"29": "Rigid tap mode",
+		"30": "End of program (Reset)",
+		"40": "Spindle gear at middle",
+		"41": "Low gear select",
+		"42": "High gear select",
+		"68": "Hydraulic chuck close",
+		"69": "Hydraulic chuck open",
+		"78": "Tailstock advancing",
+		"79": "Tailstock reversing",
+		"94": "Mirrorimage cancel",
+		"95": "Mirrorimage of X axis",
+		"98": "Subprogram call",
+		"99": "End of subprogram"
+	}
+}

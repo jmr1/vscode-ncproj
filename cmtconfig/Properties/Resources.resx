@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="nceditor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\nceditor.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MAINFORM_RECENTLY_OPENED_FILES" xml:space="preserve">
+    <value>Recently Opened Files...</value>
+  </data>
+  <data name="SPLASHSCREEN_APPLICATION_SETTINGS" xml:space="preserve">
+    <value>Loading application settings...</value>
+  </data>
+  <data name="SPLASHSCREEN_CURRENT_NC_SETTINGS" xml:space="preserve">
+    <value>Loading the current NC settings...</value>
+  </data>
+  <data name="SPLASHSCREEN_DEFAULT_NC_SETTINGS" xml:space="preserve">
+    <value>Loading default NC settings...</value>
+  </data>
+  <data name="SPLASHSCREEN_DOCKABLE_WINDOWS" xml:space="preserve">
+    <value>Creating dockable windows...</value>
+  </data>
+  <data name="SPLASHSCREEN_NEW_VERSION" xml:space="preserve">
+    <value>Checking the availability of a new version of the program...</value>
+  </data>
+  <data name="SPLASHSCREEN_RECENT_FILES" xml:space="preserve">
+    <value>Loading a list of recently opened files...</value>
+  </data>
+  <data name="SPLASHSCREEN_VERIFYING_LICENSE" xml:space="preserve">
+    <value>Verifying the program license...</value>
+  </data>
+  <data name="SPLASHSCREEN_WINDOW_SETTINGS" xml:space="preserve">
+    <value>Loading window settings...</value>
+  </data>
+  <data name="AUTOUPDATER_APP_CLOSING" xml:space="preserve">
+    <value>Application exiting...</value>
+  </data>
+  <data name="AUTOUPDATER_FAILED_CONNECTION" xml:space="preserve">
+    <value>There is a problem reaching update server. Please check your internet connection and try again later.</value>
+  </data>
+  <data name="AUTOUPDATER_NEW_MANDATORY_VERSION_AVAILABLE" xml:space="preserve">
+    <value>There is new version {0} available. You are using version {1}. This is required update. Press Ok to begin updating the application.</value>
+  </data>
+  <data name="AUTOUPDATER_NEW_VERSION_AVAILABLE" xml:space="preserve">
+    <value>There is new version {0} available. You are using version {1}. Do you want to update the application now?</value>
+  </data>
+  <data name="AUTOUPDATER_NO_UPDATE_AVAILABLE" xml:space="preserve">
+    <value>There is no update available. Please try again later.</value>
+  </data>
+  <data name="ERROR_FILE_NOT_EXIST" xml:space="preserve">
+    <value>File does not exist: </value>
+  </data>
+  <data name="ERROR_MACHINE_NOT_SET" xml:space="preserve">
+    <value>Machine Tool / Control not set!</value>
+  </data>
+  <data name="FILE_SPLITTING_FILE_WITH_ERRORS" xml:space="preserve">
+    <value>A file containing errors can not be split.</value>
+  </data>
+  <data name="FILE_SPLITTING_MANY_FILES" xml:space="preserve">
+    <value>The current file will be split into </value>
+  </data>
+  <data name="FILE_SPLITTING_MANY_FILES_CONTINUE" xml:space="preserve">
+    <value> files. Continue?</value>
+  </data>
+  <data name="FILE_SPLITTING_NOTHING_TO_SPLIT" xml:space="preserve">
+    <value>Nothing to split.</value>
+  </data>
+  <data name="MAINFORM_ACTIVATE" xml:space="preserve">
+    <value>Activate Product Code...</value>
+  </data>
+  <data name="MAINFORM_ANALYSIS_AUTOMATIC" xml:space="preserve">
+    <value>Automatic analysis</value>
+  </data>
+  <data name="MAINFORM_ANALYSIS_DISABLED" xml:space="preserve">
+    <value>Analysis disabled</value>
+  </data>
+  <data name="MAINFORM_DEACTIVATE" xml:space="preserve">
+    <value>Deactivate Product Code</value>
+  </data>
+  <data name="MAINFORM_PROGRAM_CORRECT" xml:space="preserve">
+    <value>NC Program Correct</value>
+  </data>
+  <data name="MAINFORM_PROGRAM_INCORRECT" xml:space="preserve">
+    <value>NC Program Incorrect</value>
+  </data>
+  <data name="MAINFORM_PROGRAM_UNCHECKED" xml:space="preserve">
+    <value>NC Program Unchecked</value>
+  </data>
+  <data name="TA_ACTIVATE_CONTINUE_USING" xml:space="preserve">
+    <value>Activate the product code to continue using the application.</value>
+  </data>
+  <data name="TA_FAILED_DEACTIVATION" xml:space="preserve">
+    <value>An attempt to deactivation failed: </value>
+  </data>
+  <data name="TA_FAILED_TRIAL_END_CHECK" xml:space="preserve">
+    <value>Failed to check the remaining days until the end of the trial version: </value>
+  </data>
+  <data name="TA_FAILED_TRIAL_RUN" xml:space="preserve">
+    <value>Failed to run the trial version: </value>
+  </data>
+  <data name="TA_FAILED_VALIDITY_ACTIVATION_CHECK" xml:space="preserve">
+    <value>Failed to check the validity of the activation: </value>
+  </data>
+  <data name="TA_TRIAL_EXPIRED" xml:space="preserve">
+    <value> - The trial has expired</value>
+  </data>
+  <data name="TA_TRIAL_EXPIRES" xml:space="preserve">
+    <value> - Your trial expires in </value>
+  </data>
+  <data name="TA_TRIAL_EXPIRES_DAYS" xml:space="preserve">
+    <value> days</value>
+  </data>
+  <data name="ABOUT_FORM_LICENSE" xml:space="preserve">
+    <value> - Lifetime</value>
+  </data>
+  <data name="ATTRIBUTES_FORM_FUNCTION" xml:space="preserve">
+    <value>Function</value>
+  </data>
+  <data name="ATTRIBUTES_FORM_LINE" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="ATTRIBUTES_FORM_MACRO" xml:space="preserve">
+    <value>Macro</value>
+  </data>
+  <data name="EDITOR_FORM_ANALYSING_FILE" xml:space="preserve">
+    <value>Analyzing file </value>
+  </data>
+  <data name="EDITOR_FORM_AXIS_ROTATING" xml:space="preserve">
+    <value>Axis rotating...</value>
+  </data>
+  <data name="EDITOR_FORM_CONVERTING" xml:space="preserve">
+    <value>Converting...</value>
+  </data>
+  <data name="EDITOR_FORM_DELETING_NUMBERING" xml:space="preserve">
+    <value>Numbering deleting...</value>
+  </data>
+  <data name="EDITOR_FORM_FILE_LOADING" xml:space="preserve">
+    <value>File loading in progress, please wait...</value>
+  </data>
+  <data name="EDITOR_FORM_FORMATTING" xml:space="preserve">
+    <value>Formatting...</value>
+  </data>
+  <data name="EDITOR_FORM_HELP" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="EDITOR_FORM_MODIFIED_FILE" xml:space="preserve">
+    <value> is modified. Save file?</value>
+  </data>
+  <data name="EDITOR_FORM_NEW_FILE" xml:space="preserve">
+    <value>New file</value>
+  </data>
+  <data name="EDITOR_FORM_RENUMBERING" xml:space="preserve">
+    <value>Renumbering....</value>
+  </data>
+  <data name="EDITOR_FORM_TOOLTIP_TEXT" xml:space="preserve">
+    <value>Inserts the code snippet:\n</value>
+  </data>
+  <data name="UNKNOWN_ERROR_MESSAGE" xml:space="preserve">
+    <value>Oops! Something went wrong. More details in:\r\n</value>
+  </data>
+  <data name="ERROR_FORM_COLUMN" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="ERROR_FORM_DESCRIPTION" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ERROR_FORM_LINE" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="FILE_SPLITTER_FORM_BLOCK_NUMBER" xml:space="preserve">
+    <value>Blocks Number</value>
+  </data>
+  <data name="FILE_SPLITTER_FORM_TEXT" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="FILE_SPLITTER_FORM_TOOL_CALL" xml:space="preserve">
+    <value>Tool Call</value>
+  </data>
+  <data name="FILE_SPLITTER_FORM_TOOL_WORK_PATH" xml:space="preserve">
+    <value>Tool Work Path</value>
+  </data>
+  <data name="FILE_SPLITTER_FORM_TOOL_WORK_TIME" xml:space="preserve">
+    <value>Tool Work Time</value>
+  </data>
+  <data name="FIND_FORM_FILE_END" xml:space="preserve">
+    <value>The end of the file. Search completed.</value>
+  </data>
+  <data name="GOTO_FORM_LINE_RANGE" xml:space="preserve">
+    <value>Line range (1 - {0}):</value>
+  </data>
+  <data name="LIBRARY_FORM_VIEW" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="LIBRARY_FORM_VIEW_EDIT" xml:space="preserve">
+    <value>View / Edit</value>
+  </data>
+  <data name="INFO_FORM_ABSOLUTE" xml:space="preserve">
+    <value>absolute</value>
+  </data>
+  <data name="INFO_FORM_AXIS" xml:space="preserve">
+    <value>Axis</value>
+  </data>
+  <data name="INFO_FORM_CUTTER_COMPENSATION" xml:space="preserve">
+    <value>Cutter Comp.</value>
+  </data>
+  <data name="INFO_FORM_FEEDRATE" xml:space="preserve">
+    <value>Feedrate</value>
+  </data>
+  <data name="INFO_FORM_INCH" xml:space="preserve">
+    <value>inch</value>
+  </data>
+  <data name="INFO_FORM_INCREMENTAL" xml:space="preserve">
+    <value>incremental</value>
+  </data>
+  <data name="INFO_FORM_MACHINE_RELATIVE_POS" xml:space="preserve">
+    <value>Position relative to the Machine range</value>
+  </data>
+  <data name="INFO_FORM_MAX" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="INFO_FORM_MIN" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="INFO_FORM_MM" xml:space="preserve">
+    <value>millimeter</value>
+  </data>
+  <data name="INFO_FORM_PATH_TOTAL" xml:space="preserve">
+    <value>Path Total</value>
+  </data>
+  <data name="INFO_FORM_PROGRAMMING" xml:space="preserve">
+    <value>Programming</value>
+  </data>
+  <data name="INFO_FORM_PROGRAM_ZERO_RELATIVE_POS" xml:space="preserve">
+    <value>Position relative to Program Zero</value>
+  </data>
+  <data name="INFO_FORM_COOLANT" xml:space="preserve">
+    <value>Coolant</value>
+  </data>
+  <data name="INFO_FORM_SPINDLE" xml:space="preserve">
+    <value>Spindle</value>
+  </data>
+  <data name="INFO_FORM_TIME_TOTAL" xml:space="preserve">
+    <value>Time Total</value>
+  </data>
+  <data name="INFO_FORM_TOOL_ID" xml:space="preserve">
+    <value>Tool Number</value>
+  </data>
+  <data name="INFO_FORM_TOOL_PATH" xml:space="preserve">
+    <value>Tool Path</value>
+  </data>
+  <data name="INFO_FORM_TOOL_TIME" xml:space="preserve">
+    <value>Tool Time</value>
+  </data>
+  <data name="INFO_FORM_UNITS" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="INFO_FORM_VALUE" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="MACRO_VAR_FORM_LINE" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="MACRO_VAR_FORM_PARAM" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_CODE" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_CODE_EXISTS_IN_GROUP" xml:space="preserve">
+    <value>Code {0} already exists in group {1}</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_COPY" xml:space="preserve">
+    <value> - copy</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_DEFAULT" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_DESCRIPTION" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_GROUP_EXISTS" xml:space="preserve">
+    <value>Group already exists</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_GROUP_NAME" xml:space="preserve">
+    <value>Group Name</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_NO_NAME" xml:space="preserve">
+    <value>No name</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_NO_PROFILE" xml:space="preserve">
+    <value>No active profile</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_PROFILE_EXISTS" xml:space="preserve">
+    <value>Profile already exists</value>
+  </data>
+  <data name="MCODES_EDITOR_FORM_PROFILE_NAME" xml:space="preserve">
+    <value>Profile Name</value>
+  </data>
+  <data name="PATH_FORM_WORKING_PATH" xml:space="preserve">
+    <value>Working Path</value>
+  </data>
+  <data name="PATH_FORM_WORKING_TIME" xml:space="preserve">
+    <value>Working Time</value>
+  </data>
+  <data name="PATH_FORM_LINE_NUMBER" xml:space="preserve">
+    <value>Line #</value>
+  </data>
+  <data name="PATH_FORM_RAPID_POSITIONING_PATH" xml:space="preserve">
+    <value>Rapid Positioning Path</value>
+  </data>
+  <data name="PATH_FORM_RAPID_POSITIONING_TIME" xml:space="preserve">
+    <value>Rapid Positioning Time</value>
+  </data>
+  <data name="PATH_FORM_TOOL_NUMBER" xml:space="preserve">
+    <value>Tool #</value>
+  </data>
+  <data name="PATH_FORM_TOOL_PATH" xml:space="preserve">
+    <value>Tool Path</value>
+  </data>
+  <data name="PATH_FORM_TOOL_TIME" xml:space="preserve">
+    <value>Tool Time</value>
+  </data>
+  <data name="PATH_FORM_TOTAL_PATH" xml:space="preserve">
+    <value>Total Path</value>
+  </data>
+  <data name="PATH_FORM_TOTAL_TIME" xml:space="preserve">
+    <value>Total Time</value>
+  </data>
+  <data name="REPLACE_FORM_FILE_END" xml:space="preserve">
+    <value>End of File.</value>
+  </data>
+  <data name="REPLACE_FORM_REPLACED" xml:space="preserve">
+    <value>Replaced {0} occurrence(s).</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_NO_ROTATION" xml:space="preserve">
+    <value>No rotation</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_X180" xml:space="preserve">
+    <value>X axis, 180 degrees</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_X270" xml:space="preserve">
+    <value>X axis, 270 degrees</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_X90" xml:space="preserve">
+    <value>X axis, 90 degrees</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_Y180" xml:space="preserve">
+    <value>Y axis, 180 degrees</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_Y270" xml:space="preserve">
+    <value>Y axis, 270 degrees</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_Y90" xml:space="preserve">
+    <value>Y axis, 90 degrees</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_Z180" xml:space="preserve">
+    <value>Z axis, 180 degrees</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_Z270" xml:space="preserve">
+    <value>Z axis, 270 degrees</value>
+  </data>
+  <data name="ROTATE_AXES_FORM_Z90" xml:space="preserve">
+    <value>Z axis, 90 degrees</value>
+  </data>
+  <data name="PROGRAM_SETTINGS_FORM_RESTART" xml:space="preserve">
+    <value>Language change requires application restart to take effect</value>
+  </data>
+  <data name="NOT_AVAILABLE_IN_LITE" xml:space="preserve">
+    <value>This functionality is not available in the Lite version</value>
+  </data>
+</root>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\AttributesVisitor.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\AxesRotatorTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\FileSplitterTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\MessageTextTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\OrderAttributeParserTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\PathCalculatorTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\RangeVerifierTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\RenumbererTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\SameWordInBlockVerifierTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\UnitConverterTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\ValueCalculatorTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="heidenhain\AttributesVisitor.cpp">
+      <Filter>Source Files\heidenhain</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fanuc\AttributesVisitor.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
+    <ClInclude Include="heidenhain\AttributesVisitor.h">
+      <Filter>Header Files\heidenhain</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{be64c905-36dc-4753-a8b6-3ad6a87389b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{509483db-a167-4583-a05f-1c35350ef57b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fanuc">
+      <UniqueIdentifier>{91d720d5-f7cb-4e87-8569-4d7d6ce049ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\heidenhain">
+      <UniqueIdentifier>{873988b9-9acb-4734-adf8-ddec99479651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fanuc">
+      <UniqueIdentifier>{bf879708-efd5-4fab-adb5-6818f4013106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\heidenhain">
+      <UniqueIdentifier>{12630080-1cc9-45c1-aed7-7dfcd43b6adc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,27 @@
+AllowShortIfStatementsOnASingleLine : false
+AllowShortBlocksOnASingleLine : false
+AllowShortFunctionsOnASingleLine : false
+AlignConsecutiveAssignments : true
+AlwaysBreakTemplateDeclarations : true
+BreakConstructorInitializersBeforeComma : true
+ColumnLimit : 120
+Standard : C++11
+BreakBeforeBraces : Custom
+BraceWrapping :
+    AfterClass : true
+    AfterControlStatement : true
+    AfterEnum : true
+    AfterFunction : true
+    AfterNamespace : false
+    AfterStruct : true
+    AfterUnion : true
+    BeforeCatch : true
+    BeforeElse : true
+    IndentBraces : false
+IndentWidth : 4
+AlignAfterOpenBracket : Align
+AlignConsecutiveDeclarations : true
+AccessModifierOffset : -4
+IndentCaseLabels : false
+PointerAlignment : Left
+

@@ -1,0 +1,927 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labelHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="labelHeader.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 15.75pt</value>
+  </data>
+  <data name="labelHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="labelHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>650, 30</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labelHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelHeader.Text" xml:space="preserve">
+    <value>Machine Tool Starting Parameters</value>
+  </data>
+  <data name="labelHeader.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;labelHeader.Name" xml:space="preserve">
+    <value>labelHeader</value>
+  </data>
+  <data name="&gt;&gt;labelHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelHeader.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelHeader.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="labelDefaultMotion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDefaultMotion.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDefaultMotion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 46</value>
+  </data>
+  <data name="labelDefaultMotion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
+  </data>
+  <data name="labelDefaultMotion.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="labelDefaultMotion.Text" xml:space="preserve">
+    <value>Default movement</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultMotion.Name" xml:space="preserve">
+    <value>labelDefaultMotion</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultMotion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultMotion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultMotion.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="labelDefaultWorkPlane.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDefaultWorkPlane.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDefaultWorkPlane.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 72</value>
+  </data>
+  <data name="labelDefaultWorkPlane.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="labelDefaultWorkPlane.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="labelDefaultWorkPlane.Text" xml:space="preserve">
+    <value>Default work plane</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultWorkPlane.Name" xml:space="preserve">
+    <value>labelDefaultWorkPlane</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultWorkPlane.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultWorkPlane.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultWorkPlane.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="labelDefaultDriverUnits.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDefaultDriverUnits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDefaultDriverUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 98</value>
+  </data>
+  <data name="labelDefaultDriverUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 13</value>
+  </data>
+  <data name="labelDefaultDriverUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="labelDefaultDriverUnits.Text" xml:space="preserve">
+    <value>Default control units</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultDriverUnits.Name" xml:space="preserve">
+    <value>labelDefaultDriverUnits</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultDriverUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultDriverUnits.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultDriverUnits.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="labelDefaultProgramming.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDefaultProgramming.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDefaultProgramming.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 124</value>
+  </data>
+  <data name="labelDefaultProgramming.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 13</value>
+  </data>
+  <data name="labelDefaultProgramming.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="labelDefaultProgramming.Text" xml:space="preserve">
+    <value>Default programming</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultProgramming.Name" xml:space="preserve">
+    <value>labelDefaultProgramming</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultProgramming.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultProgramming.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultProgramming.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="labelDefaultFeedMode.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDefaultFeedMode.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDefaultFeedMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 150</value>
+  </data>
+  <data name="labelDefaultFeedMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="labelDefaultFeedMode.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="labelDefaultFeedMode.Text" xml:space="preserve">
+    <value>Default feed mode</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultFeedMode.Name" xml:space="preserve">
+    <value>labelDefaultFeedMode</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultFeedMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultFeedMode.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultFeedMode.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="comboBoxDefaultMotion.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="comboBoxDefaultMotion.Items" xml:space="preserve">
+    <value>Rapid positioning</value>
+  </data>
+  <data name="comboBoxDefaultMotion.Items1" xml:space="preserve">
+    <value>Linear interpolation</value>
+  </data>
+  <data name="comboBoxDefaultMotion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 46</value>
+  </data>
+  <data name="comboBoxDefaultMotion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="comboBoxDefaultMotion.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultMotion.Name" xml:space="preserve">
+    <value>comboBoxDefaultMotion</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultMotion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultMotion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultMotion.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="comboBoxDefaultWorkPlane.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="comboBoxDefaultWorkPlane.Items" xml:space="preserve">
+    <value>XY</value>
+  </data>
+  <data name="comboBoxDefaultWorkPlane.Items1" xml:space="preserve">
+    <value>XZ</value>
+  </data>
+  <data name="comboBoxDefaultWorkPlane.Items2" xml:space="preserve">
+    <value>YZ</value>
+  </data>
+  <data name="comboBoxDefaultWorkPlane.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 72</value>
+  </data>
+  <data name="comboBoxDefaultWorkPlane.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="comboBoxDefaultWorkPlane.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultWorkPlane.Name" xml:space="preserve">
+    <value>comboBoxDefaultWorkPlane</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultWorkPlane.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultWorkPlane.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultWorkPlane.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="comboBoxDefaultDriverUnits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="comboBoxDefaultDriverUnits.Items" xml:space="preserve">
+    <value>Millimeter</value>
+  </data>
+  <data name="comboBoxDefaultDriverUnits.Items1" xml:space="preserve">
+    <value>Inch</value>
+  </data>
+  <data name="comboBoxDefaultDriverUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 98</value>
+  </data>
+  <data name="comboBoxDefaultDriverUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="comboBoxDefaultDriverUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultDriverUnits.Name" xml:space="preserve">
+    <value>comboBoxDefaultDriverUnits</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultDriverUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultDriverUnits.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultDriverUnits.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="comboBoxDefaultProgramming.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="comboBoxDefaultProgramming.Items" xml:space="preserve">
+    <value>Absolute</value>
+  </data>
+  <data name="comboBoxDefaultProgramming.Items1" xml:space="preserve">
+    <value>Incremental</value>
+  </data>
+  <data name="comboBoxDefaultProgramming.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 124</value>
+  </data>
+  <data name="comboBoxDefaultProgramming.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="comboBoxDefaultProgramming.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultProgramming.Name" xml:space="preserve">
+    <value>comboBoxDefaultProgramming</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultProgramming.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultProgramming.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultProgramming.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="comboBoxDefaultFeedMode.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="comboBoxDefaultFeedMode.Items" xml:space="preserve">
+    <value>Feed per minute</value>
+  </data>
+  <data name="comboBoxDefaultFeedMode.Items1" xml:space="preserve">
+    <value>Feed per revolution</value>
+  </data>
+  <data name="comboBoxDefaultFeedMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 150</value>
+  </data>
+  <data name="comboBoxDefaultFeedMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="comboBoxDefaultFeedMode.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultFeedMode.Name" xml:space="preserve">
+    <value>comboBoxDefaultFeedMode</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultFeedMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultFeedMode.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultFeedMode.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="textBoxDefaultRotation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="textBoxDefaultRotation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 332</value>
+  </data>
+  <data name="textBoxDefaultRotation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 20</value>
+  </data>
+  <data name="textBoxDefaultRotation.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;textBoxDefaultRotation.Name" xml:space="preserve">
+    <value>textBoxDefaultRotation</value>
+  </data>
+  <data name="&gt;&gt;textBoxDefaultRotation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxDefaultRotation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBoxDefaultRotation.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="labelDefaultRotation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDefaultRotation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDefaultRotation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 332</value>
+  </data>
+  <data name="labelDefaultRotation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="labelDefaultRotation.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="labelDefaultRotation.Text" xml:space="preserve">
+    <value>Default rotation</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultRotation.Name" xml:space="preserve">
+    <value>labelDefaultRotation</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultRotation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultRotation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultRotation.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="labelDefaultRotationDirection.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDefaultRotationDirection.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDefaultRotationDirection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 358</value>
+  </data>
+  <data name="labelDefaultRotationDirection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 13</value>
+  </data>
+  <data name="labelDefaultRotationDirection.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="labelDefaultRotationDirection.Text" xml:space="preserve">
+    <value>Default rotation direction</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultRotationDirection.Name" xml:space="preserve">
+    <value>labelDefaultRotationDirection</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultRotationDirection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultRotationDirection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelDefaultRotationDirection.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="comboBoxDefaultRotationDirection.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="comboBoxDefaultRotationDirection.Items" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="comboBoxDefaultRotationDirection.Items1" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="comboBoxDefaultRotationDirection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 358</value>
+  </data>
+  <data name="comboBoxDefaultRotationDirection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="comboBoxDefaultRotationDirection.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultRotationDirection.Name" xml:space="preserve">
+    <value>comboBoxDefaultRotationDirection</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultRotationDirection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultRotationDirection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDefaultRotationDirection.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="labelDrillCycleZValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDrillCycleZValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDrillCycleZValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 436</value>
+  </data>
+  <data name="labelDrillCycleZValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 13</value>
+  </data>
+  <data name="labelDrillCycleZValue.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="labelDrillCycleZValue.Text" xml:space="preserve">
+    <value>Z drilling cycle value</value>
+  </data>
+  <data name="&gt;&gt;labelDrillCycleZValue.Name" xml:space="preserve">
+    <value>labelDrillCycleZValue</value>
+  </data>
+  <data name="&gt;&gt;labelDrillCycleZValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDrillCycleZValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelDrillCycleZValue.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="comboBoxDrillCycleZValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="comboBoxDrillCycleZValue.Items" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="comboBoxDrillCycleZValue.Items1" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="comboBoxDrillCycleZValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 436</value>
+  </data>
+  <data name="comboBoxDrillCycleZValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="comboBoxDrillCycleZValue.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDrillCycleZValue.Name" xml:space="preserve">
+    <value>comboBoxDrillCycleZValue</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDrillCycleZValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDrillCycleZValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDrillCycleZValue.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="labelDrillCycleReturnValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDrillCycleReturnValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelDrillCycleReturnValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 462</value>
+  </data>
+  <data name="labelDrillCycleReturnValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 13</value>
+  </data>
+  <data name="labelDrillCycleReturnValue.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="labelDrillCycleReturnValue.Text" xml:space="preserve">
+    <value>Return drilling cycle value</value>
+  </data>
+  <data name="&gt;&gt;labelDrillCycleReturnValue.Name" xml:space="preserve">
+    <value>labelDrillCycleReturnValue</value>
+  </data>
+  <data name="&gt;&gt;labelDrillCycleReturnValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDrillCycleReturnValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelDrillCycleReturnValue.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="comboBoxDrillCycleReturnValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="comboBoxDrillCycleReturnValue.Items" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="comboBoxDrillCycleReturnValue.Items1" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="comboBoxDrillCycleReturnValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>429, 462</value>
+  </data>
+  <data name="comboBoxDrillCycleReturnValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="comboBoxDrillCycleReturnValue.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDrillCycleReturnValue.Name" xml:space="preserve">
+    <value>comboBoxDrillCycleReturnValue</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDrillCycleReturnValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDrillCycleReturnValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxDrillCycleReturnValue.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="checkBoxFastMotionCancelCycle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxFastMotionCancelCycle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 176</value>
+  </data>
+  <data name="checkBoxFastMotionCancelCycle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 17</value>
+  </data>
+  <data name="checkBoxFastMotionCancelCycle.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="checkBoxFastMotionCancelCycle.Text" xml:space="preserve">
+    <value>Rapid positioning cancels cycle</value>
+  </data>
+  <data name="&gt;&gt;checkBoxFastMotionCancelCycle.Name" xml:space="preserve">
+    <value>checkBoxFastMotionCancelCycle</value>
+  </data>
+  <data name="&gt;&gt;checkBoxFastMotionCancelCycle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxFastMotionCancelCycle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxFastMotionCancelCycle.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="checkBoxLinearInterpolationCancelCycle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxLinearInterpolationCancelCycle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 202</value>
+  </data>
+  <data name="checkBoxLinearInterpolationCancelCycle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 17</value>
+  </data>
+  <data name="checkBoxLinearInterpolationCancelCycle.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="checkBoxLinearInterpolationCancelCycle.Text" xml:space="preserve">
+    <value>Linear interpolation cancels cycle</value>
+  </data>
+  <data name="&gt;&gt;checkBoxLinearInterpolationCancelCycle.Name" xml:space="preserve">
+    <value>checkBoxLinearInterpolationCancelCycle</value>
+  </data>
+  <data name="&gt;&gt;checkBoxLinearInterpolationCancelCycle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxLinearInterpolationCancelCycle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxLinearInterpolationCancelCycle.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCWCancelCycle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCWCancelCycle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 228</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCWCancelCycle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 17</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCWCancelCycle.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCWCancelCycle.Text" xml:space="preserve">
+    <value>CW circular interpolation cancels cycle</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCircularInterpolationCWCancelCycle.Name" xml:space="preserve">
+    <value>checkBoxCircularInterpolationCWCancelCycle</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCircularInterpolationCWCancelCycle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCircularInterpolationCWCancelCycle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCircularInterpolationCWCancelCycle.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCCWCancelCycle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCCWCancelCycle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 254</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCCWCancelCycle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 17</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCCWCancelCycle.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="checkBoxCircularInterpolationCCWCancelCycle.Text" xml:space="preserve">
+    <value>CCW circular interpolation cancels cycle</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCircularInterpolationCCWCancelCycle.Name" xml:space="preserve">
+    <value>checkBoxCircularInterpolationCCWCancelCycle</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCircularInterpolationCCWCancelCycle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCircularInterpolationCCWCancelCycle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCircularInterpolationCCWCancelCycle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="checkBoxCycleCancelStartsFastMotion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxCycleCancelStartsFastMotion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 280</value>
+  </data>
+  <data name="checkBoxCycleCancelStartsFastMotion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 17</value>
+  </data>
+  <data name="checkBoxCycleCancelStartsFastMotion.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="checkBoxCycleCancelStartsFastMotion.Text" xml:space="preserve">
+    <value>Canceling the cycle enables rapid positioning</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCycleCancelStartsFastMotion.Name" xml:space="preserve">
+    <value>checkBoxCycleCancelStartsFastMotion</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCycleCancelStartsFastMotion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCycleCancelStartsFastMotion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxCycleCancelStartsFastMotion.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="checkBoxOperatorTurnsOnRotation.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxOperatorTurnsOnRotation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 306</value>
+  </data>
+  <data name="checkBoxOperatorTurnsOnRotation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 17</value>
+  </data>
+  <data name="checkBoxOperatorTurnsOnRotation.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="checkBoxOperatorTurnsOnRotation.Text" xml:space="preserve">
+    <value>Operator turns on the rotation</value>
+  </data>
+  <data name="&gt;&gt;checkBoxOperatorTurnsOnRotation.Name" xml:space="preserve">
+    <value>checkBoxOperatorTurnsOnRotation</value>
+  </data>
+  <data name="&gt;&gt;checkBoxOperatorTurnsOnRotation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxOperatorTurnsOnRotation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxOperatorTurnsOnRotation.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="checkBoxToolNumberExecutesExchange.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxToolNumberExecutesExchange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 384</value>
+  </data>
+  <data name="checkBoxToolNumberExecutesExchange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 17</value>
+  </data>
+  <data name="checkBoxToolNumberExecutesExchange.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="checkBoxToolNumberExecutesExchange.Text" xml:space="preserve">
+    <value>Tool number carries out a change</value>
+  </data>
+  <data name="&gt;&gt;checkBoxToolNumberExecutesExchange.Name" xml:space="preserve">
+    <value>checkBoxToolNumberExecutesExchange</value>
+  </data>
+  <data name="&gt;&gt;checkBoxToolNumberExecutesExchange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxToolNumberExecutesExchange.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxToolNumberExecutesExchange.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="checkBoxAutoFastMotionAfterToolExchange.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxAutoFastMotionAfterToolExchange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 410</value>
+  </data>
+  <data name="checkBoxAutoFastMotionAfterToolExchange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 17</value>
+  </data>
+  <data name="checkBoxAutoFastMotionAfterToolExchange.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="checkBoxAutoFastMotionAfterToolExchange.Text" xml:space="preserve">
+    <value>Automatic rapid positioning after tool change</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAutoFastMotionAfterToolExchange.Name" xml:space="preserve">
+    <value>checkBoxAutoFastMotionAfterToolExchange</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAutoFastMotionAfterToolExchange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAutoFastMotionAfterToolExchange.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxAutoFastMotionAfterToolExchange.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 28</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>650, 540</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Parametry</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

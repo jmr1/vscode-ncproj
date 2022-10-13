@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labelHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="labelHeader.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 15.75pt</value>
+  </data>
+  <data name="labelHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="labelHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>650, 30</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="labelHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="labelHeader.Text" xml:space="preserve">
+    <value>Characteristic points of the machine tool</value>
+  </data>
+  <data name="labelHeader.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;labelHeader.Name" xml:space="preserve">
+    <value>labelHeader</value>
+  </data>
+  <data name="&gt;&gt;labelHeader.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelHeader.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelHeader.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelMachineStartingPositionX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelMachineStartingPositionX.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelMachineStartingPositionX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 31</value>
+  </data>
+  <data name="labelMachineStartingPositionX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="labelMachineStartingPositionX.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="labelMachineStartingPositionX.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionX.Name" xml:space="preserve">
+    <value>labelMachineStartingPositionX</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionX.Parent" xml:space="preserve">
+    <value>groupBoxMachineStartingPosition</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionX.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labelMachineStartingPositionY.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelMachineStartingPositionY.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelMachineStartingPositionY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 58</value>
+  </data>
+  <data name="labelMachineStartingPositionY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="labelMachineStartingPositionY.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="labelMachineStartingPositionY.Text" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionY.Name" xml:space="preserve">
+    <value>labelMachineStartingPositionY</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionY.Parent" xml:space="preserve">
+    <value>groupBoxMachineStartingPosition</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionY.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labelMachineStartingPositionZ.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelMachineStartingPositionZ.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelMachineStartingPositionZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 86</value>
+  </data>
+  <data name="labelMachineStartingPositionZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="labelMachineStartingPositionZ.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="labelMachineStartingPositionZ.Text" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionZ.Name" xml:space="preserve">
+    <value>labelMachineStartingPositionZ</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionZ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionZ.Parent" xml:space="preserve">
+    <value>groupBoxMachineStartingPosition</value>
+  </data>
+  <data name="&gt;&gt;labelMachineStartingPositionZ.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelToolExchangePointX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelToolExchangePointX.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelToolExchangePointX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 29</value>
+  </data>
+  <data name="labelToolExchangePointX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="labelToolExchangePointX.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="labelToolExchangePointX.Text" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointX.Name" xml:space="preserve">
+    <value>labelToolExchangePointX</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointX.Parent" xml:space="preserve">
+    <value>groupBoxToolExchangePoint</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointX.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelToolExchangePointY.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelToolExchangePointY.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelToolExchangePointY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 56</value>
+  </data>
+  <data name="labelToolExchangePointY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="labelToolExchangePointY.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="labelToolExchangePointY.Text" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointY.Name" xml:space="preserve">
+    <value>labelToolExchangePointY</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointY.Parent" xml:space="preserve">
+    <value>groupBoxToolExchangePoint</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointY.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="labelToolExchangePointZ.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelToolExchangePointZ.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="labelToolExchangePointZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 84</value>
+  </data>
+  <data name="labelToolExchangePointZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="labelToolExchangePointZ.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="labelToolExchangePointZ.Text" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointZ.Name" xml:space="preserve">
+    <value>labelToolExchangePointZ</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointZ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointZ.Parent" xml:space="preserve">
+    <value>groupBoxToolExchangePoint</value>
+  </data>
+  <data name="&gt;&gt;labelToolExchangePointZ.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="textBoxMachineStartingPositionX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 28</value>
+  </data>
+  <data name="textBoxMachineStartingPositionX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="textBoxMachineStartingPositionX.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionX.Name" xml:space="preserve">
+    <value>textBoxMachineStartingPositionX</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionX.Parent" xml:space="preserve">
+    <value>groupBoxMachineStartingPosition</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionX.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textBoxMachineStartingPositionY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 57</value>
+  </data>
+  <data name="textBoxMachineStartingPositionY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="textBoxMachineStartingPositionY.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionY.Name" xml:space="preserve">
+    <value>textBoxMachineStartingPositionY</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionY.Parent" xml:space="preserve">
+    <value>groupBoxMachineStartingPosition</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionY.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="textBoxMachineStartingPositionZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 85</value>
+  </data>
+  <data name="textBoxMachineStartingPositionZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="textBoxMachineStartingPositionZ.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionZ.Name" xml:space="preserve">
+    <value>textBoxMachineStartingPositionZ</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionZ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionZ.Parent" xml:space="preserve">
+    <value>groupBoxMachineStartingPosition</value>
+  </data>
+  <data name="&gt;&gt;textBoxMachineStartingPositionZ.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="textBoxToolExchangePointX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 26</value>
+  </data>
+  <data name="textBoxToolExchangePointX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="textBoxToolExchangePointX.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointX.Name" xml:space="preserve">
+    <value>textBoxToolExchangePointX</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointX.Parent" xml:space="preserve">
+    <value>groupBoxToolExchangePoint</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointX.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="textBoxToolExchangePointY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 55</value>
+  </data>
+  <data name="textBoxToolExchangePointY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="textBoxToolExchangePointY.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointY.Name" xml:space="preserve">
+    <value>textBoxToolExchangePointY</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointY.Parent" xml:space="preserve">
+    <value>groupBoxToolExchangePoint</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointY.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="textBoxToolExchangePointZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 83</value>
+  </data>
+  <data name="textBoxToolExchangePointZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="textBoxToolExchangePointZ.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointZ.Name" xml:space="preserve">
+    <value>textBoxToolExchangePointZ</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointZ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointZ.Parent" xml:space="preserve">
+    <value>groupBoxToolExchangePoint</value>
+  </data>
+  <data name="&gt;&gt;textBoxToolExchangePointZ.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBoxMachineStartingPosition.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="groupBoxMachineStartingPosition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>373, 384</value>
+  </data>
+  <data name="groupBoxMachineStartingPosition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 124</value>
+  </data>
+  <data name="groupBoxMachineStartingPosition.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="groupBoxMachineStartingPosition.Text" xml:space="preserve">
+    <value>Base / start position of the machine tool</value>
+  </data>
+  <data name="&gt;&gt;groupBoxMachineStartingPosition.Name" xml:space="preserve">
+    <value>groupBoxMachineStartingPosition</value>
+  </data>
+  <data name="&gt;&gt;groupBoxMachineStartingPosition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxMachineStartingPosition.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxMachineStartingPosition.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="groupBoxToolExchangePoint.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="groupBoxToolExchangePoint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>55, 384</value>
+  </data>
+  <data name="groupBoxToolExchangePoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 124</value>
+  </data>
+  <data name="groupBoxToolExchangePoint.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="groupBoxToolExchangePoint.Text" xml:space="preserve">
+    <value>Tool change point</value>
+  </data>
+  <data name="&gt;&gt;groupBoxToolExchangePoint.Name" xml:space="preserve">
+    <value>groupBoxToolExchangePoint</value>
+  </data>
+  <data name="&gt;&gt;groupBoxToolExchangePoint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxToolExchangePoint.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBoxToolExchangePoint.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pictureBox1.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="pictureBox1.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 46</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>398, 318</value>
+  </data>
+  <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+    <value>pictureBox1</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 28</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>650, 540</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ObszarRoboczy</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

@@ -1,0 +1,181 @@
+{
+	"version": "1.0",
+	"groups": {
+		"0": [{
+			"code": 4,
+			"rest": 0
+		}, {
+			"code": 9,
+			"rest": 0
+		}, {
+			"code": 10,
+			"rest": 0
+		}, {
+			"code": 28,
+			"rest": 0
+		}, {
+			"code": 29,
+			"rest": 0
+		}, {
+			"code": 31,
+			"rest": 0
+		}, {
+			"code": 52,
+			"rest": 0
+		}, {
+			"code": 53,
+			"rest": 0
+		}, {
+			"code": 65,
+			"rest": 0
+		}, {
+			"code": 71,
+			"rest": 0
+		}],
+		"1": [{
+			"code": 0,
+			"rest": 0
+		}, {
+			"code": 1,
+			"rest": 0
+		}, {
+			"code": 2,
+			"rest": 0
+		}, {
+			"code": 3,
+			"rest": 0
+		}],
+		"2": [{
+			"code": 17,
+			"rest": 0
+		}, {
+			"code": 18,
+			"rest": 0
+		}, {
+			"code": 19,
+			"rest": 0
+		}],
+		"3": [{
+			"code": 90,
+			"rest": 0
+		}, {
+			"code": 91,
+			"rest": 0
+		}],
+		"5": [{
+			"code": 94,
+			"rest": 0
+		}, {
+			"code": 95,
+			"rest": 0
+		}],
+		"6": [{
+			"code": 20,
+			"rest": 0
+		}, {
+			"code": 21,
+			"rest": 0
+		}],
+		"7": [{
+			"code": 40,
+			"rest": 0
+		}, {
+			"code": 41,
+			"rest": 0
+		}, {
+			"code": 42,
+			"rest": 0
+		}],
+		"8": [{
+			"code": 43,
+			"rest": 0
+		}, {
+			"code": 44,
+			"rest": 0
+		}, {
+			"code": 49,
+			"rest": 0
+		}],
+		"9": [{
+			"code": 73,
+			"rest": 0
+		}, {
+			"code": 74,
+			"rest": 0
+		}, {
+			"code": 76,
+			"rest": 0
+		}, {
+			"code": 80,
+			"rest": 0
+		}, {
+			"code": 81,
+			"rest": 0
+		}, {
+			"code": 82,
+			"rest": 0
+		}, {
+			"code": 83,
+			"rest": 0
+		}, {
+			"code": 84,
+			"rest": 0
+		}, {
+			"code": 85,
+			"rest": 0
+		}, {
+			"code": 86,
+			"rest": 0
+		}, {
+			"code": 89,
+			"rest": 0
+		}],
+		"10": [{
+			"code": 98,
+			"rest": 0
+		}, {
+			"code": 99,
+			"rest": 0
+		}],
+		"11": [{
+			"code": 50,
+			"rest": 0
+		}, {
+			"code": 51,
+			"rest": 0
+		}],
+		"12": [{
+			"code": 52,
+			"rest": 0
+		}, {
+			"code": 54,
+			"rest": 0
+		}, {
+			"code": 55,
+			"rest": 0
+		}, {
+			"code": 56,
+			"rest": 0
+		}, {
+			"code": 57,
+			"rest": 0
+		}, {
+			"code": 58,
+			"rest": 0	
+		}],
+		"15": [{
+			"code": 61,
+			"rest": 0
+		}, {
+			"code": 64,
+			"rest": 0
+		}],
+		"16": [{
+			"code": 68,
+			"rest": 0
+		}, {
+			"code": 69,
+			"rest": 0
+		}]
+	}
+}

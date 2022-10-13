@@ -1,0 +1,21 @@
+{
+	"version": "1.0",
+	"descriptions": {
+		"00": "Program Stop (non-optional)",
+		"01": "Optional Stop: Operator Selected to Enable",
+		"02": "End of Program",
+		"03": "Spindle ON (CW Rotation)",
+		"04": "Spindle ON (CCW Rotation)",
+		"05": "Spindle Stop",
+		"06": "Tool Change",
+		"07": "Mist Coolant ON",
+		"08": "Flood Coolant ON",
+		"09": "Coolant OFF",
+		"13": "Spindle ON (CW Rotation) + Coolant ON",
+		"14": "Spindle ON (CCW Rotation) + Coolant ON",
+		"30": "End of Program, Rewind and Reset Modes",
+		"97": "Haas-Style Subprogram Call",
+		"98": "Subprogram Call",
+		"99": "Return from Subprogram"
+	}
+}
