@@ -1,6 +1,6 @@
 ﻿namespace cmtconfig
 {
-    partial class Parametry
+    partial class CNCInitialParams
     {
         /// <summary> 
         /// Wymagana zmienna projektanta.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Parametry));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CNCInitialParams));
             this.labelHeader = new System.Windows.Forms.Label();
             this.labelDefaultMotion = new System.Windows.Forms.Label();
             this.labelDefaultWorkPlane = new System.Windows.Forms.Label();
@@ -254,7 +254,7 @@
             this.checkBoxAutoFastMotionAfterToolExchange.Name = "checkBoxAutoFastMotionAfterToolExchange";
             this.checkBoxAutoFastMotionAfterToolExchange.UseVisualStyleBackColor = true;
             // 
-            // Parametry
+            // CNCInitialParams
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -286,7 +286,7 @@
             this.Controls.Add(this.labelDefaultWorkPlane);
             this.Controls.Add(this.labelDefaultMotion);
             this.Controls.Add(this.labelHeader);
-            this.Name = "Parametry";
+            this.Name = "CNCInitialParams";
             this.Load += new System.EventHandler(this.CNCcontrol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

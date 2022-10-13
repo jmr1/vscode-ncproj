@@ -1,6 +1,6 @@
 ﻿namespace cmtconfig
 {
-    partial class ObszarRoboczy
+    partial class CNCMachinePoints
     {
         /// <summary> 
         /// Wymagana zmienna projektanta.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ObszarRoboczy));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CNCMachinePoints));
             this.labelHeader = new System.Windows.Forms.Label();
             this.labelMachineStartingPositionX = new System.Windows.Forms.Label();
             this.labelMachineStartingPositionY = new System.Windows.Forms.Label();
@@ -165,7 +165,7 @@
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
-            // ObszarRoboczy
+            // CNCMachinePoints
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -174,7 +174,7 @@
             this.Controls.Add(this.groupBoxToolExchangePoint);
             this.Controls.Add(this.groupBoxMachineStartingPosition);
             this.Controls.Add(this.labelHeader);
-            this.Name = "ObszarRoboczy";
+            this.Name = "CNCMachinePoints";
             this.Load += new System.EventHandler(this.ZakresyLoad);
             this.groupBoxMachineStartingPosition.ResumeLayout(false);
             this.groupBoxMachineStartingPosition.PerformLayout();

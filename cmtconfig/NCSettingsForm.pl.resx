@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonProgramista.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="buttonProgramZero.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMoLHMy0s4AAADmSURBVGhD7ZJBCoMwFAU9Xe+/7S2678IiGBA7
@@ -128,10 +128,10 @@
         QeNXlUIBV5VDEb96GxTTqgUUVnKyLB9Z0GxY+M5FhQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="buttonProgramista.Text" xml:space="preserve">
-    <value>Programista</value>
+  <data name="buttonProgramZero.Text" xml:space="preserve">
+    <value>ProgramZero</value>
   </data>
-  <data name="buttonObszarRoboczy.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="buttonMachinePoints.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMrCRMbVUoAAAEbSURBVGhD7Y9BCgMxDAP3df3/ta9p6cEggpLI
@@ -142,10 +142,10 @@
         5ctjwahbYEVWvVwuizzPF2S17/aOAiUMAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="buttonObszarRoboczy.Text" xml:space="preserve">
+  <data name="buttonMachinePoints.Text" xml:space="preserve">
     <value>Punkty Obrabiarki</value>
   </data>
-  <data name="buttonParametry.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="buttonInitialParams.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMsCCtd8xsAAACjSURBVGhD7dNBqkJBEEPRWp37n7oLd/BE6RIp
@@ -154,10 +154,10 @@
         of0DZ5qN3eqPAAAA+HkRd70EVa5EaurPAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="buttonParametry.Text" xml:space="preserve">
+  <data name="buttonInitialParams.Text" xml:space="preserve">
     <value>Parametry Początkowe</value>
   </data>
-  <data name="buttonKinematyka.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="buttonKinematics.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMqE/dinXEAAAEkSURBVGhD7ZBRisMwDERzut7/d0/TogXBVIyN
@@ -168,10 +168,10 @@
         OTEVNkhs4c1tww5SS1F6vFJ6/OHwi1zXB3FqSPFztDEiAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="buttonKinematyka.Text" xml:space="preserve">
-    <value>Kinematyka</value>
+  <data name="buttonKinematics.Text" xml:space="preserve">
+    <value>Kinematics</value>
   </data>
-  <data name="buttonObrabiarkaCNC.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="buttonMachineTools.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         EgAACxIB0t1+/AAAAAd0SU1FB+IGHBMrJSHDOakAAAEjSURBVGhD7Y9LCgMxDEPndL3/tqdpVwYRXuJ8
@@ -182,7 +182,7 @@
         aQgtVFSX4WMR3B/4Bw2hhUq6XC7C83wB5hhTxIZEcn8AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="buttonObrabiarkaCNC.Text" xml:space="preserve">
+  <data name="buttonMachineTools.Text" xml:space="preserve">
     <value>Obrabiarka CNC</value>
   </data>
   <data name="buttonApply.Text" xml:space="preserve">

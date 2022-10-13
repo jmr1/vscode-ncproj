@@ -11,7 +11,7 @@ using parser;
 
 namespace cmtconfig
 {
-    public partial class Parametry : UserControl
+    public partial class CNCInitialParams : UserControl
     {
         private readonly NCSettingsName ncSettingsName;
         private readonly NCSettings ncSettings;
@@ -20,7 +20,7 @@ namespace cmtconfig
         private string driverName = "";
         private string machineToolName = "";
 
-        public Parametry(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile)
+        public CNCInitialParams(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile)
         {
             InitializeComponent();
             

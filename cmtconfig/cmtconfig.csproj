@@ -50,17 +50,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllAttributesParser.cs" />
-    <Compile Include="NCSettingsForm\Autor.cs">
+    <Compile Include="NCSettingsForm\CNCProgramZero.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NCSettingsForm\Autor.Designer.cs">
-      <DependentUpon>Autor.cs</DependentUpon>
+    <Compile Include="NCSettingsForm\CNCProgramZero.Designer.cs">
+      <DependentUpon>CNCProgramZero.cs</DependentUpon>
     </Compile>
-    <Compile Include="NCSettingsForm\Parametry.cs">
+    <Compile Include="NCSettingsForm\CNCInitialParams.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NCSettingsForm\Parametry.Designer.cs">
-      <DependentUpon>Parametry.cs</DependentUpon>
+    <Compile Include="NCSettingsForm\CNCInitialParams.Designer.cs">
+      <DependentUpon>CNCInitialParams.cs</DependentUpon>
     </Compile>
     <Compile Include="NCSettingsForm.cs">
       <SubType>Form</SubType>
@@ -68,23 +68,23 @@
     <Compile Include="NCSettingsForm.Designer.cs">
       <DependentUpon>NCSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NCSettingsForm\ObrabiarkaCNC.cs">
+    <Compile Include="NCSettingsForm\CNCMachineTool.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NCSettingsForm\ObrabiarkaCNC.Designer.cs">
-      <DependentUpon>ObrabiarkaCNC.cs</DependentUpon>
+    <Compile Include="NCSettingsForm\CNCMachineTool.Designer.cs">
+      <DependentUpon>CNCMachineTool.cs</DependentUpon>
     </Compile>
-    <Compile Include="NCSettingsForm\Kinematyka.cs">
+    <Compile Include="NCSettingsForm\CNCKinematics.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NCSettingsForm\Kinematyka.Designer.cs">
-      <DependentUpon>Kinematyka.cs</DependentUpon>
+    <Compile Include="NCSettingsForm\CNCKinematics.Designer.cs">
+      <DependentUpon>CNCKinematics.cs</DependentUpon>
     </Compile>
-    <Compile Include="NCSettingsForm\ObszarRoboczy.cs">
+    <Compile Include="NCSettingsForm\CNCMachinePoints.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NCSettingsForm\ObszarRoboczy.Designer.cs">
-      <DependentUpon>ObszarRoboczy.cs</DependentUpon>
+    <Compile Include="NCSettingsForm\CNCMachinePoints.Designer.cs">
+      <DependentUpon>CNCMachinePoints.cs</DependentUpon>
     </Compile>
     <Compile Include="CodeGroups.cs" />
     <Compile Include="NCSettingsDefinition.cs" />
@@ -92,39 +92,49 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="NCSettingsForm.pl.resx">
       <DependentUpon>NCSettingsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NCSettingsForm.resx">
       <DependentUpon>NCSettingsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\Autor.pl.resx">
-      <DependentUpon>Autor.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCProgramZero.pl.resx">
+      <DependentUpon>CNCProgramZero.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\Autor.resx">
-      <DependentUpon>Autor.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCProgramZero.resx">
+      <DependentUpon>CNCProgramZero.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\Kinematyka.pl.resx">
-      <DependentUpon>Kinematyka.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCKinematics.pl.resx">
+      <DependentUpon>CNCKinematics.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\Kinematyka.resx">
-      <DependentUpon>Kinematyka.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCKinematics.resx">
+      <DependentUpon>CNCKinematics.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\ObrabiarkaCNC.pl.resx">
-      <DependentUpon>ObrabiarkaCNC.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCMachineTool.pl.resx">
+      <DependentUpon>CNCMachineTool.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\ObrabiarkaCNC.resx">
-      <DependentUpon>ObrabiarkaCNC.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCMachineTool.resx">
+      <DependentUpon>CNCMachineTool.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\ObszarRoboczy.pl.resx">
-      <DependentUpon>ObszarRoboczy.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCMachinePoints.pl.resx">
+      <DependentUpon>CNCMachinePoints.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\ObszarRoboczy.resx">
-      <DependentUpon>ObszarRoboczy.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCMachinePoints.resx">
+      <DependentUpon>CNCMachinePoints.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\Parametry.pl.resx">
-      <DependentUpon>Parametry.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCInitialParams.pl.resx">
+      <DependentUpon>CNCInitialParams.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NCSettingsForm\Parametry.resx">
-      <DependentUpon>Parametry.cs</DependentUpon>
+    <EmbeddedResource Include="NCSettingsForm\CNCInitialParams.resx">
+      <DependentUpon>CNCInitialParams.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.pl.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">

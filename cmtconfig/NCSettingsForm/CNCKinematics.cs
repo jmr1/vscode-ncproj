@@ -11,7 +11,7 @@ using parser;
 
 namespace cmtconfig
 {
-    public partial class Kinematyka : UserControl
+    public partial class CNCKinematics : UserControl
     {
         private readonly NCSettingsName ncSettingsName;
         private readonly NCSettings ncSettings;
@@ -20,7 +20,7 @@ namespace cmtconfig
         private string driverName = "";
         private string machineToolName = "";
 
-        public Kinematyka(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile)
+        public CNCKinematics(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile)
         {
             InitializeComponent();
 
@@ -31,7 +31,7 @@ namespace cmtconfig
             this.ncSettingsFile = ncSettingsFile;
         }
 
-        void ParametryLoad(object sender, EventArgs e)
+        void InitialParamsLoad(object sender, EventArgs e)
         {
             labelMaxWorkingFeed.Text = ncSettingsName.kinematics_name["max_working_feed"];
             labelMaxWorkingFeedUnit.Text = ncSettingsName.kinematics_name["max_working_feed_unit"];
@@ -229,11 +229,11 @@ namespace cmtconfig
                         SetCurrentOrDefaults(ncSettingsFile);
                     }
                     var ncSettingsForm = ParentForm as NCSettingsForm;
-                    if (ncSettingsForm.ObrabiarkaCNC1.ExtrasChanged)
+                    if (ncSettingsForm.MachineTools1.ExtrasChanged)
                     {
-                        ShowPalletControls(ncSettingsForm.ObrabiarkaCNC1.PalletChangerPresent);
-                        ShowMeasurementControls(ncSettingsForm.ObrabiarkaCNC1.CncProbePresent);
-                        ncSettingsForm.ObrabiarkaCNC1.ExtrasChanged = false;
+                        ShowPalletControls(ncSettingsForm.MachineTools1.PalletChangerPresent);
+                        ShowMeasurementControls(ncSettingsForm.MachineTools1.CncProbePresent);
+                        ncSettingsForm.MachineTools1.ExtrasChanged = false;
                     }
                 }
             }
@@ -260,7 +260,7 @@ namespace cmtconfig
             kinematics.diameter_programming_2x = checkBoxDiameterProgramming.Checked;
 
             var ncSettingsForm = ParentForm as NCSettingsForm;
-            if (ncSettingsForm.ObrabiarkaCNC1.PalletChangerPresent)
+            if (ncSettingsForm.MachineTools1.PalletChangerPresent)
             {
                 kinematics.pallet_exchange_time = int.Parse(textBoxPalletExchangeTime.Text);
                 kinematics.pallet_exchange_code = ReadData(comboBoxPalletExchangeCode);
@@ -273,7 +273,7 @@ namespace cmtconfig
                 kinematics.pallet_exchange_code_value = "";
             }
 
-            if (ncSettingsForm.ObrabiarkaCNC1.CncProbePresent)
+            if (ncSettingsForm.MachineTools1.CncProbePresent)
             {
                 kinematics.auto_measure_after_tool_selection = checkBoxAutoMeasureAfterToolSelection.Checked;
                 kinematics.tool_measurement_time = int.Parse(textBoxToolMeasurementTime.Text);

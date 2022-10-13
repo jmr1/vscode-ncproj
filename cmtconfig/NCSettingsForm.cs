@@ -23,11 +23,11 @@ namespace cmtconfig
         private int mouseYclick;
         private bool mouseDown;
 
-        private ObrabiarkaCNC obrabiarkaCNC1;
-        private Parametry parametry1;
-        private Kinematyka kinematyka1;
-        private Autor autor1;
-        private ObszarRoboczy obszarRoboczy1;
+        private CNCMachineTools machineTools1;
+        private CNCInitialParams initialParams1;
+        private CNCKinematics kinematics1;
+        private CNCProgramZero programZero1;
+        private CNCMachinePoints machinePoints1;
 
         private readonly NCSettingsFile ncSettingsFile;
 
@@ -48,27 +48,27 @@ namespace cmtconfig
 
             this.ncSettingsFile = ncSettingsFile;
 
-            obrabiarkaCNC1 = new ObrabiarkaCNC(ncSettingsDefaults, ref ncSettingsFile, language);
-            kinematyka1 = new Kinematyka(ncSettingsDefaults, ref ncSettingsFile);
-            parametry1 = new Parametry(ncSettingsDefaults, ref ncSettingsFile);
-            obszarRoboczy1 = new ObszarRoboczy(ncSettingsDefaults, ref ncSettingsFile);
-            autor1 = new Autor(ncSettingsDefaults, ref ncSettingsFile);
+            machineTools1 = new CNCMachineTools(ncSettingsDefaults, ref ncSettingsFile, language);
+            kinematics1 = new CNCKinematics(ncSettingsDefaults, ref ncSettingsFile);
+            initialParams1 = new CNCInitialParams(ncSettingsDefaults, ref ncSettingsFile);
+            machinePoints1 = new CNCMachinePoints(ncSettingsDefaults, ref ncSettingsFile);
+            programZero1 = new CNCProgramZero(ncSettingsDefaults, ref ncSettingsFile);
             
-            parametry1.Parent = this;
+            initialParams1.Parent = this;
 
             InitializeComponent();
             Icon = Properties.Resources.nceditor;
             ShowInTaskbar = false;
 
-            Controls.Add(obrabiarkaCNC1);
-            Controls.Add(kinematyka1);
-            Controls.Add(parametry1);
-            Controls.Add(obszarRoboczy1);
-            Controls.Add(autor1);
+            Controls.Add(machineTools1);
+            Controls.Add(kinematics1);
+            Controls.Add(initialParams1);
+            Controls.Add(machinePoints1);
+            Controls.Add(programZero1);
 
-            SidePanel.Height = buttonObrabiarkaCNC.Height;
-            SidePanel.Top = buttonObrabiarkaCNC.Top;
-            obrabiarkaCNC1.BringToFront();
+            SidePanel.Height = buttonMachineTools.Height;
+            SidePanel.Top = buttonMachineTools.Top;
+            machineTools1.BringToFront();
         }
 
         private IEnumerable<Control> GetChildren(Control control)
@@ -93,37 +93,37 @@ namespace cmtconfig
 
         public string GetActiveDriver
         {
-            get { return obrabiarkaCNC1.GetActiveDriver; }
+            get { return machineTools1.GetActiveDriver; }
         }
 
         public string GetActiveMachineTool
         {
-            get { return obrabiarkaCNC1.GetActiveMachineTool; }
+            get { return machineTools1.GetActiveMachineTool; }
         }
 
-        public Kinematyka Kinematyka1
+        public CNCKinematics Kinematics1
         {
-            get { return kinematyka1; }
+            get { return kinematics1; }
         }
 
-        public ObrabiarkaCNC ObrabiarkaCNC1
+        public CNCMachineTools MachineTools1
         {
-            get { return obrabiarkaCNC1; }
+            get { return machineTools1; }
         }
 
-        public ObszarRoboczy ObszarRoboczy1
+        public CNCMachinePoints MachinePoints1
         {
-            get { return obszarRoboczy1; }
+            get { return machinePoints1; }
         }
 
-        public Parametry Parametry1
+        public CNCInitialParams InitialParams1
         {
-            get { return parametry1; }
+            get { return initialParams1; }
         }
 
-        public Autor Autor1
+        public CNCProgramZero ProgramZero1
         {
-            get { return autor1; }
+            get { return programZero1; }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -131,18 +131,18 @@ namespace cmtconfig
             ActiveForm.Close();
         }
 
-        private void buttonObrabiarkaCNC_Click(object sender, EventArgs e)
+        private void buttonMachineTools_Click(object sender, EventArgs e)
         {
-            SidePanel.Height = buttonObrabiarkaCNC.Height;
-            SidePanel.Top = buttonObrabiarkaCNC.Top;
-            obrabiarkaCNC1.BringToFront();
+            SidePanel.Height = buttonMachineTools.Height;
+            SidePanel.Top = buttonMachineTools.Top;
+            machineTools1.BringToFront();
         }
 
-        private void buttonKinematyka_Click(object sender, EventArgs e)
+        private void buttonKinematics_Click(object sender, EventArgs e)
         {
-            SidePanel.Height = buttonKinematyka.Height;
-            SidePanel.Top = buttonKinematyka.Top;
-            kinematyka1.BringToFront();
+            SidePanel.Height = buttonKinematics.Height;
+            SidePanel.Top = buttonKinematics.Top;
+            kinematics1.BringToFront();
         }
 
         private void panel2_MouseDown(object sender, MouseEventArgs e)
@@ -168,34 +168,34 @@ namespace cmtconfig
             }
         }
 
-        private void buttonParametry_Click(object sender, EventArgs e)
+        private void buttonInitialParams_Click(object sender, EventArgs e)
         {
-            SidePanel.Height = buttonParametry.Height;
-            SidePanel.Top = buttonParametry.Top;
-            parametry1.BringToFront();
+            SidePanel.Height = buttonInitialParams.Height;
+            SidePanel.Top = buttonInitialParams.Top;
+            initialParams1.BringToFront();
         }
 
-        private void buttonObszarRoboczy_Click(object sender, EventArgs e)
+        private void buttonMachinePoints_Click(object sender, EventArgs e)
         {
-            SidePanel.Height = buttonObszarRoboczy.Height;
-            SidePanel.Top = buttonObszarRoboczy.Top;
-            obszarRoboczy1.BringToFront();
+            SidePanel.Height = buttonMachinePoints.Height;
+            SidePanel.Top = buttonMachinePoints.Top;
+            machinePoints1.BringToFront();
         }
 
-        private void buttonProgramista_Click(object sender, EventArgs e)
+        private void buttonProgramZero_Click(object sender, EventArgs e)
         {
-            SidePanel.Height = buttonProgramista.Height;
-            SidePanel.Top = buttonProgramista.Top;
-            autor1.BringToFront();
+            SidePanel.Height = buttonProgramZero.Height;
+            SidePanel.Top = buttonProgramZero.Top;
+            programZero1.BringToFront();
         }
 
         private void buttonDefault_Click(object sender, EventArgs e)
         {
-            obrabiarkaCNC1.MakeDefault();
-            kinematyka1.MakeDefault();
-            parametry1.MakeDefault();
-            obszarRoboczy1.MakeDefault();
-            autor1.MakeDefault();
+            machineTools1.MakeDefault();
+            kinematics1.MakeDefault();
+            initialParams1.MakeDefault();
+            machinePoints1.MakeDefault();
+            programZero1.MakeDefault();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -210,11 +210,11 @@ namespace cmtconfig
                 if (openFileDialog1.FileName != "")
                 {
                     var ncSettingsFileLocal = NCSettingsFile.Read(openFileDialog1.FileName);
-                    obrabiarkaCNC1.SetNCSettingsFile(ncSettingsFileLocal);
-                    kinematyka1.SetNCSettingsFile(ncSettingsFileLocal);
-                    parametry1.SetNCSettingsFile(ncSettingsFileLocal);
-                    obszarRoboczy1.SetNCSettingsFile(ncSettingsFileLocal);
-                    autor1.SetNCSettingsFile(ncSettingsFileLocal);
+                    machineTools1.SetNCSettingsFile(ncSettingsFileLocal);
+                    kinematics1.SetNCSettingsFile(ncSettingsFileLocal);
+                    initialParams1.SetNCSettingsFile(ncSettingsFileLocal);
+                    machinePoints1.SetNCSettingsFile(ncSettingsFileLocal);
+                    programZero1.SetNCSettingsFile(ncSettingsFileLocal);
                 }
             }
         }
@@ -227,11 +227,11 @@ namespace cmtconfig
                 {
                     NCSettingsFile ncSettingsFileLocal = ObjectCopy.Clone(ncSettingsFile);
 
-                    obrabiarkaCNC1.ReadData(ref ncSettingsFileLocal);
-                    kinematyka1.ReadData(ref ncSettingsFileLocal);
-                    parametry1.ReadData(ref ncSettingsFileLocal);
-                    obszarRoboczy1.ReadData(ref ncSettingsFileLocal);
-                    autor1.ReadData(ref ncSettingsFileLocal);
+                    machineTools1.ReadData(ref ncSettingsFileLocal);
+                    kinematics1.ReadData(ref ncSettingsFileLocal);
+                    initialParams1.ReadData(ref ncSettingsFileLocal);
+                    machinePoints1.ReadData(ref ncSettingsFileLocal);
+                    programZero1.ReadData(ref ncSettingsFileLocal);
 
                     ncSettingsFileLocal.Write(saveFileDialog1.FileName);
                 }

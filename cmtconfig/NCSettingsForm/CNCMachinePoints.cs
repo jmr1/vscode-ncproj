@@ -12,7 +12,7 @@ using parser;
 
 namespace cmtconfig
 {
-    public partial class ObszarRoboczy : UserControl
+    public partial class CNCMachinePoints : UserControl
     {
         private readonly NCSettingsName ncSettingsName;
         private readonly NCSettings ncSettings;
@@ -21,7 +21,7 @@ namespace cmtconfig
         private string driverName = "";
         private string machineToolName = "";
 
-        public ObszarRoboczy(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile)
+        public CNCMachinePoints(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile)
         {
             InitializeComponent();
             

@@ -1,6 +1,6 @@
 ﻿namespace cmtconfig
 {
-    partial class Kinematyka
+    partial class CNCKinematics
     {
         /// <summary> 
         /// Wymagana zmienna projektanta.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Kinematyka));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CNCKinematics));
             this.labelHeader = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -278,7 +278,7 @@
             resources.ApplyResources(this.textBoxToolMeasurementCode, "textBoxToolMeasurementCode");
             this.textBoxToolMeasurementCode.Name = "textBoxToolMeasurementCode";
             // 
-            // Kinematyka
+            // CNCKinematics
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -314,8 +314,8 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.labelHeader);
             this.Controls.Add(this.checkBoxDiameterProgramming);
-            this.Name = "Kinematyka";
-            this.Load += new System.EventHandler(this.ParametryLoad);
+            this.Name = "CNCKinematics";
+            this.Load += new System.EventHandler(this.InitialParamsLoad);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

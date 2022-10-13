@@ -1,6 +1,6 @@
 ﻿namespace cmtconfig
 {
-    partial class Autor
+    partial class CNCProgramZero
     {
         /// <summary> 
         /// Wymagana zmienna projektanta.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Autor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CNCProgramZero));
             this.labelHeader = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.labelSurname = new System.Windows.Forms.Label();
@@ -202,7 +202,7 @@
             this.checkBoxWorkingTimeAtTheEnd.Name = "checkBoxWorkingTimeAtTheEnd";
             this.checkBoxWorkingTimeAtTheEnd.UseVisualStyleBackColor = true;
             // 
-            // Autor
+            // CNCProgramZero
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -233,8 +233,8 @@
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelHeader);
             this.Controls.Add(this.checkBoxWorkingTimeAtTheEnd);
-            this.Name = "Autor";
-            this.Load += new System.EventHandler(this.AutorLoad);
+            this.Name = "CNCProgramZero";
+            this.Load += new System.EventHandler(this.ProgramZeroLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 

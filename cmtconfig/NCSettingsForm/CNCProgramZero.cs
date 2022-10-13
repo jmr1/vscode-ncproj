@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace cmtconfig
 {
-    public partial class Autor : UserControl
+    public partial class CNCProgramZero : UserControl
     {
         private readonly NCSettingsName ncSettingsName;
         private readonly NCSettings ncSettings;
         private NCSettingsFile ncSettingsFile;
 
-        public Autor(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile)
+        public CNCProgramZero(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile)
         {
             InitializeComponent();
 
@@ -25,7 +25,7 @@ namespace cmtconfig
             this.ncSettingsFile = ncSettingsFile;
         }
         
-        void AutorLoad(object sender, EventArgs e)
+        void ProgramZeroLoad(object sender, EventArgs e)
         {
             labelHeader.Text = ncSettingsName.author_name["header"];
             labelName.Text = ncSettingsName.author_name["name"];

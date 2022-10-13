@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NCSettingsForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.SidePanel = new System.Windows.Forms.Panel();
-            this.buttonProgramista = new System.Windows.Forms.Button();
-            this.buttonObszarRoboczy = new System.Windows.Forms.Button();
-            this.buttonParametry = new System.Windows.Forms.Button();
-            this.buttonKinematyka = new System.Windows.Forms.Button();
-            this.buttonObrabiarkaCNC = new System.Windows.Forms.Button();
+            this.buttonProgramZero = new System.Windows.Forms.Button();
+            this.buttonMachinePoints = new System.Windows.Forms.Button();
+            this.buttonInitialParams = new System.Windows.Forms.Button();
+            this.buttonKinematics = new System.Windows.Forms.Button();
+            this.buttonMachineTools = new System.Windows.Forms.Button();
             this.buttonDefault = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonExport = new System.Windows.Forms.Button();
@@ -49,11 +49,11 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panel1.Controls.Add(this.SidePanel);
-            this.panel1.Controls.Add(this.buttonProgramista);
-            this.panel1.Controls.Add(this.buttonObszarRoboczy);
-            this.panel1.Controls.Add(this.buttonParametry);
-            this.panel1.Controls.Add(this.buttonKinematyka);
-            this.panel1.Controls.Add(this.buttonObrabiarkaCNC);
+            this.panel1.Controls.Add(this.buttonProgramZero);
+            this.panel1.Controls.Add(this.buttonMachinePoints);
+            this.panel1.Controls.Add(this.buttonInitialParams);
+            this.panel1.Controls.Add(this.buttonKinematics);
+            this.panel1.Controls.Add(this.buttonMachineTools);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
@@ -63,60 +63,60 @@
             resources.ApplyResources(this.SidePanel, "SidePanel");
             this.SidePanel.Name = "SidePanel";
             // 
-            // buttonProgramista
+            // buttonProgramZero
             // 
-            this.buttonProgramista.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.buttonProgramista.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.buttonProgramista, "buttonProgramista");
-            this.buttonProgramista.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.buttonProgramista.Name = "buttonProgramista";
-            this.buttonProgramista.UseMnemonic = false;
-            this.buttonProgramista.UseVisualStyleBackColor = false;
-            this.buttonProgramista.Click += new System.EventHandler(this.buttonProgramista_Click);
+            this.buttonProgramZero.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.buttonProgramZero.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.buttonProgramZero, "buttonProgramZero");
+            this.buttonProgramZero.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.buttonProgramZero.Name = "buttonProgramZero";
+            this.buttonProgramZero.UseMnemonic = false;
+            this.buttonProgramZero.UseVisualStyleBackColor = false;
+            this.buttonProgramZero.Click += new System.EventHandler(this.buttonProgramZero_Click);
             // 
-            // buttonObszarRoboczy
+            // buttonMachinePoints
             // 
-            this.buttonObszarRoboczy.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.buttonObszarRoboczy.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.buttonObszarRoboczy, "buttonObszarRoboczy");
-            this.buttonObszarRoboczy.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.buttonObszarRoboczy.Name = "buttonObszarRoboczy";
-            this.buttonObszarRoboczy.UseMnemonic = false;
-            this.buttonObszarRoboczy.UseVisualStyleBackColor = false;
-            this.buttonObszarRoboczy.Click += new System.EventHandler(this.buttonObszarRoboczy_Click);
+            this.buttonMachinePoints.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.buttonMachinePoints.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.buttonMachinePoints, "buttonMachinePoints");
+            this.buttonMachinePoints.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.buttonMachinePoints.Name = "buttonMachinePoints";
+            this.buttonMachinePoints.UseMnemonic = false;
+            this.buttonMachinePoints.UseVisualStyleBackColor = false;
+            this.buttonMachinePoints.Click += new System.EventHandler(this.buttonMachinePoints_Click);
             // 
-            // buttonParametry
+            // buttonInitialParams
             // 
-            this.buttonParametry.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.buttonParametry.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.buttonParametry, "buttonParametry");
-            this.buttonParametry.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.buttonParametry.Name = "buttonParametry";
-            this.buttonParametry.UseMnemonic = false;
-            this.buttonParametry.UseVisualStyleBackColor = false;
-            this.buttonParametry.Click += new System.EventHandler(this.buttonParametry_Click);
+            this.buttonInitialParams.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.buttonInitialParams.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.buttonInitialParams, "buttonInitialParams");
+            this.buttonInitialParams.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.buttonInitialParams.Name = "buttonInitialParams";
+            this.buttonInitialParams.UseMnemonic = false;
+            this.buttonInitialParams.UseVisualStyleBackColor = false;
+            this.buttonInitialParams.Click += new System.EventHandler(this.buttonInitialParams_Click);
             // 
-            // buttonKinematyka
+            // buttonKinematics
             // 
-            this.buttonKinematyka.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.buttonKinematyka.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.buttonKinematyka, "buttonKinematyka");
-            this.buttonKinematyka.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.buttonKinematyka.Name = "buttonKinematyka";
-            this.buttonKinematyka.UseMnemonic = false;
-            this.buttonKinematyka.UseVisualStyleBackColor = false;
-            this.buttonKinematyka.Click += new System.EventHandler(this.buttonKinematyka_Click);
+            this.buttonKinematics.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.buttonKinematics.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.buttonKinematics, "buttonKinematics");
+            this.buttonKinematics.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.buttonKinematics.Name = "buttonKinematics";
+            this.buttonKinematics.UseMnemonic = false;
+            this.buttonKinematics.UseVisualStyleBackColor = false;
+            this.buttonKinematics.Click += new System.EventHandler(this.buttonKinematics_Click);
             // 
-            // buttonObrabiarkaCNC
+            // buttonMachineTools
             // 
-            this.buttonObrabiarkaCNC.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.buttonObrabiarkaCNC.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.buttonObrabiarkaCNC, "buttonObrabiarkaCNC");
-            this.buttonObrabiarkaCNC.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.buttonObrabiarkaCNC.Name = "buttonObrabiarkaCNC";
-            this.buttonObrabiarkaCNC.UseMnemonic = false;
-            this.buttonObrabiarkaCNC.UseVisualStyleBackColor = false;
-            this.buttonObrabiarkaCNC.Click += new System.EventHandler(this.buttonObrabiarkaCNC_Click);
+            this.buttonMachineTools.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.buttonMachineTools.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.buttonMachineTools, "buttonMachineTools");
+            this.buttonMachineTools.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.buttonMachineTools.Name = "buttonMachineTools";
+            this.buttonMachineTools.UseMnemonic = false;
+            this.buttonMachineTools.UseVisualStyleBackColor = false;
+            this.buttonMachineTools.Click += new System.EventHandler(this.buttonMachineTools_Click);
             // 
             // buttonDefault
             // 
@@ -176,12 +176,12 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button buttonProgramista;
-        private System.Windows.Forms.Button buttonObszarRoboczy;
-        private System.Windows.Forms.Button buttonParametry;
-        private System.Windows.Forms.Button buttonObrabiarkaCNC;
+        private System.Windows.Forms.Button buttonProgramZero;
+        private System.Windows.Forms.Button buttonMachinePoints;
+        private System.Windows.Forms.Button buttonInitialParams;
+        private System.Windows.Forms.Button buttonMachineTools;
         private System.Windows.Forms.Panel SidePanel;
-        private System.Windows.Forms.Button buttonKinematyka;
+        private System.Windows.Forms.Button buttonKinematics;
         private System.Windows.Forms.Button buttonDefault;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonExport;

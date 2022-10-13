@@ -11,7 +11,7 @@ using parser;
 
 namespace cmtconfig
 {
-    public partial class ObrabiarkaCNC : UserControl
+    public partial class CNCMachineTools : UserControl
     {
         private NCSettingsName ncSettingsName;
         private NCSettings ncSettings;
@@ -20,7 +20,7 @@ namespace cmtconfig
         private bool extrasChanged = false;
         private Language language;
 
-        public ObrabiarkaCNC(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile, Language language)
+        public CNCMachineTools(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile, Language language)
         {
             InitializeComponent();
 
@@ -32,7 +32,7 @@ namespace cmtconfig
             this.language = language;
         }
 
-        void ObrabiarkaCNCLoad(object sender, EventArgs e)
+        void MachineToolsLoad(object sender, EventArgs e)
         {
             labelModel.Hide();
             comboBoxModel.Hide();
@@ -137,10 +137,10 @@ namespace cmtconfig
             pictureBox1.Image = Image.FromFile(@"img/" + activeMachineTool + ".png");
 
             var ncSettingsForm = ParentForm as NCSettingsForm;
-            ncSettingsForm.Kinematyka1.Reload(ncSettingsFileTmp);
-            ncSettingsForm.Parametry1.Reload(ncSettingsFileTmp);
-            ncSettingsForm.ObszarRoboczy1.Reload(ncSettingsFileTmp);
-            ncSettingsForm.Autor1.Reload(ncSettingsFileTmp);
+            ncSettingsForm.Kinematics1.Reload(ncSettingsFileTmp);
+            ncSettingsForm.InitialParams1.Reload(ncSettingsFileTmp);
+            ncSettingsForm.MachinePoints1.Reload(ncSettingsFileTmp);
+            ncSettingsForm.ProgramZero1.Reload(ncSettingsFileTmp);
         }
 
         public void MakeDefault()
