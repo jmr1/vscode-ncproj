@@ -3,15 +3,15 @@
     "displayName": "NC Project",
     "description": "NC Project is an integrated programming environment for text files dedicated to numerically controlled machine tools, the syntax of which is based on G-codes.",
     "author": "Janusz Rupar, Marcin Cieślik",
-    "homepage": "https://gitlab.com/nceditor/nceditor/-/blob/master/README.md",
+    "homepage": "https://github.com/jmr1/vscode-ncproj/blob/main/README.md",
     "repository": {
         "type": "git",
-        "url": "https://gitlab.com/nceditor/nceditor.git"
+        "url": "https://github.com/jmr1/vscode-ncproj.git"
     },
     "license": "Apache 2.0",
     "version": "0.0.1",
     "icon": "images/icon.png",
-    "publisher": "BeeCAM",
+    "publisher": "jrupar-mcieslik",
     "categories": [],
     "activationEvents": [
         "onLanguage:ncproj",
