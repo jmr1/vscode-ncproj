@@ -32,4 +32,25 @@
 *.app
 
 # VS Studio files
+.vs/
 *.user
+*.lib
+*.exp
+*.exe.recipe
+*.dll.recipe
+*.res
+*.iobj
+*.ipdb
+*.log
+*.tlog
+*.pch
+*.obj
+*.pdb
+*.lastbuildstate
+*.resources
+*.cache
+*.AssemblyAttributes.cs
+*.csproj.CopyComplete
+*.csproj.FileListAbsolute.txt
+packages
+
