@@ -40,6 +40,7 @@
 *.dll.recipe
 *.res
 *.iobj
+*.idb
 *.ipdb
 *.log
 *.tlog
