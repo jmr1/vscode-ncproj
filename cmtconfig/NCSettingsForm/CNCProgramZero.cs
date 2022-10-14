@@ -7,14 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using parser;
 
 namespace cmtconfig
 {
+    using ProgramZeroData = Dictionary<string, double>;
     public partial class CNCProgramZero : UserControl
     {
         private readonly NCSettingsName ncSettingsName;
         private readonly NCSettings ncSettings;
         private NCSettingsFile ncSettingsFile;
+
+        private string driverName = "";
+        private string machineToolName = "";
+
+        private readonly ProgramZeroData defaultProgramZeroData = new ProgramZeroData { {"X", 0.0 }, { "Y", 0.0 }, { "Z", 0.0 } };
 
         public CNCProgramZero(NCSettingsDefaults ncSettingsDefaults, ref NCSettingsFile ncSettingsFile)
         {
@@ -27,28 +34,6 @@ namespace cmtconfig
         
         void ProgramZeroLoad(object sender, EventArgs e)
         {
-            labelHeader.Text = ncSettingsName.author_name["header"];
-            labelName.Text = ncSettingsName.author_name["name"];
-            labelSurname.Text = ncSettingsName.author_name["surname"];
-            labelPosition.Text = ncSettingsName.author_name["position"];
-            labelDepartment.Text = ncSettingsName.author_name["department"];
-            lablePhone1.Text = ncSettingsName.author_name["phone1"];
-            labelPhone2.Text = ncSettingsName.author_name["phone2"];
-            labelEmail.Text = ncSettingsName.author_name["email"];
-            labelOther.Text = ncSettingsName.author_name["other"];
-            labelDocumentHeader.Text = ncSettingsName.author_name["document_header"];
-            labelDocumentFooter.Text = ncSettingsName.author_name["document_footer"];
-            labelDocumentInfo.Text = ncSettingsName.author_name["document_info"];
-            labelComment.Text = ncSettingsName.author_name["comment"];
-            checkBoxWorkingTimeAtTheEnd.Text = ncSettingsName.author_name["working_time_at_end"];
-
-            labelDocumentHeader.Hide();
-            textBoxDocumentHeader.Hide();
-            labelDocumentFooter.Hide();
-            textBoxDocumentFooter.Hide();
-            labelDocumentInfo.Hide();
-            checkBoxWorkingTimeAtTheEnd.Hide();
-
             Reload(ncSettingsFile);
         }
 
@@ -59,46 +44,154 @@ namespace cmtconfig
 
         public void Reload(NCSettingsFile ncSettingsFileLocal)
         {
-            SetDefaults(String.IsNullOrEmpty(ncSettingsFileLocal.machine_tool) ? ncSettings.author : ncSettingsFileLocal.author);
+            HasActiveMachineToolChanged();
+            SetCurrentOrDefaults(ncSettingsFileLocal);
         }
 
-        private void SetDefaults(AuthorData authorData)
+        private bool HasActiveMachineToolChanged()
         {
-            textBoxName.Text =              authorData.name;
-            textBoxSurname.Text =           authorData.surname;
-            textBoxPosition.Text =          authorData.position;
-            textBoxDepartment.Text =        authorData.department;
-            textBoxPhone1.Text =            authorData.phone1;
-            textBoxPhone2.Text =            authorData.phone2;
-            textBoxEmail.Text =             authorData.email;
-            textBoxOther.Text =             authorData.other;
-            textBoxDocumentHeader.Text =    authorData.document_header;
-            textBoxDocumentFooter.Text =    authorData.document_footer;
-            textBoxComment.Text =           authorData.comment;
-            checkBoxWorkingTimeAtTheEnd.Checked = authorData.working_time_at_end;
+            var ncSettingsForm = ParentForm as NCSettingsForm;
+            var activeMachineTool = ncSettingsForm.GetActiveMachineTool;
+            var activeDriver = ncSettingsForm.GetActiveDriver;
+
+            if (driverName == activeDriver && machineToolName == activeMachineTool)
+                return false;
+
+            machineToolName = activeMachineTool;
+            driverName = activeDriver;
+
+            return true;
+        }
+
+        private void SetCurrentOrDefaults(NCSettingsFile ncSettingsFileLocal)
+        {
+            if(ncSettingsFileLocal.driver.ToString() == driverName && ncSettingsFileLocal.machine_tool == machineToolName)
+            {
+                SetDefaults(ncSettingsFileLocal.machine_tool_type, ncSettingsFileLocal.kinematics, ncSettingsFileLocal.zero_point);
+            }
+            else
+            {
+                SetDefaults(ncSettings.machine_tool[machineToolName].type, ncSettings.machine_tool[machineToolName].kinematics, defaultProgramZeroData);
+            }
+        }
+
+        private void SetDefaults(MachineToolType machineToolType, Kinematics kinematics, ProgramZeroData zeroPoint)
+        {
+            pictureBox1.Image = Image.FromFile(@"img/zero_point_" + machineToolType.ToString() + ".png");
+
+            if (machineToolType == MachineToolType.lathe || machineToolType == MachineToolType.millturn)
+            {
+                labelX.Hide();
+                textBoxX.Hide();
+                labelXmin.Hide();
+                labelXminValue.Hide();
+                labelXArrows.Hide();
+                labelXmax.Hide();
+                labelXmaxValue.Hide();
+
+                labelY.Hide();
+                textBoxY.Hide();
+                labelYmin.Hide();
+                labelYminValue.Hide();
+                labelYArrows.Hide();
+                labelYmax.Hide();
+                labelYmaxValue.Hide();
+            }
+            else
+            {
+                labelX.Show();
+                textBoxX.Show();
+                labelXmin.Show();
+                labelXminValue.Show();
+                labelXArrows.Show();
+                labelXmax.Show();
+                labelXmaxValue.Show();
+
+                labelY.Show();
+                textBoxY.Show();
+                labelYmin.Show();
+                labelYminValue.Show();
+                labelYArrows.Show();
+                labelYmax.Show();
+                labelYmaxValue.Show();
+
+                textBoxX.Text = zeroPoint["X"].ToString();
+                textBoxY.Text = zeroPoint["Y"].ToString();
+
+                labelXminValue.Text = kinematics.cartesian_system_axis["X"].range_min.ToString();
+                labelXmaxValue.Text = kinematics.cartesian_system_axis["X"].range_max.ToString();
+                labelYminValue.Text = kinematics.cartesian_system_axis["Y"].range_min.ToString();
+                labelYmaxValue.Text = kinematics.cartesian_system_axis["Y"].range_max.ToString();
+            }
+
+            textBoxZ.Text = zeroPoint["Z"].ToString();
+
+            labelZminValue.Text = kinematics.cartesian_system_axis["Z"].range_min.ToString();
+            labelZmaxValue.Text = kinematics.cartesian_system_axis["Z"].range_max.ToString();
         }
 
         public void MakeDefault()
         {
-            SetDefaults(ncSettings.author);
+            SetDefaults(ncSettings.machine_tool[machineToolName].type, ncSettings.machine_tool[machineToolName].kinematics, defaultProgramZeroData);
         }
 
         public void ReadData(ref NCSettingsFile ncSettingsFileLocal)
         {
-            var authorParam = ncSettingsFileLocal.author;
+            var zeroProgramData = ncSettingsFileLocal.zero_point;
 
-            authorParam.name = textBoxName.Text;
-            authorParam.surname = textBoxSurname.Text;
-            authorParam.position = textBoxPosition.Text;
-            authorParam.department = textBoxDepartment.Text;
-            authorParam.phone1 = textBoxPhone1.Text;
-            authorParam.phone2 = textBoxPhone2.Text;
-            authorParam.email = textBoxEmail.Text;
-            authorParam.other = textBoxOther.Text;
-            authorParam.document_header = textBoxDocumentHeader.Text;
-            authorParam.document_footer = textBoxDocumentFooter.Text;
-            authorParam.comment = textBoxComment.Text;
-            authorParam.working_time_at_end = checkBoxWorkingTimeAtTheEnd.Checked;
+            if (ncSettings.machine_tool[machineToolName].type == MachineToolType.lathe || ncSettings.machine_tool[machineToolName].type == MachineToolType.millturn)
+            {
+                zeroProgramData["X"] = 0;
+                zeroProgramData["Y"] = 0;
+            }
+            else
+            {
+                zeroProgramData["X"] = Double.Parse(textBoxX.Text);
+                zeroProgramData["Y"] = Double.Parse(textBoxY.Text);
+            }
+
+            zeroProgramData["Z"] = Double.Parse(textBoxZ.Text);
+        }
+
+        private void AllowDecimalsOnly(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-')
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+
+            // only allow one minus
+            if (e.KeyChar == '-' && (sender as TextBox).Text.IndexOf('-') > -1)
+            {
+                e.Handled = true;
+            }
+
+            // only allow minus as a first character
+            if (e.KeyChar == '-' && (sender as TextBox).SelectionStart != 0)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxX_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            AllowDecimalsOnly(sender, e);
+        }
+
+        private void textBoxY_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            AllowDecimalsOnly(sender, e);
+        }
+
+        private void textBoxZ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            AllowDecimalsOnly(sender, e);
         }
     }
 }

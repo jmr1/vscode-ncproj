@@ -29,7 +29,7 @@ namespace cmtconfig
             this.ncSettingsFile = ncSettingsFile;
         }
 
-        private void CNCcontrol_Load(object sender, EventArgs e)
+        private void InitialParamsLoad(object sender, EventArgs e)
         {
             var cnc_default_values_name = ncSettingsName.cnc_default_values_name;
             labelDefaultMotion.Text = cnc_default_values_name["default_motion"];

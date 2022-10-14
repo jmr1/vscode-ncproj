@@ -175,7 +175,7 @@
             this.Controls.Add(this.groupBoxMachineStartingPosition);
             this.Controls.Add(this.labelHeader);
             this.Name = "CNCMachinePoints";
-            this.Load += new System.EventHandler(this.ZakresyLoad);
+            this.Load += new System.EventHandler(this.MachinePointsLoad);
             this.groupBoxMachineStartingPosition.ResumeLayout(false);
             this.groupBoxMachineStartingPosition.PerformLayout();
             this.groupBoxToolExchangePoint.ResumeLayout(false);

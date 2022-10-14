@@ -48,6 +48,7 @@ namespace cmtconfig
 
         public void Reload(NCSettingsFile ncSettingsFileLocal)
         {
+            comboBoxDriver.SelectedIndex = -1;
             SetDefaults(ncSettingsFileLocal.driver, ncSettingsFileLocal.machine_tool_id);
         }
 
@@ -201,12 +202,12 @@ namespace cmtconfig
             }
 
             // Set zero points of X and Y axes to zero as they aren't being used for lathe and millturn
-            var machineToolType = ncSettings.machine_tool[GetActiveMachineTool].type;
-            if (machineToolType == MachineToolType.lathe || machineToolType == MachineToolType.millturn)
-            {
-                ncSettingsFile.zero_point["X"] = 0;
-                ncSettingsFile.zero_point["Y"] = 0;
-            }
+            //var machineToolType = ncSettings.machine_tool[GetActiveMachineTool].type;
+            //if (machineToolType == MachineToolType.lathe || machineToolType == MachineToolType.millturn)
+            //{
+            //    ncSettingsFile.zero_point["X"] = 0;
+            //    ncSettingsFile.zero_point["Y"] = 0;
+            //}
         }
 
         public bool PalletChangerPresent

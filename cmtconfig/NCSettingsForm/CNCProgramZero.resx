@@ -117,677 +117,656 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="labelHeader.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="labelHeader.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 15.75pt</value>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>135, 53</value>
   </data>
-  <data name="labelHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>347, 248</value>
   </data>
-  <data name="labelHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>650, 30</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="labelHeader.TabIndex" type="System.Int32, mscorlib">
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="labelHeader.Text" xml:space="preserve">
-    <value>NC Program Author</value>
+  <data name="&gt;&gt;pictureBox1.Name" xml:space="preserve">
+    <value>pictureBox1</value>
   </data>
-  <data name="labelHeader.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+  <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelHeader.Name" xml:space="preserve">
-    <value>labelHeader</value>
-  </data>
-  <data name="&gt;&gt;labelHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelHeader.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelHeader.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
-  <data name="labelName.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="labelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 46</value>
-  </data>
-  <data name="labelName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="labelName.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="labelName.Text" xml:space="preserve">
-    <value>Name:</value>
-  </data>
-  <data name="&gt;&gt;labelName.Name" xml:space="preserve">
-    <value>labelName</value>
-  </data>
-  <data name="&gt;&gt;labelName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
-  <data name="labelSurname.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="labelTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 15.75pt</value>
   </data>
-  <data name="labelSurname.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 72</value>
+  <data name="labelTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="labelSurname.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="labelTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>650, 30</value>
   </data>
-  <data name="labelSurname.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="labelTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="labelSurname.Text" xml:space="preserve">
-    <value>Surname:</value>
+  <data name="labelTitle.Text" xml:space="preserve">
+    <value>Zero / Machining Position relative to the center of the table</value>
   </data>
-  <data name="&gt;&gt;labelSurname.Name" xml:space="preserve">
-    <value>labelSurname</value>
+  <data name="labelTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;labelSurname.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Name" xml:space="preserve">
+    <value>labelTitle</value>
+  </data>
+  <data name="&gt;&gt;labelTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelSurname.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelSurname.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelTitle.ZOrder" xml:space="preserve">
     <value>22</value>
   </data>
-  <data name="labelPosition.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="labelX.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="labelPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 98</value>
+  <data name="labelX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>468, 374</value>
   </data>
-  <data name="labelPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="labelX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
   </data>
-  <data name="labelPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="labelX.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="labelPosition.Text" xml:space="preserve">
-    <value>Position:</value>
+  <data name="labelX.Text" xml:space="preserve">
+    <value>X</value>
   </data>
-  <data name="&gt;&gt;labelPosition.Name" xml:space="preserve">
-    <value>labelPosition</value>
+  <data name="&gt;&gt;labelX.Name" xml:space="preserve">
+    <value>labelX</value>
   </data>
-  <data name="&gt;&gt;labelPosition.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelX.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPosition.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelX.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelPosition.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelX.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
-  <data name="labelDepartment.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="labelY.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="labelDepartment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 124</value>
+  <data name="labelY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>468, 422</value>
   </data>
-  <data name="labelDepartment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="labelY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
   </data>
-  <data name="labelDepartment.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="labelY.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="labelDepartment.Text" xml:space="preserve">
-    <value>Department:</value>
+  <data name="labelY.Text" xml:space="preserve">
+    <value>Y</value>
   </data>
-  <data name="&gt;&gt;labelDepartment.Name" xml:space="preserve">
-    <value>labelDepartment</value>
+  <data name="&gt;&gt;labelY.Name" xml:space="preserve">
+    <value>labelY</value>
   </data>
-  <data name="&gt;&gt;labelDepartment.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelY.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelDepartment.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelY.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelDepartment.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelY.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <data name="lablePhone1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="labelZ.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="lablePhone1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 150</value>
+  <data name="labelZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>468, 468</value>
   </data>
-  <data name="lablePhone1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+  <data name="labelZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
   </data>
-  <data name="lablePhone1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="labelZ.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="lablePhone1.Text" xml:space="preserve">
-    <value>Phone #1:</value>
+  <data name="labelZ.Text" xml:space="preserve">
+    <value>Z</value>
   </data>
-  <data name="&gt;&gt;lablePhone1.Name" xml:space="preserve">
-    <value>lablePhone1</value>
+  <data name="&gt;&gt;labelZ.Name" xml:space="preserve">
+    <value>labelZ</value>
   </data>
-  <data name="&gt;&gt;lablePhone1.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelZ.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lablePhone1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelZ.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lablePhone1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelZ.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="labelPhone2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="textBoxX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>490, 371</value>
   </data>
-  <data name="labelPhone2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 176</value>
+  <data name="textBoxX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
   </data>
-  <data name="labelPhone2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+  <data name="textBoxX.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="labelPhone2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;textBoxX.Name" xml:space="preserve">
+    <value>textBoxX</value>
   </data>
-  <data name="labelPhone2.Text" xml:space="preserve">
-    <value>Phone #2:</value>
+  <data name="&gt;&gt;textBoxX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelPhone2.Name" xml:space="preserve">
-    <value>labelPhone2</value>
-  </data>
-  <data name="&gt;&gt;labelPhone2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelPhone2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxX.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelPhone2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxX.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="labelEmail.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="textBoxY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>490, 419</value>
   </data>
-  <data name="labelEmail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 202</value>
+  <data name="textBoxY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
   </data>
-  <data name="labelEmail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+  <data name="textBoxY.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="labelEmail.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="&gt;&gt;textBoxY.Name" xml:space="preserve">
+    <value>textBoxY</value>
   </data>
-  <data name="labelEmail.Text" xml:space="preserve">
-    <value>E-mail:</value>
+  <data name="&gt;&gt;textBoxY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelEmail.Name" xml:space="preserve">
-    <value>labelEmail</value>
-  </data>
-  <data name="&gt;&gt;labelEmail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelEmail.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxY.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelEmail.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxY.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="labelOther.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="textBoxZ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>490, 465</value>
   </data>
-  <data name="labelOther.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 228</value>
+  <data name="textBoxZ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
   </data>
-  <data name="labelOther.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 20</value>
+  <data name="textBoxZ.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="labelOther.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="&gt;&gt;textBoxZ.Name" xml:space="preserve">
+    <value>textBoxZ</value>
   </data>
-  <data name="labelOther.Text" xml:space="preserve">
-    <value>Other:</value>
+  <data name="&gt;&gt;textBoxZ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelOther.Name" xml:space="preserve">
-    <value>labelOther</value>
-  </data>
-  <data name="&gt;&gt;labelOther.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelOther.Parent" xml:space="preserve">
+  <data name="&gt;&gt;textBoxZ.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelOther.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;textBoxZ.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="textBoxName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 46</value>
+  <data name="labelMachiningRange.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="textBoxName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 20</value>
+  <data name="labelMachiningRange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 333</value>
   </data>
-  <data name="textBoxName.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="labelMachiningRange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 13</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Name" xml:space="preserve">
-    <value>textBoxName</value>
+  <data name="labelMachiningRange.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelMachiningRange.Text" xml:space="preserve">
+    <value>Machine tool work range</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelMachiningRange.Name" xml:space="preserve">
+    <value>labelMachiningRange</value>
+  </data>
+  <data name="&gt;&gt;labelMachiningRange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelMachiningRange.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelMachiningRange.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="textBoxSurname.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 72</value>
+  <data name="labelXmin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="textBoxSurname.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 20</value>
+  <data name="labelXmin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 374</value>
   </data>
-  <data name="textBoxSurname.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="labelXmin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
   </data>
-  <data name="&gt;&gt;textBoxSurname.Name" xml:space="preserve">
-    <value>textBoxSurname</value>
+  <data name="labelXmin.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="&gt;&gt;textBoxSurname.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelXmin.Text" xml:space="preserve">
+    <value>X min</value>
   </data>
-  <data name="&gt;&gt;textBoxSurname.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelXmin.Name" xml:space="preserve">
+    <value>labelXmin</value>
+  </data>
+  <data name="&gt;&gt;labelXmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelXmin.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxSurname.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelXmin.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="textBoxPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 98</value>
+  <data name="labelYmin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="textBoxPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 20</value>
+  <data name="labelYmin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 422</value>
   </data>
-  <data name="textBoxPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="labelYmin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
   </data>
-  <data name="&gt;&gt;textBoxPosition.Name" xml:space="preserve">
-    <value>textBoxPosition</value>
+  <data name="labelYmin.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
-  <data name="&gt;&gt;textBoxPosition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelYmin.Text" xml:space="preserve">
+    <value>Y min</value>
   </data>
-  <data name="&gt;&gt;textBoxPosition.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelYmin.Name" xml:space="preserve">
+    <value>labelYmin</value>
+  </data>
+  <data name="&gt;&gt;labelYmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelYmin.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxPosition.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelYmin.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="textBoxDepartment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 124</value>
+  <data name="labelZmin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="textBoxDepartment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 20</value>
+  <data name="labelZmin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 468</value>
   </data>
-  <data name="textBoxDepartment.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="labelZmin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
   </data>
-  <data name="&gt;&gt;textBoxDepartment.Name" xml:space="preserve">
-    <value>textBoxDepartment</value>
+  <data name="labelZmin.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
-  <data name="&gt;&gt;textBoxDepartment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelZmin.Text" xml:space="preserve">
+    <value>Z min</value>
   </data>
-  <data name="&gt;&gt;textBoxDepartment.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelZmin.Name" xml:space="preserve">
+    <value>labelZmin</value>
+  </data>
+  <data name="&gt;&gt;labelZmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelZmin.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxDepartment.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelZmin.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="textBoxPhone1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 150</value>
+  <data name="labelZmax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="textBoxPhone1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 20</value>
+  <data name="labelZmax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>353, 468</value>
   </data>
-  <data name="textBoxPhone1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="labelZmax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
   </data>
-  <data name="&gt;&gt;textBoxPhone1.Name" xml:space="preserve">
-    <value>textBoxPhone1</value>
+  <data name="labelZmax.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
-  <data name="&gt;&gt;textBoxPhone1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelZmax.Text" xml:space="preserve">
+    <value>Z max</value>
   </data>
-  <data name="&gt;&gt;textBoxPhone1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelZmax.Name" xml:space="preserve">
+    <value>labelZmax</value>
+  </data>
+  <data name="&gt;&gt;labelZmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelZmax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxPhone1.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="textBoxPhone2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 176</value>
-  </data>
-  <data name="textBoxPhone2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 20</value>
-  </data>
-  <data name="textBoxPhone2.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;textBoxPhone2.Name" xml:space="preserve">
-    <value>textBoxPhone2</value>
-  </data>
-  <data name="&gt;&gt;textBoxPhone2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxPhone2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxPhone2.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="textBoxEmail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 202</value>
-  </data>
-  <data name="textBoxEmail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 20</value>
-  </data>
-  <data name="textBoxEmail.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;textBoxEmail.Name" xml:space="preserve">
-    <value>textBoxEmail</value>
-  </data>
-  <data name="&gt;&gt;textBoxEmail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxEmail.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxEmail.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelZmax.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="textBoxOther.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 228</value>
+  <data name="labelYmax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="textBoxOther.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 20</value>
+  <data name="labelYmax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>353, 422</value>
   </data>
-  <data name="textBoxOther.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="labelYmax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
   </data>
-  <data name="&gt;&gt;textBoxOther.Name" xml:space="preserve">
-    <value>textBoxOther</value>
+  <data name="labelYmax.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
-  <data name="&gt;&gt;textBoxOther.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelYmax.Text" xml:space="preserve">
+    <value>Y max</value>
   </data>
-  <data name="&gt;&gt;textBoxOther.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelYmax.Name" xml:space="preserve">
+    <value>labelYmax</value>
+  </data>
+  <data name="&gt;&gt;labelYmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelYmax.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxOther.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelYmax.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="labelXmax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelXmax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>353, 374</value>
+  </data>
+  <data name="labelXmax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="labelXmax.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="labelXmax.Text" xml:space="preserve">
+    <value>X max</value>
+  </data>
+  <data name="&gt;&gt;labelXmax.Name" xml:space="preserve">
+    <value>labelXmax</value>
+  </data>
+  <data name="&gt;&gt;labelXmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelXmax.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelXmax.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="labelXminValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelXminValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="labelXminValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 369</value>
+  </data>
+  <data name="labelXminValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
+  </data>
+  <data name="labelXminValue.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="labelXminValue.Text" xml:space="preserve">
+    <value>-500</value>
+  </data>
+  <data name="&gt;&gt;labelXminValue.Name" xml:space="preserve">
+    <value>labelXminValue</value>
+  </data>
+  <data name="&gt;&gt;labelXminValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelXminValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelXminValue.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 270</value>
+  <data name="labelYminValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>550, 3</value>
+  <data name="labelYminValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelYminValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 417</value>
+  </data>
+  <data name="labelYminValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
+  </data>
+  <data name="labelYminValue.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="labelYminValue.Text" xml:space="preserve">
+    <value>-500</value>
+  </data>
+  <data name="&gt;&gt;labelYminValue.Name" xml:space="preserve">
+    <value>labelYminValue</value>
+  </data>
+  <data name="&gt;&gt;labelYminValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelYminValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelYminValue.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="labelZminValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelZminValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="labelZminValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 463</value>
+  </data>
+  <data name="labelZminValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
+  </data>
+  <data name="labelZminValue.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
+  <data name="labelZminValue.Text" xml:space="preserve">
+    <value>-500</value>
   </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;labelZminValue.Name" xml:space="preserve">
+    <value>labelZminValue</value>
   </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="labelDocumentHeader.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="labelDocumentHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 376</value>
-  </data>
-  <data name="labelDocumentHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
-  </data>
-  <data name="labelDocumentHeader.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="labelDocumentHeader.Text" xml:space="preserve">
-    <value>Header:</value>
-  </data>
-  <data name="&gt;&gt;labelDocumentHeader.Name" xml:space="preserve">
-    <value>labelDocumentHeader</value>
-  </data>
-  <data name="&gt;&gt;labelDocumentHeader.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelZminValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelDocumentHeader.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelZminValue.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelDocumentHeader.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelZminValue.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="labelDocumentFooter.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="labelXmaxValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="labelDocumentFooter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 414</value>
+  <data name="labelXmaxValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
-  <data name="labelDocumentFooter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
+  <data name="labelXmaxValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>403, 369</value>
   </data>
-  <data name="labelDocumentFooter.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+  <data name="labelXmaxValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 20</value>
   </data>
-  <data name="labelDocumentFooter.Text" xml:space="preserve">
-    <value>Footer:</value>
+  <data name="labelXmaxValue.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="&gt;&gt;labelDocumentFooter.Name" xml:space="preserve">
-    <value>labelDocumentFooter</value>
+  <data name="labelXmaxValue.Text" xml:space="preserve">
+    <value>500</value>
   </data>
-  <data name="&gt;&gt;labelDocumentFooter.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelXmaxValue.Name" xml:space="preserve">
+    <value>labelXmaxValue</value>
+  </data>
+  <data name="&gt;&gt;labelXmaxValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelDocumentFooter.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelXmaxValue.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelDocumentFooter.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelXmaxValue.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="textBoxDocumentHeader.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="textBoxDocumentHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 358</value>
-  </data>
-  <data name="textBoxDocumentHeader.Multiline" type="System.Boolean, mscorlib">
+  <data name="labelYmaxValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="textBoxDocumentHeader.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
+  <data name="labelYmaxValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
-  <data name="textBoxDocumentHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 39</value>
+  <data name="labelYmaxValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>403, 417</value>
   </data>
-  <data name="textBoxDocumentHeader.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="labelYmaxValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 20</value>
   </data>
-  <data name="&gt;&gt;textBoxDocumentHeader.Name" xml:space="preserve">
-    <value>textBoxDocumentHeader</value>
+  <data name="labelYmaxValue.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
   </data>
-  <data name="&gt;&gt;textBoxDocumentHeader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelYmaxValue.Text" xml:space="preserve">
+    <value>500</value>
   </data>
-  <data name="&gt;&gt;textBoxDocumentHeader.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelYmaxValue.Name" xml:space="preserve">
+    <value>labelYmaxValue</value>
+  </data>
+  <data name="&gt;&gt;labelYmaxValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelYmaxValue.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxDocumentHeader.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelYmaxValue.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="textBoxDocumentFooter.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="textBoxDocumentFooter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 403</value>
-  </data>
-  <data name="textBoxDocumentFooter.Multiline" type="System.Boolean, mscorlib">
+  <data name="labelZmaxValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="textBoxDocumentFooter.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
+  <data name="labelZmaxValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
-  <data name="textBoxDocumentFooter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 31</value>
+  <data name="labelZmaxValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>403, 463</value>
   </data>
-  <data name="textBoxDocumentFooter.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="labelZmaxValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 20</value>
   </data>
-  <data name="&gt;&gt;textBoxDocumentFooter.Name" xml:space="preserve">
-    <value>textBoxDocumentFooter</value>
+  <data name="labelZmaxValue.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
-  <data name="&gt;&gt;textBoxDocumentFooter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="labelZmaxValue.Text" xml:space="preserve">
+    <value>500</value>
   </data>
-  <data name="&gt;&gt;textBoxDocumentFooter.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelZmaxValue.Name" xml:space="preserve">
+    <value>labelZmaxValue</value>
+  </data>
+  <data name="&gt;&gt;labelZmaxValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelZmaxValue.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxDocumentFooter.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelZmaxValue.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="labelDocumentInfo.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelXArrows.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelDocumentInfo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="labelXArrows.Location" type="System.Drawing.Point, System.Drawing">
+    <value>184, 374</value>
   </data>
-  <data name="labelDocumentInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 454</value>
+  <data name="labelXArrows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 13</value>
   </data>
-  <data name="labelDocumentInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>365, 13</value>
+  <data name="labelXArrows.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
-  <data name="labelDocumentInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="labelXArrows.Text" xml:space="preserve">
+    <value>&lt;--------------------------------------&gt;</value>
   </data>
-  <data name="labelDocumentInfo.Text" xml:space="preserve">
-    <value>*The header and footer are automatically attached to the NC code template.</value>
+  <data name="&gt;&gt;labelXArrows.Name" xml:space="preserve">
+    <value>labelXArrows</value>
   </data>
-  <data name="&gt;&gt;labelDocumentInfo.Name" xml:space="preserve">
-    <value>labelDocumentInfo</value>
-  </data>
-  <data name="&gt;&gt;labelDocumentInfo.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelXArrows.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelDocumentInfo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelXArrows.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelDocumentInfo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelXArrows.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="labelComment.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="labelYArrows.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="labelComment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 295</value>
+  <data name="labelYArrows.Location" type="System.Drawing.Point, System.Drawing">
+    <value>184, 422</value>
   </data>
-  <data name="labelComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="labelYArrows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 13</value>
   </data>
-  <data name="labelComment.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="labelYArrows.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="labelComment.Text" xml:space="preserve">
-    <value>Comment:</value>
+  <data name="labelYArrows.Text" xml:space="preserve">
+    <value>&lt;--------------------------------------&gt;</value>
   </data>
-  <data name="&gt;&gt;labelComment.Name" xml:space="preserve">
-    <value>labelComment</value>
+  <data name="&gt;&gt;labelYArrows.Name" xml:space="preserve">
+    <value>labelYArrows</value>
   </data>
-  <data name="&gt;&gt;labelComment.Type" xml:space="preserve">
+  <data name="&gt;&gt;labelYArrows.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelComment.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelYArrows.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;labelComment.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelYArrows.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="textBoxComment.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="textBoxComment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 295</value>
-  </data>
-  <data name="textBoxComment.Multiline" type="System.Boolean, mscorlib">
+  <data name="labelZArrows.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="textBoxComment.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
+  <data name="labelZArrows.Location" type="System.Drawing.Point, System.Drawing">
+    <value>184, 468</value>
   </data>
-  <data name="textBoxComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>430, 172</value>
+  <data name="labelZArrows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 13</value>
   </data>
-  <data name="textBoxComment.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="labelZArrows.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
-  <data name="&gt;&gt;textBoxComment.Name" xml:space="preserve">
-    <value>textBoxComment</value>
+  <data name="labelZArrows.Text" xml:space="preserve">
+    <value>&lt;--------------------------------------&gt;</value>
   </data>
-  <data name="&gt;&gt;textBoxComment.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;labelZArrows.Name" xml:space="preserve">
+    <value>labelZArrows</value>
   </data>
-  <data name="&gt;&gt;textBoxComment.Parent" xml:space="preserve">
+  <data name="&gt;&gt;labelZArrows.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelZArrows.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxComment.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;labelZArrows.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="checkBoxWorkingTimeAtTheEnd.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBoxWorkingTimeAtTheEnd.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="checkBoxWorkingTimeAtTheEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 481</value>
-  </data>
-  <data name="checkBoxWorkingTimeAtTheEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 17</value>
-  </data>
-  <data name="checkBoxWorkingTimeAtTheEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="checkBoxWorkingTimeAtTheEnd.Text" xml:space="preserve">
-    <value>Machining time at the end of the NC program</value>
-  </data>
-  <data name="&gt;&gt;checkBoxWorkingTimeAtTheEnd.Name" xml:space="preserve">
-    <value>checkBoxWorkingTimeAtTheEnd</value>
-  </data>
-  <data name="&gt;&gt;checkBoxWorkingTimeAtTheEnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxWorkingTimeAtTheEnd.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;checkBoxWorkingTimeAtTheEnd.ZOrder" xml:space="preserve">
-    <value>25</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -802,7 +781,7 @@
     <value>650, 540</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ProgramZero</value>
+    <value>CNCProgramZero</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

@@ -117,50 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="labelHeader.Text" xml:space="preserve">
-    <value>Autor programu NC</value>
-  </data>
-  <data name="labelName.Text" xml:space="preserve">
-    <value>Imię:</value>
-  </data>
-  <data name="labelSurname.Text" xml:space="preserve">
-    <value>Nazwisko:</value>
-  </data>
-  <data name="labelPosition.Text" xml:space="preserve">
-    <value>Stanowisko:</value>
-  </data>
-  <data name="labelDepartment.Text" xml:space="preserve">
-    <value>Wydział:</value>
-  </data>
-  <data name="lablePhone1.Text" xml:space="preserve">
-    <value>Telefon #1:</value>
-  </data>
-  <data name="labelPhone2.Text" xml:space="preserve">
-    <value>Telefon #2:</value>
-  </data>
-  <data name="labelOther.Text" xml:space="preserve">
-    <value>Inne:</value>
-  </data>
-  <data name="labelDocumentHeader.Text" xml:space="preserve">
-    <value>Nagłówek:</value>
-  </data>
-  <data name="labelDocumentFooter.Text" xml:space="preserve">
-    <value>Stopka:</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="labelDocumentInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>348, 13</value>
+  <data name="labelTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 13</value>
   </data>
-  <data name="labelDocumentInfo.Text" xml:space="preserve">
-    <value>*Nagłówek i stopka są automatycznie dołączane do szablonu kodu NC.</value>
+  <data name="labelTitle.Text" xml:space="preserve">
+    <value>Pozycja zera/początku obróbki względem środka stołu</value>
   </data>
-  <data name="labelComment.Text" xml:space="preserve">
-    <value>Komentarz:</value>
+  <data name="labelMachiningRange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 13</value>
   </data>
-  <data name="checkBoxWorkingTimeAtTheEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 17</value>
+  <data name="labelMachiningRange.Text" xml:space="preserve">
+    <value>Zakres pracy obrabiarki</value>
   </data>
-  <data name="checkBoxWorkingTimeAtTheEnd.Text" xml:space="preserve">
-    <value>Czas obróbki na końcu programu NC</value>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Zero programu</value>
   </data>
 </root>

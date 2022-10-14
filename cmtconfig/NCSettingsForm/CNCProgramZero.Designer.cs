@@ -29,212 +29,189 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CNCProgramZero));
-            this.labelHeader = new System.Windows.Forms.Label();
-            this.labelName = new System.Windows.Forms.Label();
-            this.labelSurname = new System.Windows.Forms.Label();
-            this.labelPosition = new System.Windows.Forms.Label();
-            this.labelDepartment = new System.Windows.Forms.Label();
-            this.lablePhone1 = new System.Windows.Forms.Label();
-            this.labelPhone2 = new System.Windows.Forms.Label();
-            this.labelEmail = new System.Windows.Forms.Label();
-            this.labelOther = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.textBoxSurname = new System.Windows.Forms.TextBox();
-            this.textBoxPosition = new System.Windows.Forms.TextBox();
-            this.textBoxDepartment = new System.Windows.Forms.TextBox();
-            this.textBoxPhone1 = new System.Windows.Forms.TextBox();
-            this.textBoxPhone2 = new System.Windows.Forms.TextBox();
-            this.textBoxEmail = new System.Windows.Forms.TextBox();
-            this.textBoxOther = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.labelDocumentHeader = new System.Windows.Forms.Label();
-            this.labelDocumentFooter = new System.Windows.Forms.Label();
-            this.textBoxDocumentHeader = new System.Windows.Forms.TextBox();
-            this.textBoxDocumentFooter = new System.Windows.Forms.TextBox();
-            this.labelDocumentInfo = new System.Windows.Forms.Label();
-            this.labelComment = new System.Windows.Forms.Label();
-            this.textBoxComment = new System.Windows.Forms.TextBox();
-            this.checkBoxWorkingTimeAtTheEnd = new System.Windows.Forms.CheckBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.labelX = new System.Windows.Forms.Label();
+            this.labelY = new System.Windows.Forms.Label();
+            this.labelZ = new System.Windows.Forms.Label();
+            this.textBoxX = new System.Windows.Forms.TextBox();
+            this.textBoxY = new System.Windows.Forms.TextBox();
+            this.textBoxZ = new System.Windows.Forms.TextBox();
+            this.labelMachiningRange = new System.Windows.Forms.Label();
+            this.labelXmin = new System.Windows.Forms.Label();
+            this.labelYmin = new System.Windows.Forms.Label();
+            this.labelZmin = new System.Windows.Forms.Label();
+            this.labelZmax = new System.Windows.Forms.Label();
+            this.labelYmax = new System.Windows.Forms.Label();
+            this.labelXmax = new System.Windows.Forms.Label();
+            this.labelXminValue = new System.Windows.Forms.Label();
+            this.labelYminValue = new System.Windows.Forms.Label();
+            this.labelZminValue = new System.Windows.Forms.Label();
+            this.labelXmaxValue = new System.Windows.Forms.Label();
+            this.labelYmaxValue = new System.Windows.Forms.Label();
+            this.labelZmaxValue = new System.Windows.Forms.Label();
+            this.labelXArrows = new System.Windows.Forms.Label();
+            this.labelYArrows = new System.Windows.Forms.Label();
+            this.labelZArrows = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelHeader
+            // pictureBox1
             // 
-            resources.ApplyResources(this.labelHeader, "labelHeader");
-            this.labelHeader.Name = "labelHeader";
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
             // 
-            // labelName
+            // labelTitle
             // 
-            resources.ApplyResources(this.labelName, "labelName");
-            this.labelName.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelName.Name = "labelName";
+            resources.ApplyResources(this.labelTitle, "labelTitle");
+            this.labelTitle.Name = "labelTitle";
             // 
-            // labelSurname
+            // labelX
             // 
-            resources.ApplyResources(this.labelSurname, "labelSurname");
-            this.labelSurname.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelSurname.Name = "labelSurname";
+            resources.ApplyResources(this.labelX, "labelX");
+            this.labelX.Name = "labelX";
             // 
-            // labelPosition
+            // labelY
             // 
-            resources.ApplyResources(this.labelPosition, "labelPosition");
-            this.labelPosition.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelPosition.Name = "labelPosition";
+            resources.ApplyResources(this.labelY, "labelY");
+            this.labelY.Name = "labelY";
             // 
-            // labelDepartment
+            // labelZ
             // 
-            resources.ApplyResources(this.labelDepartment, "labelDepartment");
-            this.labelDepartment.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelDepartment.Name = "labelDepartment";
+            resources.ApplyResources(this.labelZ, "labelZ");
+            this.labelZ.Name = "labelZ";
             // 
-            // lablePhone1
+            // textBoxX
             // 
-            resources.ApplyResources(this.lablePhone1, "lablePhone1");
-            this.lablePhone1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lablePhone1.Name = "lablePhone1";
+            resources.ApplyResources(this.textBoxX, "textBoxX");
+            this.textBoxX.Name = "textBoxX";
+            this.textBoxX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxX_KeyPress);
             // 
-            // labelPhone2
+            // textBoxY
             // 
-            resources.ApplyResources(this.labelPhone2, "labelPhone2");
-            this.labelPhone2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelPhone2.Name = "labelPhone2";
+            resources.ApplyResources(this.textBoxY, "textBoxY");
+            this.textBoxY.Name = "textBoxY";
+            this.textBoxY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxY_KeyPress);
             // 
-            // labelEmail
+            // textBoxZ
             // 
-            resources.ApplyResources(this.labelEmail, "labelEmail");
-            this.labelEmail.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelEmail.Name = "labelEmail";
+            resources.ApplyResources(this.textBoxZ, "textBoxZ");
+            this.textBoxZ.Name = "textBoxZ";
+            this.textBoxZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxZ_KeyPress);
             // 
-            // labelOther
+            // labelMachiningRange
             // 
-            resources.ApplyResources(this.labelOther, "labelOther");
-            this.labelOther.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelOther.Name = "labelOther";
+            resources.ApplyResources(this.labelMachiningRange, "labelMachiningRange");
+            this.labelMachiningRange.Name = "labelMachiningRange";
             // 
-            // textBoxName
+            // labelXmin
             // 
-            resources.ApplyResources(this.textBoxName, "textBoxName");
-            this.textBoxName.Name = "textBoxName";
+            resources.ApplyResources(this.labelXmin, "labelXmin");
+            this.labelXmin.Name = "labelXmin";
             // 
-            // textBoxSurname
+            // labelYmin
             // 
-            resources.ApplyResources(this.textBoxSurname, "textBoxSurname");
-            this.textBoxSurname.Name = "textBoxSurname";
+            resources.ApplyResources(this.labelYmin, "labelYmin");
+            this.labelYmin.Name = "labelYmin";
             // 
-            // textBoxPosition
+            // labelZmin
             // 
-            resources.ApplyResources(this.textBoxPosition, "textBoxPosition");
-            this.textBoxPosition.Name = "textBoxPosition";
+            resources.ApplyResources(this.labelZmin, "labelZmin");
+            this.labelZmin.Name = "labelZmin";
             // 
-            // textBoxDepartment
+            // labelZmax
             // 
-            resources.ApplyResources(this.textBoxDepartment, "textBoxDepartment");
-            this.textBoxDepartment.Name = "textBoxDepartment";
+            resources.ApplyResources(this.labelZmax, "labelZmax");
+            this.labelZmax.Name = "labelZmax";
             // 
-            // textBoxPhone1
+            // labelYmax
             // 
-            resources.ApplyResources(this.textBoxPhone1, "textBoxPhone1");
-            this.textBoxPhone1.Name = "textBoxPhone1";
+            resources.ApplyResources(this.labelYmax, "labelYmax");
+            this.labelYmax.Name = "labelYmax";
             // 
-            // textBoxPhone2
+            // labelXmax
             // 
-            resources.ApplyResources(this.textBoxPhone2, "textBoxPhone2");
-            this.textBoxPhone2.Name = "textBoxPhone2";
+            resources.ApplyResources(this.labelXmax, "labelXmax");
+            this.labelXmax.Name = "labelXmax";
             // 
-            // textBoxEmail
+            // labelXminValue
             // 
-            resources.ApplyResources(this.textBoxEmail, "textBoxEmail");
-            this.textBoxEmail.Name = "textBoxEmail";
+            resources.ApplyResources(this.labelXminValue, "labelXminValue");
+            this.labelXminValue.Name = "labelXminValue";
             // 
-            // textBoxOther
+            // labelYminValue
             // 
-            resources.ApplyResources(this.textBoxOther, "textBoxOther");
-            this.textBoxOther.Name = "textBoxOther";
+            resources.ApplyResources(this.labelYminValue, "labelYminValue");
+            this.labelYminValue.Name = "labelYminValue";
             // 
-            // panel1
+            // labelZminValue
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
+            resources.ApplyResources(this.labelZminValue, "labelZminValue");
+            this.labelZminValue.Name = "labelZminValue";
             // 
-            // labelDocumentHeader
+            // labelXmaxValue
             // 
-            resources.ApplyResources(this.labelDocumentHeader, "labelDocumentHeader");
-            this.labelDocumentHeader.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelDocumentHeader.Name = "labelDocumentHeader";
+            resources.ApplyResources(this.labelXmaxValue, "labelXmaxValue");
+            this.labelXmaxValue.Name = "labelXmaxValue";
             // 
-            // labelDocumentFooter
+            // labelYmaxValue
             // 
-            resources.ApplyResources(this.labelDocumentFooter, "labelDocumentFooter");
-            this.labelDocumentFooter.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelDocumentFooter.Name = "labelDocumentFooter";
+            resources.ApplyResources(this.labelYmaxValue, "labelYmaxValue");
+            this.labelYmaxValue.Name = "labelYmaxValue";
             // 
-            // textBoxDocumentHeader
+            // labelZmaxValue
             // 
-            resources.ApplyResources(this.textBoxDocumentHeader, "textBoxDocumentHeader");
-            this.textBoxDocumentHeader.Name = "textBoxDocumentHeader";
+            resources.ApplyResources(this.labelZmaxValue, "labelZmaxValue");
+            this.labelZmaxValue.Name = "labelZmaxValue";
             // 
-            // textBoxDocumentFooter
+            // labelXArrows
             // 
-            resources.ApplyResources(this.textBoxDocumentFooter, "textBoxDocumentFooter");
-            this.textBoxDocumentFooter.Name = "textBoxDocumentFooter";
+            resources.ApplyResources(this.labelXArrows, "labelXArrows");
+            this.labelXArrows.Name = "labelXArrows";
             // 
-            // labelDocumentInfo
+            // labelYArrows
             // 
-            resources.ApplyResources(this.labelDocumentInfo, "labelDocumentInfo");
-            this.labelDocumentInfo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelDocumentInfo.Name = "labelDocumentInfo";
+            resources.ApplyResources(this.labelYArrows, "labelYArrows");
+            this.labelYArrows.Name = "labelYArrows";
             // 
-            // labelComment
+            // labelZArrows
             // 
-            resources.ApplyResources(this.labelComment, "labelComment");
-            this.labelComment.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelComment.Name = "labelComment";
-            // 
-            // textBoxComment
-            // 
-            resources.ApplyResources(this.textBoxComment, "textBoxComment");
-            this.textBoxComment.Name = "textBoxComment";
-            // 
-            // checkBoxWorkingTimeAtTheEnd
-            // 
-            resources.ApplyResources(this.checkBoxWorkingTimeAtTheEnd, "checkBoxWorkingTimeAtTheEnd");
-            this.checkBoxWorkingTimeAtTheEnd.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.checkBoxWorkingTimeAtTheEnd.Name = "checkBoxWorkingTimeAtTheEnd";
-            this.checkBoxWorkingTimeAtTheEnd.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.labelZArrows, "labelZArrows");
+            this.labelZArrows.Name = "labelZArrows";
             // 
             // CNCProgramZero
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.Controls.Add(this.textBoxComment);
-            this.Controls.Add(this.labelComment);
-            this.Controls.Add(this.labelDocumentInfo);
-            this.Controls.Add(this.textBoxDocumentFooter);
-            this.Controls.Add(this.textBoxDocumentHeader);
-            this.Controls.Add(this.labelDocumentFooter);
-            this.Controls.Add(this.labelDocumentHeader);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.textBoxOther);
-            this.Controls.Add(this.textBoxEmail);
-            this.Controls.Add(this.textBoxPhone2);
-            this.Controls.Add(this.textBoxPhone1);
-            this.Controls.Add(this.textBoxDepartment);
-            this.Controls.Add(this.textBoxPosition);
-            this.Controls.Add(this.textBoxSurname);
-            this.Controls.Add(this.textBoxName);
-            this.Controls.Add(this.labelOther);
-            this.Controls.Add(this.labelEmail);
-            this.Controls.Add(this.labelPhone2);
-            this.Controls.Add(this.lablePhone1);
-            this.Controls.Add(this.labelDepartment);
-            this.Controls.Add(this.labelPosition);
-            this.Controls.Add(this.labelSurname);
-            this.Controls.Add(this.labelName);
-            this.Controls.Add(this.labelHeader);
-            this.Controls.Add(this.checkBoxWorkingTimeAtTheEnd);
+            this.Controls.Add(this.labelZArrows);
+            this.Controls.Add(this.labelYArrows);
+            this.Controls.Add(this.labelXArrows);
+            this.Controls.Add(this.labelZmaxValue);
+            this.Controls.Add(this.labelYmaxValue);
+            this.Controls.Add(this.labelXmaxValue);
+            this.Controls.Add(this.labelZminValue);
+            this.Controls.Add(this.labelYminValue);
+            this.Controls.Add(this.labelXminValue);
+            this.Controls.Add(this.labelZmax);
+            this.Controls.Add(this.labelYmax);
+            this.Controls.Add(this.labelXmax);
+            this.Controls.Add(this.labelZmin);
+            this.Controls.Add(this.labelYmin);
+            this.Controls.Add(this.labelXmin);
+            this.Controls.Add(this.labelMachiningRange);
+            this.Controls.Add(this.textBoxZ);
+            this.Controls.Add(this.textBoxY);
+            this.Controls.Add(this.textBoxX);
+            this.Controls.Add(this.labelZ);
+            this.Controls.Add(this.labelY);
+            this.Controls.Add(this.labelX);
+            this.Controls.Add(this.labelTitle);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "CNCProgramZero";
             this.Load += new System.EventHandler(this.ProgramZeroLoad);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,31 +219,29 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelHeader;
-        private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.Label labelSurname;
-        private System.Windows.Forms.Label labelPosition;
-        private System.Windows.Forms.Label labelDepartment;
-        private System.Windows.Forms.Label lablePhone1;
-        private System.Windows.Forms.Label labelPhone2;
-        private System.Windows.Forms.Label labelEmail;
-        private System.Windows.Forms.Label labelOther;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.TextBox textBoxSurname;
-        private System.Windows.Forms.TextBox textBoxPosition;
-        private System.Windows.Forms.TextBox textBoxDepartment;
-        private System.Windows.Forms.TextBox textBoxPhone1;
-        private System.Windows.Forms.TextBox textBoxPhone2;
-        private System.Windows.Forms.TextBox textBoxEmail;
-        private System.Windows.Forms.TextBox textBoxOther;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label labelDocumentHeader;
-        private System.Windows.Forms.Label labelDocumentFooter;
-        private System.Windows.Forms.TextBox textBoxDocumentHeader;
-        private System.Windows.Forms.TextBox textBoxDocumentFooter;
-        private System.Windows.Forms.Label labelDocumentInfo;
-        private System.Windows.Forms.Label labelComment;
-        private System.Windows.Forms.TextBox textBoxComment;
-        private System.Windows.Forms.CheckBox checkBoxWorkingTimeAtTheEnd;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.Label labelX;
+        private System.Windows.Forms.Label labelY;
+        private System.Windows.Forms.Label labelZ;
+        private System.Windows.Forms.TextBox textBoxX;
+        private System.Windows.Forms.TextBox textBoxY;
+        private System.Windows.Forms.TextBox textBoxZ;
+        private System.Windows.Forms.Label labelMachiningRange;
+        private System.Windows.Forms.Label labelXmin;
+        private System.Windows.Forms.Label labelYmin;
+        private System.Windows.Forms.Label labelZmin;
+        private System.Windows.Forms.Label labelZmax;
+        private System.Windows.Forms.Label labelYmax;
+        private System.Windows.Forms.Label labelXmax;
+        private System.Windows.Forms.Label labelXminValue;
+        private System.Windows.Forms.Label labelYminValue;
+        private System.Windows.Forms.Label labelZminValue;
+        private System.Windows.Forms.Label labelXmaxValue;
+        private System.Windows.Forms.Label labelYmaxValue;
+        private System.Windows.Forms.Label labelZmaxValue;
+        private System.Windows.Forms.Label labelXArrows;
+        private System.Windows.Forms.Label labelYArrows;
+        private System.Windows.Forms.Label labelZArrows;
     }
 }

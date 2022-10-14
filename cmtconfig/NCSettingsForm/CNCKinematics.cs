@@ -31,7 +31,7 @@ namespace cmtconfig
             this.ncSettingsFile = ncSettingsFile;
         }
 
-        void InitialParamsLoad(object sender, EventArgs e)
+        void KinematicsLoad(object sender, EventArgs e)
         {
             labelMaxWorkingFeed.Text = ncSettingsName.kinematics_name["max_working_feed"];
             labelMaxWorkingFeedUnit.Text = ncSettingsName.kinematics_name["max_working_feed_unit"];

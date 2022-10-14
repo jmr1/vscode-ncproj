@@ -315,7 +315,7 @@
             this.Controls.Add(this.labelHeader);
             this.Controls.Add(this.checkBoxDiameterProgramming);
             this.Name = "CNCKinematics";
-            this.Load += new System.EventHandler(this.InitialParamsLoad);
+            this.Load += new System.EventHandler(this.KinematicsLoad);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

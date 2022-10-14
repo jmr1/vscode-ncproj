@@ -30,7 +30,7 @@ namespace cmtconfig
             this.ncSettingsFile = ncSettingsFile;
         }
         
-        void ZakresyLoad(object sender, EventArgs e)
+        void MachinePointsLoad(object sender, EventArgs e)
         {
             Reload(ncSettingsFile);
         }

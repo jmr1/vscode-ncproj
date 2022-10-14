@@ -287,7 +287,7 @@
             this.Controls.Add(this.labelDefaultMotion);
             this.Controls.Add(this.labelHeader);
             this.Name = "CNCInitialParams";
-            this.Load += new System.EventHandler(this.CNCcontrol_Load);
+            this.Load += new System.EventHandler(this.InitialParamsLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 
