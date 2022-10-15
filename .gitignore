@@ -53,5 +53,7 @@
 *.AssemblyAttributes.cs
 *.csproj.CopyComplete
 *.csproj.FileListAbsolute.txt
+*.exe.config
+*.vsix
 packages
 
