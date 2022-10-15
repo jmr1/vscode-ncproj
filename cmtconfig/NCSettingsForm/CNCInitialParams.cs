@@ -125,6 +125,21 @@ namespace cmtconfig
                 textBoxDefaultRotation.Enabled = false;
                 comboBoxDefaultRotationDirection.Enabled = false;
             }
+
+            if (ncSettings.machine_tool[machineToolName].type == MachineToolType.lathe || ncSettings.machine_tool[machineToolName].type == MachineToolType.millturn)
+            {
+                comboBoxDrillCycleZValue.Show();
+                comboBoxDrillCycleReturnValue.Show();
+                labelDrillCycleZValue.Show();
+                labelDrillCycleReturnValue.Show();
+            }
+            else
+            {
+                comboBoxDrillCycleZValue.Hide();
+                comboBoxDrillCycleReturnValue.Hide();
+                labelDrillCycleZValue.Hide();
+                labelDrillCycleReturnValue.Hide();
+            }
         }
 
         protected override void WndProc(ref Message m)

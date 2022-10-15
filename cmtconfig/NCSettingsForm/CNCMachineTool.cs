@@ -58,8 +58,21 @@ namespace cmtconfig
             {
                 foreach (var element in ncSettings.driver_list)
                 {
-                    if (element != Driver.heidenhain)
-                        comboBoxDriver.Items.Add(new ComboboxItem(ncSettingsName.driver_name[element], element.ToString(), element));
+                    switch (element)
+                    {
+                        case Driver.fanuc_mill:
+                        case Driver.generic_mill:
+                        case Driver.haas_mill:
+                        case Driver.makino_mill:
+                            comboBoxDriver.Items.Add(new ComboboxItem(ncSettingsName.driver_name[element], element.ToString(), element));
+                            break;
+                        case Driver.fanuc_lathe:
+                        case Driver.generic_lathe:
+                        case Driver.haas_lathe:
+                            break;
+                        case Driver.heidenhain:
+                            break;
+                    }
                 }
             }
             comboBoxDriver.SelectedIndex = comboBoxDriver.FindStringExact(ncSettingsName.driver_name[driver]);
