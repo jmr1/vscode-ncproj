@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllAttributesParser.cs" />
     <Compile Include="NCSettingsForm\CNCProgramZero.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -86,7 +85,6 @@
     <Compile Include="NCSettingsForm\CNCMachinePoints.Designer.cs">
       <DependentUpon>CNCMachinePoints.cs</DependentUpon>
     </Compile>
-    <Compile Include="CodeGroups.cs" />
     <Compile Include="NCSettingsDefinition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -159,6 +157,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\parser_net\parser_net.csproj">
+      <Project>{27e6ef08-adb3-4f29-ac20-bf1d7b8bdca9}</Project>
+      <Name>parser_net</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

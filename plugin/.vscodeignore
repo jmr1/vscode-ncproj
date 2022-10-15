@@ -10,5 +10,8 @@ vscode-client/src
 **/gtest*.dll
 **/gmock*.dll
 **/*_ut.exe
+**/nunit.*
+**/NUnit3.*
+**/parser_net_test.*
 src/build/**
 src/dist/**
