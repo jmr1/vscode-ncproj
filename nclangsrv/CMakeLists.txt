@@ -13,6 +13,10 @@ ELSE (project_build_shared)
 ENDIF (project_build_shared)
 TARGET_LINK_LIBRARIES(${nclangsrv_BIN} ${nclangsrv_LIBS})
 
+add_custom_command(TARGET nclangsrv PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                   ${CMAKE_SOURCE_DIR}/conf ${PLUGIN_OUT_FOLDER}/conf/)
+
 IF (LEAKCHECK)
   SET (TEST_EXEC_CMD ${VALGRIND_PROGRAM} ${VALGRIND_CONFIG} --xml=yes --xml-file=${PROJECT_SOURCE_DIR}/output/${LIBPARSER_NAME}-leakcheck.xml  ${MAINFOLDER}/bin/${nclangsrv_BIN})
 ELSE (LEAKCHECK)

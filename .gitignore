@@ -57,3 +57,5 @@
 *.vsix
 packages
 
+#cmake
+build/
