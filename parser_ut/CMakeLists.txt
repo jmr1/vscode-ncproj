@@ -16,20 +16,12 @@ ENDIF (project_build_shared)
 TARGET_LINK_LIBRARIES(${test_BIN} ${test_LIBS})
 
 IF (LEAKCHECK)
-  SET (TEST_EXEC_CMD ${VALGRIND_PROGRAM} ${VALGRIND_CONFIG} --xml=yes --xml-file=${PROJECT_SOURCE_DIR}/output/${LIBPARSER_NAME}-ut-leakcheck.xml  ${MAINFOLDER}/bin/${test_BIN})
+  SET (TEST_EXEC_CMD ${VALGRIND_PROGRAM} ${VALGRIND_CONFIG} --xml=yes --xml-file=${PROJECT_SOURCE_DIR}/output/${LIBPARSER_NAME}-ut-leakcheck.xml  ${PLUGIN_OUT_FOLDER}/${test_BIN})
 ELSE (LEAKCHECK)
-  IF(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    SET (TEST_EXEC_CMD ${ENV} ${MAINFOLDER}/bin/${test_BIN})
-  ELSE()
-    SET (TEST_EXEC_CMD ${ENV} ${MAINFOLDER}/x64/Debug/${test_BIN})
-  ENDIF()
+    SET (TEST_EXEC_CMD ${ENV} ${PLUGIN_OUT_FOLDER}/${test_BIN})
 ENDIF (LEAKCHECK)
 
-IF(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-  ADD_TEST(${LIBPARSER_NAME}-ut-test ${MAINFOLDER}/bin/${test_BIN})
-ELSE()
-  ADD_TEST(${LIBPARSER_NAME}-ut-test ${MAINFOLDER}/x64/Debug/${test_BIN})
-ENDIF()
+ADD_TEST(${LIBPARSER_NAME}-ut-test ${PLUGIN_OUT_FOLDER}/${test_BIN})
 #ADD_CUSTOM_TARGET(${LIBPARSER_NAME}-ut-test
 #                    ${AUTORUN_TESTS}
 #                    ${TEST_EXEC_CMD}
