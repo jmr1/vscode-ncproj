@@ -18,6 +18,9 @@ add_custom_command(TARGET nclangsrv PRE_BUILD
                    ${CMAKE_SOURCE_DIR}/conf ${PLUGIN_OUT_FOLDER}/conf/)
 
 IF (LEAKCHECK)
+  IF(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/output)
+    FILE (MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/output)
+  ENDIF(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/output)
   SET (TEST_EXEC_CMD ${VALGRIND_PROGRAM} ${VALGRIND_CONFIG} --xml=yes --xml-file=${PROJECT_SOURCE_DIR}/output/${LIBPARSER_NAME}-leakcheck.xml  ${MAINFOLDER}/bin/${nclangsrv_BIN})
 ELSE (LEAKCHECK)
   SET (TEST_EXEC_CMD ${ENV} ${MAINFOLDER}/bin/${nclangsrv_BIN})
