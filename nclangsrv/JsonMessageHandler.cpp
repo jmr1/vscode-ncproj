@@ -23,9 +23,11 @@ namespace fs = std::filesystem;
 #define MSG_ENDL "\r\n"
 #endif
 
-JsonMessageHandler::JsonMessageHandler(std::ofstream* logger, const std::string& rootPath)
+JsonMessageHandler::JsonMessageHandler(std::ofstream* logger, const std::string& rootPath,
+                                       const std::string& ncSettingsPath)
     : mLogger(logger)
     , mRootPath(rootPath)
+    , mNcSettingsPath(ncSettingsPath)
 {
 }
 
@@ -351,7 +353,7 @@ void JsonMessageHandler::shutdown(int32_t id)
 
 void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri, const std::string& content)
 {
-    NCParser parser(mRootPath);
+    NCParser parser(mRootPath, mNcSettingsPath);
     auto     messages = parser.parse(content);
 
     rapidjson::Document d;

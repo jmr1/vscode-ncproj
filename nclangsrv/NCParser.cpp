@@ -272,7 +272,7 @@ static void fill_parsed_values(const std::vector<AttributeVariant>& v, std::stri
 
 } // namespace parser
 
-NCParser::NCParser(const std::string& rootPath /*= ""*/)
+NCParser::NCParser(const std::string& rootPath, const std::string& ncSettingsPath)
     : cnc_type(ECncType::Fanuc)
     , machine_tool_type(EMachineToolType::Mill)
     , grammar_path("./conf/fanuc_mill/grammar.json")
@@ -285,6 +285,7 @@ NCParser::NCParser(const std::string& rootPath /*= ""*/)
     , convert_length(false)
     , calculate_path_time(false)
     , rotate(false)
+    , ncsettings_path(ncSettingsPath)
 {
     if (not rootPath.empty())
     {

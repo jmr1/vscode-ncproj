@@ -22,10 +22,15 @@
             "title": "NC Project VSCode Language Server Configuration",
             "type": "object",
             "properties": {
-                "ncproj.args": {
-                    "type": "array",
-                    "default": [],
-                    "description": "Specifies the arguments to be passed to the ncproj language server. Requires a VSCode restart to take effect."
+                "ncproj.log-file-path": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Specifies the path to a log file. Requires a VSCode restart to take effect."
+                },
+                "ncproj.ncsetting-file-path": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Specifies the path to a .ncsetting file. Requires a VSCode restart to take effect."
                 }
             }
         },

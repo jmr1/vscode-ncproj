@@ -60,7 +60,14 @@ function afterStartLangServer(executable: string) {
 function startLangServerNCProj(context: ExtensionContext, executable: string, cwd: string) {
 
 	let config = workspace.getConfiguration("ncproj");
-	let args = config.get<Array<string>>("args");
+
+	let args : Array<string> = [];
+	let ncsettingFilePath = config.get<string>("ncsetting-file-path");
+	if(ncsettingFilePath)
+		args.push("--ncsetting-path", ncsettingFilePath);
+	let logFilePath = config.get<string>("log-file-path");
+	if(logFilePath)
+		args.push("--log-path", logFilePath);
 
 	langServer = startLangServerIO(executable, args, cwd, ["ncproj"]);
 
@@ -91,7 +98,7 @@ function startListeningConfigurationChanges() {
 			ignoreNextConfigurationChange = false;
 			return;
 		}
-		for (let s of ["ncproj.args"]) {
+		for (let s of ["ncproj.log-file-path", "ncproj.ncsetting-file-path"]) {
 			if (event.affectsConfiguration(s)) {
 				window.showWarningMessage('Please use the "Reload Window" action for changes in ' + s + ' to take effect.', ...["Reload Window"]).then((selection) => {
 					if (selection === "Reload Window") {

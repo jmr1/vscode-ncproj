@@ -8,7 +8,7 @@
 class JsonMessageHandler
 {
 public:
-    JsonMessageHandler(std::ofstream* logger, const std::string& rootPath);
+    JsonMessageHandler(std::ofstream* logger, const std::string& rootPath, const std::string& ncSettingsPath);
 
     bool parse(const std::string& json);
     bool exit() const
@@ -31,5 +31,6 @@ private:
 private:
     std::ofstream* mLogger;
     std::string    mRootPath;
+    std::string    mNcSettingsPath;
     bool           mExit{};
 };

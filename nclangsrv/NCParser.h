@@ -8,7 +8,7 @@
 class NCParser
 {
 public:
-    NCParser(const std::string& rootPath = "");
+    NCParser(const std::string& rootPath, const std::string& ncSettingsPath);
 
     void set_cnc_type(parser::ECncType value);
     void set_machine_tool_type(parser::EMachineToolType value);

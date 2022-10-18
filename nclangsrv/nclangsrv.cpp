@@ -5,24 +5,90 @@
 #include <string>
 #include <thread>
 
+#include <boost/program_options.hpp>
 #include <filesystem>
+
+#include <GeneralParserDefines.h>
 
 #include "JsonMessageHandler.h"
 
 namespace fs = std::filesystem;
+namespace po = boost::program_options;
+
+#define VERIFY_OPTION(LOGGER, NAME, VARIABLE)                                                                          \
+    if (vm.count(NAME))                                                                                                \
+    {                                                                                                                  \
+        LOGGER << NAME << " was set to [" << VARIABLE << "]." << std::endl;                                            \
+    }                                                                                                                  \
+    else                                                                                                               \
+    {                                                                                                                  \
+        LOGGER << "ERROR: " << NAME << " was not set." << std::endl;                                                   \
+        return 1;                                                                                                      \
+    }
+
+#define OPTIONAL_OPTION(LOGGER, NAME, VARIABLE)                                                                        \
+    if (vm.count(NAME))                                                                                                \
+    {                                                                                                                  \
+        LOGGER << NAME << " was set to [" << VARIABLE << "]." << std::endl;                                            \
+    }
 
 int main(int argc, char* argv[])
 {
-    std::unique_ptr<std::ofstream> logger;
+    parser::AxesRotatingOption axes_rotating_option;
+    bool                       single_line_output;
+    bool                       convert_length{};
+    bool                       calculate_path_time{};
+    bool                       rotate{};
+    std::string                ncsetting_path;
+    std::string                log_path;
 
-    if (argc > 1)
+    // Declare the supported options.
+    po::options_description desc("Allowed options");
+    // clang-format off
+    desc.add_options()
+        ("help,h", "produce help message")
+        ("single-line-output,s", po::value<bool>(&single_line_output)->default_value(true), "whether the error output is single line")
+        ("convert-length", po::value<bool>(&convert_length)->default_value(false), "whether to convert length units")
+        ("calculate-path", po::value<bool>(&calculate_path_time)->default_value(false), "whether to calculate path length and time")
+        ("rotate", po::value<bool>(&rotate)->default_value(false), "whether to rotate carthesian system")
+        ("rotate-option", po::value<parser::AxesRotatingOption>(&axes_rotating_option)->default_value(parser::AxesRotatingOption::Xrotate90degrees), "Axes rotating option: [X90, X180, X270, Y90, Y180, Y270, Z90, Z180, Z270]")
+        ("ncsetting-path,n", po::value<std::string>(&ncsetting_path), "path to ncsettings file")
+        ("log-path,l", po::value<std::string>(&log_path), "path to log file")
+    ;
+    // clang-format on
+
+    po::positional_options_description p;
+
+    po::variables_map vm;
+    po::store(po::command_line_parser(argc, argv).options(desc).positional(p).run(), vm);
+    po::notify(vm);
+
+    if (vm.count("help"))
     {
-        logger = std::make_unique<std::ofstream>(argv[1], std::ios::app);
-        *logger << "argv[0]: " << argv[0] << std::endl;
+        std::cout << desc << std::endl;
+        return 1;
+    }
+
+    std::unique_ptr<std::ofstream> logger;
+    if (not log_path.empty())
+    {
+        logger = std::make_unique<std::ofstream>(log_path.c_str(), std::ios::app);
+        *logger << "log path: " << log_path << std::endl;
+    }
+
+    if (logger)
+    {
+        VERIFY_OPTION(*logger, "single-line-output", single_line_output);
+        VERIFY_OPTION(*logger, "convert-length", convert_length);
+        VERIFY_OPTION(*logger, "calculate-path", calculate_path_time);
+        VERIFY_OPTION(*logger, "rotate", rotate);
+        VERIFY_OPTION(*logger, "rotate-option", axes_rotating_option);
+        OPTIONAL_OPTION(*logger, "log-path", log_path);
+        OPTIONAL_OPTION(*logger, "ncsetting-path", ncsetting_path);
     }
 
     const auto         executablePath = fs::path(argv[0]);
-    JsonMessageHandler jsonMessageHandler(logger.get(), executablePath.parent_path().string());
+    JsonMessageHandler jsonMessageHandler(logger.get(), executablePath.parent_path().string(), ncsetting_path);
 
     if (logger)
         *logger << __func__ << ": Current path is " << fs::current_path() << std::endl;

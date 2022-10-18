@@ -1,4 +1,5 @@
 FIND_PACKAGE (RapidJSON REQUIRED)
+FIND_PACKAGE (Boost 1.56 COMPONENTS "program_options" REQUIRED)
 
 FILE (GLOB_RECURSE nclangsrv_SRCS *.cpp *.cxx *.cc *.C *.c *.h *.hpp)
 LIST(REMOVE_ITEM nclangsrv_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.cpp ${CMAKE_CURRENT_SOURCE_DIR}/targetver.h ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h)
