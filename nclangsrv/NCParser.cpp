@@ -41,9 +41,8 @@ static bool read_json(const std::string& grammar_path, const std::string& unit, 
         for (const auto& o : root.get_child("operations"))
             operations.push_back(o.second.get_value<std::string>());
     }
-    catch (const std::exception& e)
+    catch (const std::exception&)
     {
-        std::cerr << e.what() << std::endl;
         return false;
     }
 
@@ -67,9 +66,8 @@ static bool read_json(const std::string& code_groups_path, fanuc::code_groups_ma
             }
         }
     }
-    catch (const std::exception& e)
+    catch (const std::exception&)
     {
-        std::cerr << e.what() << std::endl;
         return false;
     }
 
@@ -164,9 +162,8 @@ static auto read_json_ncsettings(const std::string& path)
             zero_point.z   = zp.get<decltype(ZeroPoint::z)>("Z");
         }
     }
-    catch (const std::exception& e)
+    catch (const std::exception&)
     {
-        std::cerr << e.what() << std::endl;
         return std::make_tuple(false, std::move(machine_points_data), std::move(kinematics),
                                std::move(cnc_default_values), std::move(zero_point));
         ;

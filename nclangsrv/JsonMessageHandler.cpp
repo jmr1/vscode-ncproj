@@ -396,10 +396,14 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
 
             if (not tokens.empty())
             {
-                line = atoi(tokens[0].c_str()) - 1;
+                line = atoi(tokens[0].c_str());
+                if (line > 0)
+                    line--;
                 if (tokens.size() > 2)
                 {
-                    character      = atoi(tokens[1].c_str()) - 1;
+                    character = atoi(tokens[1].c_str());
+                    if (character > 0)
+                        character--;
                     result_message = tokens[2];
                 }
                 else
