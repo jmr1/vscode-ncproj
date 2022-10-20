@@ -55,6 +55,7 @@
 *.csproj.FileListAbsolute.txt
 *.exe.config
 *.vsix
+.vscode/
 packages
 
 #cmake

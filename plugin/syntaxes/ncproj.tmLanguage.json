@@ -1,0 +1,42 @@
+{
+	"name": "ncproj",
+	"scopeName": "source.ncproj",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.string.ncproj",
+					"match": "M|G|P|T|S|F|L|R|H"
+				},
+				{
+					"name": "string.xcode.ncproj",
+					"match": "(X|Y|Z|A|B|C|I|J|K)"
+				},
+				{
+					"name": "support.type.ncproj",
+					"match": "(N|:)"
+				}
+			]
+		},
+		"strings": {
+			"name": "comment.type.comment.ncproj",
+			"comment": "Pattern for comments",
+			"begin": "(\\()|(\\;)",
+			"end": "(\\))|(\n)",
+			"patterns": [
+				{
+					"name": "constant.character.escape.ncproj",
+					"match": "\\\\."
+				}
+			]
+		}
+	}
+}

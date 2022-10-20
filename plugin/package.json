@@ -52,6 +52,13 @@
                 "configuration": "./language-configuration.json"
             }
         ],
+        "grammars": [
+            {
+                "language": "ncproj",
+                "scopeName": "source.ncproj",
+                "path": "./syntaxes/ncproj.tmLanguage.json"
+            }
+        ],
         "debuggers": [],
         "commands": [
             {
