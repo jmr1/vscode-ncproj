@@ -14,13 +14,17 @@
 #include <fanuc/AllAttributesParser.h>
 #include <heidenhain/AllAttributesParser.h>
 
+#include "NCSettingsReader.h"
+
 namespace pt = boost::property_tree;
 namespace fs = std::filesystem;
 
+namespace {
+
 using namespace parser;
 
-static bool read_json(const std::string& grammar_path, const std::string& unit, fanuc::word_map& word_grammar_map,
-                      std::vector<std::string>& operations)
+bool read_json(const std::string& grammar_path, const std::string& unit, fanuc::word_map& word_grammar_map,
+               std::vector<std::string>& operations)
 {
     try
     {
@@ -49,7 +53,7 @@ static bool read_json(const std::string& grammar_path, const std::string& unit, 
     return true;
 }
 
-static bool read_json(const std::string& code_groups_path, fanuc::code_groups_map& code_groups)
+bool read_json(const std::string& code_groups_path, fanuc::code_groups_map& code_groups)
 {
     try
     {
@@ -74,104 +78,7 @@ static bool read_json(const std::string& code_groups_path, fanuc::code_groups_ma
     return true;
 }
 
-static auto read_json_ncsettings(const std::string& path)
-{
-    ZeroPoint         zero_point{};
-    MachinePointsData machine_points_data{};
-    Kinematics        kinematics{};
-    CncDefaultValues  cnc_default_values{};
-
-    try
-    {
-        pt::ptree root;
-        pt::read_json(path, root);
-
-        {
-            const auto& mpd = root.get_child("machine_points_data");
-            for (const auto& pt : mpd.get_child("tool_exchange_point"))
-                machine_points_data.tool_exchange_point.emplace(std::make_pair(
-                    pt.first, pt.second.get_value<decltype(MachinePointsData::tool_exchange_point)::mapped_type>()));
-            for (const auto& pt : mpd.get_child("machine_base_point"))
-                machine_points_data.machine_base_point.emplace(std::make_pair(
-                    pt.first, pt.second.get_value<decltype(MachinePointsData::machine_base_point)::mapped_type>()));
-        }
-
-        {
-            const auto& k_pt = root.get_child("kinematics");
-            for (const auto& pt : k_pt.get_child("cartesian_system_axis"))
-            {
-                kinematics.cartesian_system_axis.emplace(std::make_pair<const std::string&, AxisParameters>(
-                    pt.first, {pt.second.get<decltype(AxisParameters::range_min)>("range_min"),
-                               pt.second.get<decltype(AxisParameters::range_max)>("range_max")}));
-            }
-            auto& k                 = kinematics;
-            k.max_working_feed      = k_pt.get<decltype(k.max_working_feed)>("max_working_feed");
-            k.max_fast_feed         = k_pt.get<decltype(k.max_fast_feed)>("max_fast_feed");
-            k.maximum_spindle_speed = k_pt.get<decltype(k.maximum_spindle_speed)>("maximum_spindle_speed");
-            k.numer_of_items_in_the_warehouse =
-                k_pt.get<decltype(k.numer_of_items_in_the_warehouse)>("numer_of_items_in_the_warehouse");
-            k.tool_exchange_time      = k_pt.get<decltype(k.tool_exchange_time)>("tool_exchange_time");
-            k.pallet_exchange_time    = k_pt.get<decltype(k.pallet_exchange_time)>("pallet_exchange_time");
-            k.tool_measurement_time   = k_pt.get<decltype(k.tool_measurement_time)>("tool_measurement_time");
-            k.diameter_programming_2x = k_pt.get<decltype(k.diameter_programming_2x)>("diameter_programming_2x");
-            k.auto_measure_after_tool_selection =
-                k_pt.get<decltype(k.auto_measure_after_tool_selection)>("auto_measure_after_tool_selection");
-            k.pallet_exchange_code = k_pt.get<decltype(k.pallet_exchange_code)>("pallet_exchange_code");
-            k.pallet_exchange_code_value =
-                k_pt.get<decltype(k.pallet_exchange_code_value)>("pallet_exchange_code_value");
-            k.tool_measurement_code = k_pt.get<decltype(k.tool_measurement_code)>("tool_measurement_code");
-            k.tool_measurement_code_value =
-                k_pt.get<decltype(k.tool_measurement_code_value)>("tool_measurement_code_value");
-        }
-
-        {
-            const auto& cnc        = root.get_child("cnc_default_values");
-            auto&       c          = cnc_default_values;
-            c.default_motion       = cnc.get<decltype(c.default_motion)>("default_motion");
-            c.default_work_plane   = cnc.get<decltype(c.default_work_plane)>("default_work_plane");
-            c.default_driver_units = cnc.get<decltype(c.default_driver_units)>("default_driver_units");
-            c.default_programming  = cnc.get<decltype(c.default_programming)>("default_programming");
-            c.default_feed_mode    = cnc.get<decltype(c.default_feed_mode)>("default_feed_mode");
-            c.default_rotation_direction =
-                cnc.get<decltype(c.default_rotation_direction)>("default_rotation_direction");
-            c.drill_cycle_z_value      = cnc.get<decltype(c.drill_cycle_z_value)>("drill_cycle_z_value");
-            c.drill_cycle_return_value = cnc.get<decltype(c.drill_cycle_return_value)>("drill_cycle_return_value");
-            c.default_rotation         = cnc.get<decltype(c.default_rotation)>("default_rotation");
-            c.rapid_traverse_cancel_cycle =
-                cnc.get<decltype(c.rapid_traverse_cancel_cycle)>("rapid_traverse_cancel_cycle");
-            c.linear_interpolation_cancel_cycle =
-                cnc.get<decltype(c.linear_interpolation_cancel_cycle)>("linear_interpolation_cancel_cycle");
-            c.circular_interpolation_cw_cancel_cycle =
-                cnc.get<decltype(c.circular_interpolation_cw_cancel_cycle)>("circular_interpolation_cw_cancel_cycle");
-            c.circular_interpolation_ccw_cancel_cycle =
-                cnc.get<decltype(c.circular_interpolation_ccw_cancel_cycle)>("circular_interpolation_ccw_cancel_cycle");
-            c.cycle_cancel_starts_rapid_traverse =
-                cnc.get<decltype(c.cycle_cancel_starts_rapid_traverse)>("cycle_cancel_starts_rapid_traverse");
-            c.operator_turns_on_rotation =
-                cnc.get<decltype(c.operator_turns_on_rotation)>("operator_turns_on_rotation");
-            c.tool_number_executes_exchange =
-                cnc.get<decltype(c.tool_number_executes_exchange)>("tool_number_executes_exchange");
-            c.auto_rapid_traverse_after_tool_exchange =
-                cnc.get<decltype(c.auto_rapid_traverse_after_tool_exchange)>("auto_rapid_traverse_after_tool_exchange");
-        }
-
-        {
-            const auto& zp = root.get_child("zero_point");
-            zero_point.x   = zp.get<decltype(ZeroPoint::x)>("X");
-            zero_point.y   = zp.get<decltype(ZeroPoint::y)>("Y");
-            zero_point.z   = zp.get<decltype(ZeroPoint::z)>("Z");
-        }
-    }
-    catch (const std::exception&)
-    {
-        return std::make_tuple(false, std::move(machine_points_data), std::move(kinematics),
-                               std::move(cnc_default_values), std::move(zero_point));
-        ;
-    }
-
-    return std::make_tuple(true, std::move(machine_points_data), std::move(kinematics), std::move(cnc_default_values),
-                           std::move(zero_point));
-}
+} // namespace
 
 namespace parser {
 namespace fanuc {
@@ -425,11 +332,13 @@ std::vector<std::string> NCParser::parse(const std::string& code)
         false};
     if (!ncsettings_path.empty())
     {
-        bool ret{};
-        std::tie(ret, machine_points_data, kinematics, cnc_default_values, zero_point) =
-            read_json_ncsettings(ncsettings_path);
-        if (!ret)
+        NCSettingsReader ncSettingsReader(ncsettings_path);
+        if (!ncSettingsReader.read())
             return {"ERROR: Couldn't read ncsettings"};
+        machine_points_data = ncSettingsReader.getMachinePointsData();
+        kinematics          = ncSettingsReader.getKinematics();
+        cnc_default_values  = ncSettingsReader.getCncDefaultValues();
+        zero_point          = ncSettingsReader.getZeroPoint();
     }
 
     bool evaluate_macro           = true;
