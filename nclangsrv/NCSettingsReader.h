@@ -4,6 +4,7 @@
 
 #include <GeneralParserDefines.h>
 
+namespace nclangsrv {
 class NCSettingsReader
 {
 public:
@@ -41,3 +42,5 @@ private:
     parser::EFanucParserType  mFanucParserType{};
     bool                      mRead{};
 };
+
+} // namespace nclangsrv

@@ -5,6 +5,8 @@
 
 #include <GeneralParserDefines.h>
 
+namespace nclangsrv {
+
 class NCParser
 {
 public:
@@ -33,3 +35,5 @@ private:
     bool                       rotate;
     std::string                ncsettings_path;
 };
+
+} // namespace nclangsrv

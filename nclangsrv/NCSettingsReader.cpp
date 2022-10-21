@@ -9,6 +9,8 @@ namespace pt = boost::property_tree;
 
 using namespace parser;
 
+namespace nclangsrv {
+
 NCSettingsReader::NCSettingsReader(const std::string& ncSettingsPath)
     : mNcSettingsPath(ncSettingsPath)
 {
@@ -113,3 +115,5 @@ bool NCSettingsReader::read()
 
     return true;
 }
+
+} // namespace nclangsrv

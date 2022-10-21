@@ -23,6 +23,8 @@ namespace fs = std::filesystem;
 #define MSG_ENDL "\r\n"
 #endif
 
+namespace nclangsrv {
+
 JsonMessageHandler::JsonMessageHandler(std::ofstream* logger, const std::string& rootPath,
                                        const std::string& ncSettingsPath)
     : mLogger(logger)
@@ -463,3 +465,5 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
     std::cout << "Content-Length: " << response.size() << MSG_ENDL << MSG_ENDL << response;
     std::cout.flush();
 }
+
+} // namespace nclangsrv

@@ -87,8 +87,9 @@ int main(int argc, char* argv[])
         OPTIONAL_OPTION(*logger, "ncsetting-path", ncsetting_path);
     }
 
-    const auto         executablePath = fs::path(argv[0]);
-    JsonMessageHandler jsonMessageHandler(logger.get(), executablePath.parent_path().string(), ncsetting_path);
+    const auto                    executablePath = fs::path(argv[0]);
+    nclangsrv::JsonMessageHandler jsonMessageHandler(logger.get(), executablePath.parent_path().string(),
+                                                     ncsetting_path);
 
     if (logger)
         *logger << __func__ << ": Current path is " << fs::current_path() << std::endl;

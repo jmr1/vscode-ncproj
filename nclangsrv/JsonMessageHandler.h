@@ -5,6 +5,7 @@
 
 #include <rapidjson/document.h>
 
+namespace nclangsrv {
 class JsonMessageHandler
 {
 public:
@@ -34,3 +35,5 @@ private:
     std::string    mNcSettingsPath;
     bool           mExit{};
 };
+
+} // namespace nclangsrv

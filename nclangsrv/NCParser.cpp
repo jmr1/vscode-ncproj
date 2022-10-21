@@ -131,7 +131,7 @@ private:
     std::string& text;
 };
 
-static void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& text)
+void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& text)
 {
     for (size_t x = 0; x < v.size(); ++x)
     {
@@ -163,7 +163,7 @@ private:
 #endif
 };
 
-static void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& text)
+void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& text)
 {
     /*for(size_t x = 0; x < v.size(); ++x)
     {
@@ -175,6 +175,8 @@ static void fill_parsed_values(const std::vector<AttributeVariant>& v, std::stri
 } // namespace heidenhain
 
 } // namespace parser
+
+namespace nclangsrv {
 
 NCParser::NCParser(const std::string& rootPath, const std::string& ncSettingsPath)
     : cnc_type(ECncType::Fanuc)
@@ -512,3 +514,5 @@ std::vector<std::string> NCParser::parse(const std::string& code)
 
     return messages;
 }
+
+} // namespace nclangsrv
