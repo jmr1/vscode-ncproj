@@ -172,21 +172,29 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CodeGroupsReader.h" />
+    <ClInclude Include="CodesReader.h" />
     <ClInclude Include="JsonMessageHandler.h" />
     <ClInclude Include="NCParser.h" />
+    <ClInclude Include="NCSettingsReader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="WordGrammarReader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CodeGroupsReader.cpp" />
+    <ClCompile Include="CodesReader.cpp" />
     <ClCompile Include="JsonMessageHandler.cpp" />
     <ClCompile Include="nclangsrv.cpp" />
     <ClCompile Include="NCParser.cpp" />
+    <ClCompile Include="NCSettingsReader.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="WordGrammarReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
