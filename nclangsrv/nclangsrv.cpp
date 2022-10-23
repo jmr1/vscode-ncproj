@@ -11,6 +11,7 @@
 #include <GeneralParserDefines.h>
 
 #include "JsonMessageHandler.h"
+#include "NCSettingsReader.h"
 
 namespace fs = std::filesystem;
 namespace po = boost::program_options;
@@ -88,8 +89,9 @@ int main(int argc, char* argv[])
     }
 
     const auto                    executablePath = fs::path(argv[0]);
+    nclangsrv::NCSettingsReader   ncSettingsReader(ncsetting_path);
     nclangsrv::JsonMessageHandler jsonMessageHandler(logger.get(), executablePath.parent_path().string(),
-                                                     ncsetting_path);
+                                                     ncSettingsReader);
 
     if (logger)
         *logger << __func__ << ": Current path is " << fs::current_path() << std::endl;

@@ -13,7 +13,7 @@
 #include <rapidjson/stringbuffer.h>
 #include <rapidjson/writer.h>
 
-#include "NCParser.h"
+#include "NCSettingsReader.h"
 
 namespace fs = std::filesystem;
 
@@ -26,10 +26,13 @@ namespace fs = std::filesystem;
 namespace nclangsrv {
 
 JsonMessageHandler::JsonMessageHandler(std::ofstream* logger, const std::string& rootPath,
-                                       const std::string& ncSettingsPath)
+                                       NCSettingsReader& ncSettingsReader,
+                                       parser::ELanguage language /*= parser::ELanguage::English*/)
     : mLogger(logger)
     , mRootPath(rootPath)
-    , mNcSettingsPath(ncSettingsPath)
+    , mNcSettingsReader(ncSettingsReader)
+    , mParser(rootPath, ncSettingsReader)
+    , mLanguage(language)
 {
 }
 
@@ -196,6 +199,58 @@ void JsonMessageHandler::textDocument_didChange(const rapidjson::Document& reque
 
 void JsonMessageHandler::textDocument_completion(int32_t id)
 {
+    if (!mGCodes.get())
+    {
+        const auto         fsRootPath = fs::path(mRootPath);
+        std::ostringstream ostr;
+        ostr << mNcSettingsReader.getFanucParserType();
+        std::string lang_prefix("en");
+        switch (mLanguage)
+        {
+        case parser::ELanguage::English:
+            lang_prefix = "en";
+            break;
+        case parser::ELanguage::Polish:
+            lang_prefix = "pl";
+            break;
+        }
+        const std::string descPath = fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) /
+                                                   fs::path("desc") / fs::path("gcode_desc_" + lang_prefix + ".json"))
+                                         .string();
+        mGCodes = std::make_unique<CodesReader>(descPath);
+        mGCodes->read();
+
+        const auto& codes = mGCodes->getCodes();
+        for (const auto& v : codes)
+            mSuggestions.push_back("G" + v);
+    }
+
+    if (!mMCodes.get())
+    {
+        const auto         fsRootPath = fs::path(mRootPath);
+        std::ostringstream ostr;
+        ostr << mNcSettingsReader.getFanucParserType();
+        std::string lang_prefix("en");
+        switch (mLanguage)
+        {
+        case parser::ELanguage::English:
+            lang_prefix = "en";
+            break;
+        case parser::ELanguage::Polish:
+            lang_prefix = "pl";
+            break;
+        }
+        const std::string descPath = fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) /
+                                                   fs::path("desc") / fs::path("mcode_desc_" + lang_prefix + ".json"))
+                                         .string();
+        mMCodes = std::make_unique<CodesReader>(descPath);
+        mMCodes->read();
+
+        const auto& codes = mMCodes->getCodes();
+        for (const auto& v : codes)
+            mSuggestions.push_back("M" + v);
+    }
+
     rapidjson::Document d;
     d.SetObject();
     rapidjson::Document::AllocatorType& a = d.GetAllocator();
@@ -203,13 +258,10 @@ void JsonMessageHandler::textDocument_completion(int32_t id)
     d.AddMember("jsonrpc", "2.0", a);
     d.AddMember("id", id, a);
 
-    // std::vector<std::string> values = {"G0 $1", "G0 X$1 Y$2", "G0 X$1 Z$2", "G0 Z$1", "G0 X$1 Y$2 Z$3"};
-    std::vector<std::string> values = {"M0", "M1", "M2", "M00", "M01", "M02"};
-
     rapidjson::Value result(rapidjson::kArrayType);
     {
         int cnt{};
-        for (const auto& value : values)
+        for (const auto& value : mSuggestions)
         {
             rapidjson::Value entry(rapidjson::kObjectType);
             rapidjson::Value label;
@@ -288,8 +340,33 @@ void JsonMessageHandler::completionItem_resolve(const rapidjson::Document& reque
             }
 
             {
+                std::string       desc;
+                const std::string label(params["label"].GetString(), params["label"].GetStringLength());
+                if (!label.empty())
+                {
+                    if (label[0] == 'G' || label[0] == 'g')
+                    {
+                        auto it = mGCodes->getDesc().find(label.substr(1));
+                        if (it != mGCodes->getDesc().cend())
+                            desc = it->second;
+                    }
+                    else if (label[0] == 'M' || label[0] == 'm')
+                    {
+                        auto it = mMCodes->getDesc().find(label.substr(1));
+                        if (it != mMCodes->getDesc().cend())
+                            desc = it->second;
+                    }
+                }
+
                 rapidjson::Value data;
-                data = "NC documentation";
+                if (!desc.empty())
+                {
+                    data.SetString(desc.c_str(), static_cast<rapidjson::SizeType>(desc.size()), a);
+                }
+                else
+                {
+                    data = "N/A";
+                }
                 result.AddMember("documentation", data, a);
             }
         }
@@ -355,8 +432,7 @@ void JsonMessageHandler::shutdown(int32_t id)
 
 void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri, const std::string& content)
 {
-    NCParser parser(mRootPath, mNcSettingsPath);
-    auto     messages = parser.parse(content);
+    auto messages = mParser.parse(content);
 
     rapidjson::Document d;
     d.SetObject();

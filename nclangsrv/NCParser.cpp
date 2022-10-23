@@ -8,77 +8,15 @@
 #include <sstream>
 
 #include <boost/algorithm/string/trim.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
 
 #include <fanuc/AllAttributesParser.h>
 #include <heidenhain/AllAttributesParser.h>
 
 #include "NCSettingsReader.h"
 
-namespace pt = boost::property_tree;
 namespace fs = std::filesystem;
 
-namespace {
-
 using namespace parser;
-
-bool read_json(const std::string& grammar_path, const std::string& unit, fanuc::word_map& word_grammar_map,
-               std::vector<std::string>& operations)
-{
-    try
-    {
-        pt::ptree root;
-        pt::read_json(grammar_path, root);
-
-        for (const auto& u : root.get_child(unit))
-        {
-            word_grammar_map[u.first] = {u.second.get<decltype(fanuc::WordGrammar::word)>("word"),
-                                         u.second.get<decltype(fanuc::WordGrammar::range_from)>("range_from"),
-                                         u.second.get<decltype(fanuc::WordGrammar::range_to)>("range_to"),
-                                         u.second.get<decltype(fanuc::WordGrammar::decimal_from)>("decimal_from"),
-                                         u.second.get<decltype(fanuc::WordGrammar::decimal_to)>("decimal_to"),
-                                         u.second.get<decltype(fanuc::WordGrammar::unique)>("unique"),
-                                         u.second.get<decltype(fanuc::WordGrammar::word_type)>("type")};
-        }
-
-        for (const auto& o : root.get_child("operations"))
-            operations.push_back(o.second.get_value<std::string>());
-    }
-    catch (const std::exception&)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-bool read_json(const std::string& code_groups_path, fanuc::code_groups_map& code_groups)
-{
-    try
-    {
-        pt::ptree root;
-        pt::read_json(code_groups_path, root);
-
-        for (const auto& u : root.get_child("groups"))
-        {
-            for (const auto& group : u.second)
-            {
-                code_groups[{group.second.get<decltype(fanuc::CodeGroupValue::code)>("code"),
-                             group.second.get<decltype(fanuc::CodeGroupValue::rest)>("rest")}]
-                    .insert(u.first);
-            }
-        }
-    }
-    catch (const std::exception&)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-} // namespace
 
 namespace parser {
 namespace fanuc {
@@ -178,176 +116,105 @@ void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& tex
 
 namespace nclangsrv {
 
-NCParser::NCParser(const std::string& rootPath, const std::string& ncSettingsPath)
-    : cnc_type(ECncType::Fanuc)
-    , machine_tool_type(EMachineToolType::Mill)
-    , grammar_path("./conf/fanuc_mill/grammar.json")
-    , gcode_groups_path("./conf/fanuc_mill/gcode_groups.json")
-    , mcode_groups_path("./conf/fanuc_mill/mcode_groups.json")
-    , grammar_unit(EDriverUnits::Millimeter)
-    , unit_conversion_type(UnitConversionType::metric_to_imperial)
+NCParser::NCParser(const std::string& rootPath, NCSettingsReader& ncSettingsReader)
+    : unit_conversion_type(UnitConversionType::metric_to_imperial)
     , axes_rotating_option(AxesRotatingOption::Xrotate90degrees)
     , single_line_output(true)
     , convert_length(false)
     , calculate_path_time(false)
     , rotate(false)
-    , ncsettings_path(ncSettingsPath)
+    , mRootPath(rootPath)
+    , mNcSettingsReader(ncSettingsReader)
+    , mLanguage(ELanguage::English)
 {
-    if (not rootPath.empty())
-    {
-        const auto fsRootPath = fs::path(rootPath);
-
-        grammar_path      = fs::canonical(fsRootPath / fs::path(grammar_path)).string();
-        gcode_groups_path = fs::canonical(fsRootPath / fs::path(gcode_groups_path)).string();
-        mcode_groups_path = fs::canonical(fsRootPath / fs::path(mcode_groups_path)).string();
-    }
-}
-
-void NCParser::set_cnc_type(ECncType value)
-{
-    cnc_type = value;
-    redo_paths();
-}
-
-void NCParser::set_machine_tool_type(EMachineToolType value)
-{
-    machine_tool_type = value;
-    redo_paths();
-}
-
-void NCParser::redo_paths()
-{
-    std::string new_path = "./conf/";
-
-    switch (cnc_type)
-    {
-    case ECncType::Fanuc:
-        switch (machine_tool_type)
-        {
-        case EMachineToolType::Mill:
-            new_path += "fanuc_mill/";
-            break;
-        case EMachineToolType::Lathe:
-        case EMachineToolType::Millturn:
-            new_path += "fanuc_lathe/";
-            break;
-        }
-        break;
-
-    case ECncType::Haas:
-        switch (machine_tool_type)
-        {
-        case EMachineToolType::Mill:
-            new_path += "haas_mill/";
-            break;
-        case EMachineToolType::Lathe:
-        case EMachineToolType::Millturn:
-            new_path += "haas_lathe/";
-            break;
-        }
-        break;
-
-    case ECncType::Makino:
-        switch (machine_tool_type)
-        {
-        case EMachineToolType::Mill:
-            new_path += "makino_mill/";
-            break;
-        case EMachineToolType::Lathe:
-        case EMachineToolType::Millturn:
-            break;
-        }
-        break;
-
-    case ECncType::Generic:
-        switch (machine_tool_type)
-        {
-        case EMachineToolType::Mill:
-            new_path += "generic_mill/";
-            break;
-        case EMachineToolType::Lathe:
-        case EMachineToolType::Millturn:
-            new_path += "generic_lathe/";
-            break;
-        }
-        break;
-
-    case ECncType::Heidenhain:
-        break;
-    }
-
-    grammar_path      = new_path + "grammar.json";
-    gcode_groups_path = new_path + "gcode_groups.json";
-    mcode_groups_path = new_path + "mcode_groups.json";
 }
 
 std::vector<std::string> NCParser::parse(const std::string& code)
 {
-    fanuc::FanucWordGrammar  word_grammar;
-    std::vector<std::string> operations;
-    fanuc::code_groups_map   gcode_groups;
-    fanuc::code_groups_map   mcode_groups;
+    if (!mNcSettingsReader.getNcSettingsPath().empty() && !mNcSettingsReader.read())
+        return {"ERROR: Couldn't read .ncsetting file"};
 
-    if (!read_json(grammar_path, "metric", word_grammar.metric, operations))
-        return {"ERROR: Couldn't read metric from grammar"};
-    if (!read_json(grammar_path, "imperial", word_grammar.imperial, operations))
-        return {"ERROR: Couldn't read imperial from grammar"};
-    if (!read_json(gcode_groups_path, gcode_groups))
-        return {"ERROR: Couldn't read gcode groups"};
-    if (!read_json(mcode_groups_path, mcode_groups))
-        return {"ERROR: Couldn't read mcode groups"};
+    const auto fanuc_parser_type = mNcSettingsReader.getFanucParserType();
+    const auto machine_tool_type = mNcSettingsReader.getMachineToolType();
 
-    ZeroPoint         zero_point{};
-    MachinePointsData machine_points_data{{{"X", 0.0}, {"Y", 0.0}, {"Z", 500.0}},
-                                          {{"X", 0.0}, {"Y", 0.0}, {"Z", 500.0}, {"I", 0.0}, {"J", 0.0}, {"K", 0.0}}};
-    Kinematics        kinematics{{{"X", {-500., 500.}}, {"Y", {-500., 500.}}, {"Z", {0., 1000.}}},
-                          20000,
-                          20000,
-                          10000,
-                          30,
-                          6,
-                          1,
-                          3,
-                          false,
-                          false,
-                          "",
-                          "",
-                          "",
-                          ""};
-    CncDefaultValues  cnc_default_values{
-        EMotion::RapidTraverse, // G0
-        machine_tool_type == EMachineToolType::Lathe ? EWorkPlane::XZ /* G18 */ : EWorkPlane::XY /* G17 */,
-        grammar_unit,
-        EProgrammingType::Absolute, // G90
-        EFeedMode::PerMinute,
-        ERotationDirection::Right,
-        EDepthProgrammingType::Absolute,
-        EDrillGreturnMode::G98,
-        0,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false};
-    if (!ncsettings_path.empty())
+    if (!mWordGrammarReader.get())
     {
-        NCSettingsReader ncSettingsReader(ncsettings_path);
-        if (!ncSettingsReader.read())
-            return {"ERROR: Couldn't read ncsettings"};
-        machine_points_data = ncSettingsReader.getMachinePointsData();
-        kinematics          = ncSettingsReader.getKinematics();
-        cnc_default_values  = ncSettingsReader.getCncDefaultValues();
-        zero_point          = ncSettingsReader.getZeroPoint();
+        const auto         fsRootPath = fs::path(mRootPath);
+        std::ostringstream ostr;
+        ostr << mNcSettingsReader.getFanucParserType();
+        const std::string grammarPath =
+            fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("grammar.json")).string();
+        mWordGrammarReader = std::make_unique<WordGrammarReader>(grammarPath);
+
+        if (!mWordGrammarReader->read())
+            return {"ERROR: Couldn't read word grammar settings"};
     }
+
+    if (!mGCodeGroupsReader.get())
+    {
+        const auto         fsRootPath = fs::path(mRootPath);
+        std::ostringstream ostr;
+        ostr << mNcSettingsReader.getFanucParserType();
+        const std::string grammarPath =
+            fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("gcode_groups.json"))
+                .string();
+        mGCodeGroupsReader = std::make_unique<CodeGroupsReader>(grammarPath);
+
+        if (!mGCodeGroupsReader->read())
+            return {"ERROR: Couldn't read gcode groups settings"};
+    }
+
+    if (!mMCodeGroupsReader.get())
+    {
+        const auto         fsRootPath = fs::path(mRootPath);
+        std::ostringstream ostr;
+        ostr << mNcSettingsReader.getFanucParserType();
+        const std::string grammarPath =
+            fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("mcode_groups.json"))
+                .string();
+        mMCodeGroupsReader = std::make_unique<CodeGroupsReader>(grammarPath);
+
+        if (!mMCodeGroupsReader->read())
+            return {"ERROR: Couldn't read mcode groups settings"};
+    }
+
+    auto word_grammar = mWordGrammarReader->getWordGrammar();
+    auto operations   = mWordGrammarReader->getOperations();
+
+    auto gcode_groups = mGCodeGroupsReader->getCodeGroups();
+    auto mcode_groups = mMCodeGroupsReader->getCodeGroups();
+
+    auto machine_points_data = mNcSettingsReader.getMachinePointsData();
+    auto kinematics          = mNcSettingsReader.getKinematics();
+    auto cnc_default_values  = mNcSettingsReader.getCncDefaultValues();
+    auto zero_point          = mNcSettingsReader.getZeroPoint();
 
     bool evaluate_macro           = true;
     bool verify_code_groups       = true;
     bool calculate_path           = true;
     bool ncsettings_code_analysis = true;
     bool zero_point_analysis      = true;
+
+    ECncType cnc_type = ECncType::Fanuc;
+
+    switch (fanuc_parser_type)
+    {
+    case EFanucParserType::FanucLathe:
+    case EFanucParserType::FanucMill:
+        cnc_type = ECncType::Fanuc;
+        break;
+    case EFanucParserType::GenericLathe:
+    case EFanucParserType::GenericMill:
+        cnc_type = ECncType::Generic;
+        break;
+    case EFanucParserType::HaasLathe:
+    case EFanucParserType::HaasMill:
+        cnc_type = ECncType::Haas;
+        break;
+    case EFanucParserType::MakinoMill:
+        cnc_type = ECncType::Makino;
+        break;
+    }
 
     std::unique_ptr<AllAttributesParserBase> ap;
     switch (cnc_type)
@@ -356,36 +223,10 @@ std::vector<std::string> NCParser::parse(const std::string& code)
     case ECncType::Haas:
     case ECncType::Makino:
     case ECncType::Generic: {
-        EFanucParserType fanuc_parser_type = EFanucParserType::FanucMill;
-        if (cnc_type == ECncType::Fanuc)
-        {
-            if (machine_tool_type == EMachineToolType::Lathe)
-                fanuc_parser_type = EFanucParserType::FanucLathe;
-        }
-        else if (cnc_type == ECncType::Haas)
-        {
-            if (machine_tool_type == EMachineToolType::Lathe)
-                fanuc_parser_type = EFanucParserType::HaasLathe;
-            else if (machine_tool_type == EMachineToolType::Mill)
-                fanuc_parser_type = EFanucParserType::HaasMill;
-        }
-        else if (cnc_type == ECncType::Makino)
-        {
-            if (machine_tool_type == EMachineToolType::Mill)
-                fanuc_parser_type = EFanucParserType::MakinoMill;
-        }
-        else if (cnc_type == ECncType::Generic)
-        {
-            if (machine_tool_type == EMachineToolType::Lathe)
-                fanuc_parser_type = EFanucParserType::GenericLathe;
-            else if (machine_tool_type == EMachineToolType::Mill)
-                fanuc_parser_type = EFanucParserType::GenericMill;
-        }
-
         ap = std::make_unique<fanuc::AllAttributesParser>(fanuc::AllAttributesParser(
             std::move(word_grammar), std::move(operations), std::move(gcode_groups), std::move(mcode_groups),
             {evaluate_macro, verify_code_groups, calculate_path, ncsettings_code_analysis, zero_point_analysis},
-            {ELanguage::Polish}, fanuc_parser_type));
+            {mLanguage}, fanuc_parser_type));
 
         break;
     }
@@ -394,7 +235,7 @@ std::vector<std::string> NCParser::parse(const std::string& code)
         ap = std::make_unique<heidenhain::AllAttributesParser>(ParserSettings{evaluate_macro, verify_code_groups,
                                                                               calculate_path, ncsettings_code_analysis,
                                                                               zero_point_analysis},
-                                                               OtherSettings{ELanguage::Polish});
+                                                               OtherSettings{mLanguage});
         break;
     }
     }

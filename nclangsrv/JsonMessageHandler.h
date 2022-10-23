@@ -1,15 +1,25 @@
 #pragma once
 
 #include <fstream>
+#include <memory>
 #include <string>
+#include <vector>
 
 #include <rapidjson/document.h>
 
+#include <GeneralParserDefines.h>
+
+#include "CodesReader.h"
+#include "NCParser.h"
+
 namespace nclangsrv {
+
+class NCSettingsReader;
 class JsonMessageHandler
 {
 public:
-    JsonMessageHandler(std::ofstream* logger, const std::string& rootPath, const std::string& ncSettingsPath);
+    JsonMessageHandler(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
+                       parser::ELanguage language = parser::ELanguage::English);
 
     bool parse(const std::string& json);
     bool exit() const
@@ -30,10 +40,15 @@ private:
     void textDocument_publishDiagnostics(const std::string& uri, const std::string& content);
 
 private:
-    std::ofstream* mLogger;
-    std::string    mRootPath;
-    std::string    mNcSettingsPath;
-    bool           mExit{};
+    std::vector<std::string>     mSuggestions;
+    std::ofstream*               mLogger;
+    std::unique_ptr<CodesReader> mGCodes;
+    std::unique_ptr<CodesReader> mMCodes;
+    std::string                  mRootPath;
+    NCSettingsReader&            mNcSettingsReader;
+    NCParser                     mParser;
+    parser::ELanguage            mLanguage;
+    bool                         mExit{};
 };
 
 } // namespace nclangsrv

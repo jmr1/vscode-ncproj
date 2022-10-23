@@ -14,6 +14,50 @@ namespace nclangsrv {
 NCSettingsReader::NCSettingsReader(const std::string& ncSettingsPath)
     : mNcSettingsPath(ncSettingsPath)
 {
+    setDefaults();
+}
+
+void NCSettingsReader::setDefaults()
+{
+    mMachineToolType = EMachineToolType::Mill;
+    mFanucParserType = EFanucParserType::FanucMill;
+
+    mMachinePointsData = MachinePointsData{{{"X", 0.0}, {"Y", 0.0}, {"Z", 500.0}},
+
+                                           {{"X", 0.0}, {"Y", 0.0}, {"Z", 500.0}, {"I", 0.0}, {"J", 0.0}, {"K", 0.0}}};
+
+    mKinematics = Kinematics{{{"X", {-500., 500.}}, {"Y", {-500., 500.}}, {"Z", {0., 1000.}}},
+                             20000,
+                             20000,
+                             10000,
+                             30,
+                             6,
+                             1,
+                             3,
+                             false,
+                             false,
+                             "",
+                             "",
+                             "",
+                             ""};
+
+    mCncDefaultValues = CncDefaultValues{EMotion::RapidTraverse, // G0
+                                         EWorkPlane::XY /* G17 */,
+                                         EDriverUnits::Millimeter,
+                                         EProgrammingType::Absolute, // G90
+                                         EFeedMode::PerMinute,
+                                         ERotationDirection::Right,
+                                         EDepthProgrammingType::Absolute,
+                                         EDrillGreturnMode::G98,
+                                         0,
+                                         false,
+                                         false,
+                                         false,
+                                         false,
+                                         false,
+                                         false,
+                                         false,
+                                         false};
 }
 
 bool NCSettingsReader::read()
@@ -27,6 +71,7 @@ bool NCSettingsReader::read()
         pt::read_json(mNcSettingsPath, root);
 
         {
+            mMachineToolType = root.get<EMachineToolType>("machine_tool_type");
             mFanucParserType = root.get<EFanucParserType>("driver");
         }
 
