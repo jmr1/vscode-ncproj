@@ -36,6 +36,7 @@ namespace cmtconfig
         {
             labelModel.Hide();
             comboBoxModel.Hide();
+            groupBoxExtras.Hide();
             Reload(ncSettingsFile);
         }
 
