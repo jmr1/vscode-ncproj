@@ -45,7 +45,7 @@ namespace parser.Tests
             wordGrammarMap.Add("I", new WordGrammarWrapper() { word = "I", range_from = -9999, range_to = 9999, decimal_from = 0, decimal_to = 9999, unique = true, type = WordType.length });
             wordGrammarMap.Add("J", new WordGrammarWrapper() { word = "J", range_from = -9999, range_to = 9999, decimal_from = 0, decimal_to = 9999, unique = true, type = WordType.length });
             wordGrammarMap.Add("K", new WordGrammarWrapper() { word = "K", range_from = -9999, range_to = 9999, decimal_from = 0, decimal_to = 9999, unique = true, type = WordType.length });
-            wordGrammarMap.Add("S", new WordGrammarWrapper() { word = "S", range_from = 0, range_to = 99999, decimal_from = 0, decimal_to = 0, unique = false, type = WordType.misc });
+            wordGrammarMap.Add("S", new WordGrammarWrapper() { word = "S", range_from = 1, range_to = 99999, decimal_from = 0, decimal_to = 0, unique = false, type = WordType.misc });
             wordGrammarMap.Add("T", new WordGrammarWrapper() { word = "T", range_from = 1, range_to = 999, decimal_from = 0, decimal_to = 0, unique = false, type = WordType.misc });
             wordGrammarMap.Add(",C", new WordGrammarWrapper() { word = ",C", range_from = -99, range_to = 99, decimal_from = 0, decimal_to = 99, unique = false, type = WordType.misc });
             wordGrammarMap.Add("O", new WordGrammarWrapper() { word = "O", range_from = 1, range_to = 9999, decimal_from = 0, decimal_to = 0, unique = true, type = WordType.misc });
