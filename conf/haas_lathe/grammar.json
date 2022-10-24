@@ -1,6 +1,34 @@
 {
     "version": "1.0",
-    "operations" : ["SIN", "COS", "TAN", "ATAN", "SQRT", "ABS", "ROUND", "FIX", "FUP", "OR", "XOR", "AND", "BIN", "BCD", "OR", "XOR", "AND", "IF", "WHILE", "DO", "END", "EQ", "NE", "GT", "GE", "LT", "LE"],
+    "operations": [
+        "SIN",
+        "COS",
+        "TAN",
+        "ATAN",
+        "SQRT",
+        "ABS",
+        "ROUND",
+        "FIX",
+        "FUP",
+        "OR",
+        "XOR",
+        "AND",
+        "BIN",
+        "BCD",
+        "OR",
+        "XOR",
+        "AND",
+        "IF",
+        "WHILE",
+        "DO",
+        "END",
+        "EQ",
+        "NE",
+        "GT",
+        "GE",
+        "LT",
+        "LE"
+    ],
     "imperial": {
         ",C": {
             "word": ",C",
@@ -256,7 +284,7 @@
         },
         "S": {
             "word": "S",
-            "range_from": 0,
+            "range_from": 1,
             "range_to": 99999,
             "decimal_from": 0,
             "decimal_to": 0,
@@ -618,7 +646,7 @@
         },
         "S": {
             "word": "S",
-            "range_from": 0,
+            "range_from": 1,
             "range_to": 99999,
             "decimal_from": 0,
             "decimal_to": 0,
