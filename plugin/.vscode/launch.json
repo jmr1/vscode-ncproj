@@ -25,7 +25,7 @@
             "name": "(gdb) Attach",
             "type": "cppdbg",
             "request": "attach",
-            "program": "${workspaceRoot}/bin/nclangsrv",
+            "program": "${workspaceRoot}/vscode-client/out/nclangsrv",
             "MIMode": "gdb",
             "setupCommands": [
                 {
