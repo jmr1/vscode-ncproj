@@ -65,12 +65,6 @@
                 "command": "ncproj.ncsettings",
                 "title": "NC Project: Control and Machine Tool configuration"
             }
-        ],
-        "snippets": [
-            {
-                "language": "ncproj",
-                "path": "./snippets.json"
-            }
         ]
     },
     "main": "./vscode-client/out/extension",

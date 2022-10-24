@@ -267,8 +267,8 @@ void JsonMessageHandler::textDocument_completion(int32_t id)
             rapidjson::Value label;
             label.SetString(value.c_str(), static_cast<rapidjson::SizeType>(value.size()), a);
             entry.AddMember("label", label, a);
-            entry.AddMember("kind", 15, a);            // Snippet
-            entry.AddMember("insertTextFormat", 2, a); // Snippet
+            entry.AddMember("kind", 15, a);
+            entry.AddMember("insertTextFormat", 2, a);
             entry.AddMember("data", ++cnt, a);
             result.PushBack(entry, a);
         }
@@ -335,7 +335,7 @@ void JsonMessageHandler::completionItem_resolve(const rapidjson::Document& reque
 
             {
                 rapidjson::Value data;
-                data = "NC details";
+                data = "Details";
                 result.AddMember("detail", data, a);
             }
 
