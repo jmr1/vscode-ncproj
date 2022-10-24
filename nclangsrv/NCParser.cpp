@@ -116,8 +116,9 @@ void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& tex
 
 namespace nclangsrv {
 
-NCParser::NCParser(const std::string& rootPath, NCSettingsReader& ncSettingsReader)
-    : unit_conversion_type(UnitConversionType::metric_to_imperial)
+NCParser::NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader)
+    : mLogger(logger)
+    , unit_conversion_type(UnitConversionType::metric_to_imperial)
     , axes_rotating_option(AxesRotatingOption::Xrotate90degrees)
     , single_line_output(true)
     , convert_length(false)
@@ -144,6 +145,8 @@ std::vector<std::string> NCParser::parse(const std::string& code)
         ostr << mNcSettingsReader.getFanucParserType();
         const std::string grammarPath =
             fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("grammar.json")).string();
+        if (mLogger)
+            *mLogger << "NCParser::" << __func__ << ": grammarPath: " << grammarPath << std::endl;
         mWordGrammarReader = std::make_unique<WordGrammarReader>(grammarPath);
 
         if (!mWordGrammarReader->read())
@@ -155,10 +158,12 @@ std::vector<std::string> NCParser::parse(const std::string& code)
         const auto         fsRootPath = fs::path(mRootPath);
         std::ostringstream ostr;
         ostr << mNcSettingsReader.getFanucParserType();
-        const std::string grammarPath =
+        const std::string gCodeGroupsPath =
             fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("gcode_groups.json"))
                 .string();
-        mGCodeGroupsReader = std::make_unique<CodeGroupsReader>(grammarPath);
+        if (mLogger)
+            *mLogger << "NCParser::" << __func__ << ": gCodeGroupsPath: " << gCodeGroupsPath << std::endl;
+        mGCodeGroupsReader = std::make_unique<CodeGroupsReader>(gCodeGroupsPath);
 
         if (!mGCodeGroupsReader->read())
             return {"ERROR: Couldn't read gcode groups settings"};
@@ -169,10 +174,12 @@ std::vector<std::string> NCParser::parse(const std::string& code)
         const auto         fsRootPath = fs::path(mRootPath);
         std::ostringstream ostr;
         ostr << mNcSettingsReader.getFanucParserType();
-        const std::string grammarPath =
+        const std::string mCodeGroupsPath =
             fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("mcode_groups.json"))
                 .string();
-        mMCodeGroupsReader = std::make_unique<CodeGroupsReader>(grammarPath);
+        if (mLogger)
+            *mLogger << "NCParser::" << __func__ << ": mCodeGroupsPath: " << mCodeGroupsPath << std::endl;
+        mMCodeGroupsReader = std::make_unique<CodeGroupsReader>(mCodeGroupsPath);
 
         if (!mMCodeGroupsReader->read())
             return {"ERROR: Couldn't read mcode groups settings"};

@@ -31,7 +31,7 @@ JsonMessageHandler::JsonMessageHandler(std::ofstream* logger, const std::string&
     : mLogger(logger)
     , mRootPath(rootPath)
     , mNcSettingsReader(ncSettingsReader)
-    , mParser(rootPath, ncSettingsReader)
+    , mParser(logger, rootPath, ncSettingsReader)
     , mLanguage(language)
 {
 }

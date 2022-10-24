@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include <memory>
 #include <string>
 #include <vector>
@@ -16,11 +17,12 @@ class NCSettingsReader;
 class NCParser
 {
 public:
-    NCParser(const std::string& rootPath, NCSettingsReader& ncSettingsReader);
+    NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader);
 
     std::vector<std::string> parse(const std::string& code);
 
 private:
+    std::ofstream*                     mLogger;
     parser::UnitConversionType         unit_conversion_type;
     parser::AxesRotatingOption         axes_rotating_option;
     bool                               single_line_output;
