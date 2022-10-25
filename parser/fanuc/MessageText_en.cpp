@@ -37,6 +37,8 @@ const MessageText message_text_en[] = {
     {MessageName::UnsupportedUnaryOperation, {"Unsupported unary operation: [", "]"}},
     {MessageName::UnsupportedFunction, {"Unsupported function: [", "]"}},
     {MessageName::DuplicateAddress, {"Same address [", "] in block not allowed"}},
+    {MessageName::SNotAllowedWhenOperatorTurnsRotation, {"Address S not allowed when Operator turns on rotation"}},
+    {MessageName::M3M4NotAllowedWhenOperatorTurnsRotation, {"M3/M4 not allowed when Operator turns on rotation"}},
 };
 
 const MessageText (&get_message_text_en())[static_cast<int>(MessageName::COUNT)]

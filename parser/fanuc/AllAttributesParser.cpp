@@ -23,6 +23,7 @@
 #include "MacroEvaluator.h"
 #include "MessageTextImpl.h"
 #include "RangeVerifier.h"
+#include "RotationVerifier.h"
 #include "SameWordInBlockVerifier.h"
 #include "UniqueCode.h"
 
@@ -202,8 +203,12 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
         }
 
         if (parser_settings.ncsettings_code_analysis)
+        {
             RangeVerifier()(machine_tool_type, attr_path_calc->get_kinematics(),
                             evaluated_code.empty() ? value : value2, other_settings.language);
+            RotationVerifier()(attr_path_calc->get_cnc_default_values(), evaluated_code.empty() ? value : value2,
+                               other_settings.language);
+        }
 
         if (parser_settings.verify_code_groups)
             CodeGroupsVerifier()(macro_values, gcode_groups, mcode_groups, line,

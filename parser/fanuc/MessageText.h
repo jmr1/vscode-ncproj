@@ -42,6 +42,8 @@ enum class MessageName
     UnsupportedUnaryOperation,
     UnsupportedFunction,
     DuplicateAddress,
+    SNotAllowedWhenOperatorTurnsRotation,
+    M3M4NotAllowedWhenOperatorTurnsRotation,
 
     COUNT // must be last
 };

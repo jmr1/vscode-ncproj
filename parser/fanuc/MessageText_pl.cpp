@@ -37,6 +37,8 @@ const MessageText message_text_pl[] = {
     {MessageName::UnsupportedUnaryOperation, {u8"Nieobsługiwana operacja jednoargumentowa: [", "]"}},
     {MessageName::UnsupportedFunction, {u8"Nieobsługiwana funkcja: [", "]"}},
     {MessageName::DuplicateAddress, {u8"Kolejny adres [", "] niedozwolony w bloku"}},
+    {MessageName::SNotAllowedWhenOperatorTurnsRotation, {u8"Niedozwolony adres S gdy obroty włącza Operator"}},
+    {MessageName::M3M4NotAllowedWhenOperatorTurnsRotation, {u8"Niedozwolony M3/M4 gdy obroty włącza Operator"}},
 };
 
 const MessageText (&get_message_text_pl())[static_cast<int>(MessageName::COUNT)]
