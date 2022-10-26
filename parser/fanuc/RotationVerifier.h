@@ -52,12 +52,22 @@ public:
 
     void reset();
 
+    void set_error_reported()
+    {
+        error_reported = true;
+    }
+    bool was_error_reported() const
+    {
+        return error_reported;
+    }
+
 private:
     const CncDefaultValues* cnc_default_values;
     ELanguage               language;
     bool                    S{};
     bool                    M{};
     bool                    G{};
+    bool                    error_reported{};
 };
 
 class PARSER_API RotationVerifier

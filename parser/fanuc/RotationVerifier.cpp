@@ -18,7 +18,7 @@ void RotationVerifierVisitor::setContext(const CncDefaultValues& cnc_default_val
 
 void RotationVerifierVisitor::reset()
 {
-    G = M = S = false;
+    G = M = S = error_reported = false;
 }
 
 void RotationVerifierVisitor::operator()(const DecimalAttributeData& data)
@@ -61,18 +61,24 @@ void RotationVerifier::operator()(const CncDefaultValues&              cnc_defau
     rotation_verifier_visitor.setContext(cnc_default_values, language);
     for (size_t x = 0; x < value.size(); ++x)
         boost::apply_visitor(rotation_verifier_visitor, value[x]);
-    if (!cnc_default_values.operator_turns_on_rotation)
+    if (!rotation_verifier_visitor.was_error_reported() && !cnc_default_values.operator_turns_on_rotation)
     {
+        if (rotation_verifier_visitor.was_G() && !rotation_verifier_visitor.was_M() &&
+            !rotation_verifier_visitor.was_S())
+        {
+            rotation_verifier_visitor.set_error_reported();
+            throw rotation_verifier_exception(make_message(MessageName::ValueNotSet, language, std::string("S")));
+        }
         if (rotation_verifier_visitor.was_G() && rotation_verifier_visitor.was_M() &&
             !rotation_verifier_visitor.was_S())
         {
-            rotation_verifier_visitor.reset();
+            rotation_verifier_visitor.set_error_reported();
             throw rotation_verifier_exception(make_message(MessageName::ValueNotSet, language, std::string("S")));
         }
         if (rotation_verifier_visitor.was_G() && rotation_verifier_visitor.was_S() &&
             !rotation_verifier_visitor.was_M())
         {
-            rotation_verifier_visitor.reset();
+            rotation_verifier_visitor.set_error_reported();
             throw rotation_verifier_exception(make_message(MessageName::ValueNotSet, language, std::string("M3/M4")));
         }
     }

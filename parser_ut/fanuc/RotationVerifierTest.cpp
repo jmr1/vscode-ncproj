@@ -72,6 +72,12 @@ TEST_F(RotationVerifierTest, Spindle)
         },
         false, "S100 G89 false");
 
+    verifyThrow(
+        {
+            fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("01")},
+        },
+        false, "G01 false");
+
     verifyNoThrow(
         {
             fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("01")},
