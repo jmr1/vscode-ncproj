@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "parser_export.h"
+
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -11,7 +13,7 @@
 namespace parser {
 namespace fanuc {
 
-class MacroEvaluator
+class PARSER_API MacroEvaluator
 {
 public:
     static bool evaluate(macro_map& macro_values, int line, const std::vector<AttributeVariant>& value,

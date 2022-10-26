@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "parser_export.h"
+
 #include <map>
 #include <stdexcept>
 #include <string>
@@ -28,7 +30,7 @@ enum class EHelixType
     Quarter = 90,
 };
 
-class AttributesPathCalculator
+class PARSER_API AttributesPathCalculator
 {
 public:
     AttributesPathCalculator(EMachineToolType machine_tool_type, MachinePointsData&& machine_points_data,
@@ -67,6 +69,10 @@ public:
     }
 
 private:
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4251)
+#endif
     const EMachineToolType        machine_tool_type;
     const MachinePointsData       machine_points_data;
     Kinematics                    kinematics;
@@ -89,6 +95,9 @@ private:
     EHelixType                    active_helix{};
     std::string                   active_t;
     bool                          active_auto_rapid_traverse_after_tool_exchange{};
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
 };
 
 } // namespace fanuc

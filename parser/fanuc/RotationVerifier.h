@@ -23,7 +23,7 @@ struct rotation_verifier_exception : std::runtime_error
     }
 };
 
-class RotationVerifierVisitor : public boost::static_visitor<>
+class PARSER_API RotationVerifierVisitor : public boost::static_visitor<>
 {
 public:
     void setContext(const CncDefaultValues& cnc_default_values, ELanguage language);

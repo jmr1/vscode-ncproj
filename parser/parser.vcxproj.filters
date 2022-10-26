@@ -141,6 +141,9 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fanuc\RotationVerifier.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -232,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="heidenhain\AllAttributesParserDefines.cpp">
       <Filter>Source Files\heidenhain</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\RotationVerifier.cpp">
+      <Filter>Source Files\fanuc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

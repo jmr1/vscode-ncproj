@@ -46,17 +46,24 @@
     <OutDir>$(SolutionDir)plugin\vscode-client\out\</OutDir>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="fanuc\AllAttributesParserTest.cpp" />
+    <ClCompile Include="fanuc\AttributesPathCalculatorTest.cpp" />
     <ClCompile Include="fanuc\AttributesVisitor.cpp" />
     <ClCompile Include="fanuc\AxesRotatorTest.cpp" />
+    <ClCompile Include="fanuc\CodeGroupsVerifierTest.cpp" />
     <ClCompile Include="fanuc\FileSplitterTest.cpp" />
+    <ClCompile Include="fanuc\MacroEvaluatedCodeVerifierTest.cpp" />
+    <ClCompile Include="fanuc\MacroEvaluatorTest.cpp" />
     <ClCompile Include="fanuc\MessageTextTest.cpp" />
     <ClCompile Include="fanuc\OrderAttributeParserTest.cpp" />
     <ClCompile Include="fanuc\PathCalculatorTest.cpp" />
     <ClCompile Include="fanuc\RangeVerifierTest.cpp" />
     <ClCompile Include="fanuc\RenumbererTest.cpp" />
+    <ClCompile Include="fanuc\RotationVerifierTest.cpp" />
     <ClCompile Include="fanuc\SameWordInBlockVerifierTest.cpp" />
     <ClCompile Include="fanuc\UnitConverterTest.cpp" />
     <ClCompile Include="fanuc\ValueCalculatorTest.cpp" />
+    <ClCompile Include="heidenhain\AllAttributesParserTest.cpp" />
     <ClCompile Include="heidenhain\AttributesVisitor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

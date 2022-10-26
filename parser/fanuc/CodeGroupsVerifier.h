@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "parser_export.h"
+
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -20,7 +22,7 @@ struct code_groups_exception : std::runtime_error
     }
 };
 
-class CodeGroupsVerifier
+class PARSER_API CodeGroupsVerifier
 {
 public:
     void operator()(const macro_map& macro_values, const code_groups_map& gcode_groups,

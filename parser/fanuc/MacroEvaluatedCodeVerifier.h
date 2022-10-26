@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "parser_export.h"
+
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -19,7 +21,7 @@ struct macro_evaluated_code_exception : std::runtime_error
     }
 };
 
-class MacroEvaluatedCodeVerifier
+class PARSER_API MacroEvaluatedCodeVerifier
 {
 public:
     std::string operator()(const std::vector<std::string>& allowed_operations, const macro_map& macro_values, int line,

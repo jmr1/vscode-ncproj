@@ -40,6 +40,27 @@
     <ClCompile Include="heidenhain\AttributesVisitor.cpp">
       <Filter>Source Files\heidenhain</Filter>
     </ClCompile>
+    <ClCompile Include="fanuc\AllAttributesParserTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\AttributesPathCalculatorTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\CodeGroupsVerifierTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\MacroEvaluatedCodeVerifierTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\MacroEvaluatorTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\RotationVerifierTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="heidenhain\AllAttributesParserTest.cpp">
+      <Filter>Source Files\heidenhain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
