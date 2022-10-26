@@ -206,8 +206,8 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
         {
             RangeVerifier()(machine_tool_type, attr_path_calc->get_kinematics(),
                             evaluated_code.empty() ? value : value2, other_settings.language);
-            RotationVerifier()(attr_path_calc->get_cnc_default_values(), evaluated_code.empty() ? value : value2,
-                               other_settings.language);
+            rotation_verifier(attr_path_calc->get_cnc_default_values(), evaluated_code.empty() ? value : value2,
+                              other_settings.language);
         }
 
         if (parser_settings.verify_code_groups)
@@ -282,6 +282,11 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
         return false;
     }
     catch (const same_word_verifier_exception& e)
+    {
+        message = e.what();
+        return false;
+    }
+    catch (const rotation_verifier_exception& e)
     {
         message = e.what();
         return false;

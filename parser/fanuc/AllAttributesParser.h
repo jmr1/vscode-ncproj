@@ -13,6 +13,7 @@
 #include "CodeGroupsDefines.h"
 #include "MacroDefines.h"
 #include "Renumberer.h"
+#include "RotationVerifier.h"
 #include "UnitConverter.h"
 
 namespace qi = boost::spirit::qi;
@@ -130,6 +131,7 @@ private:
     std::unique_ptr<AttributesPathCalculator> attr_path_calc;
     UnitConverter                             unit_converter;
     Renumberer                                renumberer;
+    RotationVerifier                          rotation_verifier;
     macro_map                                 macro_values;
     word_symbols                              assignable_sym;
     word_symbols                              decimal_sym;

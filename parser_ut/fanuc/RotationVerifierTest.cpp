@@ -58,19 +58,19 @@ TEST_F(RotationVerifierTest, Spindle)
         },
         true, "S10 M03 true");
 
-    verifyNoThrow(
-        {
-            fanuc::DecimalAttributeData{"S", _, _, _, _, std::string("10")},
-            fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("01")},
-        },
-        false, "S10 G01 false");
-
     verifyThrow(
         {
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("03")},
             fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("81")},
         },
         false, "M03 G81 false");
+
+    verifyThrow(
+        {
+            fanuc::DecimalAttributeData{"S", _, _, _, _, std::string("100")},
+            fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("89")},
+        },
+        false, "S100 G89 false");
 
     verifyNoThrow(
         {
