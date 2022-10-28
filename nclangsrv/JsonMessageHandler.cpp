@@ -432,9 +432,9 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
     rapidjson::Value result(rapidjson::kObjectType);
     {
-        int         pos{};
-        int         from{};
-        int         to{};
+        size_t      pos{};
+        size_t      from{};
+        size_t      to{};
         std::string strLine = mContenLines[line];
         std::smatch m;
         std::regex  r("[GgMm]\\d+\\.?\\d?");
