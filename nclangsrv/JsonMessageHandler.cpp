@@ -440,7 +440,8 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
         std::regex  r("[GgMm]\\d+\\.?\\d?");
         while (std::regex_search(strLine, m, r))
         {
-            if (character >= pos + m.position() && character < static_cast<int>(pos + m.position() + m.str().size()))
+            if (character >= static_cast<int>(pos + m.position()) &&
+                character < static_cast<int>(pos + m.position() + m.str().size()))
             {
                 from = pos + m.position();
                 to   = pos + m.position() + m.str().size();
