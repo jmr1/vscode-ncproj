@@ -19,7 +19,7 @@ limitations under the License.
 
 'use strict';
 
-import { workspace, Disposable, ExtensionContext, window, commands, RelativePattern, Uri } from 'vscode';
+import { workspace, Disposable, ExtensionContext, window, commands, RelativePattern, Uri, ConfigurationTarget } from 'vscode';
 import { LanguageClientOptions } from 'vscode-languageclient';
 import { LanguageClient, ServerOptions } from 'vscode-languageclient/node';
 import * as cp from "child_process";
@@ -32,8 +32,10 @@ const execShell = (cmd: string, options: cp.ExecOptions) =>
         cp.exec(cmd, options, (err, out) => {
             if (err) {
 				console.log(err);
+				askNcsettingFilePath("Do you want to select .ncsetting file?");
                 return reject(err);
             }
+			askNcsettingFilePath("Do you want to select .ncsetting file?");
             return resolve(out);
         });
     });
@@ -133,6 +135,36 @@ function startListeningConfigurationChanges() {
 			}
 		});
 	}
+}
+
+function askNcsettingFilePath(askMessage: string) {
+	let saveInUser: string = 'Yes (save in user settings)';
+	let saveInWorkspace: string = 'Yes (save in workspace settings)';
+
+	window.showWarningMessage(askMessage, ...[saveInUser, saveInWorkspace, 'No']).then((selection) => {
+		if (selection == saveInUser || selection == saveInWorkspace) {
+			window.showOpenDialog({
+				'canSelectMany': false,
+				'openLabel': 'Select .ncsetting configuration',
+				'filters': {'NCSetting': ['ncsetting']}
+			}).then(onfulfilled => {
+				if (onfulfilled && onfulfilled.length > 0) {
+					let configurationTarget: ConfigurationTarget = ConfigurationTarget.Workspace;
+					if (selection == saveInUser) {
+						configurationTarget = ConfigurationTarget.Global;
+					}
+					let config = workspace.getConfiguration("ncproj");
+					ignoreNextConfigurationChange = true;
+					config.update("ncsetting-file-path", onfulfilled[0].fsPath, configurationTarget);
+					window.showWarningMessage('Please use the "Reload Window" action for changes in ' + onfulfilled[0].fsPath + ' to take effect.', ...["Reload Window"]).then((selection) => {
+						if (selection === "Reload Window") {
+							commands.executeCommand("workbench.action.reloadWindow");
+						}
+					});
+				}
+			});
+		}
+	});
 }
 
 export function activate(context: ExtensionContext) {
