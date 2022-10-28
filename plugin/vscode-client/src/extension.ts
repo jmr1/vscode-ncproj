@@ -19,7 +19,7 @@ limitations under the License.
 
 'use strict';
 
-import { workspace, Disposable, ExtensionContext, window, commands, RelativePattern } from 'vscode';
+import { workspace, Disposable, ExtensionContext, window, commands, RelativePattern, Uri } from 'vscode';
 import { LanguageClientOptions } from 'vscode-languageclient';
 import { LanguageClient, ServerOptions } from 'vscode-languageclient/node';
 import * as cp from "child_process";
@@ -124,7 +124,7 @@ function startListeningConfigurationChanges() {
 		const watcher = workspace.createFileSystemWatcher(new RelativePattern(dirpath, '*' + extension), true, false, true);
 
 		watcher.onDidChange(uri => {
-			if(uri.fsPath == path.normalize(ncsettingFilePath)) {
+			if(uri.fsPath == Uri.file(path.normalize(ncsettingFilePath)).fsPath) {
 				window.showWarningMessage('Please use the "Reload Window" action for changes in ' + uri.fsPath + ' to take effect.', ...["Reload Window"]).then((selection) => {
 					if (selection === "Reload Window") {
 						commands.executeCommand("workbench.action.reloadWindow");
