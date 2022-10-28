@@ -78,13 +78,19 @@
         "vscode-languageclient": "^7.0.0-next.12"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.40",
-        "@types/vscode": "1.53.0",
-        "vscode-test": "1.5.1",
-        "typescript": "^3.6.4"
+        "@types/vscode": "^1.71.0",
+        "@types/glob": "^7.2.0",
+        "@types/mocha": "^9.1.1",
+        "@types/node": "16.x",
+        "@typescript-eslint/eslint-plugin": "^5.31.0",
+        "@typescript-eslint/parser": "^5.31.0",
+        "eslint": "^8.20.0",
+        "glob": "^8.0.3",
+        "mocha": "^10.0.0",
+        "typescript": "^4.7.4",
+        "@vscode/test-electron": "^2.1.5"
     },
     "engines": {
-        "vscode": "^1.53.0"
+        "vscode": "^1.71.0"
     }
 }

@@ -19,10 +19,11 @@ limitations under the License.
 
 'use strict';
 
-import { workspace, Disposable, ExtensionContext, window, commands } from 'vscode';
+import { workspace, Disposable, ExtensionContext, window, commands, RelativePattern } from 'vscode';
 import { LanguageClientOptions } from 'vscode-languageclient';
 import { LanguageClient, ServerOptions } from 'vscode-languageclient/node';
 import * as cp from "child_process";
+import path = require('path');
 
 let langServer: LanguageClient;
 
@@ -109,6 +110,29 @@ function startListeningConfigurationChanges() {
 			}
 		}
 	});
+
+	let config = workspace.getConfiguration("ncproj");
+	let ncsettingFilePath = config.get<string>("ncsetting-file-path");
+	if(ncsettingFilePath)
+	{
+		const normalized = path.normalize(ncsettingFilePath);
+		const extension = path.extname(normalized);
+		const dirpath = path.dirname(normalized);
+
+		// watching for changes in a specific file does not seem to work therefore need to watch for file pattern and the fileter other changes files out: 
+		// https://stackoverflow.com/questions/73914581/file-system-watcher-doesnt-work-when-used-full-filename-as-filter
+		const watcher = workspace.createFileSystemWatcher(new RelativePattern(dirpath, '*' + extension), true, false, true);
+
+		watcher.onDidChange(uri => {
+			if(uri.fsPath == path.normalize(ncsettingFilePath)) {
+				window.showWarningMessage('Please use the "Reload Window" action for changes in ' + uri.fsPath + ' to take effect.', ...["Reload Window"]).then((selection) => {
+					if (selection === "Reload Window") {
+						commands.executeCommand("workbench.action.reloadWindow");
+					}
+				});
+			}
+		});
+	}
 }
 
 export function activate(context: ExtensionContext) {
