@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <iostream>
 #include <memory>
+#include <regex>
 #include <sstream>
 #include <thread>
 
@@ -101,6 +102,10 @@ bool JsonMessageHandler::parse(const std::string& json)
     {
         completionItem_resolve(d);
     }
+    else if (method == "textDocument/hover")
+    {
+        textDocument_hover(d);
+    }
     else if (method == "$/cancelRequest")
     {
         cancelRequest();
@@ -148,6 +153,7 @@ void JsonMessageHandler::initialize(int32_t id)
 
             capabilities.AddMember("textDocumentSync", textDocumentSync, a);
             capabilities.AddMember("completionProvider", completionProvider, a);
+            capabilities.AddMember("hoverProvider", true, a);
         }
 
         result.AddMember("capabilities", capabilities, a);
@@ -197,7 +203,7 @@ void JsonMessageHandler::textDocument_didChange(const rapidjson::Document& reque
     textDocument_publishDiagnostics(textDocument["uri"].GetString(), contentChanges[0]["text"].GetString());
 }
 
-void JsonMessageHandler::textDocument_completion(int32_t id)
+void JsonMessageHandler::fetch_gCodesDesc()
 {
     if (!mGCodes.get())
     {
@@ -224,7 +230,10 @@ void JsonMessageHandler::textDocument_completion(int32_t id)
         for (const auto& v : codes)
             mSuggestions.push_back("G" + v);
     }
+}
 
+void JsonMessageHandler::fetch_mCodesDesc()
+{
     if (!mMCodes.get())
     {
         const auto         fsRootPath = fs::path(mRootPath);
@@ -250,6 +259,12 @@ void JsonMessageHandler::textDocument_completion(int32_t id)
         for (const auto& v : codes)
             mSuggestions.push_back("M" + v);
     }
+}
+
+void JsonMessageHandler::textDocument_completion(int32_t id)
+{
+    fetch_gCodesDesc();
+    fetch_mCodesDesc();
 
     rapidjson::Document d;
     d.SetObject();
@@ -391,6 +406,125 @@ void JsonMessageHandler::completionItem_resolve(const rapidjson::Document& reque
     std::cout.flush();
 }
 
+void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
+{
+    const auto& params    = request["params"];
+    const auto& position  = params["position"];
+    const int   line      = position["line"].GetInt();
+    const int   character = position["character"].GetInt();
+
+    if (mContenLines.empty())
+    {
+        std::string       data;
+        std::stringstream ss(mContent);
+        while (std::getline(ss, data))
+        {
+            mContenLines.push_back(data);
+        }
+    }
+
+    rapidjson::Document d;
+    d.SetObject();
+    rapidjson::Document::AllocatorType& a = d.GetAllocator();
+
+    d.AddMember("jsonrpc", "2.0", a);
+    d.AddMember("id", request["id"].GetInt(), a);
+
+    rapidjson::Value result(rapidjson::kObjectType);
+    {
+        int         pos{};
+        int         from{};
+        int         to{};
+        std::string strLine = mContenLines[line];
+        std::smatch m;
+        std::regex  r("[GgMm]\\d+\\.?\\d?");
+        while (std::regex_search(strLine, m, r))
+        {
+            if (character >= pos + m.position() && character < static_cast<int>(pos + m.position() + m.str().size()))
+            {
+                from = pos + m.position();
+                to   = pos + m.position() + m.str().size();
+                break;
+            }
+            pos += m.position() + m.str().size();
+            strLine = m.suffix();
+        }
+
+        std::string contents = m.str();
+
+        rapidjson::Value data;
+        if (!contents.empty())
+        {
+            fetch_gCodesDesc();
+            fetch_mCodesDesc();
+
+            if (contents[0] == 'G' || contents[0] == 'g')
+            {
+                std::string code = contents.substr(1);
+                while (!code.empty() && code[0] == '0')
+                    code = code.substr(1);
+                auto it = mGCodes->getDesc().find(code);
+                if (it != mGCodes->getDesc().cend())
+                    contents = contents + ": " + it->second;
+                else
+                    contents.clear();
+            }
+            else if (contents[0] == 'M' || contents[0] == 'm')
+            {
+                std::string code = contents.substr(1);
+                while (!code.empty() && code[0] == '0')
+                    code = code.substr(1);
+                auto it = mMCodes->getDesc().find(code);
+                if (it != mMCodes->getDesc().cend())
+                    contents = contents + ": " + it->second;
+                else
+                    contents.clear();
+            }
+
+            data.SetString(contents.c_str(), static_cast<rapidjson::SizeType>(contents.size()), a);
+            result.AddMember("contents", data, a);
+
+            rapidjson::Value range(rapidjson::kObjectType);
+
+            rapidjson::Value start(rapidjson::kObjectType);
+            rapidjson::Value end(rapidjson::kObjectType);
+
+            start.AddMember("line", line, a);
+            start.AddMember("character", from, a);
+
+            end.AddMember("line", line, a);
+            end.AddMember("character", to, a);
+
+            range.AddMember("start", start, a);
+            range.AddMember("end", end, a);
+
+            result.AddMember("range", range, a);
+        }
+        else
+        {
+            result.SetNull();
+        }
+    }
+
+    d.AddMember("result", result, a);
+
+    rapidjson::StringBuffer                    stringBuffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+    d.Accept(writer);
+
+    std::string response{stringBuffer.GetString()};
+
+    if (mLogger)
+    {
+        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+                 << "[" << response << "]" << std::endl;
+        mLogger->flush();
+    }
+
+    std::cout << "Content-Length: " << response.size() << MSG_ENDL << MSG_ENDL << response;
+    std::cout.flush();
+}
+
 void JsonMessageHandler::cancelRequest()
 {
 }
@@ -432,6 +566,9 @@ void JsonMessageHandler::shutdown(int32_t id)
 
 void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri, const std::string& content)
 {
+    mContent = content;
+    mContenLines.clear();
+
     auto messages = mParser.parse(content);
 
     rapidjson::Document d;
