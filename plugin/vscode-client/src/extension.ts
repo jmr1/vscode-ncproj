@@ -147,7 +147,7 @@ function askNcsettingFilePath(askMessage: string) {
 			window.showOpenDialog({
 				'canSelectMany': false,
 				'openLabel': 'Select .ncsetting configuration',
-				'filters': {'NCSetting': ['ncsetting']}
+				'filters': {'NCSetting Files': ['ncsetting'], 'All Files': ['*']}
 			}).then(onfulfilled => {
 				if (onfulfilled && onfulfilled.length > 0) {
 					let configurationTarget: ConfigurationTarget = ConfigurationTarget.Workspace;
@@ -207,7 +207,7 @@ function checkNcsettingFilePathProperty() {
 	let config = workspace.getConfiguration("ncproj");
 	let ncsettingFilePath = config.get<string>("ncsetting.file.path");
 	if (!ncsettingFilePath) {
-		askWhenNoNcsettingSpecified("There is no user Control and Machine Tool configuration specified. Do you want to craete or select .ncsetting file?");
+		askWhenNoNcsettingSpecified("There is no user Control and Machine Tool configuration specified. Do you want to create or select .ncsetting file?");
 	}
 }
 
