@@ -27,9 +27,12 @@ import path = require('path');
 
 let langServer: LanguageClient;
 
+let cmtConfigRunning = false;
 const execShell = (cmd: string, options: cp.ExecOptions) =>
     new Promise<string>((resolve, reject) => {
+		cmtConfigRunning = true;
         cp.exec(cmd, options, (err, out) => {
+			cmtConfigRunning = false;
             if (err) {
 				console.log(err);
                 return reject(err);
@@ -118,6 +121,7 @@ function startListeningConfigurationChanges() {
 		watcher.onDidChange(async (uri) => {
 			if(uri.fsPath == Uri.file(path.normalize(ncsettingFilePath)).fsPath) {
 				await langServer.restart();
+				window.showInformationMessage("Changes to " + path.basename(uri.fsPath) + " have been loaded.");
 			}
 		});
 	}
@@ -224,7 +228,11 @@ function registerCmdNcsettingCreate(currentWorkingDirectory: string, options: { 
 		if (process.platform == "win32") {
 			executable = "cmtconfig.exe";
 			executable = currentWorkingDirectory + executable;
-			execShell(executable, options);
+			if(cmtConfigRunning) {
+				window.showInformationMessage("Configuration window is already running!");
+			} else {
+				execShell(executable, options);
+			}
 		} else {
 			executable = currentWorkingDirectory + executable;
 		}
