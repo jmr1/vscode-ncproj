@@ -15,22 +15,25 @@
     "categories": [],
     "activationEvents": [
         "onLanguage:ncproj",
-        "onCommand:ncproj.ncsettings"
+        "onCommand:ncproj.ncsettingCreate",
+        "onCommand:ncproj.ncsettingSelect"
     ],
     "contributes": {
         "configuration": {
-            "title": "NC Project VSCode Language Server Configuration",
+            "title": "NCProj",
             "type": "object",
             "properties": {
-                "ncproj.log-file-path": {
+                "ncproj.debug.log.path": {
                     "type": "string",
                     "default": "",
-                    "description": "Specifies the path to a log file. Requires a VSCode restart to take effect."
+                    "title": "Path to the log file",
+                    "description": "Specifies the path to the debug log file. Requires a VSCode restart to take effect."
                 },
-                "ncproj.ncsetting-file-path": {
+                "ncproj.ncsetting.file.path": {
                     "type": "string",
                     "default": "",
-                    "description": "Specifies the path to a .ncsetting file. Requires a VSCode restart to take effect."
+                    "title": "Path to the Control and Machine Tool configuration file",
+                    "description": "Specifies the path to the .ncsetting file. Requires a VSCode restart to take effect."
                 }
             }
         },
@@ -62,8 +65,12 @@
         "debuggers": [],
         "commands": [
             {
-                "command": "ncproj.ncsettings",
-                "title": "NC Project: Control and Machine Tool configuration"
+                "command": "ncproj.ncsettingCreate",
+                "title": "NC Project: Create Control and Machine Tool configuration"
+            },
+            {
+                "command": "ncproj.ncsettingSelect",
+                "title": "NC Project: Select Control and Machine Tool configuration"
             }
         ]
     },

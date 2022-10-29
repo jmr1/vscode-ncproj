@@ -63,10 +63,10 @@ async function startLangServerNCProj(context: ExtensionContext, executable: stri
 	let config = workspace.getConfiguration("ncproj");
 
 	let args : Array<string> = [];
-	let ncsettingFilePath = config.get<string>("ncsetting-file-path");
+	let ncsettingFilePath = config.get<string>("ncsetting.file.path");
 	if(ncsettingFilePath)
 		args.push("--ncsetting-path", ncsettingFilePath);
-	let logFilePath = config.get<string>("log-file-path");
+	let logFilePath = config.get<string>("debug.log.path");
 	if(logFilePath)
 		args.push("--log-path", logFilePath);
 
@@ -91,7 +91,7 @@ function startListeningConfigurationChanges() {
 			ignoreNextConfigurationChange = false;
 			return;
 		}
-		for (let s of ["ncproj.log-file-path", "ncproj.ncsetting-file-path"]) {
+		for (let s of ["ncproj.debug.log.path", "ncproj.ncsetting.file.path"]) {
 			if (event.affectsConfiguration(s)) {
 				window.showWarningMessage('Please use the "Reload Window" action for changes in ' + s + ' to take effect.', ...["Reload Window"]).then((selection) => {
 					if (selection === "Reload Window") {
@@ -104,7 +104,7 @@ function startListeningConfigurationChanges() {
 	});
 
 	let config = workspace.getConfiguration("ncproj");
-	let ncsettingFilePath = config.get<string>("ncsetting-file-path");
+	let ncsettingFilePath = config.get<string>("ncsetting.file.path");
 	if(ncsettingFilePath)
 	{
 		const normalized = path.normalize(ncsettingFilePath);
@@ -122,6 +122,21 @@ function startListeningConfigurationChanges() {
 		});
 	}
 }
+
+function askWhenNoNcsettingSpecified(askMessage: string) {
+	let createNcsetting: string = 'Create configuration';
+	let selectNcsetting: string = 'Select configuration';
+
+	window.showWarningMessage(askMessage, ...[createNcsetting, selectNcsetting, 'No']).then((selection) => {
+		if (selection == createNcsetting) {
+			commands.executeCommand('ncproj.ncsettingCreate');
+		}
+		if(selection == selectNcsetting) {
+			commands.executeCommand('ncproj.ncsettingSelect');
+		}
+	});
+}
+
 
 function askNcsettingFilePath(askMessage: string) {
 	let saveInUser: string = 'Yes (save in user settings)';
@@ -141,7 +156,7 @@ function askNcsettingFilePath(askMessage: string) {
 					}
 					let config = workspace.getConfiguration("ncproj");
 					ignoreNextConfigurationChange = true;
-					config.update("ncsetting-file-path", onfulfilled[0].fsPath, configurationTarget);
+					config.update("ncsetting.file.path", onfulfilled[0].fsPath, configurationTarget);
 					window.showWarningMessage('Please use the "Reload Window" action for setting ' + onfulfilled[0].fsPath + ' to take effect.', ...["Reload Window"]).then((selection) => {
 						if (selection === "Reload Window") {
 							commands.executeCommand("workbench.action.reloadWindow");
@@ -162,9 +177,18 @@ export function activate(context: ExtensionContext) {
 
 	const options = { cwd: currentWorkingDirectory };
 
+	startNclangsrv(currentWorkingDirectory, context);
+
+	registerCmdNcsettingCreate(currentWorkingDirectory, options, context);
+	registerCmdNcsettingSelect(context);
+
+	checkNcsettingFilePathProperty();
+}
+
+function startNclangsrv(currentWorkingDirectory: string, context: ExtensionContext) {
 	try {
 
-		let executable : string = "nclangsrv";
+		let executable: string = "nclangsrv";
 		if (process.platform == "win32") {
 			executable = "nclangsrv.exe";
 			executable = currentWorkingDirectory + executable;
@@ -177,10 +201,26 @@ export function activate(context: ExtensionContext) {
 	} finally {
 		startListeningConfigurationChanges();
 	}
+}
 
-	let disposable = commands.registerCommand('ncproj.ncsettings', () => {
+function checkNcsettingFilePathProperty() {
+	let config = workspace.getConfiguration("ncproj");
+	let ncsettingFilePath = config.get<string>("ncsetting.file.path");
+	if (!ncsettingFilePath) {
+		askWhenNoNcsettingSpecified("There is no user Control and Machine Tool configuration specified. Do you want to craete or select .ncsetting file?");
+	}
+}
 
-		let executable : string = "cmtconfig";
+function registerCmdNcsettingSelect(context: ExtensionContext) {
+	let disposable = commands.registerCommand('ncproj.ncsettingSelect', () => {
+		askNcsettingFilePath("Do you want to select .ncsetting file?");
+	});
+	context.subscriptions.push(disposable);
+}
+
+function registerCmdNcsettingCreate(currentWorkingDirectory: string, options: { cwd: string; }, context: ExtensionContext) {
+	let disposable = commands.registerCommand('ncproj.ncsettingCreate', () => {
+		let executable: string = "cmtconfig";
 		if (process.platform == "win32") {
 			executable = "cmtconfig.exe";
 			executable = currentWorkingDirectory + executable;
@@ -188,11 +228,8 @@ export function activate(context: ExtensionContext) {
 		} else {
 			executable = currentWorkingDirectory + executable;
 		}
-		askNcsettingFilePath("Do you want to select .ncsetting file?");
 	});
-
 	context.subscriptions.push(disposable);
-
 }
 
 export function deactivate(): Thenable<void> | undefined {
