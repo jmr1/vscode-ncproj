@@ -32,10 +32,8 @@ const execShell = (cmd: string, options: cp.ExecOptions) =>
         cp.exec(cmd, options, (err, out) => {
             if (err) {
 				console.log(err);
-				askNcsettingFilePath("Do you want to select .ncsetting file?");
                 return reject(err);
             }
-			askNcsettingFilePath("Do you want to select .ncsetting file?");
             return resolve(out);
         });
     });
@@ -60,7 +58,7 @@ function afterStartLangServer(executable: string) {
     // Register additional things (for instance, debugger).
 }
 
-function startLangServerNCProj(context: ExtensionContext, executable: string, cwd: string) {
+async function startLangServerNCProj(context: ExtensionContext, executable: string, cwd: string) {
 
 	let config = workspace.getConfiguration("ncproj");
 
@@ -78,16 +76,8 @@ function startLangServerNCProj(context: ExtensionContext, executable: string, cw
 		console.log(e);
 	});
 
-	langServer.onReady().then(()=> {
-		console.log(langServer.initializeResult);
-	}, (error) => {
-		console.log(error);
-	});
-
-	let disposable: Disposable = langServer.start();
+	await langServer.start();
 	afterStartLangServer(executable);
-	context.subscriptions.push(disposable);
-
 }
 
 
@@ -125,13 +115,9 @@ function startListeningConfigurationChanges() {
 		// https://stackoverflow.com/questions/73914581/file-system-watcher-doesnt-work-when-used-full-filename-as-filter
 		const watcher = workspace.createFileSystemWatcher(new RelativePattern(dirpath, '*' + extension), true, false, true);
 
-		watcher.onDidChange(uri => {
+		watcher.onDidChange(async (uri) => {
 			if(uri.fsPath == Uri.file(path.normalize(ncsettingFilePath)).fsPath) {
-				window.showWarningMessage('Please use the "Reload Window" action for changes in ' + uri.fsPath + ' to take effect.', ...["Reload Window"]).then((selection) => {
-					if (selection === "Reload Window") {
-						commands.executeCommand("workbench.action.reloadWindow");
-					}
-				});
+				await langServer.restart();
 			}
 		});
 	}
@@ -156,7 +142,7 @@ function askNcsettingFilePath(askMessage: string) {
 					let config = workspace.getConfiguration("ncproj");
 					ignoreNextConfigurationChange = true;
 					config.update("ncsetting-file-path", onfulfilled[0].fsPath, configurationTarget);
-					window.showWarningMessage('Please use the "Reload Window" action for changes in ' + onfulfilled[0].fsPath + ' to take effect.', ...["Reload Window"]).then((selection) => {
+					window.showWarningMessage('Please use the "Reload Window" action for setting ' + onfulfilled[0].fsPath + ' to take effect.', ...["Reload Window"]).then((selection) => {
 						if (selection === "Reload Window") {
 							commands.executeCommand("workbench.action.reloadWindow");
 						}
@@ -198,10 +184,11 @@ export function activate(context: ExtensionContext) {
 		if (process.platform == "win32") {
 			executable = "cmtconfig.exe";
 			executable = currentWorkingDirectory + executable;
+			execShell(executable, options);
 		} else {
 			executable = currentWorkingDirectory + executable;
 		}
-		execShell(executable, options);
+		askNcsettingFilePath("Do you want to select .ncsetting file?");
 	});
 
 	context.subscriptions.push(disposable);
