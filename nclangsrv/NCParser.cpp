@@ -198,7 +198,7 @@ std::vector<std::string> NCParser::parse(const std::string& code)
 
     bool evaluate_macro           = true;
     bool verify_code_groups       = false;
-    bool calculate_path           = false;
+    bool calculate_path           = true;
     bool ncsettings_code_analysis = true;
     bool zero_point_analysis      = true;
 
