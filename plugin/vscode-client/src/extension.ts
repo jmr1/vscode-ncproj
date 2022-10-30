@@ -19,13 +19,16 @@ limitations under the License.
 
 'use strict';
 
-import { workspace, Disposable, ExtensionContext, window, commands, RelativePattern, Uri, ConfigurationTarget } from 'vscode';
+import { workspace, ExtensionContext, window, commands, RelativePattern, Uri, ConfigurationTarget } from 'vscode';
 import { LanguageClientOptions } from 'vscode-languageclient';
 import { LanguageClient, ServerOptions } from 'vscode-languageclient/node';
 import * as cp from "child_process";
 import path = require('path');
 
 let langServer: LanguageClient;
+let currentWorkingDirectory: string;
+let exeSrvPath: string;
+let exeCmtconfigPath: string;
 
 let cmtConfigRunning = false;
 const execShell = (cmd: string, options: cp.ExecOptions) =>
@@ -61,7 +64,7 @@ function afterStartLangServer(executable: string) {
     // Register additional things (for instance, debugger).
 }
 
-async function startLangServerNCProj(context: ExtensionContext, executable: string, cwd: string) {
+async function startLangServerNCProj(executable: string, cwd: string) {
 
 	let config = workspace.getConfiguration("ncproj");
 
@@ -152,7 +155,7 @@ function askNcsettingFilePath(askMessage: string) {
 				'canSelectMany': false,
 				'openLabel': 'Select .ncsetting configuration',
 				'filters': {'NCSetting Files': ['ncsetting'], 'All Files': ['*']}
-			}).then(onfulfilled => {
+			}).then(async onfulfilled => {
 				if (onfulfilled && onfulfilled.length > 0) {
 					let configurationTarget: ConfigurationTarget = ConfigurationTarget.Workspace;
 					if (selection == saveInUser) {
@@ -173,35 +176,31 @@ function askNcsettingFilePath(askMessage: string) {
 }
 
 export function activate(context: ExtensionContext) {
+	setupPaths(context);
 
-	let currentWorkingDirectory = context.extensionPath + "/vscode-client/out/";
-	if (process.platform == "win32") {
-		currentWorkingDirectory = context.extensionPath + "\\vscode-client\\out\\";
-	}
+	startNclangsrv();
 
-	const options = { cwd: currentWorkingDirectory };
-
-	startNclangsrv(currentWorkingDirectory, context);
-
-	registerCmdNcsettingCreate(currentWorkingDirectory, options, context);
+	registerCmdNcsettingCreate(context);
 	registerCmdNcsettingSelect(context);
 
 	checkNcsettingFilePathProperty();
 }
 
-function startNclangsrv(currentWorkingDirectory: string, context: ExtensionContext) {
+function setupPaths(context: ExtensionContext) {
+	if (process.platform == "win32") {
+		currentWorkingDirectory = context.extensionPath + "\\vscode-client\\out\\";
+		exeSrvPath = currentWorkingDirectory + "nclangsrv.exe";
+		exeCmtconfigPath = currentWorkingDirectory + "cmtconfig.exe";
+	} else {
+		currentWorkingDirectory = context.extensionPath + "/vscode-client/out/";
+		exeSrvPath = currentWorkingDirectory + "nclangsrv";
+		exeCmtconfigPath = currentWorkingDirectory + "cmtconfig";
+	}
+}
+
+function startNclangsrv() {
 	try {
-
-		let executable: string = "nclangsrv";
-		if (process.platform == "win32") {
-			executable = "nclangsrv.exe";
-			executable = currentWorkingDirectory + executable;
-		} else {
-			executable = currentWorkingDirectory + executable;
-		}
-
-		startLangServerNCProj(context, executable, currentWorkingDirectory);
-
+		startLangServerNCProj(exeSrvPath, currentWorkingDirectory);
 	} finally {
 		startListeningConfigurationChanges();
 	}
@@ -222,21 +221,19 @@ function registerCmdNcsettingSelect(context: ExtensionContext) {
 	context.subscriptions.push(disposable);
 }
 
-function registerCmdNcsettingCreate(currentWorkingDirectory: string, options: { cwd: string; }, context: ExtensionContext) {
+function registerCmdNcsettingCreate(context: ExtensionContext) {
 	let disposable = commands.registerCommand('ncproj.ncsettingCreate', () => {
-		let executable: string = "cmtconfig";
 		if (process.platform == "win32") {
-			executable = "cmtconfig.exe";
-			executable = currentWorkingDirectory + executable;
-			if(cmtConfigRunning) {
-				window.showInformationMessage("Configuration window is already running!");
-			} else {
-				execShell(executable, options);
-			}
+			window.showInformationMessage("Not supported.");
+		}
+		if(cmtConfigRunning) {
+			window.showInformationMessage("Configuration window is already running!");
 		} else {
-			executable = currentWorkingDirectory + executable;
+			const options = { cwd: currentWorkingDirectory };
+			execShell(exeCmtconfigPath, options);
 		}
 	});
+
 	context.subscriptions.push(disposable);
 }
 
