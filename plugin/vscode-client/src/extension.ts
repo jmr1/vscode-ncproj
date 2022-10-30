@@ -223,8 +223,8 @@ function registerCmdNcsettingSelect(context: ExtensionContext) {
 
 function registerCmdNcsettingCreate(context: ExtensionContext) {
 	let disposable = commands.registerCommand('ncproj.ncsettingCreate', () => {
-		if (process.platform == "win32") {
-			window.showInformationMessage("Not supported.");
+		if (process.platform != "win32") {
+			window.showInformationMessage("Function not supported.");
 		}
 		if(cmtConfigRunning) {
 			window.showInformationMessage("Configuration window is already running!");
