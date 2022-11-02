@@ -45,9 +45,12 @@ bool WordGrammarReader::read()
         pt::ptree root;
         pt::read_json(mPath, root);
 
+        mWordGrammar.metric.clear();
+        mWordGrammar.imperial.clear();
         readGrammar(root, "metric", mWordGrammar.metric);
         readGrammar(root, "imperial", mWordGrammar.imperial);
 
+        mOperations.clear();
         for (const auto& o : root.get_child("operations"))
             mOperations.push_back(o.second.get_value<std::string>());
     }

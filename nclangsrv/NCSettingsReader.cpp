@@ -76,6 +76,8 @@ bool NCSettingsReader::read()
         }
 
         {
+            mMachinePointsData.tool_exchange_point.clear();
+            mMachinePointsData.machine_base_point.clear();
             const auto& mpd = root.get_child("machine_points_data");
             for (const auto& pt : mpd.get_child("tool_exchange_point"))
                 mMachinePointsData.tool_exchange_point.emplace(std::make_pair(
@@ -86,6 +88,7 @@ bool NCSettingsReader::read()
         }
 
         {
+            mKinematics.cartesian_system_axis.clear();
             const auto& k_pt = root.get_child("kinematics");
             for (const auto& pt : k_pt.get_child("cartesian_system_axis"))
             {

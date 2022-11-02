@@ -26,6 +26,8 @@ bool CodesReader::read()
         pt::ptree root;
         pt::read_json(mPath, root);
 
+        mData.clear();
+        mCodes.clear();
         for (const auto& pt : root.get_child("descriptions"))
         {
             mData.emplace(std::make_pair(pt.first, pt.second.get_value<std::string>()));

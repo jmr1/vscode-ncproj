@@ -26,6 +26,7 @@ bool CodeGroupsReader::read()
         pt::ptree root;
         pt::read_json(mPath, root);
 
+        mCodeGroups.clear();
         for (const auto& u : root.get_child("groups"))
         {
             for (const auto& group : u.second)
