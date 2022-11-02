@@ -19,16 +19,18 @@ limitations under the License.
 
 'use strict';
 
-import { workspace, ExtensionContext, window, commands, RelativePattern, Uri, ConfigurationTarget } from 'vscode';
+import { workspace, ExtensionContext, window, commands, RelativePattern, Uri, ConfigurationTarget, StatusBarItem, StatusBarAlignment } from 'vscode';
 import { LanguageClientOptions } from 'vscode-languageclient';
 import { LanguageClient, ServerOptions } from 'vscode-languageclient/node';
 import * as cp from "child_process";
 import path = require('path');
+import fs = require('fs');
 
 let langServer: LanguageClient;
 let currentWorkingDirectory: string;
 let exeSrvPath: string;
 let exeCmtconfigPath: string;
+let statusBarItem: StatusBarItem;
 
 let cmtConfigRunning = false;
 const execShell = (cmd: string, options: cp.ExecOptions) =>
@@ -70,11 +72,17 @@ async function startLangServerNCProj(executable: string, cwd: string) {
 
 	let args : Array<string> = [];
 	let ncsettingFilePath = config.get<string>("ncsetting.file.path");
-	if(ncsettingFilePath)
+	if(ncsettingFilePath) {
 		args.push("--ncsetting-path", ncsettingFilePath);
+	}
 	let logFilePath = config.get<string>("debug.log.path");
-	if(logFilePath)
+	if(logFilePath) {
 		args.push("--log-path", logFilePath);
+	}
+
+	if(ncsettingFilePath) {
+		setStatusText(ncsettingFilePath);
+	}
 
 	langServer = startLangServerIO(executable, args, cwd, ["ncproj"]);
 
@@ -86,6 +94,37 @@ async function startLangServerNCProj(executable: string, cwd: string) {
 	afterStartLangServer(executable);
 }
 
+function setStatusText(ncsettingFilePath: string) {
+	fs.readFile(ncsettingFilePath, (err, data) => {
+		let statusText: string;
+		if (err) {
+			console.log(err);
+			statusText = stem(ncsettingFilePath);
+		} else {
+			try {
+				const obj = JSON.parse(data.toString());
+				if (obj && obj.machine_tool_id && obj.machine_tool_id.trim()) {
+					statusText = obj.machine_tool_id.trim();
+				} else {
+					statusText = stem(ncsettingFilePath);
+				}
+			} catch (error) {
+				console.log(error);
+				statusText = stem(ncsettingFilePath);
+			}
+		}
+
+		statusBarItem.text = statusText;
+		statusBarItem.show();
+	});
+}
+
+function stem(ncsettingFilePath: string) {
+	const normalized = path.normalize(ncsettingFilePath);
+	const filename = path.basename(normalized);
+	const ext = path.extname(normalized);
+	return filename.replace(ext, '');
+}
 
 // i.e.: we can ignore changes when we know we'll be doing them prior to starting the language server.
 let ignoreNextConfigurationChange: boolean = false;
@@ -122,8 +161,10 @@ function startListeningConfigurationChanges() {
 		const watcher = workspace.createFileSystemWatcher(new RelativePattern(dirpath, '*' + extension), true, false, true);
 
 		watcher.onDidChange(async (uri) => {
-			if(uri.fsPath == Uri.file(path.normalize(ncsettingFilePath)).fsPath) {
+			const normalized = path.normalize(ncsettingFilePath);
+			if(uri.fsPath == Uri.file(normalized).fsPath) {
 				await langServer.restart();
+				setStatusText(normalized);
 				window.showInformationMessage("Changes to " + path.basename(uri.fsPath) + " have been loaded.");
 			}
 		});
@@ -178,12 +219,21 @@ function askNcsettingFilePath(askMessage: string) {
 export function activate(context: ExtensionContext) {
 	setupPaths(context);
 
+	createStatusBarItem(context);
+
 	startNclangsrv();
 
 	registerCmdNcsettingCreate(context);
 	registerCmdNcsettingSelect(context);
 
 	checkNcsettingFilePathProperty();
+}
+
+function createStatusBarItem(context: ExtensionContext) {
+	statusBarItem = window.createStatusBarItem(StatusBarAlignment.Right, 100);
+	statusBarItem.text = 'default';
+	statusBarItem.show();
+	context.subscriptions.push(statusBarItem);
 }
 
 function setupPaths(context: ExtensionContext) {
