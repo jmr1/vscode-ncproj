@@ -19,7 +19,7 @@ limitations under the License.
 
 'use strict';
 
-import { workspace, ExtensionContext, window, commands, RelativePattern, Uri, ConfigurationTarget, StatusBarItem, StatusBarAlignment } from 'vscode';
+import { workspace, ExtensionContext, window, commands, RelativePattern, Uri, ConfigurationTarget, StatusBarItem, StatusBarAlignment, OutputChannel } from 'vscode';
 import { LanguageClientOptions } from 'vscode-languageclient';
 import { LanguageClient, ServerOptions } from 'vscode-languageclient/node';
 import * as cp from "child_process";
@@ -31,6 +31,7 @@ let currentWorkingDirectory: string;
 let exeSrvPath: string;
 let exeCmtconfigPath: string;
 let statusBarItem: StatusBarItem;
+let ncprojChannel: OutputChannel;
 
 let cmtConfigRunning = false;
 const execShell = (cmd: string, options: cp.ExecOptions) =>
@@ -90,7 +91,14 @@ async function startLangServerNCProj(executable: string, cwd: string) {
 		console.log(e);
 	});
 
-	await langServer.start();
+	await langServer.start().catch(error => {
+		console.log(error);
+		ncprojChannel.appendLine("Unable to start Language Server!");
+		ncprojChannel.appendLine("Installation of Microsoft Visual C++ Redistributable packages for Visual Studio 2019 may be required: https://aka.ms/vs/17/release/vc_redist.x64.exe");
+		ncprojChannel.appendLine("To investigate more navigate to: \"" + currentWorkingDirectory + "\" and attempt to execute: \"" + exeSrvPath.substring(currentWorkingDirectory.length) + "\"");
+		ncprojChannel.show(true);
+	});
+
 	afterStartLangServer(executable);
 }
 
@@ -217,6 +225,8 @@ function askNcsettingFilePath(askMessage: string) {
 }
 
 export function activate(context: ExtensionContext) {
+	ncprojChannel = window.createOutputChannel("NC Project");
+
 	setupPaths(context);
 
 	createStatusBarItem(context);
