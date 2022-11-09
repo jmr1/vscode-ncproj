@@ -27,7 +27,7 @@ class PARSER_API CodeGroupsVerifier
 public:
     void operator()(const macro_map& macro_values, const code_groups_map& gcode_groups,
                     const code_groups_map& mcode_groups, int line, const std::vector<AttributeVariant>& value,
-                    ELanguage language);
+                    ELanguage language, bool report_missing = false);
 };
 
 } // namespace fanuc

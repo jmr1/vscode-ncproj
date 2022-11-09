@@ -50,8 +50,9 @@ void CodeGroupsVerifierTest::verify_throw(const fanuc::macro_map&       macro_va
                                           const fanuc::code_groups_map& mcode_groups, int line,
                                           std::vector<fanuc::AttributeVariant>&& data, std::string&& msg)
 {
-    EXPECT_THROW(fanuc::CodeGroupsVerifier()(macro_values, gcode_groups, mcode_groups, line, data, {ELanguage::Polish}),
-                 fanuc::code_groups_exception)
+    EXPECT_THROW(
+        fanuc::CodeGroupsVerifier()(macro_values, gcode_groups, mcode_groups, line, data, {ELanguage::Polish}, true),
+        fanuc::code_groups_exception)
         << msg;
 }
 
@@ -61,7 +62,7 @@ void CodeGroupsVerifierTest::verify_no_throw(const fanuc::macro_map&       macro
                                              std::vector<fanuc::AttributeVariant>&& data, std::string&& msg)
 {
     EXPECT_NO_THROW(
-        fanuc::CodeGroupsVerifier()(macro_values, gcode_groups, mcode_groups, line, data, {ELanguage::Polish}))
+        fanuc::CodeGroupsVerifier()(macro_values, gcode_groups, mcode_groups, line, data, {ELanguage::Polish}, true))
         << msg;
 }
 

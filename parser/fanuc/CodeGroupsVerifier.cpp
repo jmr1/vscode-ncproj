@@ -15,12 +15,14 @@ namespace fanuc {
 class CodeGroupsVisitor : public boost::static_visitor<>
 {
 public:
-    CodeGroupsVisitor(const std::string& code, const code_groups_map& codes, const macro_map& macro_values, int line, ELanguage language)
+    CodeGroupsVisitor(const std::string& code, const code_groups_map& codes, const macro_map& macro_values, int line,
+                      ELanguage language, bool report_missing)
         : code(code)
         , codes_map(codes)
         , macro_values_map(macro_values)
         , line(line)
         , language(language)
+        , report_missing(report_missing)
     {
     }
 
@@ -62,10 +64,17 @@ public:
         auto itor = codes_map.find(cgv);
         if (itor == std::end(codes_map))
         {
-            std::string tmp(code + std::to_string(cgv.code));
-            if (cgv.rest != 0)
-                tmp += "." + std::to_string(cgv.rest);
-            throw code_groups_exception(make_message2(MessageName::MissingInCodeGroups, language, tmp));
+            if (report_missing)
+            {
+                std::string tmp(code + std::to_string(cgv.code));
+                if (cgv.rest != 0)
+                    tmp += "." + std::to_string(cgv.rest);
+                throw code_groups_exception(make_message2(MessageName::MissingInCodeGroups, language, tmp));
+            }
+            else
+            {
+                return;
+            }
         }
 
         for (const auto& gr : itor->second)
@@ -100,16 +109,18 @@ private:
     code_occurences_map    occurences;
     const int              line{};
     const ELanguage        language;
+    const bool             report_missing;
 };
 
 void CodeGroupsVerifier::operator()(const macro_map& macro_values, const code_groups_map& gcode_groups,
                                     const code_groups_map& mcode_groups, int line,
-                                    const std::vector<AttributeVariant>& value, ELanguage language)
+                                    const std::vector<AttributeVariant>& value, ELanguage language,
+                                    bool report_missing /*= false*/)
 {
-    CodeGroupsVisitor gcode_groups_visitor("G", gcode_groups, macro_values, line, language);
+    CodeGroupsVisitor gcode_groups_visitor("G", gcode_groups, macro_values, line, language, report_missing);
     for (size_t x = 0; x < value.size(); ++x)
         boost::apply_visitor(gcode_groups_visitor, value[x]);
-    CodeGroupsVisitor mcode_groups_visitor("M", mcode_groups, macro_values, line, language);
+    CodeGroupsVisitor mcode_groups_visitor("M", mcode_groups, macro_values, line, language, report_missing);
     for (size_t x = 0; x < value.size(); ++x)
         boost::apply_visitor(mcode_groups_visitor, value[x]);
 }
