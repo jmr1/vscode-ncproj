@@ -462,7 +462,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
             if (contents[0] == 'G' || contents[0] == 'g')
             {
                 std::string code = contents.substr(1);
-                while (!code.empty() && code[0] == '0')
+                while (!code.empty() && code.size() > 1 && code[0] == '0')
                     code = code.substr(1);
                 auto it = mGCodes->getDesc().find(code);
                 if (it != mGCodes->getDesc().cend())
@@ -473,7 +473,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
             else if (contents[0] == 'M' || contents[0] == 'm')
             {
                 std::string code = contents.substr(1);
-                while (!code.empty() && code[0] == '0')
+                while (!code.empty() && code.size() > 1 && code[0] == '0')
                     code = code.substr(1);
                 auto it = mMCodes->getDesc().find(code);
                 if (it != mMCodes->getDesc().cend())
