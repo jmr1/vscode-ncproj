@@ -60,3 +60,9 @@ packages
 
 #cmake
 build/
+
+# VS Code
+vscode-client/out
+node_modules
+.vscode-dev
+package-lock.json

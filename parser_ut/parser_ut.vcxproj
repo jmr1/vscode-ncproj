@@ -40,10 +40,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)plugin\vscode-client\out\</OutDir>
+    <OutDir>$(SolutionDir)vscode-client\out\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)plugin\vscode-client\out\</OutDir>
+    <OutDir>$(SolutionDir)vscode-client\out\</OutDir>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="fanuc\AllAttributesParserTest.cpp" />
