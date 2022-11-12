@@ -1,6 +1,6 @@
-FROM alpine:3.12
+FROM node:lts-alpine3.16
 
-WORKDIR /usr/app/build
+WORKDIR /usr/app
 
 RUN apk add g++
 RUN apk add make
@@ -11,4 +11,6 @@ RUN apk add rapidjson-dev
 RUN apk add boost-dev
 RUN apk add gtest-dev
 
-CMD ["cmake", ".."]
+RUN npm install -g vsce
+
+CMD ["pwd"]
