@@ -1,6 +1,7 @@
 .git/**
 .vs/**
 .vscode/**
+build/**
 cmtconfig/**
 conf/**
 nclangsrv/**
