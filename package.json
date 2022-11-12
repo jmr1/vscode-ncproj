@@ -1,18 +1,19 @@
 {
     "name": "ncproj",
     "displayName": "NC Project",
-    "description": "NC Project is an integrated programming environment for text files dedicated to numerically controlled machine tools, the syntax of which is based on G-codes.",
+    "description": "Develop and validate CNC programs.",
     "author": "Janusz Rupar, Marcin Cieślik",
     "homepage": "https://github.com/jmr1/vscode-ncproj/blob/main/README.md",
     "repository": {
         "type": "git",
-        "url": "https://github.com/jmr1/vscode-ncproj.git"
+        "url": "https://github.com/jmr1/vscode-ncproj"
     },
-    "license": "Apache 2.0",
+    "license": "SEE LICENSE IN LICENSE",
     "version": "0.0.1",
     "icon": "images/icon.png",
     "publisher": "jrupar-mcieslik",
-    "categories": [],
+    "categories": ["Programming Languages", "Snippets", "Linters", "Debuggers", "Other"],
+    "keywords": ["cnc", "Fanuc", "gcode", "g-code", "nc"],
     "activationEvents": [
         "onLanguage:ncproj",
         "onCommand:ncproj.ncsettingCreate",

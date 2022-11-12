@@ -4,6 +4,7 @@
 build/**
 cmtconfig/**
 conf/**
+images/*.gif
 nclangsrv/**
 packages/**
 parser/**
