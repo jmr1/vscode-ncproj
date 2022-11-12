@@ -121,8 +121,8 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_DepthIncremental)
     for (const auto drill_gmode :
          {EDrillGmode::G81, EDrillGmode::G82, EDrillGmode::G85, EDrillGmode::G86, EDrillGmode::G88, EDrillGmode::G89})
     {
-        for (const auto drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(27., 13.)),
-                                              std::make_pair(EDrillGreturnMode::G99, std::make_pair(20., 13.))})
+        for (const auto& drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(27., 13.)),
+                                               std::make_pair(EDrillGreturnMode::G99, std::make_pair(20., 13.))})
         {
             for (auto& f : func_vec)
             {
@@ -137,8 +137,8 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_DepthIncremental)
 
     for (const auto drill_gmode : {EDrillGmode::G74, EDrillGmode::G84})
     {
-        for (const auto drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(40., 14.)),
-                                              std::make_pair(EDrillGreturnMode::G99, std::make_pair(40., 7.))})
+        for (const auto& drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(40., 14.)),
+                                               std::make_pair(EDrillGreturnMode::G99, std::make_pair(40., 7.))})
         {
             for (auto& f : func_vec)
             {
@@ -166,8 +166,8 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_Absolute)
     for (const auto drill_gmode :
          {EDrillGmode::G81, EDrillGmode::G82, EDrillGmode::G85, EDrillGmode::G86, EDrillGmode::G88, EDrillGmode::G89})
     {
-        for (const auto drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(1., 13.)),
-                                              std::make_pair(EDrillGreturnMode::G99, std::make_pair(1., 6.))})
+        for (const auto& drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(1., 13.)),
+                                               std::make_pair(EDrillGreturnMode::G99, std::make_pair(1., 6.))})
         {
             for (auto& f : func_vec)
             {
@@ -182,8 +182,8 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_Absolute)
 
     for (const auto drill_gmode : {EDrillGmode::G74, EDrillGmode::G84})
     {
-        for (const auto drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(2., 14.)),
-                                              std::make_pair(EDrillGreturnMode::G99, std::make_pair(2., 7.))})
+        for (const auto& drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(2., 14.)),
+                                               std::make_pair(EDrillGreturnMode::G99, std::make_pair(2., 7.))})
         {
             for (auto& f : func_vec)
             {
@@ -212,8 +212,8 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_Incremental)
     for (const auto drill_gmode :
          {EDrillGmode::G81, EDrillGmode::G82, EDrillGmode::G85, EDrillGmode::G86, EDrillGmode::G88, EDrillGmode::G89})
     {
-        for (const auto drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(6., 48.)),
-                                              std::make_pair(EDrillGreturnMode::G99, std::make_pair(6., 27.))})
+        for (const auto& drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(6., 48.)),
+                                               std::make_pair(EDrillGreturnMode::G99, std::make_pair(6., 27.))})
         {
             for (auto& f : func_vec)
             {
@@ -227,8 +227,8 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_Incremental)
 
     for (const auto drill_gmode : {EDrillGmode::G74, EDrillGmode::G84})
     {
-        for (const auto drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(12., 42.)),
-                                              std::make_pair(EDrillGreturnMode::G99, std::make_pair(12., 0.))})
+        for (const auto& drill_greturn_mode : {std::make_pair(EDrillGreturnMode::G98, std::make_pair(12., 42.)),
+                                               std::make_pair(EDrillGreturnMode::G99, std::make_pair(12., 0.))})
         {
             for (auto& f : func_vec)
             {
@@ -254,7 +254,7 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_QParam_DepthIncremental)
         static_cast<fn*>(&fanuc::PathCalculator::DrillCyclePath_G19),
     };
 
-    for (const auto data : {
+    for (const auto& data : {
              std::make_tuple(EDrillGmode::G87, std::make_pair(EDrillGreturnMode::G98, std::make_pair(1., 33.)),
                              std::make_pair(EDrillGreturnMode::G99, std::make_pair(1., 33.))),
              std::make_tuple(EDrillGmode::G76, std::make_pair(EDrillGreturnMode::G98, std::make_pair(20., 44.)),
@@ -266,7 +266,7 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_QParam_DepthIncremental)
          })
     {
         auto& [drill_gmode, drill_greturn_mode98, drill_greturn_mode99] = data;
-        for (const auto drill_greturn_mode : {drill_greturn_mode98, drill_greturn_mode99})
+        for (const auto& drill_greturn_mode : {drill_greturn_mode98, drill_greturn_mode99})
         {
             for (auto& f : func_vec)
             {
@@ -293,7 +293,7 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_QParam_Absolute)
         static_cast<fn*>(&fanuc::PathCalculator::DrillCyclePath_G19),
     };
 
-    for (const auto data : {
+    for (const auto& data : {
              std::make_tuple(EDrillGmode::G87, std::make_pair(EDrillGreturnMode::G98, std::make_pair(1., 33.)),
                              std::make_pair(EDrillGreturnMode::G99, std::make_pair(1., 33.))),
              std::make_tuple(EDrillGmode::G76, std::make_pair(EDrillGreturnMode::G98, std::make_pair(1., 23.)),
@@ -305,7 +305,7 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_QParam_Absolute)
          })
     {
         auto& [drill_gmode, drill_greturn_mode98, drill_greturn_mode99] = data;
-        for (const auto drill_greturn_mode : {drill_greturn_mode98, drill_greturn_mode99})
+        for (const auto& drill_greturn_mode : {drill_greturn_mode98, drill_greturn_mode99})
         {
             for (auto& f : func_vec)
             {
@@ -331,7 +331,7 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_QParam_Incremental)
         static_cast<fn*>(&fanuc::PathCalculator::DrillCyclePath_G19),
     };
 
-    for (const auto data : {
+    for (const auto& data : {
              std::make_tuple(EDrillGmode::G87,
                              std::make_pair(EDrillGreturnMode::G98, std::make_pair(6., 64.8102496759066)),
                              std::make_pair(EDrillGreturnMode::G99, std::make_pair(6., 64.8102496759066))),
@@ -344,7 +344,7 @@ TEST_F(PathCalculatorTest, Drill_CyclePath_QParam_Incremental)
          })
     {
         auto& [drill_gmode, drill_greturn_mode98, drill_greturn_mode99] = data;
-        for (const auto drill_greturn_mode : {drill_greturn_mode98, drill_greturn_mode99})
+        for (const auto& drill_greturn_mode : {drill_greturn_mode98, drill_greturn_mode99})
         {
             for (auto& f : func_vec)
             {
