@@ -47,7 +47,7 @@ Please visit [GitHub Issues](https://github.com/jmr1/vscode-ncproj/issues) page 
 
 ### Extension does not seem to work
 
-Installation of Microsoft Visual C++ Redistributable packages for Visual Studio 2019 may be required: https://aka.ms/vs/17/release/vc_redist.x64.exe
+Installation of Microsoft Visual C++ Redistributable packages for Visual Studio 2019 may be required: <https://aka.ms/vs/17/release/vc_redist.x64.exe>
 
 #### Further troubleshooting
 
