@@ -14,7 +14,7 @@
 			"patterns": [
 				{
 					"name": "keyword.string.ncproj",
-					"match": "M|G|P|T|S|F|L|R|H"
+					"match": "SIN|COS|TAN|ATAN|SQRT|ABS|ROUND|FIX|FUP|OR|XOR|AND|BIN|BCD|OR|XOR|AND|IF|WHILE|DO|END|EQ|NE|GT|GE|LT|LE|M|G|P|T|S|F|L|R|H"
 				},
 				{
 					"name": "string.xcode.ncproj",
