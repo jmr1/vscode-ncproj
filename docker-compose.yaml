@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+
+  plugin:
+    image: alpine-ncproj
+    container_name: alpine-ncproj
+    volumes:
+      - ./:/usr/app
+    build:
+      context: ./
+    working_dir: /usr/app/build
+    environment:
+      - MSYS_NO_PATHCONV=1
+    command: sh -c "cmake .. && make -j && make test && cd .. && npm install && npm run compile && vsce package --target alpine-x64"
