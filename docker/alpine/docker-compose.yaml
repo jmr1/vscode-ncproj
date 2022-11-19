@@ -11,9 +11,10 @@ services:
     container_name: alpine-ncproj
     volumes:
       - build_vol:/usr/app
-      - ./out:/usr/app/out
+      - ../../out:/usr/app/out
     build:
-      context: ./
+      context: ../../
+      dockerfile: ./docker/alpine/Dockerfile
     working_dir: /usr/app/build
     environment:
       - MSYS_NO_PATHCONV=1
