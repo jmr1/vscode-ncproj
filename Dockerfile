@@ -13,4 +13,6 @@ RUN apk add gtest-dev
 
 RUN npm install -g vsce
 
+COPY . .
+
 CMD ["pwd"]
