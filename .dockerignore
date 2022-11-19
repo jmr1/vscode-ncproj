@@ -1,4 +1,5 @@
 build
+docker
 vscode-client/out
 out
 node_modules
