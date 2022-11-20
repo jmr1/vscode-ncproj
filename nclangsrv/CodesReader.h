@@ -14,7 +14,9 @@ public:
 
     bool read();
 
-    const std::map<std::string, std::string>& getDesc() const
+    using TitleDescPair = std::pair<std::string, std::string>;
+
+    const std::map<std::string, TitleDescPair>& getDesc() const
     {
         return mData;
     }
@@ -24,10 +26,10 @@ public:
     }
 
 private:
-    std::string                        mPath;
-    std::map<std::string, std::string> mData;
-    std::vector<std::string>           mCodes;
-    bool                               mRead{};
+    std::string                          mPath;
+    std::map<std::string, TitleDescPair> mData;
+    std::vector<std::string>             mCodes;
+    bool                                 mRead{};
 };
 
 } // namespace nclangsrv

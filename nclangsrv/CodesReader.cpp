@@ -30,7 +30,8 @@ bool CodesReader::read()
         mCodes.clear();
         for (const auto& pt : root.get_child("descriptions"))
         {
-            mData.emplace(std::make_pair(pt.first, pt.second.get_value<std::string>()));
+            for (const auto& pt2 : root.get_child(pt::ptree::path_type("descriptions/" + pt.first, '/')))
+                mData.emplace(std::make_pair(pt.first, std::make_pair(pt2.first, pt2.second.get_value<std::string>())));
             mCodes.emplace_back(pt.first);
         }
     }

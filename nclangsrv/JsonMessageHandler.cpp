@@ -348,39 +348,45 @@ void JsonMessageHandler::completionItem_resolve(const rapidjson::Document& reque
                 result.AddMember("data", value, a);
             }
 
+            std::string       desc;
+            std::string       title;
+            const std::string label(params["label"].GetString(), params["label"].GetStringLength());
+            if (!label.empty())
+            {
+                if (label[0] == 'G' || label[0] == 'g')
+                {
+                    auto it = mGCodes->getDesc().find(label.substr(1));
+                    if (it != mGCodes->getDesc().cend())
+                    {
+                        title = it->second.first;
+                        desc  = it->second.second;
+                    }
+                }
+                else if (label[0] == 'M' || label[0] == 'm')
+                {
+                    auto it = mMCodes->getDesc().find(label.substr(1));
+                    if (it != mMCodes->getDesc().cend())
+                    {
+                        title = it->second.first;
+                        desc  = it->second.second;
+                    }
+                }
+            }
+
             {
                 rapidjson::Value data;
-                data = "Details";
+                if (!title.empty())
+                {
+                    data.SetString(title.c_str(), static_cast<rapidjson::SizeType>(title.size()), a);
+                }
                 result.AddMember("detail", data, a);
             }
 
             {
-                std::string       desc;
-                const std::string label(params["label"].GetString(), params["label"].GetStringLength());
-                if (!label.empty())
-                {
-                    if (label[0] == 'G' || label[0] == 'g')
-                    {
-                        auto it = mGCodes->getDesc().find(label.substr(1));
-                        if (it != mGCodes->getDesc().cend())
-                            desc = it->second;
-                    }
-                    else if (label[0] == 'M' || label[0] == 'm')
-                    {
-                        auto it = mMCodes->getDesc().find(label.substr(1));
-                        if (it != mMCodes->getDesc().cend())
-                            desc = it->second;
-                    }
-                }
-
                 rapidjson::Value data;
                 if (!desc.empty())
                 {
                     data.SetString(desc.c_str(), static_cast<rapidjson::SizeType>(desc.size()), a);
-                }
-                else
-                {
-                    data = "N/A";
                 }
                 result.AddMember("documentation", data, a);
             }
@@ -466,7 +472,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                     code = code.substr(1);
                 auto it = mGCodes->getDesc().find(code);
                 if (it != mGCodes->getDesc().cend())
-                    contents = contents + ": " + it->second;
+                    contents = contents + ": " + it->second.first;
                 else
                     contents.clear();
             }
@@ -477,7 +483,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                     code = code.substr(1);
                 auto it = mMCodes->getDesc().find(code);
                 if (it != mMCodes->getDesc().cend())
-                    contents = contents + ": " + it->second;
+                    contents = contents + ": " + it->second.first;
                 else
                     contents.clear();
             }
