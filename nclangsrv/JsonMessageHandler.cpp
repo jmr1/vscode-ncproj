@@ -535,32 +535,78 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
         }
         else if (!mMacroMap.empty())
         {
-            size_t     from{};
-            size_t     to{};
-            std::regex r("#\\d+");
+            size_t from{};
+            size_t to{};
 
-            std::string contents = searchPattern(r, mContentLines[line], character, from, to);
-
-            if (!contents.empty())
+            std::regex  rGM("[GgMm]#\\d+");
+            std::string contents = searchPattern(rGM, mContentLines[line], character, from, to);
+            if (!contents.empty() && contents.size() > 2)
             {
-                std::string code = extractCode(contents.substr(1));
+                std::string code = extractCode(contents.substr(2));
 
                 auto macroId = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
 
-                auto it = mMacroMap.lower_bound({macroId, line});
-                if (it != mMacroMap.cend() && it->first.id == macroId)
-                    contents = contents + " = " + parser::to_string_trunc(it->second);
-                else
-                    contents.clear();
+                auto itm = mMacroMap.lower_bound({macroId, line});
+                if (itm != mMacroMap.cend() && itm->first.id == macroId)
+                {
+                    fetch_gCodesDesc();
+                    fetch_mCodesDesc();
 
-                if (!contents.empty())
-                    hoverMakeResult(contents, line, from, to, result, a);
+                    auto gmcode = parser::to_string_trunc(itm->second);
+                    if (contents[0] == 'G' || contents[0] == 'g')
+                    {
+                        auto it = mGCodes->getDesc().find(gmcode);
+                        if (it != mGCodes->getDesc().cend())
+                            contents = contents + " (G" + gmcode + "): " + it->second.first;
+                        else
+                            contents.clear();
+                    }
+                    else if (contents[0] == 'M' || contents[0] == 'm')
+                    {
+                        auto it = mMCodes->getDesc().find(gmcode);
+                        if (it != mMCodes->getDesc().cend())
+                            contents = contents + " (M" + gmcode + "): " + it->second.first;
+                        else
+                            contents.clear();
+                    }
+
+                    if (!contents.empty())
+                        hoverMakeResult(contents, line, from, to, result, a);
+                    else
+                        result.SetNull();
+                }
                 else
-                    result.SetNull();
+                {
+                    contents.clear();
+                }
             }
             else
             {
-                result.SetNull();
+                std::regex rm("#\\d+");
+
+                std::string contents = searchPattern(rm, mContentLines[line], character, from, to);
+
+                if (!contents.empty())
+                {
+                    std::string code = extractCode(contents.substr(1));
+
+                    auto macroId = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
+
+                    auto it = mMacroMap.lower_bound({macroId, line});
+                    if (it != mMacroMap.cend() && it->first.id == macroId)
+                        contents = contents + " = " + parser::to_string_trunc(it->second);
+                    else
+                        contents.clear();
+
+                    if (!contents.empty())
+                        hoverMakeResult(contents, line, from, to, result, a);
+                    else
+                        result.SetNull();
+                }
+                else
+                {
+                    result.SetNull();
+                }
             }
         }
         else
