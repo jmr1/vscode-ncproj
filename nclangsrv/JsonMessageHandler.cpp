@@ -94,6 +94,10 @@ bool JsonMessageHandler::parse(const std::string& json)
     {
         textDocument_didChange(d);
     }
+    else if (method == "textDocument/didClose")
+    {
+        textDocument_didClose(d);
+    }
     else if (method == "textDocument/completion")
     {
         textDocument_completion(id);
@@ -201,6 +205,14 @@ void JsonMessageHandler::textDocument_didChange(const rapidjson::Document& reque
     const auto& contentChanges = params["contentChanges"];
 
     textDocument_publishDiagnostics(textDocument["uri"].GetString(), contentChanges[0]["text"].GetString());
+}
+
+void JsonMessageHandler::textDocument_didClose(const rapidjson::Document& request)
+{
+    const auto& params       = request["params"];
+    const auto& textDocument = params["textDocument"];
+
+    mFileContexts.erase(textDocument["uri"].GetString());
 }
 
 void JsonMessageHandler::fetch_gCodesDesc()
@@ -414,19 +426,38 @@ void JsonMessageHandler::completionItem_resolve(const rapidjson::Document& reque
 
 void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 {
-    const auto& params    = request["params"];
-    const auto& position  = params["position"];
-    const int   line      = position["line"].GetInt();
-    const int   character = position["character"].GetInt();
+    const auto& params       = request["params"];
+    const auto& position     = params["position"];
+    const int   line         = position["line"].GetInt();
+    const int   character    = position["character"].GetInt();
+    const auto& textDocument = params["textDocument"];
 
-    if (mContenLines.empty())
+    const std::string uri = textDocument["uri"].GetString();
+
+    std::string strLine;
+
+    auto it = mFileContexts.find(uri);
+    if (it == mFileContexts.cend())
     {
-        std::string       data;
-        std::stringstream ss(mContent);
-        while (std::getline(ss, data))
+        if (mLogger)
         {
-            mContenLines.push_back(data);
+            *mLogger << "JsonMessageHandler::" << __func__ << ": Couldn't find content for uri: " << uri << std::endl;
+            mLogger->flush();
         }
+    }
+    else if (it->second.contenLines.size() <= static_cast<size_t>(line))
+    {
+        if (mLogger)
+        {
+            *mLogger << "JsonMessageHandler::" << __func__
+                     << ": Requested line number does not exist. Line number: " << line
+                     << ", total number of lines: " << it->second.contenLines.size() << std::endl;
+            mLogger->flush();
+        }
+    }
+    else
+    {
+        strLine = it->second.contenLines[line];
     }
 
     rapidjson::Document d;
@@ -441,7 +472,6 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
         size_t      pos{};
         size_t      from{};
         size_t      to{};
-        std::string strLine = mContenLines[line];
         std::smatch m;
         std::regex  r("[GgMm]\\d+\\.?\\d?");
         while (std::regex_search(strLine, m, r))
@@ -573,8 +603,16 @@ void JsonMessageHandler::shutdown(int32_t id)
 
 void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri, const std::string& content)
 {
-    mContent = content;
-    mContenLines.clear();
+    FileContext       fileContext{};
+    std::string       data;
+    std::stringstream ss(content);
+    while (std::getline(ss, data))
+    {
+        fileContext.contenLines.push_back(data);
+    }
+
+    mFileContexts.erase(uri);
+    mFileContexts.emplace(std::make_pair(uri, std::move(fileContext)));
 
     auto messages = mParser.parse(content);
 

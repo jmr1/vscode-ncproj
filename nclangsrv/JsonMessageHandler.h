@@ -33,6 +33,7 @@ private:
     void workspace_didChangeConfiguration(const rapidjson::Document& request);
     void textDocument_didOpen(const rapidjson::Document& request);
     void textDocument_didChange(const rapidjson::Document& request);
+    void textDocument_didClose(const rapidjson::Document& request);
     void textDocument_completion(int32_t id);
     void completionItem_resolve(const rapidjson::Document& request);
     void textDocument_hover(const rapidjson::Document& request);
@@ -43,18 +44,22 @@ private:
     void fetch_gCodesDesc();
     void fetch_mCodesDesc();
 
+    struct FileContext
+    {
+        std::vector<std::string> contenLines;
+    };
+
 private:
-    std::vector<std::string>     mSuggestions;
-    std::vector<std::string>     mContenLines;
-    std::string                  mContent;
-    std::ofstream*               mLogger;
-    std::unique_ptr<CodesReader> mGCodes;
-    std::unique_ptr<CodesReader> mMCodes;
-    std::string                  mRootPath;
-    NCSettingsReader&            mNcSettingsReader;
-    NCParser                     mParser;
-    parser::ELanguage            mLanguage;
-    bool                         mExit{};
+    std::map<std::string, FileContext> mFileContexts;
+    std::vector<std::string>           mSuggestions;
+    std::ofstream*                     mLogger;
+    std::unique_ptr<CodesReader>       mGCodes;
+    std::unique_ptr<CodesReader>       mMCodes;
+    std::string                        mRootPath;
+    NCSettingsReader&                  mNcSettingsReader;
+    NCParser                           mParser;
+    parser::ELanguage                  mLanguage;
+    bool                               mExit{};
 };
 
 } // namespace nclangsrv
