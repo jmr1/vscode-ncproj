@@ -14,6 +14,8 @@
 #include <rapidjson/stringbuffer.h>
 #include <rapidjson/writer.h>
 
+#include <util.h>
+
 #include "NCSettingsReader.h"
 
 namespace fs = std::filesystem;
@@ -25,6 +27,62 @@ namespace fs = std::filesystem;
 #endif
 
 namespace nclangsrv {
+
+namespace {
+void hoverMakeResult(const std::string& contents, int line, size_t from, size_t to, rapidjson::Value& result,
+                     rapidjson::Document::AllocatorType& a)
+{
+    rapidjson::Value data;
+    data.SetString(contents.c_str(), static_cast<rapidjson::SizeType>(contents.size()), a);
+    result.AddMember("contents", data, a);
+
+    rapidjson::Value range(rapidjson::kObjectType);
+
+    rapidjson::Value start(rapidjson::kObjectType);
+    rapidjson::Value end(rapidjson::kObjectType);
+
+    start.AddMember("line", line, a);
+    start.AddMember("character", from, a);
+
+    end.AddMember("line", line, a);
+    end.AddMember("character", to, a);
+
+    range.AddMember("start", start, a);
+    range.AddMember("end", end, a);
+
+    result.AddMember("range", range, a);
+}
+
+std::string searchPattern(const std::regex& r, const std::string& contentLine, int character, size_t& from, size_t& to)
+{
+    size_t      pos{};
+    std::string strLine = contentLine;
+    std::smatch m;
+    while (std::regex_search(strLine, m, r))
+    {
+        if (character >= static_cast<int>(pos + m.position()) &&
+            character < static_cast<int>(pos + m.position() + m.str().size()))
+        {
+            from = pos + m.position();
+            to   = pos + m.position() + m.str().size();
+            break;
+        }
+        pos += m.position() + m.str().size();
+        strLine = m.suffix();
+    }
+
+    return m.str();
+}
+
+std::string extractCode(const std::string& data)
+{
+    std::string code = data;
+    while (!code.empty() && code.size() > 1 && code[0] == '0')
+        code = code.substr(1);
+    return code;
+}
+
+} // namespace
 
 JsonMessageHandler::JsonMessageHandler(std::ofstream* logger, const std::string& rootPath,
                                        NCSettingsReader& ncSettingsReader,
@@ -434,7 +492,8 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
     const std::string uri = textDocument["uri"].GetString();
 
-    std::string strLine;
+    std::string               strLine;
+    parser::fanuc::macro_map* macroMap{};
 
     auto it = mFileContexts.find(uri);
     if (it == mFileContexts.cend())
@@ -457,7 +516,8 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
     }
     else
     {
-        strLine = it->second.contenLines[line];
+        strLine  = it->second.contenLines[line];
+        macroMap = &it->second.macroMap;
     }
 
     rapidjson::Document d;
@@ -469,27 +529,12 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
     rapidjson::Value result(rapidjson::kObjectType);
     {
-        size_t      pos{};
-        size_t      from{};
-        size_t      to{};
-        std::smatch m;
-        std::regex  r("[GgMm]\\d+\\.?\\d?");
-        while (std::regex_search(strLine, m, r))
-        {
-            if (character >= static_cast<int>(pos + m.position()) &&
-                character < static_cast<int>(pos + m.position() + m.str().size()))
-            {
-                from = pos + m.position();
-                to   = pos + m.position() + m.str().size();
-                break;
-            }
-            pos += m.position() + m.str().size();
-            strLine = m.suffix();
-        }
+        size_t     from{};
+        size_t     to{};
+        std::regex r("[GgMm]\\d+\\.?\\d?");
 
-        std::string contents = m.str();
+        std::string contents = searchPattern(r, strLine, character, from, to);
 
-        rapidjson::Value data;
         if (!contents.empty())
         {
             fetch_gCodesDesc();
@@ -497,9 +542,8 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
             if (contents[0] == 'G' || contents[0] == 'g')
             {
-                std::string code = contents.substr(1);
-                while (!code.empty() && code.size() > 1 && code[0] == '0')
-                    code = code.substr(1);
+                std::string code = extractCode(contents.substr(1));
+
                 auto it = mGCodes->getDesc().find(code);
                 if (it != mGCodes->getDesc().cend())
                     contents = contents + ": " + it->second.first;
@@ -508,9 +552,8 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
             }
             else if (contents[0] == 'M' || contents[0] == 'm')
             {
-                std::string code = contents.substr(1);
-                while (!code.empty() && code.size() > 1 && code[0] == '0')
-                    code = code.substr(1);
+                std::string code = extractCode(contents.substr(1));
+
                 auto it = mMCodes->getDesc().find(code);
                 if (it != mMCodes->getDesc().cend())
                     contents = contents + ": " + it->second.first;
@@ -518,24 +561,86 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                     contents.clear();
             }
 
-            data.SetString(contents.c_str(), static_cast<rapidjson::SizeType>(contents.size()), a);
-            result.AddMember("contents", data, a);
+            if (!contents.empty())
+                hoverMakeResult(contents, line, from, to, result, a);
+            else
+                result.SetNull();
+        }
+        else if (macroMap && !macroMap->empty())
+        {
+            size_t from{};
+            size_t to{};
 
-            rapidjson::Value range(rapidjson::kObjectType);
+            std::regex  rGM("[GgMm]#\\d+");
+            std::string contents = searchPattern(rGM, strLine, character, from, to);
+            if (!contents.empty() && contents.size() > 2)
+            {
+                std::string code = extractCode(contents.substr(2));
 
-            rapidjson::Value start(rapidjson::kObjectType);
-            rapidjson::Value end(rapidjson::kObjectType);
+                auto macroId = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
 
-            start.AddMember("line", line, a);
-            start.AddMember("character", from, a);
+                auto itm = macroMap->lower_bound({macroId, line});
+                if (itm != macroMap->cend() && itm->first.id == macroId)
+                {
+                    fetch_gCodesDesc();
+                    fetch_mCodesDesc();
 
-            end.AddMember("line", line, a);
-            end.AddMember("character", to, a);
+                    auto gmcode = parser::to_string_trunc(itm->second);
+                    if (contents[0] == 'G' || contents[0] == 'g')
+                    {
+                        auto it = mGCodes->getDesc().find(gmcode);
+                        if (it != mGCodes->getDesc().cend())
+                            contents = contents + " (G" + gmcode + "): " + it->second.first;
+                        else
+                            contents.clear();
+                    }
+                    else if (contents[0] == 'M' || contents[0] == 'm')
+                    {
+                        auto it = mMCodes->getDesc().find(gmcode);
+                        if (it != mMCodes->getDesc().cend())
+                            contents = contents + " (M" + gmcode + "): " + it->second.first;
+                        else
+                            contents.clear();
+                    }
 
-            range.AddMember("start", start, a);
-            range.AddMember("end", end, a);
+                    if (!contents.empty())
+                        hoverMakeResult(contents, line, from, to, result, a);
+                    else
+                        result.SetNull();
+                }
+                else
+                {
+                    contents.clear();
+                }
+            }
+            else
+            {
+                std::regex rm("#\\d+");
 
-            result.AddMember("range", range, a);
+                std::string contents = searchPattern(rm, strLine, character, from, to);
+
+                if (!contents.empty())
+                {
+                    std::string code = extractCode(contents.substr(1));
+
+                    auto macroId = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
+
+                    auto it = macroMap->lower_bound({macroId, line});
+                    if (it != macroMap->cend() && it->first.id == macroId)
+                        contents = contents + " = " + parser::to_string_trunc(it->second);
+                    else
+                        contents.clear();
+
+                    if (!contents.empty())
+                        hoverMakeResult(contents, line, from, to, result, a);
+                    else
+                        result.SetNull();
+                }
+                else
+                {
+                    result.SetNull();
+                }
+            }
         }
         else
         {
@@ -611,10 +716,11 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
         fileContext.contenLines.push_back(data);
     }
 
+    std::vector<std::string> messages;
+    std::tie(messages, fileContext.macroMap) = mParser.parse(content);
+
     mFileContexts.erase(uri);
     mFileContexts.emplace(std::make_pair(uri, std::move(fileContext)));
-
-    auto messages = mParser.parse(content);
 
     rapidjson::Document d;
     d.SetObject();

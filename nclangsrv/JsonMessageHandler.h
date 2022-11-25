@@ -47,6 +47,7 @@ private:
     struct FileContext
     {
         std::vector<std::string> contenLines;
+        parser::fanuc::macro_map macroMap;
     };
 
 private:
