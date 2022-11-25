@@ -547,8 +547,6 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                 auto it = mGCodes->getDesc().find(code);
                 if (it != mGCodes->getDesc().cend())
                     contents = contents + ": " + it->second.first;
-                else
-                    contents.clear();
             }
             else if (contents[0] == 'M' || contents[0] == 'm')
             {
@@ -557,8 +555,6 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                 auto it = mMCodes->getDesc().find(code);
                 if (it != mMCodes->getDesc().cend())
                     contents = contents + ": " + it->second.first;
-                else
-                    contents.clear();
             }
 
             if (!contents.empty())
@@ -579,7 +575,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
                 auto macroId = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
 
-                auto itm = macroMap->lower_bound({macroId, line});
+                auto itm = macroMap->lower_bound({macroId, line + 1});
                 if (itm != macroMap->cend() && itm->first.id == macroId)
                 {
                     fetch_gCodesDesc();
@@ -588,19 +584,17 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                     auto gmcode = parser::to_string_trunc(itm->second);
                     if (contents[0] == 'G' || contents[0] == 'g')
                     {
-                        auto it = mGCodes->getDesc().find(gmcode);
+                        contents = contents + " (G" + gmcode + ")";
+                        auto it  = mGCodes->getDesc().find(gmcode);
                         if (it != mGCodes->getDesc().cend())
-                            contents = contents + " (G" + gmcode + "): " + it->second.first;
-                        else
-                            contents.clear();
+                            contents = contents + ": " + it->second.first;
                     }
                     else if (contents[0] == 'M' || contents[0] == 'm')
                     {
-                        auto it = mMCodes->getDesc().find(gmcode);
+                        contents = contents + " (M" + gmcode + ")";
+                        auto it  = mMCodes->getDesc().find(gmcode);
                         if (it != mMCodes->getDesc().cend())
-                            contents = contents + " (M" + gmcode + "): " + it->second.first;
-                        else
-                            contents.clear();
+                            contents = contents + ": " + it->second.first;
                     }
 
                     if (!contents.empty())
@@ -621,15 +615,15 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
                 if (!contents.empty())
                 {
-                    std::string code = extractCode(contents.substr(1));
+                    std::string code    = extractCode(contents.substr(1));
+                    auto        macroId = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
 
-                    auto macroId = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
-
-                    auto it = macroMap->lower_bound({macroId, line});
+                    contents = contents + " = ";
+                    auto it  = macroMap->lower_bound({macroId, line + 1});
                     if (it != macroMap->cend() && it->first.id == macroId)
-                        contents = contents + " = " + parser::to_string_trunc(it->second);
+                        contents = contents + parser::to_string_trunc(it->second);
                     else
-                        contents.clear();
+                        contents = contents + "undefined";
 
                     if (!contents.empty())
                         hoverMakeResult(contents, line, from, to, result, a);
