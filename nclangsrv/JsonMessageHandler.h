@@ -45,7 +45,8 @@ private:
 
 private:
     std::vector<std::string>     mSuggestions;
-    std::vector<std::string>     mContenLines;
+    std::vector<std::string>     mContentLines;
+    parser::fanuc::macro_map     mMacroMap;
     std::string                  mContent;
     std::ofstream*               mLogger;
     std::unique_ptr<CodesReader> mGCodes;

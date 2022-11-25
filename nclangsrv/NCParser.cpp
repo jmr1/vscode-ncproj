@@ -130,10 +130,10 @@ NCParser::NCParser(std::ofstream* logger, const std::string& rootPath, NCSetting
 {
 }
 
-std::vector<std::string> NCParser::parse(const std::string& code)
+std::tuple<std::vector<std::string>, fanuc::macro_map> NCParser::parse(const std::string& code)
 {
     if (!mNcSettingsReader.getNcSettingsPath().empty() && !mNcSettingsReader.read())
-        return {"ERROR: Couldn't read .ncsetting file"};
+        return {{"ERROR: Couldn't read .ncsetting file"}, {}};
 
     const auto fanuc_parser_type = mNcSettingsReader.getFanucParserType();
     const auto machine_tool_type = mNcSettingsReader.getMachineToolType();
@@ -150,7 +150,7 @@ std::vector<std::string> NCParser::parse(const std::string& code)
         mWordGrammarReader = std::make_unique<WordGrammarReader>(grammarPath);
 
         if (!mWordGrammarReader->read())
-            return {"ERROR: Couldn't read word grammar settings"};
+            return {{"ERROR: Couldn't read word grammar settings"}, {}};
     }
 
     if (!mGCodeGroupsReader.get())
@@ -166,7 +166,7 @@ std::vector<std::string> NCParser::parse(const std::string& code)
         mGCodeGroupsReader = std::make_unique<CodeGroupsReader>(gCodeGroupsPath);
 
         if (!mGCodeGroupsReader->read())
-            return {"ERROR: Couldn't read gcode groups settings"};
+            return {{"ERROR: Couldn't read gcode groups settings"}, {}};
     }
 
     if (!mMCodeGroupsReader.get())
@@ -182,7 +182,7 @@ std::vector<std::string> NCParser::parse(const std::string& code)
         mMCodeGroupsReader = std::make_unique<CodeGroupsReader>(mCodeGroupsPath);
 
         if (!mMCodeGroupsReader->read())
-            return {"ERROR: Couldn't read mcode groups settings"};
+            return {{"ERROR: Couldn't read mcode groups settings"}, {}};
     }
 
     auto word_grammar = mWordGrammarReader->getWordGrammar();
@@ -234,6 +234,10 @@ std::vector<std::string> NCParser::parse(const std::string& code)
             std::move(word_grammar), std::move(operations), std::move(gcode_groups), std::move(mcode_groups),
             {evaluate_macro, verify_code_groups, calculate_path, ncsettings_code_analysis, zero_point_analysis},
             {mLanguage}, fanuc_parser_type));
+
+        auto apf = dynamic_cast<fanuc::AllAttributesParser*>(ap.get());
+        apf->reset_macro_values();
+        // apf->reset_attributes_path_calculator();
 
         break;
     }
@@ -353,6 +357,23 @@ std::vector<std::string> NCParser::parse(const std::string& code)
             text += "\n";
     }
 
+    fanuc::macro_map macro_m;
+    switch (cnc_type)
+    {
+    case ECncType::Fanuc:
+    case ECncType::Haas:
+    case ECncType::Makino:
+    case ECncType::Generic: {
+        auto apf = dynamic_cast<fanuc::AllAttributesParser*>(ap.get());
+        macro_m  = apf->get_macro_values();
+        break;
+    }
+
+    case ECncType::Heidenhain: {
+        break;
+    }
+    }
+
     // std::cout << line_nbr << " lines parsed, " << line_err << " error(s) found!" << std::endl;
 
     // if (convert_length || calculate_path_time || rotate)
@@ -360,7 +381,7 @@ std::vector<std::string> NCParser::parse(const std::string& code)
     //     message_all += text;
     // }
 
-    return messages;
+    return std::make_tuple(messages, macro_m);
 }
 
 } // namespace nclangsrv

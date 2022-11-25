@@ -6,6 +6,7 @@
 #include <vector>
 
 #include <GeneralParserDefines.h>
+#include <fanuc/MacroDefines.h>
 
 #include "CodeGroupsReader.h"
 #include "WordGrammarReader.h"
@@ -19,7 +20,7 @@ class NCParser
 public:
     NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader);
 
-    std::vector<std::string> parse(const std::string& code);
+    std::tuple<std::vector<std::string>, parser::fanuc::macro_map> parse(const std::string& code);
 
 private:
     std::ofstream*                     mLogger;
