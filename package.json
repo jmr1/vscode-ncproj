@@ -9,7 +9,7 @@
         "url": "https://github.com/jmr1/vscode-ncproj"
     },
     "license": "SEE LICENSE IN LICENSE",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "icon": "images/icon.png",
     "publisher": "jrupar-mcieslik",
     "categories": ["Programming Languages", "Snippets", "Linters", "Debuggers", "Other"],

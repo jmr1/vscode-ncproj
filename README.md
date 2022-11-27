@@ -6,16 +6,19 @@ Develop and validate CNC programs.
 
 ## News
 
-- Initial version 0.0.1 released
+- Version 0.1.0 released
+  - New Features: Hovers for macro values and G/M codes with macros (i.e. G#1)
+  ![macro2](./images/macro2.png)![macro](./images/macro.png)
+  - Enhancements: Code completion description shown in the main list
+  - Bug fixes: Hovers sometimes not working properly due to mixed nc files context
 
 ## Features
 
-- Code correctness validation
-- Code Groups validation
-- Hovers and code completion (G-Code and M-Code)
+- Code correctness and Code Groups validation
+- Code completion for G/M codes
+- Hovers for G/M codes, macro values and G/M codes with macros (i.e. G#1)
+- Machine Tool and Driver configuration creation/selection
 - Syntax coloring
-- Machine Tool and Driver configuration creation
-- Machine Tool and Driver configuration selection
 - Status bar
 - Commands
 
