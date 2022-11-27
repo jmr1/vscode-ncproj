@@ -8,6 +8,7 @@ Develop and validate CNC programs.
 
 - Version 0.1.0 released
   - New Features: Hovers for macro values and G/M codes with macros (i.e. G#1)
+
   ![macro](./images/macro.png)
   ![macro2](./images/macro2.png)
   - Enhancements: Code completion description shown in the main list
