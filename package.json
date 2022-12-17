@@ -12,8 +12,20 @@
     "version": "0.1.0",
     "icon": "images/icon.png",
     "publisher": "jrupar-mcieslik",
-    "categories": ["Programming Languages", "Snippets", "Linters", "Debuggers", "Other"],
-    "keywords": ["cnc", "Fanuc", "gcode", "g-code", "nc"],
+    "categories": [
+        "Programming Languages",
+        "Snippets",
+        "Linters",
+        "Debuggers",
+        "Other"
+    ],
+    "keywords": [
+        "cnc",
+        "Fanuc",
+        "gcode",
+        "g-code",
+        "nc"
+    ],
     "activationEvents": [
         "onLanguage:ncproj",
         "onCommand:ncproj.ncsettingCreate",
@@ -47,7 +59,28 @@
                     ".ptp",
                     ".dat",
                     ".mcd",
-                    ".spf"
+                    ".spf",
+                    ".001",
+                    ".cnc",
+                    ".dnc",
+                    ".eia",
+                    ".fan",
+                    ".fnc",
+                    ".g",
+                    ".g00",
+                    ".gcode",
+                    ".iso",
+                    ".lib",
+                    ".min",
+                    ".ncl",
+                    ".out",
+                    ".pm",
+                    ".prf",
+                    ".prg",
+                    ".pu1",
+                    ".sub",
+                    ".tap",
+                    ".tp"
                 ],
                 "aliases": [
                     "NC Project",

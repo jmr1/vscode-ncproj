@@ -26,7 +26,7 @@ Develop and validate CNC programs.
 
 ## Current supported file extensions
 
-".nc", ".txt", ".ptp", ".dat", ".mcd", ".spf"
+".nc", ".txt", ".ptp", ".dat", ".mcd", ".spf", ".001", ".cnc", ".dnc", ".eia", ".fan", ".fnc", ".g", ".g00", ".gcode", ".iso", ".lib", ".min", ".ncl", ".out", ".pm", ".prf", ".prg", ".pu1", ".sub", ".tap", ".tp"
 
 If you would like another file extension supported by this extension, please open an [issue](https://github.com/jmr1/vscode-ncproj/issues).
 
