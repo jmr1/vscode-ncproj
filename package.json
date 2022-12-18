@@ -112,7 +112,8 @@
     "scripts": {
         "vscode:prepublish": "cd vscode-client && npm run compile && cd ..",
         "compile": "cd vscode-client && tsc -p ./ && cd ..",
-        "watch": "cd vscode-client && tsc -watch -p ./ && cd .."
+        "watch": "cd vscode-client && tsc -watch -p ./ && cd ..",
+        "package:windows": "vsce package --target win32-x64"
     },
     "dependencies": {
         "path-exists": "^4.0.0",
