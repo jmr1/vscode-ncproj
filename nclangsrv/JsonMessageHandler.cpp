@@ -29,6 +29,24 @@ namespace fs = std::filesystem;
 namespace nclangsrv {
 
 namespace {
+
+rapidjson::Value makeRange(int line, size_t from, size_t to, rapidjson::Document::AllocatorType& a)
+{
+    rapidjson::Value start(rapidjson::kObjectType);
+    start.AddMember("line", line, a);
+    start.AddMember("character", from, a);
+
+    rapidjson::Value end(rapidjson::kObjectType);
+    end.AddMember("line", line, a);
+    end.AddMember("character", to, a);
+
+    rapidjson::Value range(rapidjson::kObjectType);
+    range.AddMember("start", start, a);
+    range.AddMember("end", end, a);
+
+    return range;
+}
+
 void hoverMakeResult(const std::string& contents, int line, size_t from, size_t to, rapidjson::Value& result,
                      rapidjson::Document::AllocatorType& a)
 {
@@ -36,21 +54,7 @@ void hoverMakeResult(const std::string& contents, int line, size_t from, size_t 
     data.SetString(contents.c_str(), static_cast<rapidjson::SizeType>(contents.size()), a);
     result.AddMember("contents", data, a);
 
-    rapidjson::Value range(rapidjson::kObjectType);
-
-    rapidjson::Value start(rapidjson::kObjectType);
-    rapidjson::Value end(rapidjson::kObjectType);
-
-    start.AddMember("line", line, a);
-    start.AddMember("character", from, a);
-
-    end.AddMember("line", line, a);
-    end.AddMember("character", to, a);
-
-    range.AddMember("start", start, a);
-    range.AddMember("end", end, a);
-
-    result.AddMember("range", range, a);
+    result.AddMember("range", makeRange(line, from, to, a), a);
 }
 
 std::string searchPattern(const std::regex& r, const std::string& contentLine, int character, size_t& from, size_t& to)
@@ -168,6 +172,14 @@ bool JsonMessageHandler::parse(const std::string& json)
     {
         textDocument_hover(d);
     }
+    else if (method == "textDocument/codeLens")
+    {
+        textDocument_codeLens(d);
+    }
+    else if (method == "codeLens/resolve")
+    {
+        codeLens_resolve(d);
+    }
     else if (method == "$/cancelRequest")
     {
         cancelRequest();
@@ -205,7 +217,8 @@ void JsonMessageHandler::initialize(int32_t id)
             rapidjson::Value textDocumentSync(rapidjson::kObjectType);
             {
                 textDocumentSync.AddMember("openClose", true, a);
-                textDocumentSync.AddMember("change", 1, a);
+                textDocumentSync.AddMember(
+                    "change", 1, a); // Full: Documents are synced by always sending the full content of the document.
             }
 
             rapidjson::Value completionProvider(rapidjson::kObjectType);
@@ -213,9 +226,15 @@ void JsonMessageHandler::initialize(int32_t id)
                 completionProvider.AddMember("resolveProvider", true, a);
             }
 
+            rapidjson::Value codeLensProvider(rapidjson::kObjectType);
+            {
+                codeLensProvider.AddMember("resolveProvider", true, a);
+            }
+
             capabilities.AddMember("textDocumentSync", textDocumentSync, a);
             capabilities.AddMember("completionProvider", completionProvider, a);
             capabilities.AddMember("hoverProvider", true, a);
+            capabilities.AddMember("codeLensProvider", codeLensProvider, a);
         }
 
         result.AddMember("capabilities", capabilities, a);
@@ -504,19 +523,19 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
             mLogger->flush();
         }
     }
-    else if (it->second.contenLines.size() <= static_cast<size_t>(line))
+    else if (it->second.contentLines.size() <= static_cast<size_t>(line))
     {
         if (mLogger)
         {
             *mLogger << "JsonMessageHandler::" << __func__
                      << ": Requested line number does not exist. Line number: " << line
-                     << ", total number of lines: " << it->second.contenLines.size() << std::endl;
+                     << ", total number of lines: " << it->second.contentLines.size() << std::endl;
             mLogger->flush();
         }
     }
     else
     {
-        strLine  = it->second.contenLines[line];
+        strLine  = it->second.contentLines[line];
         macroMap = &it->second.macroMap;
     }
 
@@ -661,6 +680,157 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
     std::cout.flush();
 }
 
+void JsonMessageHandler::textDocument_codeLens(const rapidjson::Document& request)
+{
+    const auto& params       = request["params"];
+    const auto& textDocument = params["textDocument"];
+
+    const std::string uri = textDocument["uri"].GetString();
+
+    PathTimeResult* pathTimeResult{};
+
+    auto it = mFileContexts.find(uri);
+    if (it == mFileContexts.cend())
+    {
+        if (mLogger)
+        {
+            *mLogger << "JsonMessageHandler::" << __func__ << ": Couldn't find content for uri: " << uri << std::endl;
+            mLogger->flush();
+        }
+    }
+    else
+    {
+        mCurrentUri    = uri;
+        pathTimeResult = &it->second.pathTimeResult;
+    }
+
+    rapidjson::Document d;
+    d.SetObject();
+    rapidjson::Document::AllocatorType& a = d.GetAllocator();
+
+    d.AddMember("jsonrpc", "2.0", a);
+    d.AddMember("id", request["id"].GetInt(), a);
+
+    rapidjson::Value result(rapidjson::kArrayType);
+
+    if (!pathTimeResult || pathTimeResult->empty())
+    {
+        result.SetNull();
+    }
+    else
+    {
+        for (const auto& value : *pathTimeResult)
+        {
+            rapidjson::Value entry(rapidjson::kObjectType);
+            {
+                entry.AddMember("range", makeRange(static_cast<int>(value.first), 0, 0, a), a);
+            }
+            result.PushBack(entry, a);
+        }
+    }
+
+    d.AddMember("result", result, a);
+
+    rapidjson::StringBuffer                    stringBuffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+    d.Accept(writer);
+
+    std::string response{stringBuffer.GetString()};
+
+    if (mLogger)
+    {
+        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+                 << "[" << response << "]" << std::endl;
+        mLogger->flush();
+    }
+
+    std::cout << "Content-Length: " << response.size() << MSG_ENDL << MSG_ENDL << response;
+    std::cout.flush();
+}
+
+void JsonMessageHandler::codeLens_resolve(const rapidjson::Document& request)
+{
+    const auto& params = request["params"];
+    const auto& range  = params["range"];
+    const auto& start  = range["start"];
+    const int   line   = start["line"].GetInt();
+
+    PathTimeResult* pathTimeResult{};
+
+    auto it = mFileContexts.find(mCurrentUri);
+    if (it == mFileContexts.cend())
+    {
+        if (mLogger)
+        {
+            *mLogger << "JsonMessageHandler::" << __func__ << ": Couldn't find content for uri: " << mCurrentUri
+                     << std::endl;
+            mLogger->flush();
+        }
+    }
+    else
+    {
+        pathTimeResult = &it->second.pathTimeResult;
+    }
+
+    rapidjson::Document d;
+    d.SetObject();
+    rapidjson::Document::AllocatorType& a = d.GetAllocator();
+
+    d.AddMember("jsonrpc", "2.0", a);
+    d.AddMember("id", request["id"].GetInt(), a);
+
+    rapidjson::Value result(rapidjson::kObjectType);
+
+    if (!pathTimeResult || pathTimeResult->empty())
+    {
+        result.SetNull();
+    }
+    else
+    {
+        const auto it = pathTimeResult->find(line);
+        if (it != pathTimeResult->cend())
+        {
+            rapidjson::Value command(rapidjson::kObjectType);
+            {
+                rapidjson::Value r(rapidjson::kObjectType);
+                r.CopyFrom(range, a);
+                result.AddMember("range", r, a);
+
+                rapidjson::Value title;
+                title.SetString(it->second.c_str(), static_cast<rapidjson::SizeType>(it->second.size()), a);
+
+                rapidjson::Value cmd; // no command
+
+                command.AddMember("title", title, a);
+                command.AddMember("command", cmd, a);
+            }
+            result.AddMember("command", command, a);
+        }
+        else
+        {
+            result.SetNull();
+        }
+    }
+
+    d.AddMember("result", result, a);
+
+    rapidjson::StringBuffer                    stringBuffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+    d.Accept(writer);
+
+    std::string response{stringBuffer.GetString()};
+
+    if (mLogger)
+    {
+        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+                 << "[" << response << "]" << std::endl;
+        mLogger->flush();
+    }
+
+    std::cout << "Content-Length: " << response.size() << MSG_ENDL << MSG_ENDL << response;
+    std::cout.flush();
+}
+
 void JsonMessageHandler::cancelRequest()
 {
 }
@@ -707,11 +877,11 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
     std::stringstream ss(content);
     while (std::getline(ss, data))
     {
-        fileContext.contenLines.push_back(data);
+        fileContext.contentLines.push_back(data);
     }
 
     std::vector<std::string> messages;
-    std::tie(messages, fileContext.macroMap) = mParser.parse(content);
+    std::tie(messages, fileContext.macroMap, fileContext.pathTimeResult) = mParser.parse(content);
 
     mFileContexts.erase(uri);
     mFileContexts.emplace(std::make_pair(uri, std::move(fileContext)));
@@ -777,20 +947,7 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
                 rapidjson::Value diagnostic(rapidjson::kObjectType);
                 {
                     diagnostic.AddMember("severity", 1, a); // Error, can be omitted
-
-                    rapidjson::Value range(rapidjson::kObjectType);
-                    {
-                        rapidjson::Value start(rapidjson::kObjectType);
-                        start.AddMember("line", line, a);
-                        start.AddMember("character", character, a);
-                        range.AddMember("start", start, a);
-
-                        rapidjson::Value end(rapidjson::kObjectType);
-                        end.AddMember("line", line, a);
-                        end.AddMember("character", character, a);
-                        range.AddMember("end", end, a);
-                    }
-                    diagnostic.AddMember("range", range, a);
+                    diagnostic.AddMember("range", makeRange(line, character, character, a), a);
 
                     rapidjson::Value message;
                     message.SetString(result_message.c_str(), static_cast<rapidjson::SizeType>(result_message.size()),

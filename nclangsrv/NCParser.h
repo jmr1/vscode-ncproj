@@ -1,6 +1,7 @@
 #pragma once
 
 #include <fstream>
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
@@ -13,6 +14,8 @@
 
 namespace nclangsrv {
 
+using PathTimeResult = std::map<size_t, std::string>;
+
 class NCSettingsReader;
 
 class NCParser
@@ -20,7 +23,7 @@ class NCParser
 public:
     NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader);
 
-    std::tuple<std::vector<std::string>, parser::fanuc::macro_map> parse(const std::string& code);
+    std::tuple<std::vector<std::string>, parser::fanuc::macro_map, PathTimeResult> parse(const std::string& code);
 
 private:
     std::ofstream*                     mLogger;

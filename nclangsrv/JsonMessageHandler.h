@@ -37,6 +37,8 @@ private:
     void textDocument_completion(int32_t id);
     void completionItem_resolve(const rapidjson::Document& request);
     void textDocument_hover(const rapidjson::Document& request);
+    void textDocument_codeLens(const rapidjson::Document& request);
+    void codeLens_resolve(const rapidjson::Document& request);
     void cancelRequest();
     void shutdown(int32_t id);
     void textDocument_publishDiagnostics(const std::string& uri, const std::string& content);
@@ -46,8 +48,17 @@ private:
 
     struct FileContext
     {
-        std::vector<std::string> contenLines;
+        std::vector<std::string> contentLines;
         parser::fanuc::macro_map macroMap;
+        PathTimeResult           pathTimeResult;
+    };
+
+    struct PathTime
+    {
+        std::string data;
+        int         line;
+        int         from;
+        int         to;
     };
 
 private:
@@ -57,6 +68,7 @@ private:
     std::unique_ptr<CodesReader>       mGCodes;
     std::unique_ptr<CodesReader>       mMCodes;
     std::string                        mRootPath;
+    std::string                        mCurrentUri;
     NCSettingsReader&                  mNcSettingsReader;
     NCParser                           mParser;
     parser::ELanguage                  mLanguage;

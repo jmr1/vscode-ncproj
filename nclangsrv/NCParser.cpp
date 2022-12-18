@@ -122,7 +122,7 @@ NCParser::NCParser(std::ofstream* logger, const std::string& rootPath, NCSetting
     , axes_rotating_option(AxesRotatingOption::Xrotate90degrees)
     , single_line_output(true)
     , convert_length(false)
-    , calculate_path_time(false)
+    , calculate_path_time(true)
     , rotate(false)
     , mRootPath(rootPath)
     , mNcSettingsReader(ncSettingsReader)
@@ -130,10 +130,10 @@ NCParser::NCParser(std::ofstream* logger, const std::string& rootPath, NCSetting
 {
 }
 
-std::tuple<std::vector<std::string>, fanuc::macro_map> NCParser::parse(const std::string& code)
+std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser::parse(const std::string& code)
 {
     if (!mNcSettingsReader.getNcSettingsPath().empty() && !mNcSettingsReader.read())
-        return {{"ERROR: Couldn't read .ncsetting file"}, {}};
+        return {{"ERROR: Couldn't read .ncsetting file"}, {}, {}};
 
     const auto fanuc_parser_type = mNcSettingsReader.getFanucParserType();
     const auto machine_tool_type = mNcSettingsReader.getMachineToolType();
@@ -150,7 +150,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map> NCParser::parse(const std
         mWordGrammarReader = std::make_unique<WordGrammarReader>(grammarPath);
 
         if (!mWordGrammarReader->read())
-            return {{"ERROR: Couldn't read word grammar settings"}, {}};
+            return {{"ERROR: Couldn't read word grammar settings"}, {}, {}};
     }
 
     if (!mGCodeGroupsReader.get())
@@ -166,7 +166,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map> NCParser::parse(const std
         mGCodeGroupsReader = std::make_unique<CodeGroupsReader>(gCodeGroupsPath);
 
         if (!mGCodeGroupsReader->read())
-            return {{"ERROR: Couldn't read gcode groups settings"}, {}};
+            return {{"ERROR: Couldn't read gcode groups settings"}, {}, {}};
     }
 
     if (!mMCodeGroupsReader.get())
@@ -182,7 +182,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map> NCParser::parse(const std
         mMCodeGroupsReader = std::make_unique<CodeGroupsReader>(mCodeGroupsPath);
 
         if (!mMCodeGroupsReader->read())
-            return {{"ERROR: Couldn't read mcode groups settings"}, {}};
+            return {{"ERROR: Couldn't read mcode groups settings"}, {}, {}};
     }
 
     auto word_grammar = mWordGrammarReader->getWordGrammar();
@@ -262,6 +262,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map> NCParser::parse(const std
     double                   prev_time_total{};
     std::stringstream        ss(code);
     std::vector<std::string> messages;
+    PathTimeResult           pathTimeResult;
     while (std::getline(ss, data))
     {
         ++line_nbr;
@@ -323,7 +324,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map> NCParser::parse(const std
             }
             messages.push_back(message);
         }
-        if (convert_length || calculate_path_time || rotate)
+        if (convert_length || rotate)
         {
             switch (cnc_type)
             {
@@ -344,17 +345,28 @@ std::tuple<std::vector<std::string>, fanuc::macro_map> NCParser::parse(const std
             auto tr = ap->get_time_result();
             if (tr.total != prev_time_total || pr.fast_motion != 0 || pr.work_motion != 0)
             {
-                prev_time_total = tr.total;
+                constexpr double tolerance = 1e-2;
+                prev_time_total            = tr.total;
                 std::ostringstream ostr;
-                ostr << "\t(" << std::fixed << std::setprecision(2) << "PathTotal=" << pr.total
-                     << ", TimeTotal=" << tr.total << ", T" << pr.tool_id << "=" << pr.tool_total
-                     << ", PathFastMotion=" << pr.fast_motion << ", TimeFastMotion=" << tr.fast_motion
-                     << ", PathWorkMotion=" << pr.work_motion << ", TimeWorkMotion=" << tr.work_motion << ")";
-                text += ostr.str().c_str();
+                ostr << std::fixed << std::setprecision(2) << " | ";
+                if (pr.total >= tolerance)
+                    ostr << "total path = " << pr.total << " | ";
+                if (tr.total >= tolerance)
+                    ostr << "total time = " << tr.total << " | ";
+                if (pr.tool_total >= tolerance && pr.total - pr.tool_total >= tolerance)
+                    ostr << "T" << pr.tool_id << " total path = " << pr.tool_total << " | ";
+                if (pr.fast_motion >= tolerance)
+                    ostr << "rapid path = " << pr.fast_motion << " | ";
+                if (tr.fast_motion >= tolerance)
+                    ostr << "rapid time = " << tr.fast_motion << " | ";
+                if (pr.work_motion >= tolerance)
+                    ostr << "cut path = " << pr.work_motion << " | ";
+                if (tr.work_motion >= tolerance)
+                    ostr << "cut time = " << tr.work_motion << " | ";
+
+                pathTimeResult.emplace(std::make_pair(line_nbr - 1, ostr.str().c_str()));
             }
         }
-        if (convert_length || calculate_path_time || rotate)
-            text += "\n";
     }
 
     fanuc::macro_map macro_m;
@@ -374,14 +386,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map> NCParser::parse(const std
     }
     }
 
-    // std::cout << line_nbr << " lines parsed, " << line_err << " error(s) found!" << std::endl;
-
-    // if (convert_length || calculate_path_time || rotate)
-    // {
-    //     message_all += text;
-    // }
-
-    return std::make_tuple(messages, macro_m);
+    return std::make_tuple(messages, macro_m, pathTimeResult);
 }
 
 } // namespace nclangsrv
