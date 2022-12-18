@@ -113,24 +113,27 @@
         "vscode:prepublish": "cd vscode-client && npm run compile && cd ..",
         "compile": "cd vscode-client && tsc -p ./ && cd ..",
         "watch": "cd vscode-client && tsc -watch -p ./ && cd ..",
-        "package:windows": "vsce package --target win32-x64"
+        "package:windows": "vsce package --target win32-x64",
+        "lint": "eslint \"vscode-client/src/**/*.{js,ts}\" && npx prettier --check \"vscode-client/src/**/*.{js,ts}\"",
+        "lint:fix": "eslint \"vscode-client/src/**/*.{js,ts}\" --fix && npx prettier --write \"vscode-client/src/**/*.{js,ts}\""
     },
     "dependencies": {
         "path-exists": "^4.0.0",
         "vscode-languageclient": "^8.0.2"
     },
     "devDependencies": {
-        "@types/vscode": "^1.71.0",
         "@types/glob": "^7.2.0",
         "@types/mocha": "^9.1.1",
         "@types/node": "16.x",
-        "@typescript-eslint/eslint-plugin": "^5.31.0",
-        "@typescript-eslint/parser": "^5.31.0",
+        "@types/vscode": "^1.71.0",
+        "@typescript-eslint/eslint-plugin": "^5.46.1",
+        "@typescript-eslint/parser": "^5.46.1",
+        "@vscode/test-electron": "^2.1.5",
         "eslint": "^8.20.0",
         "glob": "^8.0.3",
         "mocha": "^10.0.0",
-        "typescript": "^4.7.4",
-        "@vscode/test-electron": "^2.1.5"
+        "prettier": "^2.8.1",
+        "typescript": "^4.7.4"
     },
     "engines": {
         "vscode": "^1.71.0"
