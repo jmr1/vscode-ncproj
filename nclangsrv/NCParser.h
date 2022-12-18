@@ -21,7 +21,8 @@ class NCSettingsReader;
 class NCParser
 {
 public:
-    NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader);
+    NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
+             bool calculatePathTime);
 
     std::tuple<std::vector<std::string>, parser::fanuc::macro_map, PathTimeResult> parse(const std::string& code);
 

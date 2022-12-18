@@ -116,13 +116,14 @@ void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& tex
 
 namespace nclangsrv {
 
-NCParser::NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader)
+NCParser::NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
+                   bool calculatePathTime)
     : mLogger(logger)
     , unit_conversion_type(UnitConversionType::metric_to_imperial)
     , axes_rotating_option(AxesRotatingOption::Xrotate90degrees)
     , single_line_output(true)
     , convert_length(false)
-    , calculate_path_time(true)
+    , calculate_path_time(calculatePathTime)
     , rotate(false)
     , mRootPath(rootPath)
     , mNcSettingsReader(ncSettingsReader)

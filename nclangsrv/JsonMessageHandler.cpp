@@ -89,12 +89,12 @@ std::string extractCode(const std::string& data)
 } // namespace
 
 JsonMessageHandler::JsonMessageHandler(std::ofstream* logger, const std::string& rootPath,
-                                       NCSettingsReader& ncSettingsReader,
+                                       NCSettingsReader& ncSettingsReader, bool calculatePathTime,
                                        parser::ELanguage language /*= parser::ELanguage::English*/)
     : mLogger(logger)
     , mRootPath(rootPath)
     , mNcSettingsReader(ncSettingsReader)
-    , mParser(logger, rootPath, ncSettingsReader)
+    , mParser(logger, rootPath, ncSettingsReader, calculatePathTime)
     , mLanguage(language)
 {
 }

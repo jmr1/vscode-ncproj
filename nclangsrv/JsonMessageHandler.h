@@ -19,7 +19,7 @@ class JsonMessageHandler
 {
 public:
     JsonMessageHandler(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
-                       parser::ELanguage language = parser::ELanguage::English);
+                       bool calculatePathTime, parser::ELanguage language = parser::ELanguage::English);
 
     bool parse(const std::string& json);
     bool exit() const

@@ -91,7 +91,7 @@ int main(int argc, char* argv[])
     const auto                    executablePath = fs::path(argv[0]);
     nclangsrv::NCSettingsReader   ncSettingsReader(ncsetting_path);
     nclangsrv::JsonMessageHandler jsonMessageHandler(logger.get(), executablePath.parent_path().string(),
-                                                     ncSettingsReader);
+                                                     ncSettingsReader, calculate_path_time);
 
     if (logger)
         *logger << __func__ << ": Current path is " << fs::current_path() << std::endl;

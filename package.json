@@ -29,7 +29,8 @@
     "activationEvents": [
         "onLanguage:ncproj",
         "onCommand:ncproj.ncsettingCreate",
-        "onCommand:ncproj.ncsettingSelect"
+        "onCommand:ncproj.ncsettingSelect",
+        "onCommand:ncproj.togglePathTimeCalculation"
     ],
     "contributes": {
         "configuration": {
@@ -47,6 +48,12 @@
                     "default": "",
                     "title": "Path to the Control and Machine Tool configuration file",
                     "description": "Specifies the path to the .ncsetting file. Requires a VSCode restart to take effect."
+                },
+                "ncproj.calculate.pathtime.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "title": "Whether to calculate path and time",
+                    "description": "Sets if path and time calculations should be performed"
                 }
             }
         },
@@ -105,6 +112,10 @@
             {
                 "command": "ncproj.ncsettingSelect",
                 "title": "NC Project: Select Control and Machine Tool configuration"
+            },
+            {
+                "command": "ncproj.togglePathTimeCalculation",
+                "title": "NC Project: Toggle Path and Time Calculation"
             }
         ]
     },

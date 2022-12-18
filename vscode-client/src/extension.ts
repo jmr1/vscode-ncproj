@@ -102,6 +102,10 @@ async function startLangServerNCProj(executable: string, cwd: string) {
     if (logFilePath) {
         args.push("--log-path", logFilePath);
     }
+    const calculatePathTime = config.get<boolean>("calculate.pathtime.enable");
+    if (calculatePathTime) {
+        args.push("--calculate-path", String(calculatePathTime));
+    }
 
     if (ncsettingFilePath) {
         setStatusText(ncsettingFilePath);
@@ -175,7 +179,7 @@ function startListeningConfigurationChanges() {
             ignoreNextConfigurationChange = false;
             return;
         }
-        for (const s of ["ncproj.debug.log.path", "ncproj.ncsetting.file.path"]) {
+        for (const s of ["ncproj.debug.log.path", "ncproj.ncsetting.file.path", "ncproj.calculate.pathtime.enable"]) {
             if (event.affectsConfiguration(s)) {
                 window
                     .showWarningMessage(
@@ -286,6 +290,7 @@ export function activate(context: ExtensionContext) {
 
     registerCmdNcsettingCreate(context);
     registerCmdNcsettingSelect(context);
+    registerCmdTogglePathTimeCalculation(context);
 
     checkNcsettingFilePathProperty();
 }
@@ -345,6 +350,41 @@ function registerCmdNcsettingCreate(context: ExtensionContext) {
             const options = { cwd: currentWorkingDirectory };
             execShell(exeCmtconfigPath, options);
         }
+    });
+
+    context.subscriptions.push(disposable);
+}
+
+function registerCmdTogglePathTimeCalculation(context: ExtensionContext) {
+    const disposable = commands.registerCommand("ncproj.togglePathTimeCalculation", () => {
+        const config = workspace.getConfiguration("ncproj");
+        const calculatePathTime = config.get<boolean>("calculate.pathtime.enable");
+        const saveInUser = "Yes (save in user settings)";
+        const saveInWorkspace = "Yes (save in workspace settings)";
+
+        window
+            .showWarningMessage("Where do you want to save the setting?", ...[saveInUser, saveInWorkspace, "No"])
+            .then((selection) => {
+                if (selection == saveInUser || selection == saveInWorkspace) {
+                    let configurationTarget: ConfigurationTarget = ConfigurationTarget.Workspace;
+                    if (selection == saveInUser) {
+                        configurationTarget = ConfigurationTarget.Global;
+                    }
+                    const config = workspace.getConfiguration("ncproj");
+                    ignoreNextConfigurationChange = true;
+                    config.update("calculate.pathtime.enable", !calculatePathTime, configurationTarget);
+                    window
+                        .showWarningMessage(
+                            'Please use the "Reload Window" action for setting to take effect.',
+                            ...["Reload Window"]
+                        )
+                        .then((selection) => {
+                            if (selection === "Reload Window") {
+                                commands.executeCommand("workbench.action.reloadWindow");
+                            }
+                        });
+                }
+            });
     });
 
     context.subscriptions.push(disposable);
