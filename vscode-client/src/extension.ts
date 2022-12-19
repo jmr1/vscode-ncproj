@@ -359,30 +359,17 @@ function registerCmdTogglePathTimeCalculation(context: ExtensionContext) {
     const disposable = commands.registerCommand("ncproj.togglePathTimeCalculation", () => {
         const config = workspace.getConfiguration("ncproj");
         const calculatePathTime = config.get<boolean>("calculate.pathtime.enable");
-        const saveInUser = "Yes (save in user settings)";
-        const saveInWorkspace = "Yes (save in workspace settings)";
 
+        ignoreNextConfigurationChange = true;
+        config.update("calculate.pathtime.enable", !calculatePathTime, ConfigurationTarget.Global);
         window
-            .showWarningMessage("Where do you want to save the setting?", ...[saveInUser, saveInWorkspace, "No"])
+            .showWarningMessage(
+                'Please use the "Reload Window" action for setting to take effect.',
+                ...["Reload Window"]
+            )
             .then((selection) => {
-                if (selection == saveInUser || selection == saveInWorkspace) {
-                    let configurationTarget: ConfigurationTarget = ConfigurationTarget.Workspace;
-                    if (selection == saveInUser) {
-                        configurationTarget = ConfigurationTarget.Global;
-                    }
-                    const config = workspace.getConfiguration("ncproj");
-                    ignoreNextConfigurationChange = true;
-                    config.update("calculate.pathtime.enable", !calculatePathTime, configurationTarget);
-                    window
-                        .showWarningMessage(
-                            'Please use the "Reload Window" action for setting to take effect.',
-                            ...["Reload Window"]
-                        )
-                        .then((selection) => {
-                            if (selection === "Reload Window") {
-                                commands.executeCommand("workbench.action.reloadWindow");
-                            }
-                        });
+                if (selection === "Reload Window") {
+                    commands.executeCommand("workbench.action.reloadWindow");
                 }
             });
     });
