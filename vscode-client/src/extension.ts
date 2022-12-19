@@ -181,16 +181,7 @@ function startListeningConfigurationChanges() {
         }
         for (const s of ["ncproj.debug.log.path", "ncproj.ncsetting.file.path", "ncproj.calculate.pathtime.enable"]) {
             if (event.affectsConfiguration(s)) {
-                window
-                    .showWarningMessage(
-                        'Please use the "Reload Window" action for changes in ' + s + " to take effect.",
-                        ...["Reload Window"]
-                    )
-                    .then((selection) => {
-                        if (selection === "Reload Window") {
-                            commands.executeCommand("workbench.action.reloadWindow");
-                        }
-                    });
+                askReloadWindow('Please use the "Reload Window" action for changes in ' + s + " to take effect.");
                 return;
             }
         }
@@ -261,18 +252,11 @@ function askNcsettingFilePath(askMessage: string) {
                         const config = workspace.getConfiguration("ncproj");
                         ignoreNextConfigurationChange = true;
                         config.update("ncsetting.file.path", onfulfilled[0].fsPath, configurationTarget);
-                        window
-                            .showWarningMessage(
-                                'Please use the "Reload Window" action for setting ' +
-                                    onfulfilled[0].fsPath +
-                                    " to take effect.",
-                                ...["Reload Window"]
-                            )
-                            .then((selection) => {
-                                if (selection === "Reload Window") {
-                                    commands.executeCommand("workbench.action.reloadWindow");
-                                }
-                            });
+                        askReloadWindow(
+                            'Please use the "Reload Window" action for setting ' +
+                                onfulfilled[0].fsPath +
+                                " to take effect."
+                        );
                     }
                 });
         }
@@ -362,19 +346,18 @@ function registerCmdTogglePathTimeCalculation(context: ExtensionContext) {
 
         ignoreNextConfigurationChange = true;
         config.update("calculate.pathtime.enable", !calculatePathTime, ConfigurationTarget.Global);
-        window
-            .showWarningMessage(
-                'Please use the "Reload Window" action for setting to take effect.',
-                ...["Reload Window"]
-            )
-            .then((selection) => {
-                if (selection === "Reload Window") {
-                    commands.executeCommand("workbench.action.reloadWindow");
-                }
-            });
+        askReloadWindow('Please use the "Reload Window" action for setting to take effect.');
     });
 
     context.subscriptions.push(disposable);
+}
+
+function askReloadWindow(message: string) {
+    window.showWarningMessage(message, ...["Reload Window"]).then((selection) => {
+        if (selection === "Reload Window") {
+            commands.executeCommand("workbench.action.reloadWindow");
+        }
+    });
 }
 
 export function deactivate(): Thenable<void> | undefined {
