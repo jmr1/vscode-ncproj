@@ -116,6 +116,32 @@ void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& tex
 
 namespace nclangsrv {
 
+namespace {
+std::string formatTime(double doubleSeconds)
+{
+    int64_t msInt = int64_t(std::round(doubleSeconds * 1000.0));
+
+    int64_t absInt = std::abs(msInt);
+
+    std::stringstream s;
+
+    if (msInt < 0)
+        s << "-";
+
+    auto hours        = absInt / (1000 * 60 * 60);
+    auto minutes      = absInt / (1000 * 60) % 60;
+    auto secondsx     = absInt / 1000 % 60;
+    auto milliseconds = absInt % 1000;
+
+    if (hours > 0)
+        s << std::setfill('0') << hours << "::";
+
+    s << minutes << std::setfill('0') << ":" << std::setw(2) << secondsx << "." << std::setw(3) << milliseconds;
+
+    return s.str();
+}
+} // namespace
+
 NCParser::NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
                    bool calculatePathTime)
     : mLogger(logger)
@@ -353,17 +379,17 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
                 if (pr.total >= tolerance)
                     ostr << "total path = " << pr.total << " | ";
                 if (tr.total >= tolerance)
-                    ostr << "total time = " << tr.total << " | ";
+                    ostr << "total time = " << formatTime(tr.total) << " | ";
                 if (pr.tool_total >= tolerance && pr.total - pr.tool_total >= tolerance)
                     ostr << "T" << pr.tool_id << " total path = " << pr.tool_total << " | ";
                 if (pr.fast_motion >= tolerance)
                     ostr << "rapid path = " << pr.fast_motion << " | ";
                 if (tr.fast_motion >= tolerance)
-                    ostr << "rapid time = " << tr.fast_motion << " | ";
+                    ostr << "rapid time = " << formatTime(tr.fast_motion) << " | ";
                 if (pr.work_motion >= tolerance)
                     ostr << "cut path = " << pr.work_motion << " | ";
                 if (tr.work_motion >= tolerance)
-                    ostr << "cut time = " << tr.work_motion << " | ";
+                    ostr << "cut time = " << formatTime(tr.work_motion) << " | ";
 
                 pathTimeResult.emplace(std::make_pair(line_nbr - 1, ostr.str().c_str()));
             }
