@@ -377,19 +377,19 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
                 std::ostringstream ostr;
                 ostr << std::fixed << std::setprecision(2) << " | ";
                 if (pr.total >= tolerance)
-                    ostr << "total path = " << pr.total << " | ";
+                    ostr << "Total path = " << pr.total << " | ";
                 if (tr.total >= tolerance)
-                    ostr << "total time = " << formatTime(tr.total) << " | ";
+                    ostr << "Total time = " << formatTime(tr.total) << " | ";
                 if (pr.tool_total >= tolerance && pr.total - pr.tool_total >= tolerance)
                     ostr << "T" << pr.tool_id << " total path = " << pr.tool_total << " | ";
                 if (pr.fast_motion >= tolerance)
-                    ostr << "rapid path = " << pr.fast_motion << " | ";
+                    ostr << "Rapid path = " << pr.fast_motion << " | ";
                 if (tr.fast_motion >= tolerance)
-                    ostr << "rapid time = " << formatTime(tr.fast_motion) << " | ";
+                    ostr << "Rapid time = " << formatTime(tr.fast_motion) << " | ";
                 if (pr.work_motion >= tolerance)
-                    ostr << "cut path = " << pr.work_motion << " | ";
+                    ostr << "Cut path = " << pr.work_motion << " | ";
                 if (tr.work_motion >= tolerance)
-                    ostr << "cut time = " << formatTime(tr.work_motion) << " | ";
+                    ostr << "Cut time = " << formatTime(tr.work_motion) << " | ";
 
                 pathTimeResult.emplace(std::make_pair(line_nbr - 1, ostr.str().c_str()));
             }
