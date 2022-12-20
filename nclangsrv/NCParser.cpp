@@ -287,6 +287,10 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
     std::string              text;
     const std::string        line_str("line 1");
     double                   prev_time_total{};
+    double                   total_work_motion_path{};
+    double                   total_work_motion_time{};
+    double                   total_fast_motion_path{};
+    double                   total_fast_motion_time{};
     std::stringstream        ss(code);
     std::vector<std::string> messages;
     PathTimeResult           pathTimeResult;
@@ -370,10 +374,18 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
         {
             auto pr = ap->get_path_result();
             auto tr = ap->get_time_result();
-            if (tr.total != prev_time_total || pr.fast_motion != 0 || pr.work_motion != 0)
+            if (tr.total != prev_time_total /*|| pr.fast_motion != 0 || pr.work_motion != 0*/)
             {
                 constexpr double tolerance = 1e-2;
                 prev_time_total            = tr.total;
+                if (pr.fast_motion != 0)
+                    total_fast_motion_path += pr.fast_motion;
+                if (tr.fast_motion != 0)
+                    total_fast_motion_time += tr.fast_motion;
+                if (pr.work_motion != 0)
+                    total_work_motion_path += pr.work_motion;
+                if (tr.work_motion != 0)
+                    total_work_motion_time += tr.work_motion;
                 std::ostringstream ostr;
                 ostr << std::fixed << std::setprecision(2) << " | ";
                 if (pr.total >= tolerance)
@@ -383,13 +395,13 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
                 if (pr.tool_total >= tolerance && pr.total - pr.tool_total >= tolerance)
                     ostr << "T" << pr.tool_id << " total path = " << pr.tool_total << " | ";
                 if (pr.fast_motion >= tolerance)
-                    ostr << "Rapid path = " << pr.fast_motion << " | ";
+                    ostr << "Total rapid path = " << total_fast_motion_path << " | ";
                 if (tr.fast_motion >= tolerance)
-                    ostr << "Rapid time = " << formatTime(tr.fast_motion) << " | ";
+                    ostr << "Total rapid time = " << formatTime(total_fast_motion_time) << " | ";
                 if (pr.work_motion >= tolerance)
-                    ostr << "Cut path = " << pr.work_motion << " | ";
+                    ostr << "Total cut path = " << total_work_motion_path << " | ";
                 if (tr.work_motion >= tolerance)
-                    ostr << "Cut time = " << formatTime(tr.work_motion) << " | ";
+                    ostr << "Total cut time = " << formatTime(total_work_motion_time) << " | ";
 
                 pathTimeResult.emplace(std::make_pair(line_nbr - 1, ostr.str().c_str()));
             }
