@@ -1,15 +1,15 @@
 {
 	"version": "1.0",
 	"descriptions": {
-		"0": {"Program stop" : ""},
-		"1": {"Optional program stop" : ""},
-		"2": {"End of program" : ""},
+		"0": {"Program stop" : "Automatic operation is stopped after a block containing M00 is executed. When the program is stopped, all existing modal information remains unchanged. The automatic operation can be restarted by actuating the cycle operation."},
+		"1": {"Optional program stop" : "Similarly to M00, automatic operation is stopped after a block containing M01 is executed. This code is only effective when the Optional Stop switch on the machine operator's panel has been pressed."},
+		"2": {"End of program" : "This indicates the end of the main program. Automatic operation is stopped and the CNC unit is reset. After a block specifying the end of the program is executed, control returns to the start of the program."},
 		"3": {"Spindle start forward CW" : ""},
 		"4": {"Spindle start reverse CCW" : ""},
 		"5": {"Spindle stop" : ""},
 		"6": {"Tool change" : ""},
-		"7": {"Coolant ON – ist coolant/Coolant thru spindle" : ""},
-		"8": {"Coolant ON – Flood coolant" : ""},
+		"7": {"Coolant ON" : "Coolant/Coolant thru spindle"},
+		"8": {"Coolant ON" : "Flood coolant"},
 		"9": {"Coolant OFF" : ""},
 		"19": {"Spindle orientation" : ""},
 		"28": {"Return to origin" : ""},
@@ -17,10 +17,10 @@
 		"30": {"End of program (Reset)" : ""},
 		"41": {"Low gear select" : ""},
 		"42": {"High gear select" : ""},
-		"94": {"Cancel mirrorimage" : ""},
-		"95": {"Mirrorimage of X axis" : ""},
-		"96": {"Mirrorimage of Y axis" : ""},
-		"98": {"Subprogram call" : ""},
-		"99": {"End of subprogram" : ""}
+		"94": {"Cancel mirror image" : ""},
+		"95": {"Mirror image of X axis" : ""},
+		"96": {"Mirror image of Y axis" : ""},
+		"98": {"Subprogram call" : "This code is used to call a subprogram."},
+		"99": {"End of subprogram" : "This code indicates the end of a subprogram. M99 execution returns control to the main program."}
 	}
 }
