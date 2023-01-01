@@ -60,7 +60,7 @@
         "#": {
             "word": "#",
             "range_from": 0,
-            "range_to": 9999,
+            "range_to": 99999,
             "decimal_from": 0,
             "decimal_to": 0,
             "unique": false,
@@ -422,7 +422,7 @@
         "#": {
             "word": "#",
             "range_from": 0,
-            "range_to": 9999,
+            "range_to": 99999,
             "decimal_from": 0,
             "decimal_to": 0,
             "unique": false,
@@ -568,7 +568,7 @@
             "range_from": -99999,
             "range_to": 99999,
             "decimal_from": 0,
-            "decimal_to": 999,
+            "decimal_to": 9999,
             "unique": true,
             "type": "length"
         },
@@ -577,7 +577,7 @@
             "range_from": -99999,
             "range_to": 99999,
             "decimal_from": 0,
-            "decimal_to": 999,
+            "decimal_to": 9999,
             "unique": true,
             "type": "length"
         },
@@ -586,7 +586,7 @@
             "range_from": -99999,
             "range_to": 99999,
             "decimal_from": 0,
-            "decimal_to": 999,
+            "decimal_to": 9999,
             "unique": true,
             "type": "length"
         },
@@ -694,7 +694,7 @@
             "range_from": -99999,
             "range_to": 99999,
             "decimal_from": 0,
-            "decimal_to": 999,
+            "decimal_to": 9999,
             "unique": true,
             "type": "length"
         },
@@ -703,7 +703,7 @@
             "range_from": -99999,
             "range_to": 99999,
             "decimal_from": 0,
-            "decimal_to": 999,
+            "decimal_to": 9999,
             "unique": true,
             "type": "length"
         },
@@ -712,7 +712,7 @@
             "range_from": -99999,
             "range_to": 99999,
             "decimal_from": 0,
-            "decimal_to": 999,
+            "decimal_to": 9999,
             "unique": true,
             "type": "length"
         },
@@ -721,7 +721,7 @@
             "range_from": -99999,
             "range_to": 99999,
             "decimal_from": 0,
-            "decimal_to": 999,
+            "decimal_to": 9999,
             "unique": true,
             "type": "length"
         },
@@ -730,7 +730,7 @@
             "range_from": -99999,
             "range_to": 99999,
             "decimal_from": 0,
-            "decimal_to": 999,
+            "decimal_to": 9999,
             "unique": true,
             "type": "length"
         },
@@ -739,7 +739,7 @@
             "range_from": -99999,
             "range_to": 99999,
             "decimal_from": 0,
-            "decimal_to": 999,
+            "decimal_to": 9999,
             "unique": true,
             "type": "length"
         },

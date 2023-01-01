@@ -60,7 +60,7 @@
         "#": {
             "word": "#",
             "range_from": 0,
-            "range_to": 9999,
+            "range_to": 99999,
             "decimal_from": 0,
             "decimal_to": 0,
             "unique": false,
@@ -323,7 +323,7 @@
             "range_from": 0,
             "range_to": 9999,
             "decimal_from": 0,
-            "decimal_to": 0,
+            "decimal_to": 9999,
             "unique": false,
             "type": "misc"
         },
@@ -422,7 +422,7 @@
         "#": {
             "word": "#",
             "range_from": 0,
-            "range_to": 9999,
+            "range_to": 99999,
             "decimal_from": 0,
             "decimal_to": 0,
             "unique": false,
@@ -685,7 +685,7 @@
             "range_from": 0,
             "range_to": 9999,
             "decimal_from": 0,
-            "decimal_to": 0,
+            "decimal_to": 9999,
             "unique": false,
             "type": "misc"
         },
