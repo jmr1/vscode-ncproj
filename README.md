@@ -6,19 +6,27 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.1.0 released
-  - New Features: Hovers for macro values and G/M codes with macros (i.e. G#1)
-
-  ![macro](./images/macro.png)
-  ![macro2](./images/macro2.png)
-  - Enhancements: Code completion description shown in the main list
-  - Bug fixes: Hovers sometimes not working properly due to mixed nc files context
+- Version 0.2.0 released
+  - New Features
+    - Code Lens showing computed path and time for given line of CNC code
+    ![macro](./images/codelens.png)
+    - Switch to toggle Code Lens: "NC Project: Toggle Path and Time Calculation"
+  - Enhancements
+    - Added synonim suggestions starting from 0 for G/M codes < 10, i.e. G1 and G01
+    - Extended list of supported file extensions by default
+    - Updated some of the CNC words allowed ranges and number of decimals after comma
+    - Extended code complection help and G-code groups for Fanuc mill
+  - Bug fixes
 
 ## Features
 
 - Code correctness and Code Groups validation
 - Code completion for G/M codes
 - Hovers for G/M codes, macro values and G/M codes with macros (i.e. G#1)
+
+  ![macro](./images/macro.png)
+  ![macro2](./images/macro2.png)
+- Code Lens showing computed path and time for given line of CNC code
 - Machine Tool and Driver configuration creation/selection
 - Syntax coloring
 - Status bar
