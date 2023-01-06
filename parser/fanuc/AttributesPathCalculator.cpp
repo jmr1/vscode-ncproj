@@ -63,6 +63,8 @@ public:
 
         if (itor != std::end(gcode_params))
         {
+            if (!data.value && !data.dot)
+                return;
             std::string tmp;
             // if(data.assign)
             //    tmp += *data.assign;
@@ -282,7 +284,7 @@ private:
     bool                                        was_comment{};
     bool                                        pallet_exchange{};
     bool                                        tool_measurement{};
-};
+}; // namespace fanuc
 
 struct copy_on_return
 {

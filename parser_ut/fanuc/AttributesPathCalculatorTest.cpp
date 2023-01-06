@@ -234,6 +234,49 @@ TEST_F(AttributesPathCalculatorTest, G90_absolute_programming)
            "G3 G17 X2 Y3 I2 J3");
 }
 
+TEST_F(AttributesPathCalculatorTest, Not_crash_test)
+{
+    std::map<std::string, PathResult> pvm;
+    fanuc::word_range_map             wrm;
+    fanuc::AttributesPathCalculator   apc(EMachineToolType::Mill, machine_points_data, kinematics, cnc_default_values,
+                                        ELanguage::Polish);
+
+    verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")}}, "T4");
+
+    verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
+           {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
+            fanuc::DecimalAttributeData{"Y", _, _, _, _, std::string("0")},
+            fanuc::DecimalAttributeData{"Z", _, _, _, _, std::string("0")}},
+           "X0 Y0 Z0");
+
+    verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {}, // <- here should be different Z value: -33.8 but currently
+                                                       // calculation in brackets next to axis is not supported
+           {
+               fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("1")},
+               fanuc::DecimalAttributeData{"Z", _, _, std::string("[")},
+               fanuc::DecimalAttributeData{"-", _, _, _, _, std::string("7"), '.', std::string("8")},
+               fanuc::DecimalAttributeData{"-", _, _, _, _, std::string("26"), _, _, std::string("]")},
+           },
+           "G1 Z[-7.8-26]");
+
+    verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {},
+           {
+               fanuc::DecimalAttributeData{"F", _, _, std::string("[")},
+               fanuc::DecimalAttributeData{"-", _, _, _, _, std::string("2")},
+               fanuc::DecimalAttributeData{"+", _, _, _, _, std::string("5"), _, _, std::string("]")},
+           },
+           "F[-2+5]");
+
+    verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {},
+           {
+               fanuc::DecimalAttributeData{"S", _, _, std::string("[")},
+               fanuc::DecimalAttributeData{"-", _, _, _, _, std::string("2")},
+               fanuc::DecimalAttributeData{"+", _, _, _, _, std::string("5"), _, _, std::string("]")},
+           },
+           "S[-2+5]");
+}
+
 TEST_F(AttributesPathCalculatorTest, Helix_360_full_arc_G90_absolute_programming)
 {
     std::map<std::string, PathResult> pvm;

@@ -625,6 +625,15 @@ TEST_F(AllAttributesParserTest, generalAttributes)
                fanuc::DecimalAttributeData{"C", _, _, _, _, std::string("25")},
            },
            true);
+
+    verify("G1 Z[-7.8-#26]",
+           {
+               fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("1")},
+               fanuc::DecimalAttributeData{"Z", _, _, std::string("[")},
+               fanuc::DecimalAttributeData{"-", _, _, _, _, std::string("7"), '.', std::string("8")},
+               fanuc::DecimalAttributeData{"-", _, _, _, std::string("#"), std::string("26"), _, _, std::string("]")},
+           },
+           true);
 }
 
 TEST_F(AllAttributesParserTest, programStart)

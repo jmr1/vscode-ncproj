@@ -6,9 +6,9 @@
 #include "MessageTextImpl.h"
 #include "ValueCalculator.h"
 
+#include <cmath>
 #include <iomanip>
 #include <limits>
-#include <cmath>
 
 #ifndef M_PI
 #define M_PI (3.14159265358979323846)
@@ -167,7 +167,7 @@ struct printer
     void operator()(program const& x) const
     {
         boost::apply_visitor(*this, x.first);
-        for (operation const &oper : x.rest)
+        for (operation const& oper : x.rest)
         {
             std::cout << ' ';
             (*this)(oper);
@@ -324,7 +324,7 @@ public:
     double operator()(program const& x) const
     {
         double state = boost::apply_visitor(*this, x.first);
-        for (operation const& oper: x.rest)
+        for (operation const& oper : x.rest)
         {
             state = (*this)(oper, state);
         }
