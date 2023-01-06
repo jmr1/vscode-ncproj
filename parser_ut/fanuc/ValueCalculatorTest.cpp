@@ -45,6 +45,9 @@ TEST_F(ValueCalculatorTest, generalCalculator)
     verify("ABS[-6]/2", 3., {}, true);
     verify("#1+#2", 5., {{{1, 1}, 2.}, {{2, 1}, 3.}}, true);
     verify("#[#1+#2]", 7., {{{1, 1}, 2.}, {{2, 1}, 3.}, {{5, 1}, 7.}}, true);
+    verify("8/2", 4., {}, true);
+    verify("[8/2]", 4., {}, true);
+    verify("[[8/2]]", 4., {}, true);
 }
 
 } // namespace fanuc_test

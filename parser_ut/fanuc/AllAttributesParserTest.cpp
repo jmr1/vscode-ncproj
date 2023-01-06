@@ -450,6 +450,96 @@ TEST_F(AllAttributesParserTest, generalAttributes)
            },
            true);
 
+    verify("#113=8/2",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, _, _, std::string("8")},
+               fanuc::DecimalAttributeData{"/", _, _, _, _, std::string("2")},
+           },
+           true);
+
+    verify("#113=8*2",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, _, _, std::string("8")},
+               fanuc::DecimalAttributeData{"*", _, _, _, _, std::string("2")},
+           },
+           true);
+
+    verify("#113=[8/2]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, std::string("["), _, std::string("8")},
+               fanuc::DecimalAttributeData{"/", _, _, _, _, std::string("2"), _, _, std::string("]")},
+           },
+           true);
+
+    verify("#113=8/2]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, _, _, std::string("8")},
+           },
+           false);
+
+    verify("#113=[8*2]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, std::string("["), _, std::string("8")},
+               fanuc::DecimalAttributeData{"*", _, _, _, _, std::string("2"), _, _, std::string("]")},
+           },
+           true);
+
+    verify("#113=8*2]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, _, _, std::string("8")},
+           },
+           false);
+
+    verify("#113=[[8/2]]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, std::string("[["), _, std::string("8")},
+               fanuc::DecimalAttributeData{"/", _, _, _, _, std::string("2"), _, _, std::string("]]")},
+           },
+           true);
+
+    verify("#113=[8/2]]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, std::string("["), _, std::string("8")},
+           },
+           false);
+
+    verify("#113=8/2]]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, _, _, std::string("8")},
+           },
+           false);
+
+    verify("#113=[[8*2]]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, std::string("[["), _, std::string("8")},
+               fanuc::DecimalAttributeData{"*", _, _, _, _, std::string("2"), _, _, std::string("]]")},
+           },
+           true);
+
+    verify("#113=[8*2]]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, std::string("["), _, std::string("8")},
+           },
+           false);
+
+    verify("#113=8*2]]",
+           {
+               fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("113")},
+               fanuc::DecimalAttributeData{"=", _, _, _, _, std::string("8")},
+           },
+           false);
+
     verify("#3=#1 OR #2",
            {
                fanuc::DecimalAttributeData{"#", _, _, _, _, std::string("3")},
@@ -669,7 +759,11 @@ TEST_F(AllAttributesParserTest, removeOptionalBlock)
         "/ G02", {fanuc::DecimalAttributeData{"/"}, fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("02")}},
         true);
 
+    verify_remove_optional_block("/] G02", {}, false);
+
     verify_remove_optional_block("/1 G02", {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("02")}}, true);
+
+    verify_remove_optional_block("/1] G02", {}, false);
 
     verify_remove_optional_block("/1/2 G02", {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("02")}}, true);
 

@@ -16,7 +16,8 @@ std::ostream& operator<<(std::ostream& ostr, const WordGrammar& grammar)
 }
 
 template <>
-bool verify_range(const word_map& word_grammar, const AttributeData<std::string>& data, std::string& message, ELanguage language)
+bool verify_range(const word_map& word_grammar, const AttributeData<std::string>& data, std::string& message,
+                  ELanguage language)
 {
     try
     {

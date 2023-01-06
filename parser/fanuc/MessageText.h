@@ -44,6 +44,7 @@ enum class MessageName
     DuplicateAddress,
     SNotAllowedWhenOperatorTurnsRotation,
     M3M4NotAllowedWhenOperatorTurnsRotation,
+    NonMatchingCloseBracket,
 
     COUNT // must be last
 };

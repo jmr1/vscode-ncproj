@@ -65,6 +65,7 @@ struct status
     bool was_macro;
     bool was_macro_equal;
     int  open_bracket;
+    int  close_bracket;
 };
 
 template <typename T>
@@ -102,6 +103,9 @@ template <typename T, typename U>
 bool verify_range(const word_map& word_grammar, const AttributeDataDecimal<T, U>& data, std::string& message,
                   ELanguage language, status& st)
 {
+    if (data.open_bracket)
+        st.open_bracket += static_cast<int>((*data.open_bracket).size());
+
     auto it = word_grammar.find(data.word);
     if (it == std::end(word_grammar))
         return true;
@@ -111,8 +115,14 @@ bool verify_range(const word_map& word_grammar, const AttributeDataDecimal<T, U>
         st.was_macro = true;
     else if (st.was_macro && data.word == "=")
         st.was_macro_equal = true;
-    if (data.open_bracket)
-        st.open_bracket += static_cast<int>((*data.open_bracket).size());
+    if (data.close_bracket)
+        st.close_bracket += static_cast<int>((*data.close_bracket).size());
+
+    if (data.close_bracket && st.open_bracket - st.close_bracket < 0)
+    {
+        message += make_message(MessageName::NonMatchingCloseBracket, language);
+        return false;
+    }
 
     if (data.macro)
     {
@@ -179,7 +189,10 @@ bool verify_range(const word_map& word_grammar, const AttributeDataDecimal<T, U>
             if (st.open_bracket > 0)
             {
                 if (data.close_bracket)
+                {
                     st.open_bracket -= static_cast<int>((*data.close_bracket).size());
+                    st.close_bracket -= static_cast<int>((*data.close_bracket).size());
+                }
                 return true;
             }
             if (!st.was_macro || !st.was_macro_equal)
@@ -309,24 +322,61 @@ public:
     optional_block_grammar(const word_map& word_grammar, std::string& message, ELanguage language, status& st)
         : optional_block_grammar::base_type(start_optional_block)
     {
-        attr_value  = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type1>();
-        attr_value2 = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type2>();
+        digits      = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type1>();
+        digits_tens = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type2>();
         auto verify_range_bind =
             phx::bind(verify_range<DecimalAttributeData::type1, DecimalAttributeData::type2>, phx::cref(word_grammar),
                       qi::_val, phx::ref(message), language, phx::ref(st));
 
+        close_bracket = +qi::string("]");
+
+        // Note: division including closing brackets is handled in either division_attribute_grammar or here
         optional_block = qi::char_("/") > &!qi::lit('/') > qi::attr(boost::none) > -qi::char_("-+") >
-                         qi::attr(boost::none) > -qi::string("#") > qi::lexeme[-attr_value] >
-                         qi::no_skip[-qi::char_('.')] > qi::no_skip[-attr_value2] > qi::attr(boost::none);
+                         qi::attr(boost::none) > -qi::string("#") > qi::lexeme[-digits] > qi::no_skip[-qi::char_('.')] >
+                         qi::no_skip[-digits_tens] > -close_bracket;
         start_optional_block %= optional_block[qi::_pass = verify_range_bind];
-        BOOST_SPIRIT_DEBUG_NODES((attr_value)(attr_value2)(optional_block) /*(start_optional_block)*/);
+        BOOST_SPIRIT_DEBUG_NODES((digits)(digits_tens)(optional_block) /*(start_optional_block)*/);
     }
 
 private:
-    qi::rule<Iterator, DecimalAttributeData::type1()>          attr_value;
-    qi::rule<Iterator, DecimalAttributeData::type2()>          attr_value2;
+    qi::rule<Iterator, DecimalAttributeData::type1()>          digits;
+    qi::rule<Iterator, DecimalAttributeData::type2()>          digits_tens;
+    qi::rule<Iterator, std::string()>                          close_bracket;
     qi::rule<Iterator, DecimalAttributeData(), qi::blank_type> optional_block;
     qi::rule<Iterator, DecimalAttributeData(), qi::blank_type> start_optional_block;
+};
+
+template <typename Iterator>
+class division_attribute_grammar : public qi::grammar<Iterator, DecimalAttributeData(), qi::blank_type>
+{
+public:
+    division_attribute_grammar(const word_map& word_grammar, std::string& message, ELanguage language, status& st)
+        : division_attribute_grammar::base_type(start_division_attribute)
+    {
+        digits      = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type1>();
+        digits_tens = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type2>();
+        auto verify_range_bind =
+            phx::bind(verify_range<DecimalAttributeData::type1, DecimalAttributeData::type2>, phx::cref(word_grammar),
+                      qi::_val, phx::ref(message), language, phx::ref(st));
+
+        open_bracket  = +qi::string("[");
+        close_bracket = +qi::string("]");
+        // Note: division including closing brackets is handled in either optional_block_grammar or here
+        division_attribute = qi::char_("/") > &!qi::lit('/') > qi::attr(boost::none) > -qi::char_("-+") >
+                             -open_bracket > -qi::string("#") > qi::lexeme[-digits] > qi::no_skip[-qi::char_('.')] >
+                             qi::no_skip[-digits_tens] > -close_bracket;
+        start_division_attribute %= division_attribute[qi::_pass = verify_range_bind];
+        BOOST_SPIRIT_DEBUG_NODES(
+            (digits)(digits_tens)(open_bracket)(close_bracket)(division_attribute) /*(start_division_attribute)*/);
+    }
+
+private:
+    qi::rule<Iterator, DecimalAttributeData::type1()>          digits;
+    qi::rule<Iterator, DecimalAttributeData::type2()>          digits_tens;
+    qi::rule<Iterator, std::string()>                          open_bracket;
+    qi::rule<Iterator, std::string()>                          close_bracket;
+    qi::rule<Iterator, DecimalAttributeData(), qi::blank_type> division_attribute;
+    qi::rule<Iterator, DecimalAttributeData(), qi::blank_type> start_division_attribute;
 };
 
 template <typename Iterator>
@@ -337,27 +387,27 @@ public:
                                  ELanguage language, status& st)
         : assignable_attribute_grammar::base_type(start_assignable_attribute)
     {
-        attr_value  = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type1>();
-        attr_value2 = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type2>();
+        digits      = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type1>();
+        digits_tens = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type2>();
         auto verify_range_bind =
             phx::bind(verify_range<DecimalAttributeData::type1, DecimalAttributeData::type2>, phx::cref(word_grammar),
                       qi::_val, phx::ref(message), language, phx::ref(st));
 
-        attr_string          = +qi::string("[");
-        attr_string2         = +qi::string("]");
-        assignable_attribute = symbols > qi::char_("=") > -qi::char_("-+") > -attr_string > -qi::string("#") >
-                               qi::lexeme[-attr_value] > qi::no_skip[-qi::char_('.')] > qi::no_skip[-attr_value2] >
-                               -attr_string2;
+        open_bracket         = +qi::string("[");
+        close_bracket        = +qi::string("]");
+        assignable_attribute = symbols > qi::char_("=") > -qi::char_("-+") > -open_bracket > -qi::string("#") >
+                               qi::lexeme[-digits] > qi::no_skip[-qi::char_('.')] > qi::no_skip[-digits_tens] >
+                               -close_bracket;
         start_assignable_attribute %= assignable_attribute[qi::_pass = verify_range_bind];
-        BOOST_SPIRIT_DEBUG_NODES((attr_value)(attr_value2)(attr_string)(attr_string2)(
-            assignable_attribute) /*(start_assignable_attribute)*/);
+        BOOST_SPIRIT_DEBUG_NODES(
+            (digits)(digits_tens)(open_bracket)(close_bracket)(assignable_attribute) /*(start_assignable_attribute)*/);
     }
 
 private:
-    qi::rule<Iterator, DecimalAttributeData::type1()>          attr_value;
-    qi::rule<Iterator, DecimalAttributeData::type2()>          attr_value2;
-    qi::rule<Iterator, std::string()>                          attr_string;
-    qi::rule<Iterator, std::string()>                          attr_string2;
+    qi::rule<Iterator, DecimalAttributeData::type1()>          digits;
+    qi::rule<Iterator, DecimalAttributeData::type2()>          digits_tens;
+    qi::rule<Iterator, std::string()>                          open_bracket;
+    qi::rule<Iterator, std::string()>                          close_bracket;
     qi::rule<Iterator, DecimalAttributeData(), qi::blank_type> assignable_attribute;
     qi::rule<Iterator, DecimalAttributeData(), qi::blank_type> start_assignable_attribute;
 };
@@ -371,27 +421,29 @@ public:
                               status& st)
         : decimal_attribute_grammar::base_type(start_decimal_attribute)
     {
-        attr_value  = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type1>();
-        attr_value2 = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type2>();
+        digits      = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type1>();
+        digits_tens = +qi::char_("0-9"); // get_spirit_parser<DecimalAttributeData::type2>();
         auto verify_range_bind =
             phx::bind(verify_range<DecimalAttributeData::type1, DecimalAttributeData::type2>, phx::cref(word_grammar),
                       qi::_val, phx::ref(message), language, phx::ref(st));
 
-        attr_string       = +qi::string("[");
-        attr_string2      = +qi::string("]");
+        open_bracket  = +qi::string("[");
+        close_bracket = +qi::string("]");
+        // Note: division including closing brackets is handled in either optional_block_grammar or
+        // division_attribute_grammar
         decimal_attribute = (&!(assignable_symbols >> qi::lit('=')) >> symbols) > qi::attr(boost::none) >
-                            -qi::char_("-+") > -attr_string > -qi::string("#") > qi::lexeme[-attr_value] >
-                            qi::no_skip[-qi::char_('.')] > qi::no_skip[-attr_value2] > -attr_string2;
+                            -qi::char_("-+") > -open_bracket > -qi::string("#") > qi::lexeme[-digits] >
+                            qi::no_skip[-qi::char_('.')] > qi::no_skip[-digits_tens] > -close_bracket;
         start_decimal_attribute %= decimal_attribute[qi::_pass = verify_range_bind];
         BOOST_SPIRIT_DEBUG_NODES(
-            (attr_value)(attr_value2)(attr_string)(attr_string2)(decimal_attribute) /*(start_decimal_attribute)*/);
+            (digits)(digits_tens)(open_bracket)(close_bracket)(decimal_attribute) /*(start_decimal_attribute)*/);
     }
 
 private:
-    qi::rule<Iterator, DecimalAttributeData::type1()>          attr_value;
-    qi::rule<Iterator, DecimalAttributeData::type2()>          attr_value2;
-    qi::rule<Iterator, std::string()>                          attr_string;
-    qi::rule<Iterator, std::string()>                          attr_string2;
+    qi::rule<Iterator, DecimalAttributeData::type1()>          digits;
+    qi::rule<Iterator, DecimalAttributeData::type2()>          digits_tens;
+    qi::rule<Iterator, std::string()>                          open_bracket;
+    qi::rule<Iterator, std::string()>                          close_bracket;
     qi::rule<Iterator, DecimalAttributeData(), qi::blank_type> decimal_attribute;
     qi::rule<Iterator, DecimalAttributeData(), qi::blank_type> start_decimal_attribute;
 };
@@ -406,10 +458,11 @@ public:
         , char_eag_rule(char_sym)
         , optional_block_rule(word_grammar, message, language, st)
         , decimal_sag_rule(word_grammar, decimal_sym, assignable_sym, message, language, st)
+        , division_sag_rule(word_grammar, message, language, st)
         , assignable_sag_rule(word_grammar, assignable_sym, message, language, st)
     {
-        line_attribute = (qi::no_skip[char_eag_rule] | decimal_sag_rule | assignable_sag_rule | optional_block_rule |
-                          comment_rule | start_program_rule | program_name_rule);
+        line_attribute     = (qi::no_skip[char_eag_rule] | decimal_sag_rule | division_sag_rule | assignable_sag_rule |
+                          optional_block_rule | comment_rule | start_program_rule | program_name_rule);
         line_attribute_vec = +line_attribute > qi::eoi;
         BOOST_SPIRIT_DEBUG_NODES((line_attribute)(line_attribute_vec));
     }
@@ -418,6 +471,7 @@ private:
     space_empty_attribute_grammar<Iterator>                             char_eag_rule;
     optional_block_grammar<Iterator, int>                               optional_block_rule;
     decimal_attribute_grammar<Iterator>                                 decimal_sag_rule;
+    division_attribute_grammar<Iterator>                                division_sag_rule;
     assignable_attribute_grammar<Iterator>                              assignable_sag_rule;
     comment_attribute_grammar<Iterator>                                 comment_rule;
     start_program_grammar<Iterator>                                     start_program_rule;
