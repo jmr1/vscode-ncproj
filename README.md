@@ -6,17 +6,12 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.2.0 released
+- Version 0.2.1 released
   - New Features
-    - Code Lens showing computed path and time for given line of CNC code
-    ![macro](./images/codelens.png)
-    - Switch to toggle Code Lens: "NC Project: Toggle Path and Time Calculation"
   - Enhancements
-    - Added synonim suggestions starting from 0 for G/M codes < 10, i.e. G1 and G01
-    - Extended list of supported file extensions by default
-    - Updated some of the CNC words allowed ranges and number of decimals after comma
-    - Extended code complection help and G-code groups for Fanuc mill
   - Bug fixes
+    - Parser crash when axis contained value in brackets where first value was negative, i.e. Z[-7.8-#26]
+    - Handle division math operation inside brackets correctly, i.e. #1=[8/2]
 
 ## Features
 
@@ -27,6 +22,8 @@ Develop and validate CNC programs.
   ![macro](./images/macro.png)
   ![macro2](./images/macro2.png)
 - Code Lens showing computed path and time for given line of CNC code
+  Switch to toggle Code Lens: "NC Project: Toggle Path and Time Calculation"
+  ![macro](./images/codelens.png)
 - Machine Tool and Driver configuration creation/selection
 - Syntax coloring
 - Status bar
