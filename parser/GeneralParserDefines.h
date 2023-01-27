@@ -28,7 +28,9 @@ RIGHT_STREAM_OP_DECL(ECncType)
 
 enum class EFanucParserType
 {
-    FanucLathe,
+    FanucLatheSystemA,
+    FanucLatheSystemB,
+    FanucLatheSystemC,
     FanucMill,
     GenericLathe,
     GenericMill,

@@ -233,7 +233,9 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
 
     switch (fanuc_parser_type)
     {
-    case EFanucParserType::FanucLathe:
+    case EFanucParserType::FanucLatheSystemA:
+    case EFanucParserType::FanucLatheSystemB:
+    case EFanucParserType::FanucLatheSystemC:
     case EFanucParserType::FanucMill:
         cnc_type = ECncType::Fanuc;
         break;

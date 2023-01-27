@@ -20,7 +20,7 @@
 		"79": {"Tailstock reversing" : ""},
 		"94": {"Mirrorimage cancel" : ""},
 		"95": {"Mirrorimage of X axis" : ""},
-		"98": {"Subprogram call" : ""},
+		"98": {"Calling of subprogram" : ""},
 		"99": {"End of subprogram" : ""}
 	}
 }

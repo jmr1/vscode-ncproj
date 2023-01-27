@@ -20,7 +20,9 @@ namespace parser
 
     public enum FanucParserType
     {
-        FanucLathe,
+        FanucLatheSystemA,
+        FanucLatheSystemB,
+        FanucLatheSystemC,
         FanucMill,
         GenericLathe,
         GenericMill,

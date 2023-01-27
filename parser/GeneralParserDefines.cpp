@@ -51,8 +51,12 @@ std::string to_string(EFanucParserType e)
 {
     switch (e)
     {
-    case EFanucParserType::FanucLathe:
-        return "fanuc_lathe";
+    case EFanucParserType::FanucLatheSystemA:
+        return "fanuc_lathe_system_a";
+    case EFanucParserType::FanucLatheSystemB:
+        return "fanuc_lathe_system_b";
+    case EFanucParserType::FanucLatheSystemC:
+        return "fanuc_lathe_system_c";
     case EFanucParserType::FanucMill:
         return "fanuc_mill";
     case EFanucParserType::GenericLathe:
@@ -72,8 +76,12 @@ std::string to_string(EFanucParserType e)
 
 EFanucParserType to_EFanucParserType(const std::string& s)
 {
-    if (s == "fanuc_lathe")
-        return EFanucParserType::FanucLathe;
+    if (s == "fanuc_lathe_system_a")
+        return EFanucParserType::FanucLatheSystemA;
+    if (s == "fanuc_lathe_system_b")
+        return EFanucParserType::FanucLatheSystemB;
+    if (s == "fanuc_lathe_system_c")
+        return EFanucParserType::FanucLatheSystemC;
     else if (s == "fanuc_mill")
         return EFanucParserType::FanucMill;
     if (s == "generic_lathe")

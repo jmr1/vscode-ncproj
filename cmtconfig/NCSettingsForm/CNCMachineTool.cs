@@ -67,7 +67,9 @@ namespace cmtconfig
                         case Driver.makino_mill:
                             comboBoxDriver.Items.Add(new ComboboxItem(ncSettingsName.driver_name[element], element.ToString(), element));
                             break;
-                        case Driver.fanuc_lathe:
+                        case Driver.fanuc_lathe_system_a:
+                        case Driver.fanuc_lathe_system_b:
+                        case Driver.fanuc_lathe_system_c:
                         case Driver.generic_lathe:
                         case Driver.haas_lathe:
                             break;
@@ -97,7 +99,9 @@ namespace cmtconfig
                         if (machine.Value.type != MachineToolType.mill)
                             continue;
                         break;
-                    case Driver.fanuc_lathe:
+                    case Driver.fanuc_lathe_system_a:
+                    case Driver.fanuc_lathe_system_b:
+                    case Driver.fanuc_lathe_system_c:
                     case Driver.generic_lathe:
                         if (machine.Value.type != MachineToolType.lathe && machine.Value.type != MachineToolType.millturn)
                             continue;

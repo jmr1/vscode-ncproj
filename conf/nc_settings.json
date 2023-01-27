@@ -3,7 +3,9 @@
   "driver_default": "fanuc_mill",
   "driver_list": [
     "fanuc_mill",
-    "fanuc_lathe",
+    "fanuc_lathe_system_a",
+    "fanuc_lathe_system_b",
+    "fanuc_lathe_system_c",
     "generic_mill",
     "generic_lathe",
     "haas_mill",

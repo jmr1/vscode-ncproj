@@ -38,7 +38,9 @@ namespace cmtconfig
     public enum Driver
     {
         fanuc_mill,
-        fanuc_lathe,
+        fanuc_lathe_system_a,
+        fanuc_lathe_system_b,
+        fanuc_lathe_system_c,
         generic_mill,
         generic_lathe,
         haas_mill,
