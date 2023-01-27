@@ -72,6 +72,7 @@ namespace cmtconfig
                         case Driver.fanuc_lathe_system_c:
                         case Driver.generic_lathe:
                         case Driver.haas_lathe:
+                            comboBoxDriver.Items.Add(new ComboboxItem(ncSettingsName.driver_name[element], element.ToString(), element));
                             break;
                         case Driver.heidenhain:
                             break;
