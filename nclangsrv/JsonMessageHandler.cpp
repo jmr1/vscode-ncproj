@@ -565,7 +565,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
                 auto it = mGCodes->getDesc().find(code);
                 if (it != mGCodes->getDesc().cend())
-                    contents = contents + ": " + it->second.first;
+                    contents = contents + ": " + it->second.first + "\n-\n" + it->second.second;
             }
             else if (contents[0] == 'M' || contents[0] == 'm')
             {
@@ -573,7 +573,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
                 auto it = mMCodes->getDesc().find(code);
                 if (it != mMCodes->getDesc().cend())
-                    contents = contents + ": " + it->second.first;
+                    contents = contents + ": " + it->second.first + "\n-\n" + it->second.second;
             }
 
             if (!contents.empty())
@@ -606,14 +606,14 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                         contents = contents + " (G" + gmcode + ")";
                         auto it  = mGCodes->getDesc().find(gmcode);
                         if (it != mGCodes->getDesc().cend())
-                            contents = contents + ": " + it->second.first;
+                            contents = contents + ": " + it->second.first + "\n-\n" + it->second.second;
                     }
                     else if (contents[0] == 'M' || contents[0] == 'm')
                     {
                         contents = contents + " (M" + gmcode + ")";
                         auto it  = mMCodes->getDesc().find(gmcode);
                         if (it != mMCodes->getDesc().cend())
-                            contents = contents + ": " + it->second.first;
+                            contents = contents + ": " + it->second.first + "\n-\n" + it->second.second;
                     }
 
                     if (!contents.empty())
