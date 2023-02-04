@@ -134,7 +134,7 @@ std::string formatTime(double doubleSeconds)
     auto milliseconds = absInt % 1000;
 
     if (hours > 0)
-        s << std::setfill('0') << hours << "::";
+        s << std::setfill('0') << hours << ":";
 
     s << minutes << std::setfill('0') << ":" << std::setw(2) << secondsx << "." << std::setw(3) << milliseconds;
 
