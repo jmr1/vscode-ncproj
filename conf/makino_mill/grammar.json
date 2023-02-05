@@ -170,7 +170,7 @@
             "range_from": -999,
             "range_to": 999,
             "decimal_from": 0,
-            "decimal_to": 0,
+            "decimal_to": 999,
             "unique": false,
             "type": "misc"
         },
@@ -532,7 +532,7 @@
             "range_from": -999,
             "range_to": 999,
             "decimal_from": 0,
-            "decimal_to": 0,
+            "decimal_to": 999,
             "unique": false,
             "type": "misc"
         },
