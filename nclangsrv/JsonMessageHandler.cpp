@@ -20,7 +20,7 @@
 
 namespace fs = std::filesystem;
 
-#ifdef _MSC_VER
+#ifdef _WIN64
 #define MSG_ENDL "\n"
 #else
 #define MSG_ENDL "\r\n"
