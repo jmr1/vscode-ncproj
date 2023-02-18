@@ -501,6 +501,19 @@ void JsonMessageHandler::completionItem_resolve(const rapidjson::Document& reque
     std::cout.flush();
 }
 
+std::string replaceAll(const std::string& str1, const std::string& from, const std::string& to)
+{
+    std::string str       = str1;
+    size_t      start_pos = 0;
+    while ((start_pos = str.find(from, start_pos)) != std::string::npos)
+    {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length();
+    }
+
+    return str;
+}
+
 void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 {
     const auto& params       = request["params"];
@@ -565,7 +578,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
                 auto it = mGCodes->getDesc().find(code);
                 if (it != mGCodes->getDesc().cend())
-                    contents = contents + ": " + it->second.first + "\n-\n" + it->second.second;
+                    contents += ": " + it->second.first + "\n-\n" + replaceAll(it->second.second, "\n", "\n-\n");
             }
             else if (contents[0] == 'M' || contents[0] == 'm')
             {
@@ -573,7 +586,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
                 auto it = mMCodes->getDesc().find(code);
                 if (it != mMCodes->getDesc().cend())
-                    contents = contents + ": " + it->second.first + "\n-\n" + it->second.second;
+                    contents += ": " + it->second.first + "\n-\n" + replaceAll(it->second.second, "\n", "\n-\n");
             }
 
             if (!contents.empty())
@@ -606,14 +619,16 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                         contents = contents + " (G" + gmcode + ")";
                         auto it  = mGCodes->getDesc().find(gmcode);
                         if (it != mGCodes->getDesc().cend())
-                            contents = contents + ": " + it->second.first + "\n-\n" + it->second.second;
+                            contents +=
+                                ": " + it->second.first + "\n-\n" + replaceAll(it->second.second, "\n", "\n-\n");
                     }
                     else if (contents[0] == 'M' || contents[0] == 'm')
                     {
                         contents = contents + " (M" + gmcode + ")";
                         auto it  = mMCodes->getDesc().find(gmcode);
                         if (it != mMCodes->getDesc().cend())
-                            contents = contents + ": " + it->second.first + "\n-\n" + it->second.second;
+                            contents +=
+                                ": " + it->second.first + "\n-\n" + replaceAll(it->second.second, "\n", "\n-\n");
                     }
 
                     if (!contents.empty())
