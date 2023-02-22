@@ -163,6 +163,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
         return {{"ERROR: Couldn't read .ncsetting file"}, {}, {}};
 
     const auto fanuc_parser_type = mNcSettingsReader.getFanucParserType();
+    const auto machine_tool      = mNcSettingsReader.getMachineTool();
     const auto machine_tool_type = mNcSettingsReader.getMachineToolType();
 
     if (!mWordGrammarReader.get())
@@ -280,7 +281,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
     }
     }
 
-    ap->set_ncsettings(machine_tool_type, std::move(machine_points_data), std::move(kinematics),
+    ap->set_ncsettings(machine_tool, machine_tool_type, std::move(machine_points_data), std::move(kinematics),
                        std::move(cnc_default_values), std::move(zero_point));
 
     size_t                   line_nbr{};

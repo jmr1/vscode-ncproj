@@ -42,9 +42,9 @@ public:
 
     virtual void set_parser_settings(const ParserSettings& parser_settings) override;
 
-    virtual void set_ncsettings(EMachineToolType machine_tool_type, MachinePointsData&& machine_points_data,
-                                Kinematics&& kinematics, CncDefaultValues&& cnc_default_values,
-                                ZeroPoint&& zero_point) override;
+    virtual void set_ncsettings(EMachineTool machine_tool, EMachineToolType machine_tool_type,
+                                MachinePointsData&& machine_points_data, Kinematics&& kinematics,
+                                CncDefaultValues&& cnc_default_values, ZeroPoint&& zero_point) override;
 
     virtual EDriverUnits get_unit_system() const override
     {

@@ -52,6 +52,36 @@ enum class EMachineToolType
 LEFT_STREAM_OP_DECL(EMachineToolType)
 RIGHT_STREAM_OP_DECL(EMachineToolType)
 
+enum class EMachineTool
+{
+    mill_3axis,
+    mill_4axis,
+    mill_4axis_horizontal,
+    mill_4axis_horizontal_pinola,
+    mill_4axis_head_gantry,
+    mill_5axis_head_head_gantry,
+    mill_5axis_head_table_gantry,
+    mill_5axis_table_table,
+    mill_5axis_table_tilt,
+    mill_5axis_head_table,
+    mill_5axis_horizontal_table_table,
+    mill_5axis_horizontal_table_table_pinola,
+    lathe_zx,
+    lathe_zxc,
+    lathe_zxcy,
+    lathe_zxcy_steady,
+    millturn_XYZBC,
+    millturn_XYZBC_steady,
+    millturn_XYZBC_C2,
+    millturn_XYZBC_C2_steady,
+    millturn_XYZBC_C2_Lower_Left_Turret,
+    millturn_XYZBC_C2_Lower_Right_Turret,
+    millturn_XYZBC_C2_Lower_LeftRight_Turret,
+};
+
+LEFT_STREAM_OP_DECL(EMachineTool)
+RIGHT_STREAM_OP_DECL(EMachineTool)
+
 struct ParserSettings
 {
     bool evaluate_macro;

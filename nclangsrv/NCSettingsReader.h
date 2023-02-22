@@ -32,6 +32,10 @@ public:
     {
         return mCncDefaultValues;
     }
+    parser::EMachineTool getMachineTool() const
+    {
+        return mMachineTool;
+    }
     parser::EMachineToolType getMachineToolType() const
     {
         return mMachineToolType;
@@ -50,6 +54,7 @@ private:
     parser::MachinePointsData mMachinePointsData{};
     parser::Kinematics        mKinematics{};
     parser::CncDefaultValues  mCncDefaultValues{};
+    parser::EMachineTool      mMachineTool{};
     parser::EMachineToolType  mMachineToolType{};
     parser::EFanucParserType  mFanucParserType{};
     bool                      mRead{};

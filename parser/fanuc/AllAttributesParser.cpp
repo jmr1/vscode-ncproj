@@ -100,14 +100,15 @@ void AllAttributesParser::renumber_reset()
     renumberer.reset();
 }
 
-void AllAttributesParser::set_ncsettings(EMachineToolType machine_tool_type, MachinePointsData&& machine_points_data,
-                                         Kinematics&& kinematics, CncDefaultValues&& cnc_default_values,
-                                         ZeroPoint&& zero_point)
+void AllAttributesParser::set_ncsettings(EMachineTool machine_tool, EMachineToolType machine_tool_type,
+                                         MachinePointsData&& machine_points_data, Kinematics&& kinematics,
+                                         CncDefaultValues&& cnc_default_values, ZeroPoint&& zero_point)
 {
+    this->machine_tool      = machine_tool;
     this->machine_tool_type = machine_tool_type;
     this->zero_point        = std::move(zero_point);
     active_word_grammar     = cnc_default_values.default_driver_units == EDriverUnits::Millimeter ? &word_grammar.metric
-                                                                                              : &word_grammar.imperial;
+                                                                                                  : &word_grammar.imperial;
     MachinePointsData machine_points_data_zero_point;
 
     const std::map<std::string, double> zero_point_axis_map = {
@@ -125,8 +126,9 @@ void AllAttributesParser::set_ncsettings(EMachineToolType machine_tool_type, Mac
             it.second - zero_point_axis_map.count(it.first) ? zero_point_axis_map.at(it.first) : 0;
     }
 
-    attr_path_calc = std::make_unique<AttributesPathCalculator>(
-        machine_tool_type, machine_points_data_zero_point, kinematics, cnc_default_values, other_settings.language);
+    attr_path_calc =
+        std::make_unique<AttributesPathCalculator>(machine_tool, machine_tool_type, machine_points_data_zero_point,
+                                                   kinematics, cnc_default_values, other_settings.language);
 }
 
 void AllAttributesParser::build_symbols()

@@ -32,9 +32,9 @@ void AllAttributesParser::set_parser_settings(const ParserSettings& parser_setti
     this->parser_settings = parser_settings;
 }
 
-void AllAttributesParser::set_ncsettings(EMachineToolType machine_tool_type, MachinePointsData&& machine_points_data,
-                                         Kinematics&& kinematics, CncDefaultValues&& cnc_default_values,
-                                         ZeroPoint&& zero_point)
+void AllAttributesParser::set_ncsettings(EMachineTool machine_tool, EMachineToolType machine_tool_type,
+                                         MachinePointsData&& machine_points_data, Kinematics&& kinematics,
+                                         CncDefaultValues&& cnc_default_values, ZeroPoint&& zero_point)
 {
     this->zero_point = std::move(zero_point);
     // active_word_grammar = cnc_default_values.default_driver_units == EDriverUnits::Millimeter ? &word_grammar.metric
@@ -103,12 +103,11 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
         }
         else
         {
-            if(other_settings.language == ELanguage::Polish)
+            if (other_settings.language == ELanguage::Polish)
             {
-                msg <<
-                    u8"Błąd parsowania w linii " << pos.line << u8" kolumna " << pos.column << ":" << std::endl <<
-                    "'" << e.first.get_currentline() << "'" << std::endl <<
-                    std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj" : "^- " + message) << std::endl;
+                msg << u8"Błąd parsowania w linii " << pos.line << u8" kolumna " << pos.column << ":" << std::endl
+                    << "'" << e.first.get_currentline() << "'" << std::endl
+                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj" : "^- " + message) << std::endl;
             }
             else
             {
@@ -160,12 +159,11 @@ bool AllAttributesParser::simple_parse(int line, const std::string& data, std::v
         }
         else
         {
-            if(other_settings.language == ELanguage::Polish)
+            if (other_settings.language == ELanguage::Polish)
             {
-                msg <<
-                    u8"Błąd parsowania w linii " << pos.line << u8" kolumna " << pos.column << ":" << std::endl <<
-                    "'" << e.first.get_currentline() << "'" << std::endl <<
-                    std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj" : "^- " + message) << std::endl;
+                msg << u8"Błąd parsowania w linii " << pos.line << u8" kolumna " << pos.column << ":" << std::endl
+                    << "'" << e.first.get_currentline() << "'" << std::endl
+                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj" : "^- " + message) << std::endl;
             }
             else
             {

@@ -211,7 +211,7 @@ Kinematics fill_kinematics(KinematicsWrapper* kinematics_wrapper, AxisParameters
     return kinematics;
 }
 
-void SetNCSettings(AllAttributesParserWrapperBase* ptr, EMachineToolType machine_tool_type,
+void SetNCSettings(AllAttributesParserWrapperBase* ptr, EMachineTool machine_tool, EMachineToolType machine_tool_type,
                    char** machine_base_point_default_keys, double* machine_base_point_default_vals,
                    int machine_base_point_default_length, char** tool_exchange_point_default_keys,
                    double* tool_exchange_point_default_vals, int tool_exchange_point_default_length,
@@ -219,7 +219,7 @@ void SetNCSettings(AllAttributesParserWrapperBase* ptr, EMachineToolType machine
                    int kinematics_axis_parameters_length, CncDefaultValues* cnc_default_values, ZeroPoint* zero_point)
 {
     ptr->get_parser()->set_ncsettings(
-        machine_tool_type,
+        machine_tool, machine_tool_type,
         makeMachinePointsData(machine_base_point_default_length, machine_base_point_default_keys,
                               machine_base_point_default_vals, tool_exchange_point_default_length,
                               tool_exchange_point_default_keys, tool_exchange_point_default_vals),

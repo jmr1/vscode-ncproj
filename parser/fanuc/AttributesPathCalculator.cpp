@@ -379,10 +379,11 @@ private:
     const EProgrammingType&              g9091;
 };
 
-AttributesPathCalculator::AttributesPathCalculator(EMachineToolType    machine_tool_type,
+AttributesPathCalculator::AttributesPathCalculator(EMachineTool machine_tool, EMachineToolType machine_tool_type,
                                                    MachinePointsData&& machine_points_data, Kinematics&& kinematics,
                                                    CncDefaultValues&& cnc_default_values, ELanguage language)
-    : machine_tool_type(machine_tool_type)
+    : machine_tool(machine_tool)
+    , machine_tool_type(machine_tool_type)
     , machine_points_data(std::move(machine_points_data))
     , kinematics(std::move(kinematics))
     , cnc_default_values(std::move(cnc_default_values))
@@ -397,11 +398,12 @@ AttributesPathCalculator::AttributesPathCalculator(EMachineToolType    machine_t
     copy_on_return cr{active_g, active_g9091, machine_points_data.machine_base_point, prev_values, word_range};
 }
 
-AttributesPathCalculator::AttributesPathCalculator(EMachineToolType         machine_tool_type,
+AttributesPathCalculator::AttributesPathCalculator(EMachineTool machine_tool, EMachineToolType machine_tool_type,
                                                    const MachinePointsData& machine_points_data,
                                                    const Kinematics&        kinematics,
                                                    const CncDefaultValues& cnc_default_values, ELanguage language)
-    : machine_tool_type(machine_tool_type)
+    : machine_tool(machine_tool)
+    , machine_tool_type(machine_tool_type)
     , machine_points_data(machine_points_data)
     , kinematics(kinematics)
     , cnc_default_values(cnc_default_values)
@@ -644,18 +646,15 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
             if (zit_prev == std::end(prev_values))
                 throw path_calc_exception(make_message(MessageName::MissingPreviousValue, language, "Z"));
 
-            const auto xit = !move_to_tool_exchange_point && !move_to_machine_base_point
-                                 ? values.find("X")
-                                 : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("X")
-                                                               : machine_points_data.machine_base_point.find("X");
-            const auto yit = !move_to_tool_exchange_point && !move_to_machine_base_point
-                                 ? values.find("Y")
-                                 : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Y")
-                                                               : machine_points_data.machine_base_point.find("Y");
-            const auto zit = !move_to_tool_exchange_point && !move_to_machine_base_point
-                                 ? values.find("Z")
-                                 : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Z")
-                                                               : machine_points_data.machine_base_point.find("Z");
+            const auto xit = !move_to_tool_exchange_point && !move_to_machine_base_point ? values.find("X")
+                             : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("X")
+                                                           : machine_points_data.machine_base_point.find("X");
+            const auto yit = !move_to_tool_exchange_point && !move_to_machine_base_point ? values.find("Y")
+                             : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Y")
+                                                           : machine_points_data.machine_base_point.find("Y");
+            const auto zit = !move_to_tool_exchange_point && !move_to_machine_base_point ? values.find("Z")
+                             : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Z")
+                                                           : machine_points_data.machine_base_point.find("Z");
 
             const auto x_curr =
                 ((!move_to_tool_exchange_point && !move_to_machine_base_point && xit != std::cend(values)) ||
@@ -1152,12 +1151,16 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
         if (path_result.hole_number == 0 || k) // we want to calculate this even though *k=0 or k is with G90 because
                                                // the results may be needed in next blocks
         {
+            const bool zgleb_is_lathe_without_Y =
+                machine_tool == EMachineTool::lathe_zx ||
+                machine_tool == EMachineTool::lathe_zxc; // TODO: change this to check if axis is in axes machine
+                                                         // configuration (nc_settings.json: axes array)
             const auto zit_prev = prev_values.find(axis3);
             if (zit_prev == std::end(prev_values))
                 throw path_calc_exception(make_message(MessageName::MissingPreviousValue, language, axis3));
             const auto zglebit = values.find(axis_gleb);
-            if (zglebit == std::end(values))
-                throw path_calc_exception(make_message(MessageName::MissingValue, language, axis_gleb));
+            if (zglebit == std::end(values) && !zgleb_is_lathe_without_Y)
+                throw path_calc_exception(make_message(MessageName::MissingValue, language, axis_gleb + "gleb"));
             const auto rit = values.find("R");
             if (rit == std::end(values))
                 throw path_calc_exception(make_message(MessageName::MissingValue, language, "R"));
@@ -1170,13 +1173,14 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
                     throw path_calc_exception(make_message(MessageName::MissingValue, language, "Q"));
                 if (current_g9091 == EProgrammingType::Incremental)
                 {
-                    ret = func_drill_cycle_qparam_incr(zglebit->second, rit->second, qit->second,
-                                                       static_cast<EDrillGmode>(current_g), current_g_return);
+                    ret = func_drill_cycle_qparam_incr(!zgleb_is_lathe_without_Y ? zglebit->second : 0.0, rit->second,
+                                                       qit->second, static_cast<EDrillGmode>(current_g),
+                                                       current_g_return);
                 }
                 else
                 {
-                    ret = func_drill_cycle_qparam(zit_prev->second, zglebit->second, rit->second, qit->second,
-                                                  cnc_default_values.drill_cycle_z_value,
+                    ret = func_drill_cycle_qparam(zit_prev->second, !zgleb_is_lathe_without_Y ? zglebit->second : 0.0,
+                                                  rit->second, qit->second, cnc_default_values.drill_cycle_z_value,
                                                   static_cast<EDrillGmode>(current_g), current_g_return);
                 }
             }
@@ -1184,14 +1188,14 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
             {
                 if (current_g9091 == EProgrammingType::Incremental)
                 {
-                    ret = func_drill_cycle_incr(zglebit->second, rit->second, static_cast<EDrillGmode>(current_g),
-                                                current_g_return);
+                    ret = func_drill_cycle_incr(!zgleb_is_lathe_without_Y ? zglebit->second : 0.0, rit->second,
+                                                static_cast<EDrillGmode>(current_g), current_g_return);
                 }
                 else
                 {
-                    ret = func_drill_cycle(zit_prev->second, zglebit->second, rit->second,
-                                           cnc_default_values.drill_cycle_z_value, static_cast<EDrillGmode>(current_g),
-                                           current_g_return);
+                    ret = func_drill_cycle(zit_prev->second, !zgleb_is_lathe_without_Y ? zglebit->second : 0.0,
+                                           rit->second, cnc_default_values.drill_cycle_z_value,
+                                           static_cast<EDrillGmode>(current_g), current_g_return);
                 }
             }
             path_result.cycle_distance = ret;

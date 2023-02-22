@@ -14,6 +14,7 @@ enum class FileSplittingType;
 struct ZeroPoint;
 struct ParserSettings;
 struct RenumberSettings;
+enum class EMachineTool;
 enum class EMachineToolType;
 
 struct WordValueWrapper;
@@ -214,11 +215,11 @@ extern PARSER_API bool RotateAxes(AllAttributesParserWrapperBase* ptr, int line,
                                   WordValueWrapper** value, int* length, char** message, bool single_line_msg,
                                   AxesRotatingOption axes_rotating_options);
 
-extern PARSER_API void SetNCSettings(AllAttributesParserWrapperBase* ptr, EMachineToolType machine_tool_type,
-                                     char** machine_base_point_default_keys, double* machine_base_point_default_vals,
-                                     int machine_base_point_default_length, char** tool_exchange_point_default_keys,
-                                     double* tool_exchange_point_default_vals, int tool_exchange_point_default_length,
-                                     KinematicsWrapper*     kinematics_wrapper,
+extern PARSER_API void SetNCSettings(AllAttributesParserWrapperBase* ptr, EMachineTool machine_tool,
+                                     EMachineToolType machine_tool_type, char** machine_base_point_default_keys,
+                                     double* machine_base_point_default_vals, int machine_base_point_default_length,
+                                     char** tool_exchange_point_default_keys, double* tool_exchange_point_default_vals,
+                                     int tool_exchange_point_default_length, KinematicsWrapper* kinematics_wrapper,
                                      AxisParametersWrapper* kinematics_axis_parameters,
                                      int kinematics_axis_parameters_length, CncDefaultValues* cnc_default_values,
                                      ZeroPoint* zero_point);

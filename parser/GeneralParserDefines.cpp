@@ -131,6 +131,116 @@ EMachineToolType to_EMachineToolType(const std::string& s)
 LEFT_STREAM_OP(EMachineToolType)
 RIGHT_STREAM_OP(EMachineToolType)
 
+std::string to_string(EMachineTool e)
+{
+    switch (e)
+    {
+    case EMachineTool::mill_3axis:
+        return "mill_3axis";
+    case EMachineTool::mill_4axis:
+        return "mill_4axis";
+    case EMachineTool::mill_4axis_horizontal:
+        return "mill_4axis_horizontal";
+    case EMachineTool::mill_4axis_horizontal_pinola:
+        return "mill_4axis_horizontal_pinola";
+    case EMachineTool::mill_4axis_head_gantry:
+        return "mill_4axis_head_gantry";
+    case EMachineTool::mill_5axis_head_head_gantry:
+        return "mill_5axis_head_head_gantry";
+    case EMachineTool::mill_5axis_head_table_gantry:
+        return "mill_5axis_head_table_gantry";
+    case EMachineTool::mill_5axis_table_table:
+        return "mill_5axis_table_table";
+    case EMachineTool::mill_5axis_table_tilt:
+        return "mill_5axis_table_tilt";
+    case EMachineTool::mill_5axis_head_table:
+        return "mill_5axis_head_table";
+    case EMachineTool::mill_5axis_horizontal_table_table:
+        return "mill_5axis_horizontal_table_table";
+    case EMachineTool::mill_5axis_horizontal_table_table_pinola:
+        return "mill_5axis_horizontal_table_table_pinola";
+    case EMachineTool::lathe_zx:
+        return "lathe_zx";
+    case EMachineTool::lathe_zxc:
+        return "lathe_zxc";
+    case EMachineTool::lathe_zxcy:
+        return "lathe_zxcy";
+    case EMachineTool::lathe_zxcy_steady:
+        return "lathe_zxcy_steady";
+    case EMachineTool::millturn_XYZBC:
+        return "mill-turn_XYZBC";
+    case EMachineTool::millturn_XYZBC_steady:
+        return "mill-turn_XYZBC_steady";
+    case EMachineTool::millturn_XYZBC_C2:
+        return "mill-turn_XYZBC_C2";
+    case EMachineTool::millturn_XYZBC_C2_steady:
+        return "mill-turn_XYZBC_C2_steady";
+    case EMachineTool::millturn_XYZBC_C2_Lower_Left_Turret:
+        return "mill-turn_XYZBC_C2_Lower_Left_Turret";
+    case EMachineTool::millturn_XYZBC_C2_Lower_Right_Turret:
+        return "mill-turn_XYZBC_C2_Lower_Right_Turret";
+    case EMachineTool::millturn_XYZBC_C2_Lower_LeftRight_Turret:
+        return "mill-turn_XYZBC_C2_Lower_LeftRight_Turret";
+        // omit default case to trigger compiler warning for missing cases
+    }
+    throw std::invalid_argument("Unsupported EMachineTool value");
+}
+
+EMachineTool to_EMachineTool(const std::string& s)
+{
+    if (s == "mill_3axis")
+        return EMachineTool::mill_3axis;
+    else if (s == "mill_4axis")
+        return EMachineTool::mill_4axis;
+    else if (s == "mill_4axis_horizontal")
+        return EMachineTool::mill_4axis_horizontal;
+    else if (s == "mill_4axis_horizontal_pinola")
+        return EMachineTool::mill_4axis_horizontal_pinola;
+    else if (s == "mill_4axis_head_gantry")
+        return EMachineTool::mill_4axis_head_gantry;
+    else if (s == "mill_5axis_head_head_gantry")
+        return EMachineTool::mill_5axis_head_head_gantry;
+    else if (s == "mill_5axis_head_table_gantry")
+        return EMachineTool::mill_5axis_head_table_gantry;
+    else if (s == "mill_5axis_table_table")
+        return EMachineTool::mill_5axis_table_table;
+    else if (s == "mill_5axis_table_tilt")
+        return EMachineTool::mill_5axis_table_tilt;
+    else if (s == "mill_5axis_head_table")
+        return EMachineTool::mill_5axis_head_table;
+    else if (s == "mill_5axis_horizontal_table_table")
+        return EMachineTool::mill_5axis_horizontal_table_table;
+    else if (s == "mill_5axis_horizontal_table_table_pinola")
+        return EMachineTool::mill_5axis_horizontal_table_table_pinola;
+    else if (s == "lathe_zx")
+        return EMachineTool::lathe_zx;
+    else if (s == "lathe_zxc")
+        return EMachineTool::lathe_zxc;
+    else if (s == "lathe_zxcy")
+        return EMachineTool::lathe_zxcy;
+    else if (s == "lathe_zxcy_steady")
+        return EMachineTool::lathe_zxcy_steady;
+    else if (s == "mill-turn_XYZBC")
+        return EMachineTool::millturn_XYZBC;
+    else if (s == "mill-turn_XYZBC_steady")
+        return EMachineTool::millturn_XYZBC_steady;
+    else if (s == "mill-turn_XYZBC_C2")
+        return EMachineTool::millturn_XYZBC_C2;
+    else if (s == "mill-turn_XYZBC_C2_steady")
+        return EMachineTool::millturn_XYZBC_C2_steady;
+    else if (s == "mill-turn_XYZBC_C2_Lower_Left_Turret")
+        return EMachineTool::millturn_XYZBC_C2_Lower_Left_Turret;
+    else if (s == "mill-turn_XYZBC_C2_Lower_Right_Turret")
+        return EMachineTool::millturn_XYZBC_C2_Lower_Right_Turret;
+    else if (s == "mill-turn_XYZBC_C2_Lower_LeftRight_Turret")
+        return EMachineTool::millturn_XYZBC_C2_Lower_LeftRight_Turret;
+    else
+        throw std::invalid_argument("Unsupported EMachineTool value: " + s);
+}
+
+LEFT_STREAM_OP(EMachineTool)
+RIGHT_STREAM_OP(EMachineTool)
+
 std::string to_string(ELanguage e)
 {
     switch (e)

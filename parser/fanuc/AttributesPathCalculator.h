@@ -33,11 +33,12 @@ enum class EHelixType
 class PARSER_API AttributesPathCalculator
 {
 public:
-    AttributesPathCalculator(EMachineToolType machine_tool_type, MachinePointsData&& machine_points_data,
-                             Kinematics&& kinematics, CncDefaultValues&& cnc_default_values, ELanguage language);
-    AttributesPathCalculator(EMachineToolType machine_tool_type, const MachinePointsData& machine_points_data,
-                             const Kinematics& kinematics, const CncDefaultValues& cnc_default_values,
-                             ELanguage language);
+    AttributesPathCalculator(EMachineTool machine_tool, EMachineToolType machine_tool_type,
+                             MachinePointsData&& machine_points_data, Kinematics&& kinematics,
+                             CncDefaultValues&& cnc_default_values, ELanguage language);
+    AttributesPathCalculator(EMachineTool machine_tool, EMachineToolType machine_tool_type,
+                             const MachinePointsData& machine_points_data, const Kinematics& kinematics,
+                             const CncDefaultValues& cnc_default_values, ELanguage language);
 
     void reset();
 
@@ -73,6 +74,7 @@ private:
 #pragma warning(push)
 #pragma warning(disable : 4251)
 #endif
+    const EMachineTool            machine_tool;
     const EMachineToolType        machine_tool_type;
     const MachinePointsData       machine_points_data;
     Kinematics                    kinematics;

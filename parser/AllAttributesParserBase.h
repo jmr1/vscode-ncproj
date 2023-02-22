@@ -21,6 +21,7 @@ enum class UnitConversionType;
 struct RenumberSettings;
 enum class AxesRotatingOption;
 struct FileSplitting;
+enum class EMachineTool;
 enum class EMachineToolType;
 
 class PARSER_API AllAttributesParserBase
@@ -38,9 +39,9 @@ public:
 
     virtual void set_parser_settings(const ParserSettings& parser_settings) = 0;
 
-    virtual void set_ncsettings(EMachineToolType machine_tool_type, MachinePointsData&& machine_points_data,
-                                Kinematics&& kinematics, CncDefaultValues&& cnc_default_values,
-                                ZeroPoint&& zero_point) = 0;
+    virtual void set_ncsettings(EMachineTool machine_tool, EMachineToolType machine_tool_type,
+                                MachinePointsData&& machine_points_data, Kinematics&& kinematics,
+                                CncDefaultValues&& cnc_default_values, ZeroPoint&& zero_point) = 0;
 
     virtual EDriverUnits get_unit_system() const = 0;
 

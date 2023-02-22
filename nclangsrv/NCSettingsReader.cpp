@@ -19,6 +19,7 @@ NCSettingsReader::NCSettingsReader(const std::string& ncSettingsPath)
 
 void NCSettingsReader::setDefaults()
 {
+    mMachineTool     = EMachineTool::mill_3axis;
     mMachineToolType = EMachineToolType::Mill;
     mFanucParserType = EFanucParserType::FanucMill;
 
@@ -71,6 +72,7 @@ bool NCSettingsReader::read()
         pt::read_json(mNcSettingsPath, root);
 
         {
+            mMachineTool     = root.get<EMachineTool>("machine_tool");
             mMachineToolType = root.get<EMachineToolType>("machine_tool_type");
             mFanucParserType = root.get<EFanucParserType>("driver");
         }
