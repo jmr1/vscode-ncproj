@@ -1119,7 +1119,7 @@
         "operator_turns_on_rotation": false,
         "default_rotation": 1000,
         "default_rotation_direction": "right",
-        "tool_number_executes_exchange": false,
+        "tool_number_executes_exchange": true,
         "auto_rapid_traverse_after_tool_exchange": false,
         "drill_cycle_z_value": "absolute",
         "drill_cycle_return_value": "beginning"
@@ -1198,7 +1198,7 @@
         "operator_turns_on_rotation": false,
         "default_rotation": 1000,
         "default_rotation_direction": "right",
-        "tool_number_executes_exchange": false,
+        "tool_number_executes_exchange": true,
         "auto_rapid_traverse_after_tool_exchange": false,
         "drill_cycle_z_value": "absolute",
         "drill_cycle_return_value": "beginning"
@@ -1282,7 +1282,7 @@
         "operator_turns_on_rotation": false,
         "default_rotation": 1000,
         "default_rotation_direction": "right",
-        "tool_number_executes_exchange": false,
+        "tool_number_executes_exchange": true,
         "auto_rapid_traverse_after_tool_exchange": false,
         "drill_cycle_z_value": "absolute",
         "drill_cycle_return_value": "beginning"
@@ -1371,7 +1371,7 @@
         "operator_turns_on_rotation": false,
         "default_rotation": 1000,
         "default_rotation_direction": "right",
-        "tool_number_executes_exchange": false,
+        "tool_number_executes_exchange": true,
         "auto_rapid_traverse_after_tool_exchange": false,
         "drill_cycle_z_value": "absolute",
         "drill_cycle_return_value": "beginning"
