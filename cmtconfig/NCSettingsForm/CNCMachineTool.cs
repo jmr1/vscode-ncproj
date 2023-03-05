@@ -104,7 +104,7 @@ namespace cmtconfig
                     case Driver.fanuc_lathe_system_b:
                     case Driver.fanuc_lathe_system_c:
                     case Driver.generic_lathe:
-                        if (machine.Value.type != MachineToolType.lathe && machine.Value.type != MachineToolType.millturn)
+                        if (machine.Value.type != MachineToolType.lathe /*&& machine.Value.type != MachineToolType.millturn*/)
                             continue;
                         break;
                     case Driver.haas_lathe:
