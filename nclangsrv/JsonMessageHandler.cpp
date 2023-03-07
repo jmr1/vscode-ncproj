@@ -101,8 +101,7 @@ std::string replaceAll(const std::string& str1, const std::string& from, const s
 
 std::string markdownFormatHover(const std::string& contents, const std::string& title, const std::string& description)
 {
-    return "**" + contents + ": " + title + "**\n\n---\n\n#### " +
-           replaceAll(replaceAll(description, "\n\n", "\n"), "\n", "\n* ");
+    return "**" + contents + ": " + title + "** \n\n---\n\n" + replaceAll(description, "\n", "\n\n");
 }
 
 } // namespace
