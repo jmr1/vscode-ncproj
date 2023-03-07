@@ -6,12 +6,11 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.2.1 released
+- Version 0.3.0 released
   - New Features
+    - Lathe support added
   - Enhancements
   - Bug fixes
-    - Parser crash when axis contained value in brackets where first value was negative, i.e. Z[-7.8-#26]
-    - Handle division math operation inside brackets correctly, i.e. #1=[8/2]
 
 ## Features
 
