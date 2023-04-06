@@ -238,6 +238,8 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
     case EFanucParserType::FanucLatheSystemB:
     case EFanucParserType::FanucLatheSystemC:
     case EFanucParserType::FanucMill:
+    case EFanucParserType::FanucMillturnSystemA:
+    case EFanucParserType::FanucMillturnSystemB:
         cnc_type = ECncType::Fanuc;
         break;
     case EFanucParserType::GenericLathe:

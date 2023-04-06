@@ -76,6 +76,10 @@ namespace cmtconfig
                             break;
                         case Driver.heidenhain:
                             break;
+                        case Driver.fanuc_millturn_system_a:
+                        case Driver.fanuc_millturn_system_b:
+                            comboBoxDriver.Items.Add(new ComboboxItem(ncSettingsName.driver_name[element], element.ToString(), element));
+                            break;
                     }
                 }
             }
@@ -109,6 +113,11 @@ namespace cmtconfig
                         break;
                     case Driver.haas_lathe:
                         if (machine.Value.type != MachineToolType.lathe)
+                            continue;
+                        break;
+                    case Driver.fanuc_millturn_system_a:
+                    case Driver.fanuc_millturn_system_b:
+                        if (machine.Value.type != MachineToolType.millturn)
                             continue;
                         break;
                 }

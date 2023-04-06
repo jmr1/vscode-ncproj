@@ -11,7 +11,9 @@
     "haas_mill",
     "haas_lathe",
     "heidenhain",
-    "makino_mill"
+    "makino_mill",
+    "fanuc_millturn_system_a",
+    "fanuc_millturn_system_b"
   ],
   "machine_tool_default": "mill_3axis",
   "machine_tool_id": "",

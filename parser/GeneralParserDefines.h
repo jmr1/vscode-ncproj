@@ -32,6 +32,8 @@ enum class EFanucParserType
     FanucLatheSystemB,
     FanucLatheSystemC,
     FanucMill,
+    FanucMillturnSystemA,
+    FanucMillturnSystemB,
     GenericLathe,
     GenericMill,
     HaasLathe,

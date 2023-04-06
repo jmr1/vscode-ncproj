@@ -41,6 +41,8 @@ namespace cmtconfig
         fanuc_lathe_system_a,
         fanuc_lathe_system_b,
         fanuc_lathe_system_c,
+        fanuc_millturn_system_a,
+        fanuc_millturn_system_b,
         generic_mill,
         generic_lathe,
         haas_mill,

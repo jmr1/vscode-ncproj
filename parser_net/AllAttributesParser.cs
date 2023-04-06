@@ -24,6 +24,8 @@ namespace parser
         FanucLatheSystemB,
         FanucLatheSystemC,
         FanucMill,
+        FanucMillturnSystemA,
+        FanucMillturnSystemB,
         GenericLathe,
         GenericMill,
         HaasLathe,
