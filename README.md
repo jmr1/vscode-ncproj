@@ -6,14 +6,15 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.3.0 released
+- Version 0.4.0 released
   - New Features
-    - Lathe support added
+    - Turn & Mill Machines support added
   - Enhancements
   - Bug fixes
 
 ## Features
 
+- Support for Mill, Lathe and Turn & Mill Machines
 - Code correctness and Code Groups validation
 - Code completion for G/M codes
 - Hovers for G/M codes, macro values and G/M codes with macros (i.e. G#1)
