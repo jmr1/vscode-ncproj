@@ -119,6 +119,8 @@ namespace cmtconfig
                     case Driver.fanuc_millturn_system_b:
                         if (machine.Value.type != MachineToolType.millturn)
                             continue;
+                        if (machine.Key != "mill-turn_XYZBC")
+                            continue;
                         break;
                 }
 
