@@ -81,22 +81,22 @@ bool NCSettingsReader::read()
             mMachinePointsData.tool_exchange_point.clear();
             mMachinePointsData.machine_base_point.clear();
             const auto& mpd = root.get_child("machine_points_data");
-            for (const auto& pt : mpd.get_child("tool_exchange_point"))
+            for (const auto& [axis, data] : mpd.get_child("tool_exchange_point"))
                 mMachinePointsData.tool_exchange_point.emplace(std::make_pair(
-                    pt.first, pt.second.get_value<decltype(MachinePointsData::tool_exchange_point)::mapped_type>()));
-            for (const auto& pt : mpd.get_child("machine_base_point"))
+                    axis, data.get_value<decltype(MachinePointsData::tool_exchange_point)::mapped_type>()));
+            for (const auto& [axis, data] : mpd.get_child("machine_base_point"))
                 mMachinePointsData.machine_base_point.emplace(std::make_pair(
-                    pt.first, pt.second.get_value<decltype(MachinePointsData::machine_base_point)::mapped_type>()));
+                    axis, data.get_value<decltype(MachinePointsData::machine_base_point)::mapped_type>()));
         }
 
         {
             mKinematics.cartesian_system_axis.clear();
             const auto& k_pt = root.get_child("kinematics");
-            for (const auto& pt : k_pt.get_child("cartesian_system_axis"))
+            for (const auto& [axis, data] : k_pt.get_child("cartesian_system_axis"))
             {
                 mKinematics.cartesian_system_axis.emplace(std::make_pair<const std::string&, AxisParameters>(
-                    pt.first, {pt.second.get<decltype(AxisParameters::range_min)>("range_min"),
-                               pt.second.get<decltype(AxisParameters::range_max)>("range_max")}));
+                    axis, {data.get<decltype(AxisParameters::range_min)>("range_min"),
+                           data.get<decltype(AxisParameters::range_max)>("range_max")}));
             }
             auto& k                 = mKinematics;
             k.max_working_feed      = k_pt.get<decltype(k.max_working_feed)>("max_working_feed");

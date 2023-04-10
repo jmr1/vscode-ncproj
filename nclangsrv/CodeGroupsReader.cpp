@@ -27,13 +27,13 @@ bool CodeGroupsReader::read()
         pt::read_json(mPath, root);
 
         mCodeGroups.clear();
-        for (const auto& u : root.get_child("groups"))
+        for (const auto& [groupName, arr] : root.get_child("groups"))
         {
-            for (const auto& group : u.second)
+            for (const auto& [_, group] : arr)
             {
-                mCodeGroups[{group.second.get<decltype(fanuc::CodeGroupValue::code)>("code"),
-                             group.second.get<decltype(fanuc::CodeGroupValue::rest)>("rest")}]
-                    .insert(u.first);
+                mCodeGroups[{group.get<decltype(fanuc::CodeGroupValue::code)>("code"),
+                             group.get<decltype(fanuc::CodeGroupValue::rest)>("rest")}]
+                    .insert(groupName);
             }
         }
     }

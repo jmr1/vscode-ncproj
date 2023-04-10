@@ -16,15 +16,15 @@ namespace {
 void readGrammar(pt::ptree& root, const std::string& unit, fanuc::word_map& word_grammar_map)
 {
 
-    for (const auto& u : root.get_child(unit))
+    for (const auto& [word, grammar] : root.get_child(unit))
     {
-        word_grammar_map[u.first] = {u.second.get<decltype(fanuc::WordGrammar::word)>("word"),
-                                     u.second.get<decltype(fanuc::WordGrammar::range_from)>("range_from"),
-                                     u.second.get<decltype(fanuc::WordGrammar::range_to)>("range_to"),
-                                     u.second.get<decltype(fanuc::WordGrammar::decimal_from)>("decimal_from"),
-                                     u.second.get<decltype(fanuc::WordGrammar::decimal_to)>("decimal_to"),
-                                     u.second.get<decltype(fanuc::WordGrammar::unique)>("unique"),
-                                     u.second.get<decltype(fanuc::WordGrammar::word_type)>("type")};
+        word_grammar_map[word] = {grammar.get<decltype(fanuc::WordGrammar::word)>("word"),
+                                  grammar.get<decltype(fanuc::WordGrammar::range_from)>("range_from"),
+                                  grammar.get<decltype(fanuc::WordGrammar::range_to)>("range_to"),
+                                  grammar.get<decltype(fanuc::WordGrammar::decimal_from)>("decimal_from"),
+                                  grammar.get<decltype(fanuc::WordGrammar::decimal_to)>("decimal_to"),
+                                  grammar.get<decltype(fanuc::WordGrammar::unique)>("unique"),
+                                  grammar.get<decltype(fanuc::WordGrammar::word_type)>("type")};
     }
 }
 
@@ -51,8 +51,8 @@ bool WordGrammarReader::read()
         readGrammar(root, "imperial", mWordGrammar.imperial);
 
         mOperations.clear();
-        for (const auto& o : root.get_child("operations"))
-            mOperations.push_back(o.second.get_value<std::string>());
+        for (const auto& [_, op] : root.get_child("operations"))
+            mOperations.push_back(op.get_value<std::string>());
     }
     catch (const std::exception&)
     {

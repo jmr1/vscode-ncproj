@@ -333,8 +333,7 @@ void JsonMessageHandler::fetch_gCodesDesc()
         mGCodes = std::make_unique<CodesReader>(descPath);
         mGCodes->read();
 
-        const auto& codes = mGCodes->getCodes();
-        for (const auto& v : codes)
+        for (const auto& v : mGCodes->getCodes())
             mSuggestions.push_back("G" + v);
     }
 }
@@ -362,8 +361,7 @@ void JsonMessageHandler::fetch_mCodesDesc()
         mMCodes = std::make_unique<CodesReader>(descPath);
         mMCodes->read();
 
-        const auto& codes = mMCodes->getCodes();
-        for (const auto& v : codes)
+        for (const auto& v : mMCodes->getCodes())
             mSuggestions.push_back("M" + v);
     }
 }

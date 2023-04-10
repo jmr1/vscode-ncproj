@@ -28,19 +28,19 @@ bool CodesReader::read()
 
         mData.clear();
         mCodes.clear();
-        for (const auto& pt : root.get_child("descriptions"))
+        for (const auto& [code, titleDesc] : root.get_child("descriptions"))
         {
-            bool addSynonim = pt.first.size() == 1 || (pt.first.size() == 3 && pt.first[1] == '.');
-            for (const auto& pt2 : root.get_child(pt::ptree::path_type("descriptions/" + pt.first, '/')))
+            bool addSynonim = code.size() == 1 || (code.size() == 3 && code[1] == '.');
+            for (const auto& [title, desc] : titleDesc)
             {
-                mData.emplace(std::make_pair(pt.first, std::make_pair(pt2.first, pt2.second.get_value<std::string>())));
+                auto [it, ret] =
+                    mData.emplace(std::make_pair(code, std::make_pair(title, desc.get_value<std::string>())));
                 if (addSynonim)
-                    mData.emplace(
-                        std::make_pair("0" + pt.first, std::make_pair(pt2.first, pt2.second.get_value<std::string>())));
+                    mData.emplace(std::make_pair("0" + it->first, it->second));
             }
-            mCodes.emplace_back(pt.first);
+            mCodes.emplace_back(code);
             if (addSynonim)
-                mCodes.emplace_back("0" + pt.first);
+                mCodes.emplace_back("0" + code);
         }
     }
     catch (const std::exception&)
