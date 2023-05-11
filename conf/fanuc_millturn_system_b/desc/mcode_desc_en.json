@@ -242,7 +242,7 @@
 		"317": {"Unusable" : ""},
 		"318": {"Unusable" : ""},
 		"319": {"Tool-spindle/rotary tool spindle orientation" : ""},
-		"329": {"Spindle synchronized tapping mode ON" : ""},
+		"329": {"Spindle synchronized tapping mode ON" : "Three dimensional synchronized tapping is possible by specifying M329 G84 or M329 G88 in the 3D coordinate conversion mode"},
 		"337": {"Unusable" : ""},
 		"340": {"Steady rest 1 open" : ""},
 		"341": {"Steady rest 1 close" : ""},
