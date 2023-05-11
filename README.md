@@ -6,10 +6,10 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.4.0 released
+- Version 0.4.1 released
   - New Features
-    - Turn & Mill Machines support added
   - Enhancements
+    - Fanuc Turn & Mill Machines configurations updated
   - Bug fixes
 
 ## Features
