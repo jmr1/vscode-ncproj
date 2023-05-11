@@ -10,7 +10,7 @@ namespace nclangsrv {
 class CodesReader
 {
 public:
-    CodesReader(const std::string& path);
+    explicit CodesReader(const std::string& path);
 
     bool read();
 

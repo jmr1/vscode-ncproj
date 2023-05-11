@@ -23,7 +23,7 @@ struct HeidenhainAttributeData : public AttributeVariantData
     std::vector<AttributeVariant> value;
 };
 
-class PARSER_API AllAttributesParser : public AllAttributesParserBase
+class PARSER_API AllAttributesParser final : public AllAttributesParserBase
 {
 public:
     AllAttributesParser(ParserSettings&& parser_settings, OtherSettings&& other_settings);

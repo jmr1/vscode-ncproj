@@ -8,7 +8,7 @@ namespace nclangsrv {
 class NCSettingsReader
 {
 public:
-    NCSettingsReader(const std::string& ncSettingsPath);
+    explicit NCSettingsReader(const std::string& ncSettingsPath);
 
     bool read();
 

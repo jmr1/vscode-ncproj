@@ -10,7 +10,7 @@ namespace nclangsrv {
 class WordGrammarReader
 {
 public:
-    WordGrammarReader(const std::string& path);
+    explicit WordGrammarReader(const std::string& path);
 
     bool read();
 

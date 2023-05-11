@@ -10,7 +10,7 @@ namespace nclangsrv {
 class CodeGroupsReader
 {
 public:
-    CodeGroupsReader(const std::string& path);
+    explicit CodeGroupsReader(const std::string& path);
 
     bool read();
 

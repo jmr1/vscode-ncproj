@@ -13,7 +13,7 @@ enum class EFanucParserType;
 
 namespace fanuc {
 
-class AllAttributesParserWrapper : public AllAttributesParserWrapperBase
+class AllAttributesParserWrapper final : public AllAttributesParserWrapperBase
 {
 public:
     explicit AllAttributesParserWrapper(std::unique_ptr<AllAttributesParserBase> ptr);

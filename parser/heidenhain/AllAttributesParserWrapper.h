@@ -10,7 +10,7 @@
 namespace parser {
 namespace heidenhain {
 
-class AllAttributesParserWrapper : public AllAttributesParserWrapperBase
+class AllAttributesParserWrapper final : public AllAttributesParserWrapperBase
 {
 public:
     AllAttributesParserWrapper(std::unique_ptr<AllAttributesParserBase> ptr);

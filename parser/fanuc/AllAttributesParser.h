@@ -28,7 +28,7 @@ struct FanucAttributeData : public AttributeVariantData
     std::vector<AttributeVariant> value;
 };
 
-class PARSER_API AllAttributesParser : public AllAttributesParserBase
+class PARSER_API AllAttributesParser final : public AllAttributesParserBase
 {
 public:
     AllAttributesParser(FanucWordGrammar&& grammar, std::vector<std::string>&& operations, code_groups_map&& gcodes,
