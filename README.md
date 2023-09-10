@@ -6,10 +6,10 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.4.1 released
+- Version 0.4.2 released
   - New Features
   - Enhancements
-    - Fanuc Turn & Mill Machines configurations updated
+    - Haas Mill configuration updated
   - Bug fixes
 
 ## Features
