@@ -408,7 +408,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
                 if (tr.work_motion >= tolerance)
                     ostr << "Total cut time = " << formatTime(total_work_motion_time) << " | ";
 
-                pathTimeResult.emplace(std::make_pair(line_nbr - 1, ostr.str().c_str()));
+                pathTimeResult.emplace_hint(pathTimeResult.end(), line_nbr - 1, std::string(ostr.str().c_str()));
             }
         }
     }
