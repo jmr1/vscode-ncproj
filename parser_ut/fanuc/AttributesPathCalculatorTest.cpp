@@ -150,10 +150,12 @@ TEST_F(AttributesPathCalculatorTest, G90_absolute_programming)
     std::map<std::string, PathResult> pvm;
     fanuc::word_range_map             wrm;
     fanuc::AttributesPathCalculator   apc(EMachineTool::mill_3axis, EMachineToolType::Mill, machine_points_data,
-                                          kinematics, cnc_default_values, ELanguage::Polish);
+                                        kinematics, cnc_default_values, ELanguage::Polish);
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
-           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")}}, "T4");
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")},
+            fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
+           "T4 M6");
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
@@ -222,7 +224,9 @@ TEST_F(AttributesPathCalculatorTest, G90_absolute_programming)
            "G3 X3 I3");
 
     verify(apc, wrm, pvm, {16.424879532, 0, 0, 0, "5"}, true, {},
-           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("5")}}, "T5");
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("5")},
+            fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
+           "T5 M6");
 
     verify(apc, wrm, pvm, {0, 1.00323318660525, 0, 0, "5"}, true, {{"X", 2}, {"I", 2}, {"J", 3}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("3")},
@@ -239,10 +243,12 @@ TEST_F(AttributesPathCalculatorTest, Not_crash_test)
     std::map<std::string, PathResult> pvm;
     fanuc::word_range_map             wrm;
     fanuc::AttributesPathCalculator   apc(EMachineTool::mill_3axis, EMachineToolType::Mill, machine_points_data,
-                                          kinematics, cnc_default_values, ELanguage::Polish);
+                                        kinematics, cnc_default_values, ELanguage::Polish);
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
-           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")}}, "T4");
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")},
+            fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
+           "T4 M6");
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
@@ -282,10 +288,12 @@ TEST_F(AttributesPathCalculatorTest, Helix_360_full_arc_G90_absolute_programming
     std::map<std::string, PathResult> pvm;
     fanuc::word_range_map             wrm;
     fanuc::AttributesPathCalculator   apc(EMachineTool::mill_3axis, EMachineToolType::Mill, machine_points_data,
-                                          kinematics, cnc_default_values, ELanguage::Polish);
+                                        kinematics, cnc_default_values, ELanguage::Polish);
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
-           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")}}, "T2");
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")},
+            fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
+           "T2 M6");
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("90")},
@@ -340,10 +348,12 @@ TEST_F(AttributesPathCalculatorTest, Helix_4x90_arc_G90_absolute_programming)
     std::map<std::string, PathResult> pvm;
     fanuc::word_range_map             wrm;
     fanuc::AttributesPathCalculator   apc(EMachineTool::mill_3axis, EMachineToolType::Mill, machine_points_data,
-                                          kinematics, cnc_default_values, ELanguage::Polish);
+                                        kinematics, cnc_default_values, ELanguage::Polish);
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
-           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")}}, "T2");
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")},
+            fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
+           "T2 M6");
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("17")},
@@ -445,10 +455,12 @@ TEST_F(AttributesPathCalculatorTest, Helix_Archimedes_G90_absolute_programming)
     std::map<std::string, PathResult> pvm;
     fanuc::word_range_map             wrm;
     fanuc::AttributesPathCalculator   apc(EMachineTool::mill_3axis, EMachineToolType::Mill, machine_points_data,
-                                          kinematics, cnc_default_values, ELanguage::Polish);
+                                        kinematics, cnc_default_values, ELanguage::Polish);
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "22"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
-           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("22")}}, "T22");
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("22")},
+            fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
+           "T22 M6");
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "22"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
@@ -489,7 +501,7 @@ TEST_F(AttributesPathCalculatorTest, G91_incremental_programming)
     std::map<std::string, PathResult> pvm;
     fanuc::word_range_map             wrm;
     fanuc::AttributesPathCalculator   apc(EMachineTool::mill_3axis, EMachineToolType::Mill, machine_points_data,
-                                          kinematics, cnc_default_values, ELanguage::Polish);
+                                        kinematics, cnc_default_values, ELanguage::Polish);
 
     //     verify(apc, wrm, pvm, {0, 0, 0, 0, "0"}, false, {{"X", 0}, {"Y", 0}, {"Z", 0}},
     //            {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
@@ -498,7 +510,9 @@ TEST_F(AttributesPathCalculatorTest, G91_incremental_programming)
     //            "G1 X4 Y5 Z2");
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
-           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")}}, "T4");
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")},
+            fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
+           "T4 M6");
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
@@ -568,10 +582,12 @@ TEST_F(AttributesPathCalculatorTest, Helix_360_full_arc_G91_incremental_programm
     std::map<std::string, PathResult> pvm;
     fanuc::word_range_map             wrm;
     fanuc::AttributesPathCalculator   apc(EMachineTool::mill_3axis, EMachineToolType::Mill, machine_points_data,
-                                          kinematics, cnc_default_values, ELanguage::Polish);
+                                        kinematics, cnc_default_values, ELanguage::Polish);
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
-           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")}}, "T2");
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")},
+            fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
+           "T2 M6");
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("17")},
@@ -625,10 +641,12 @@ TEST_F(AttributesPathCalculatorTest, Helix_4x90_arc_G91_incremental_programming)
     std::map<std::string, PathResult> pvm;
     fanuc::word_range_map             wrm;
     fanuc::AttributesPathCalculator   apc(EMachineTool::mill_3axis, EMachineToolType::Mill, machine_points_data,
-                                          kinematics, cnc_default_values, ELanguage::Polish);
+                                        kinematics, cnc_default_values, ELanguage::Polish);
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
-           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")}}, "T2");
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")},
+            fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
+           "T2 M6");
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("17")},

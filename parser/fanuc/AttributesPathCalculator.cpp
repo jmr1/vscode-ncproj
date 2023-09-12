@@ -502,7 +502,10 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
             t_time[active_t] = time_result.tool_total;
         }
 
-        active_t            = *t;
+        if (cnc_default_values.tool_number_executes_exchange ||
+            (!cnc_default_values.tool_number_executes_exchange && was_m6))
+            active_t = *t;
+
         path_result.tool_id = time_result.tool_id = active_t;
 
         if (cnc_default_values.tool_number_executes_exchange)
@@ -646,15 +649,18 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
             if (zit_prev == std::end(prev_values))
                 throw path_calc_exception(make_message(MessageName::MissingPreviousValue, language, "Z"));
 
-            const auto xit = !move_to_tool_exchange_point && !move_to_machine_base_point ? values.find("X")
-                             : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("X")
-                                                           : machine_points_data.machine_base_point.find("X");
-            const auto yit = !move_to_tool_exchange_point && !move_to_machine_base_point ? values.find("Y")
-                             : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Y")
-                                                           : machine_points_data.machine_base_point.find("Y");
-            const auto zit = !move_to_tool_exchange_point && !move_to_machine_base_point ? values.find("Z")
-                             : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Z")
-                                                           : machine_points_data.machine_base_point.find("Z");
+            const auto xit = !move_to_tool_exchange_point && !move_to_machine_base_point
+                                 ? values.find("X")
+                                 : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("X")
+                                                               : machine_points_data.machine_base_point.find("X");
+            const auto yit = !move_to_tool_exchange_point && !move_to_machine_base_point
+                                 ? values.find("Y")
+                                 : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Y")
+                                                               : machine_points_data.machine_base_point.find("Y");
+            const auto zit = !move_to_tool_exchange_point && !move_to_machine_base_point
+                                 ? values.find("Z")
+                                 : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Z")
+                                                               : machine_points_data.machine_base_point.find("Z");
 
             const auto x_curr =
                 ((!move_to_tool_exchange_point && !move_to_machine_base_point && xit != std::cend(values)) ||
