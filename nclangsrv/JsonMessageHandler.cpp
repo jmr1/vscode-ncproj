@@ -16,6 +16,7 @@
 
 #include <util.h>
 
+#include "Logger.h"
 #include "NCSettingsReader.h"
 
 namespace fs = std::filesystem;
@@ -106,8 +107,10 @@ std::string markdownFormatHover(const std::string& contents, const std::string& 
 
 } // namespace
 
-JsonMessageHandler::JsonMessageHandler(std::ofstream* logger, const std::string& rootPath,
-                                       NCSettingsReader& ncSettingsReader, bool calculatePathTime,
+#define LOGGER (*mLogger)()
+
+JsonMessageHandler::JsonMessageHandler(Logger* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
+                                       bool              calculatePathTime,
                                        parser::ELanguage language /*= parser::ELanguage::English*/)
     : mLogger(logger)
     , mRootPath(rootPath)
@@ -128,9 +131,9 @@ bool JsonMessageHandler::parse(const std::string& json)
     if (not parse_result)
     {
         if (mLogger)
-            *mLogger << "JsonMessageHandler::" << __func__
-                     << ": JSON parse error: " << rapidjson::GetParseErrorFunc(parse_result.Code()) << "("
-                     << parse_result.Offset() << ")" << std::endl;
+            LOGGER << "JsonMessageHandler::" << __func__
+                   << ": JSON parse error: " << rapidjson::GetParseErrorFunc(parse_result.Code()) << "("
+                   << parse_result.Offset() << ")" << std::endl;
     }
 
     if (d.HasMember("id"))
@@ -148,11 +151,11 @@ bool JsonMessageHandler::parse(const std::string& json)
     else
     {
         if (mLogger)
-            *mLogger << "JsonMessageHandler::" << __func__ << ": no method!" << std::endl;
+            LOGGER << "JsonMessageHandler::" << __func__ << ": no method!" << std::endl;
     }
 
     if (mLogger)
-        *mLogger << "JsonMessageHandler::" << __func__ << ": id:" << id << ", method:" << method << std::endl;
+        LOGGER << "JsonMessageHandler::" << __func__ << ": id:" << id << ", method:" << method << std::endl;
 
     if (method == "initialize")
     {
@@ -213,7 +216,7 @@ bool JsonMessageHandler::parse(const std::string& json)
     else
     {
         if (mLogger)
-            *mLogger << "JsonMessageHandler::" << __func__ << ": WRN: No handler for method: " << method << std::endl;
+            LOGGER << "JsonMessageHandler::" << __func__ << ": WRN: No handler for method: " << method << std::endl;
     }
 
     return true;
@@ -268,8 +271,8 @@ void JsonMessageHandler::initialize(int32_t id)
 
     if (mLogger)
     {
-        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
-                 << "[" << response << "]" << std::endl;
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
         mLogger->flush();
     }
 
@@ -404,8 +407,8 @@ void JsonMessageHandler::textDocument_completion(int32_t id)
 
     if (mLogger)
     {
-        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
-                 << "[" << response << "]" << std::endl;
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
         mLogger->flush();
     }
 
@@ -508,8 +511,8 @@ void JsonMessageHandler::completionItem_resolve(const rapidjson::Document& reque
 
     if (mLogger)
     {
-        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
-                 << "[" << response << "]" << std::endl;
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
         mLogger->flush();
     }
 
@@ -535,7 +538,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
     {
         if (mLogger)
         {
-            *mLogger << "JsonMessageHandler::" << __func__ << ": Couldn't find content for uri: " << uri << std::endl;
+            LOGGER << "JsonMessageHandler::" << __func__ << ": Couldn't find content for uri: " << uri << std::endl;
             mLogger->flush();
         }
     }
@@ -543,9 +546,9 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
     {
         if (mLogger)
         {
-            *mLogger << "JsonMessageHandler::" << __func__
-                     << ": Requested line number does not exist. Line number: " << line
-                     << ", total number of lines: " << it->second.contentLines.size() << std::endl;
+            LOGGER << "JsonMessageHandler::" << __func__
+                   << ": Requested line number does not exist. Line number: " << line
+                   << ", total number of lines: " << it->second.contentLines.size() << std::endl;
             mLogger->flush();
         }
     }
@@ -687,8 +690,8 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
     if (mLogger)
     {
-        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
-                 << "[" << response << "]" << std::endl;
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
         mLogger->flush();
     }
 
@@ -710,7 +713,7 @@ void JsonMessageHandler::textDocument_codeLens(const rapidjson::Document& reques
     {
         if (mLogger)
         {
-            *mLogger << "JsonMessageHandler::" << __func__ << ": Couldn't find content for uri: " << uri << std::endl;
+            LOGGER << "JsonMessageHandler::" << __func__ << ": Couldn't find content for uri: " << uri << std::endl;
             mLogger->flush();
         }
     }
@@ -755,8 +758,8 @@ void JsonMessageHandler::textDocument_codeLens(const rapidjson::Document& reques
 
     if (mLogger)
     {
-        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
-                 << "[" << response << "]" << std::endl;
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
         mLogger->flush();
     }
 
@@ -778,8 +781,8 @@ void JsonMessageHandler::codeLens_resolve(const rapidjson::Document& request)
     {
         if (mLogger)
         {
-            *mLogger << "JsonMessageHandler::" << __func__ << ": Couldn't find content for uri: " << mCurrentUri
-                     << std::endl;
+            LOGGER << "JsonMessageHandler::" << __func__ << ": Couldn't find content for uri: " << mCurrentUri
+                   << std::endl;
             mLogger->flush();
         }
     }
@@ -838,8 +841,8 @@ void JsonMessageHandler::codeLens_resolve(const rapidjson::Document& request)
 
     if (mLogger)
     {
-        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
-                 << "[" << response << "]" << std::endl;
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
         mLogger->flush();
     }
 
@@ -871,8 +874,8 @@ void JsonMessageHandler::shutdown(int32_t id)
 
     if (mLogger)
     {
-        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
-                 << "[" << response << "]" << std::endl;
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
         mLogger->flush();
     }
 
@@ -922,8 +925,8 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
         for (const auto& error_message : messages)
         {
             if (mLogger)
-                *mLogger << "JsonMessageHandler::" << __func__ << ": error_message: [" << error_message << "]"
-                         << std::endl;
+                LOGGER << "JsonMessageHandler::" << __func__ << ": error_message: [" << error_message << "]"
+                       << std::endl;
 
             int32_t     line{};
             int32_t     character{};
@@ -937,7 +940,7 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
                 boost::algorithm::trim(data);
                 tokens.push_back(data);
                 if (mLogger)
-                    *mLogger << "JsonMessageHandler::" << __func__ << ": [" << data << "]" << std::endl;
+                    LOGGER << "JsonMessageHandler::" << __func__ << ": [" << data << "]" << std::endl;
             }
 
             if (not tokens.empty())
@@ -988,8 +991,8 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
 
     if (mLogger)
     {
-        *mLogger << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
-                 << "[" << response << "]" << std::endl;
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
         mLogger->flush();
     }
 

@@ -11,6 +11,7 @@
 #include <GeneralParserDefines.h>
 
 #include "JsonMessageHandler.h"
+#include "Logger.h"
 #include "NCSettingsReader.h"
 
 namespace fs = std::filesystem;
@@ -32,6 +33,8 @@ namespace po = boost::program_options;
     {                                                                                                                  \
         LOGGER << NAME << " was set to [" << VARIABLE << "]." << std::endl;                                            \
     }
+
+#define LOGGER (*logger)()
 
 int main(int argc, char* argv[])
 {
@@ -70,22 +73,22 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    std::unique_ptr<std::ofstream> logger;
+    std::unique_ptr<nclangsrv::Logger> logger;
     if (not log_path.empty())
     {
-        logger = std::make_unique<std::ofstream>(log_path.c_str(), std::ios::app);
-        *logger << "log path: " << log_path << std::endl;
+        logger = std::make_unique<nclangsrv::Logger>(log_path.c_str() /*, std::ios::app*/);
+        LOGGER << "log path: " << log_path << std::endl;
     }
 
     if (logger)
     {
-        VERIFY_OPTION(*logger, "single-line-output", single_line_output);
-        VERIFY_OPTION(*logger, "convert-length", convert_length);
-        VERIFY_OPTION(*logger, "calculate-path", calculate_path_time);
-        VERIFY_OPTION(*logger, "rotate", rotate);
-        VERIFY_OPTION(*logger, "rotate-option", axes_rotating_option);
-        OPTIONAL_OPTION(*logger, "log-path", log_path);
-        OPTIONAL_OPTION(*logger, "ncsetting-path", ncsetting_path);
+        VERIFY_OPTION(LOGGER, "single-line-output", single_line_output);
+        VERIFY_OPTION(LOGGER, "convert-length", convert_length);
+        VERIFY_OPTION(LOGGER, "calculate-path", calculate_path_time);
+        VERIFY_OPTION(LOGGER, "rotate", rotate);
+        VERIFY_OPTION(LOGGER, "rotate-option", axes_rotating_option);
+        OPTIONAL_OPTION(LOGGER, "log-path", log_path);
+        OPTIONAL_OPTION(LOGGER, "ncsetting-path", ncsetting_path);
     }
 
     const auto                    executablePath = fs::path(argv[0]);
@@ -94,7 +97,7 @@ int main(int argc, char* argv[])
                                                      ncSettingsReader, calculate_path_time);
 
     if (logger)
-        *logger << __func__ << ": Current path is " << fs::current_path() << std::endl;
+        LOGGER << __func__ << ": Current path is " << fs::current_path() << std::endl;
 
     while (true)
     {
@@ -131,8 +134,8 @@ int main(int argc, char* argv[])
 
         uint32_t length = std::atoi(str.c_str());
         if (logger)
-            *logger << __func__ << ": Content-Length: [" << str << "(" << str.size() << ")"
-                    << "], " << length << std::endl;
+            LOGGER << __func__ << ": Content-Length: [" << str << "(" << str.size() << ")"
+                   << "], " << length << std::endl;
         if (length == 0)
         {
             continue;
@@ -151,7 +154,7 @@ int main(int argc, char* argv[])
         for (uint32_t x = 1; x < length; ++x)
             buffer += std::cin.get();
         if (logger)
-            *logger << __func__ << ": " << buffer << std::endl;
+            LOGGER << __func__ << ": " << buffer << std::endl;
 
         jsonMessageHandler.parse(buffer);
         if (jsonMessageHandler.exit())

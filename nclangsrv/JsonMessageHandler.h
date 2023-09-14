@@ -15,10 +15,11 @@
 namespace nclangsrv {
 
 class NCSettingsReader;
+class Logger;
 class JsonMessageHandler
 {
 public:
-    JsonMessageHandler(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
+    JsonMessageHandler(Logger* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
                        bool calculatePathTime, parser::ELanguage language = parser::ELanguage::English);
 
     bool parse(const std::string& json);
@@ -64,7 +65,7 @@ private:
 private:
     std::map<std::string, FileContext> mFileContexts;
     std::vector<std::string>           mSuggestions;
-    std::ofstream*                     mLogger;
+    Logger*                            mLogger;
     std::unique_ptr<CodesReader>       mGCodes;
     std::unique_ptr<CodesReader>       mMCodes;
     std::string                        mRootPath;

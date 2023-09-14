@@ -12,6 +12,7 @@
 #include <fanuc/AllAttributesParser.h>
 #include <heidenhain/AllAttributesParser.h>
 
+#include "Logger.h"
 #include "NCSettingsReader.h"
 
 namespace fs = std::filesystem;
@@ -142,7 +143,9 @@ std::string formatTime(double doubleSeconds)
 }
 } // namespace
 
-NCParser::NCParser(std::ofstream* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
+#define LOGGER (*mLogger)()
+
+NCParser::NCParser(Logger* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
                    bool calculatePathTime)
     : mLogger(logger)
     , unit_conversion_type(UnitConversionType::metric_to_imperial)
@@ -174,7 +177,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
         const std::string grammarPath =
             fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("grammar.json")).string();
         if (mLogger)
-            *mLogger << "NCParser::" << __func__ << ": grammarPath: " << grammarPath << std::endl;
+            LOGGER << "NCParser::" << __func__ << ": grammarPath: " << grammarPath << std::endl;
         mWordGrammarReader = std::make_unique<WordGrammarReader>(grammarPath);
 
         if (!mWordGrammarReader->read())
@@ -190,7 +193,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
             fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("gcode_groups.json"))
                 .string();
         if (mLogger)
-            *mLogger << "NCParser::" << __func__ << ": gCodeGroupsPath: " << gCodeGroupsPath << std::endl;
+            LOGGER << "NCParser::" << __func__ << ": gCodeGroupsPath: " << gCodeGroupsPath << std::endl;
         mGCodeGroupsReader = std::make_unique<CodeGroupsReader>(gCodeGroupsPath);
 
         if (!mGCodeGroupsReader->read())
@@ -206,7 +209,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
             fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("mcode_groups.json"))
                 .string();
         if (mLogger)
-            *mLogger << "NCParser::" << __func__ << ": mCodeGroupsPath: " << mCodeGroupsPath << std::endl;
+            LOGGER << "NCParser::" << __func__ << ": mCodeGroupsPath: " << mCodeGroupsPath << std::endl;
         mMCodeGroupsReader = std::make_unique<CodeGroupsReader>(mCodeGroupsPath);
 
         if (!mMCodeGroupsReader->read())

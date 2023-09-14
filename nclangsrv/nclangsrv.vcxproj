@@ -175,6 +175,7 @@
     <ClInclude Include="CodeGroupsReader.h" />
     <ClInclude Include="CodesReader.h" />
     <ClInclude Include="JsonMessageHandler.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="NCParser.h" />
     <ClInclude Include="NCSettingsReader.h" />
     <ClInclude Include="stdafx.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="CodeGroupsReader.cpp" />
     <ClCompile Include="CodesReader.cpp" />
     <ClCompile Include="JsonMessageHandler.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="nclangsrv.cpp" />
     <ClCompile Include="NCParser.cpp" />
     <ClCompile Include="NCSettingsReader.cpp" />
