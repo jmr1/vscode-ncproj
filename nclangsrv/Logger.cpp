@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Logger.h"
 
 #include <ctime>
@@ -12,8 +14,10 @@ Logger::Logger(const std::string& path)
 
 std::ofstream& Logger::operator()()
 {
+    tm     buf;
     time_t now = std::time(nullptr);
-    ostr << "[" << std::put_time(localtime(&now), "%F %T") << "] ";
+    localtime_s(&buf , &now);
+    ostr << "[" << std::put_time(&buf, "%F %T") << "] ";
 
     return ostr;
 }
