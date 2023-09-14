@@ -743,6 +743,26 @@ void JsonMessageHandler::textDocument_codeLens(const rapidjson::Document& reques
             rapidjson::Value entry(rapidjson::kObjectType);
             {
                 entry.AddMember("range", makeRange(static_cast<int>(value.first), 0, 0, a), a);
+
+                // --- optional, if not provided then codeLens/resolve request will be sent to resolve missing commands.
+                // But since computation of Path/Time is in no time (already computed) then it is faster to send
+                // everything in one go. Resolving one by one seems to be a performance problem on Windows which is
+                // opposite to what documentation says (in this specific case when everything is already computed).
+                // From documentation:
+                // A code lens is _unresolved_ when no command is associated to it. For performance
+                // reasons the creation of a code lens and resolving should be done in two stages.
+                rapidjson::Value command(rapidjson::kObjectType);
+                {
+                    rapidjson::Value title;
+                    title.SetString(value.second.c_str(), static_cast<rapidjson::SizeType>(value.second.size()), a);
+
+                    rapidjson::Value cmd; // no command
+
+                    command.AddMember("title", title, a);
+                    command.AddMember("command", cmd, a);
+                }
+                entry.AddMember("command", command, a);
+                // --- optional end
             }
             result.PushBack(entry, a);
         }
@@ -809,12 +829,13 @@ void JsonMessageHandler::codeLens_resolve(const rapidjson::Document& request)
         const auto it = pathTimeResult->find(line);
         if (it != pathTimeResult->cend())
         {
+
+            rapidjson::Value r(rapidjson::kObjectType);
+            r.CopyFrom(range, a);
+            result.AddMember("range", r, a);
+
             rapidjson::Value command(rapidjson::kObjectType);
             {
-                rapidjson::Value r(rapidjson::kObjectType);
-                r.CopyFrom(range, a);
-                result.AddMember("range", r, a);
-
                 rapidjson::Value title;
                 title.SetString(it->second.c_str(), static_cast<rapidjson::SizeType>(it->second.size()), a);
 
