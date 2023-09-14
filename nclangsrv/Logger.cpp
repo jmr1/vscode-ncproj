@@ -16,7 +16,11 @@ std::ofstream& Logger::operator()()
 {
     tm     buf;
     time_t now = std::time(nullptr);
-    localtime_s(&buf , &now);
+#ifdef _MSC_VER
+    localtime_s(&buf, &now);
+#else
+    localtime_r(&now, &buf);
+#endif
     ostr << "[" << std::put_time(&buf, "%F %T") << "] ";
 
     return ostr;
