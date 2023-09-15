@@ -6,11 +6,12 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.4.2 released
+- Version 0.4.3 released
   - New Features
   - Enhancements
-    - Haas Mill configuration updated
+    - The performance of Code Lens has been significantly improved, which affects the speed of the entire application. From now on, the calculated path and time appear after a single request for the entire visible area, rather than a request for a single line of CNC code as before.
   - Bug fixes
+    - Accumulation of time and path to the wrong, inactive tool. The tool is active when the M6 code is used or the tool_number_executes_exchange option is set.
 
 ## Features
 
