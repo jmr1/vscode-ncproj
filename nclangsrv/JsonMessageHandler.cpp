@@ -105,6 +105,29 @@ std::string markdownFormatHover(const std::string& contents, const std::string& 
     return "**" + contents + ": " + title + "** \n\n---\n\n" + replaceAll(description, "\n", "\n\n");
 }
 
+std::string parserType_str(parser::EFanucParserType parserType)
+{
+    std::ostringstream ostr;
+    ostr << parserType;
+    return ostr.str();
+}
+
+std::string getLangPrefix(parser::ELanguage lang)
+{
+    std::string lang_prefix("en");
+    switch (lang)
+    {
+    case parser::ELanguage::English:
+        lang_prefix = "en";
+        break;
+    case parser::ELanguage::Polish:
+        lang_prefix = "pl";
+        break;
+    }
+
+    return lang_prefix;
+}
+
 } // namespace
 
 #define LOGGER (*mLogger)()
@@ -317,22 +340,11 @@ void JsonMessageHandler::fetch_gCodesDesc()
 {
     if (!mGCodes.get())
     {
-        const auto         fsRootPath = fs::path(mRootPath);
-        std::ostringstream ostr;
-        ostr << mNcSettingsReader.getFanucParserType();
-        std::string lang_prefix("en");
-        switch (mLanguage)
-        {
-        case parser::ELanguage::English:
-            lang_prefix = "en";
-            break;
-        case parser::ELanguage::Polish:
-            lang_prefix = "pl";
-            break;
-        }
-        const std::string descPath = fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) /
-                                                   fs::path("desc") / fs::path("gcode_desc_" + lang_prefix + ".json"))
-                                         .string();
+        auto fsRootPath = fs::path(mRootPath);
+        auto descPath   = fs::canonical(fsRootPath / fs::path("conf") /
+                                      fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
+                                      fs::path("desc") / fs::path("gcode_desc_" + getLangPrefix(mLanguage) + ".json"))
+                            .string();
         mGCodes = std::make_unique<CodesReader>(descPath);
         mGCodes->read();
 
@@ -345,27 +357,33 @@ void JsonMessageHandler::fetch_mCodesDesc()
 {
     if (!mMCodes.get())
     {
-        const auto         fsRootPath = fs::path(mRootPath);
-        std::ostringstream ostr;
-        ostr << mNcSettingsReader.getFanucParserType();
-        std::string lang_prefix("en");
-        switch (mLanguage)
-        {
-        case parser::ELanguage::English:
-            lang_prefix = "en";
-            break;
-        case parser::ELanguage::Polish:
-            lang_prefix = "pl";
-            break;
-        }
-        const std::string descPath = fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) /
-                                                   fs::path("desc") / fs::path("mcode_desc_" + lang_prefix + ".json"))
-                                         .string();
+        auto fsRootPath = fs::path(mRootPath);
+        auto descPath   = fs::canonical(fsRootPath / fs::path("conf") /
+                                      fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
+                                      fs::path("desc") / fs::path("mcode_desc_" + getLangPrefix(mLanguage) + ".json"))
+                            .string();
         mMCodes = std::make_unique<CodesReader>(descPath);
         mMCodes->read();
 
         for (const auto& v : mMCodes->getCodes())
             mSuggestions.push_back("M" + v);
+    }
+}
+
+void JsonMessageHandler::fetch_macrosDesc()
+{
+    if (!mMacrosDesc.get())
+    {
+        auto fsRootPath = fs::path(mRootPath);
+        auto descPath   = fs::canonical(fsRootPath / fs::path("conf") /
+                                      fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
+                                      fs::path("desc") / fs::path("macros_desc_" + getLangPrefix(mLanguage) + ".json"))
+                            .string();
+        mMacrosDesc = std::make_unique<MacrosDescReader>(descPath, mLogger);
+        mMacrosDesc->read();
+
+        for (const auto& v : mMacrosDesc->getMacros())
+            mSuggestions.push_back(v);
     }
 }
 
@@ -653,8 +671,9 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
                 if (!contents.empty())
                 {
-                    std::string code    = extractCode(contents.substr(1));
-                    auto        macroId = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
+                    auto fullcode = contents;
+                    auto code     = extractCode(contents.substr(1));
+                    auto macroId  = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
 
                     contents = contents + " = ";
                     auto it  = macroMap->lower_bound({macroId, line + 1});
@@ -662,6 +681,11 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                         contents = contents + parser::to_string_trunc(it->second);
                     else
                         contents = contents + "undefined";
+
+                    fetch_macrosDesc();
+                    auto itM = mMacrosDesc->getDesc().find(fullcode);
+                    if (itM != mMacrosDesc->getDesc().cend())
+                        contents = markdownFormatHover(contents, itM->second.first, itM->second.second);
 
                     if (!contents.empty())
                         hoverMakeResult(contents, line, from, to, result, a);

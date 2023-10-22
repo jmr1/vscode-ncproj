@@ -10,6 +10,7 @@
 #include <GeneralParserDefines.h>
 
 #include "CodesReader.h"
+#include "MacrosDescReader.h"
 #include "NCParser.h"
 
 namespace nclangsrv {
@@ -46,6 +47,7 @@ private:
 
     void fetch_gCodesDesc();
     void fetch_mCodesDesc();
+    void fetch_macrosDesc();
 
     struct FileContext
     {
@@ -68,6 +70,7 @@ private:
     Logger*                            mLogger;
     std::unique_ptr<CodesReader>       mGCodes;
     std::unique_ptr<CodesReader>       mMCodes;
+    std::unique_ptr<MacrosDescReader>  mMacrosDesc;
     std::string                        mRootPath;
     std::string                        mCurrentUri;
     NCSettingsReader&                  mNcSettingsReader;
