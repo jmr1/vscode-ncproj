@@ -7,10 +7,11 @@
 
 namespace nclangsrv {
 
+class Logger;
 class CodeGroupsReader
 {
 public:
-    explicit CodeGroupsReader(const std::string& path);
+    CodeGroupsReader(const std::string& path, Logger* logger);
 
     bool read();
 
@@ -21,6 +22,7 @@ public:
 
 private:
     std::string                    mPath;
+    Logger*                        mLogger;
     parser::fanuc::code_groups_map mCodeGroups;
     bool                           mRead{};
 };

@@ -5,14 +5,19 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 
+#include "Logger.h"
+
 namespace pt = boost::property_tree;
+
+#define LOGGER (*mLogger)()
 
 using namespace parser;
 
 namespace nclangsrv {
 
-CodeGroupsReader::CodeGroupsReader(const std::string& path)
+CodeGroupsReader::CodeGroupsReader(const std::string& path, Logger* logger)
     : mPath(path)
+    , mLogger(logger)
 {
 }
 
@@ -37,8 +42,22 @@ bool CodeGroupsReader::read()
             }
         }
     }
-    catch (const std::exception&)
+    catch (const pt::json_parser_error& e)
     {
+        if (mLogger)
+        {
+            LOGGER << "CodeGroupsReader::" << __func__ << ": ERR: " << e.what() << std::endl;
+            mLogger->flush();
+        }
+        return false;
+    }
+    catch (const std::exception& e)
+    {
+        if (mLogger)
+        {
+            LOGGER << "CodeGroupsReader::" << __func__ << ": ERR: " << e.what() << std::endl;
+            mLogger->flush();
+        }
         return false;
     }
 

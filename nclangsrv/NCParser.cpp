@@ -178,7 +178,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
             fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("grammar.json")).string();
         if (mLogger)
             LOGGER << "NCParser::" << __func__ << ": grammarPath: " << grammarPath << std::endl;
-        mWordGrammarReader = std::make_unique<WordGrammarReader>(grammarPath);
+        mWordGrammarReader = std::make_unique<WordGrammarReader>(grammarPath, mLogger);
 
         if (!mWordGrammarReader->read())
             return {{"ERROR: Couldn't read word grammar settings"}, {}, {}};
@@ -194,7 +194,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
                 .string();
         if (mLogger)
             LOGGER << "NCParser::" << __func__ << ": gCodeGroupsPath: " << gCodeGroupsPath << std::endl;
-        mGCodeGroupsReader = std::make_unique<CodeGroupsReader>(gCodeGroupsPath);
+        mGCodeGroupsReader = std::make_unique<CodeGroupsReader>(gCodeGroupsPath, mLogger);
 
         if (!mGCodeGroupsReader->read())
             return {{"ERROR: Couldn't read gcode groups settings"}, {}, {}};
@@ -210,7 +210,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
                 .string();
         if (mLogger)
             LOGGER << "NCParser::" << __func__ << ": mCodeGroupsPath: " << mCodeGroupsPath << std::endl;
-        mMCodeGroupsReader = std::make_unique<CodeGroupsReader>(mCodeGroupsPath);
+        mMCodeGroupsReader = std::make_unique<CodeGroupsReader>(mCodeGroupsPath, mLogger);
 
         if (!mMCodeGroupsReader->read())
             return {{"ERROR: Couldn't read mcode groups settings"}, {}, {}};

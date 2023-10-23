@@ -7,10 +7,11 @@
 
 namespace nclangsrv {
 
+class Logger;
 class CodesReader
 {
 public:
-    explicit CodesReader(const std::string& path);
+    CodesReader(const std::string& path, Logger* logger);
 
     bool read();
 
@@ -27,6 +28,7 @@ public:
 
 private:
     std::string                          mPath;
+    Logger*                              mLogger;
     std::map<std::string, TitleDescPair> mData;
     std::vector<std::string>             mCodes;
     bool                                 mRead{};

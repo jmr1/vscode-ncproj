@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
     }
 
     const auto                    executablePath = fs::path(argv[0]);
-    nclangsrv::NCSettingsReader   ncSettingsReader(ncsetting_path);
+    nclangsrv::NCSettingsReader   ncSettingsReader(ncsetting_path, logger.get());
     nclangsrv::JsonMessageHandler jsonMessageHandler(logger.get(), executablePath.parent_path().string(),
                                                      ncSettingsReader, calculate_path_time);
 

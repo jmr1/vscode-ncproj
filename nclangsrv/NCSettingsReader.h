@@ -5,10 +5,11 @@
 #include <GeneralParserDefines.h>
 
 namespace nclangsrv {
+class Logger;
 class NCSettingsReader
 {
 public:
-    explicit NCSettingsReader(const std::string& ncSettingsPath);
+    NCSettingsReader(const std::string& ncSettingsPath, Logger* logger);
 
     bool read();
 
@@ -50,6 +51,7 @@ private:
 
 private:
     std::string               mNcSettingsPath;
+    Logger*                   mLogger;
     parser::ZeroPoint         mZeroPoint{};
     parser::MachinePointsData mMachinePointsData{};
     parser::Kinematics        mKinematics{};

@@ -10,7 +10,7 @@ class Logger;
 class MacrosDescReader
 {
 public:
-    explicit MacrosDescReader(const std::string& path, Logger* logger);
+    MacrosDescReader(const std::string& path, Logger* logger);
 
     bool read();
 

@@ -7,10 +7,11 @@
 
 namespace nclangsrv {
 
+class Logger;
 class WordGrammarReader
 {
 public:
-    explicit WordGrammarReader(const std::string& path);
+    WordGrammarReader(const std::string& path, Logger* logger);
 
     bool read();
 
@@ -25,6 +26,7 @@ public:
 
 private:
     std::string                     mPath;
+    Logger*                         mLogger;
     parser::fanuc::FanucWordGrammar mWordGrammar;
     std::vector<std::string>        mOperations;
     bool                            mRead{};

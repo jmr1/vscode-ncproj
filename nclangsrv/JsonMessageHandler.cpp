@@ -345,7 +345,7 @@ void JsonMessageHandler::fetch_gCodesDesc()
                                       fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
                                       fs::path("desc") / fs::path("gcode_desc_" + getLangPrefix(mLanguage) + ".json"))
                             .string();
-        mGCodes = std::make_unique<CodesReader>(descPath);
+        mGCodes = std::make_unique<CodesReader>(descPath, mLogger);
         mGCodes->read();
 
         for (const auto& v : mGCodes->getCodes())
@@ -362,7 +362,7 @@ void JsonMessageHandler::fetch_mCodesDesc()
                                       fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
                                       fs::path("desc") / fs::path("mcode_desc_" + getLangPrefix(mLanguage) + ".json"))
                             .string();
-        mMCodes = std::make_unique<CodesReader>(descPath);
+        mMCodes = std::make_unique<CodesReader>(descPath, mLogger);
         mMCodes->read();
 
         for (const auto& v : mMCodes->getCodes())

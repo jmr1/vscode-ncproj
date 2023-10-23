@@ -5,14 +5,19 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 
+#include "Logger.h"
+
 namespace pt = boost::property_tree;
+
+#define LOGGER (*mLogger)()
 
 using namespace parser;
 
 namespace nclangsrv {
 
-NCSettingsReader::NCSettingsReader(const std::string& ncSettingsPath)
+NCSettingsReader::NCSettingsReader(const std::string& ncSettingsPath, Logger* logger)
     : mNcSettingsPath(ncSettingsPath)
+    , mLogger(logger)
 {
     setDefaults();
 }
@@ -156,8 +161,22 @@ bool NCSettingsReader::read()
             mZeroPoint.z   = zp.get<decltype(ZeroPoint::z)>("Z");
         }
     }
-    catch (const std::exception&)
+    catch (const pt::json_parser_error& e)
     {
+        if (mLogger)
+        {
+            LOGGER << "NCSettingsReader::" << __func__ << ": ERR: " << e.what() << std::endl;
+            mLogger->flush();
+        }
+        return false;
+    }
+    catch (const std::exception& e)
+    {
+        if (mLogger)
+        {
+            LOGGER << "NCSettingsReader::" << __func__ << ": ERR: " << e.what() << std::endl;
+            mLogger->flush();
+        }
         return false;
     }
 
