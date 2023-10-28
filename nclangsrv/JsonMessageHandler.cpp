@@ -675,17 +675,25 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                     auto code     = extractCode(contents.substr(1));
                     auto macroId  = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
 
-                    contents = contents + " = ";
-                    auto it  = macroMap->lower_bound({macroId, line + 1});
+                    bool exist{};
+
+                    auto it = macroMap->lower_bound({macroId, line + 1});
                     if (it != macroMap->cend() && it->first.id == macroId)
-                        contents = contents + parser::to_string_trunc(it->second);
-                    else
-                        contents = contents + "undefined";
+                    {
+                        exist    = true;
+                        contents = contents + " = " + parser::to_string_trunc(it->second);
+                    }
 
                     fetch_macrosDesc();
                     auto itM = mMacrosDesc->getDesc().find(fullcode);
                     if (itM != mMacrosDesc->getDesc().cend())
+                    {
+                        exist    = true;
                         contents = markdownFormatHover(contents, itM->second.first, itM->second.second);
+                    }
+
+                    if (not exist)
+                        contents += " = undefined";
 
                     if (!contents.empty())
                         hoverMakeResult(contents, line, from, to, result, a);
