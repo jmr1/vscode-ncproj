@@ -383,7 +383,7 @@ void JsonMessageHandler::fetch_macrosDesc()
         mMacrosDesc->read();
 
         for (const auto& v : mMacrosDesc->getMacros())
-            mSuggestions.push_back(v);
+            mSuggestions.push_back("#" + v);
     }
 }
 
@@ -391,6 +391,7 @@ void JsonMessageHandler::textDocument_completion(int32_t id)
 {
     fetch_gCodesDesc();
     fetch_mCodesDesc();
+    fetch_macrosDesc();
 
     rapidjson::Document d;
     d.SetObject();
@@ -492,6 +493,15 @@ void JsonMessageHandler::completionItem_resolve(const rapidjson::Document& reque
                 {
                     auto it = mMCodes->getDesc().find(label.substr(1));
                     if (it != mMCodes->getDesc().cend())
+                    {
+                        title = it->second.first;
+                        desc  = it->second.second;
+                    }
+                }
+                else if (label[0] == '#')
+                {
+                    auto it = mMacrosDesc->getDesc().find(label.substr(1));
+                    if (it != mMacrosDesc->getDesc().cend())
                     {
                         title = it->second.first;
                         desc  = it->second.second;
@@ -671,9 +681,8 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
                 if (!contents.empty())
                 {
-                    auto fullcode = contents;
-                    auto code     = extractCode(contents.substr(1));
-                    auto macroId  = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
+                    auto code    = extractCode(contents.substr(1));
+                    auto macroId = static_cast<decltype(parser::fanuc::macro_map_key::id)>(std::stoi(code));
 
                     bool exist{};
 
@@ -685,7 +694,7 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                     }
 
                     fetch_macrosDesc();
-                    auto itM = mMacrosDesc->getDesc().find(fullcode);
+                    auto itM = mMacrosDesc->getDesc().find(code);
                     if (itM != mMacrosDesc->getDesc().cend())
                     {
                         exist    = true;
