@@ -139,7 +139,7 @@
 		"7901": {"[#_WZP46[n]]" : "G54.1P46 workpiece origin offset value \nExtended workpiece origin offset value \nSubscript n represents a axis number (1 to 20) \nRange: #7901-#7920 \nAttribute: R/W"},
 		"7921": {"[#_WZP47[n]]" : "G54.1P47 workpiece origin offset value \nExtended workpiece origin offset value \nSubscript n represents a axis number (1 to 20) \nRange: #7921-#7940 \nAttribute: R/W"},
 		"7941": {"[#_WZP48[n]]" : "G54.1P48 workpiece origin offset value \nExtended workpiece origin offset value \nSubscript n represents a axis number (1 to 20) \nRange: #7941-#7960 \nAttribute: R/W"},
-		"13001": {"[#_OFSDG[n]]" : "Tool compensation value (D code) \nRange: #2001-#2200 - #10001-#10999 \nAttribute: R/W"},
+		"13001": {"[#_OFSDG[n]]" : "Tool compensation value (D code) \nAttribute: R/W"},
 		"14001": {"[#_WZP1[n]]" : "G54.1P1 workpiece origin offset value \nExtended workpiece origin offset value \nSubscript n represents a axis number (1 to 20) \nRange: #14001-#14020 \nAttribute: R/W"},
 		"14051": {"[#_WZP2[n]]" : "G54.1P2 workpiece origin offset value \nExtended workpiece origin offset value \nSubscript n represents a axis number (1 to 20) \nRange: #14051-#14100 \nAttribute: R/W"},
 		"100001": {"[#_ABSIO[n]]" : "The numbers to the left can also be used. \nSubscript n represents a axis number (1 to 50) \nRange: #100001-#100050 \nAttribute: R"},

@@ -500,12 +500,7 @@ void JsonMessageHandler::completionItem_resolve(const rapidjson::Document& reque
                 }
                 else if (label[0] == '#')
                 {
-                    auto it = mMacrosDesc->getDesc().find(label.substr(1));
-                    if (it != mMacrosDesc->getDesc().cend())
-                    {
-                        title = it->second.first;
-                        desc  = it->second.second;
-                    }
+                    std::tie(title, desc) = mMacrosDesc->getDesc(label.substr(1));
                 }
             }
 
@@ -694,11 +689,11 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                     }
 
                     fetch_macrosDesc();
-                    auto itM = mMacrosDesc->getDesc().find(code);
-                    if (itM != mMacrosDesc->getDesc().cend())
+                    auto [macroTitle, macroDesc] = mMacrosDesc->getDesc(code);
+                    if (not macroTitle.empty() or not macroDesc.empty())
                     {
                         exist    = true;
-                        contents = markdownFormatHover(contents, itM->second.first, itM->second.second);
+                        contents = markdownFormatHover(contents, macroTitle, macroDesc);
                     }
 
                     if (not exist)

@@ -14,7 +14,10 @@ public:
 
     bool read();
 
-    using MacroDescPair = std::pair<std::string, std::string>;
+    using MacroDescPair   = std::pair<std::string, std::string>;
+    using MacroCodesRange = std::pair<int, int>;
+
+    MacroDescPair getDesc(const std::string& code) const;
 
     const std::map<std::string, MacroDescPair>& getDesc() const
     {
@@ -26,11 +29,14 @@ public:
     }
 
 private:
-    std::string                          mPath;
-    Logger*                              mLogger;
-    std::map<std::string, MacroDescPair> mData;
-    std::vector<std::string>             mMacros;
-    bool                                 mRead{};
+    void readRanges();
+
+    std::string                                          mPath;
+    Logger*                                              mLogger;
+    std::vector<std::pair<MacroCodesRange, std::string>> mRanges;
+    std::map<std::string, MacroDescPair>                 mData;
+    std::vector<std::string>                             mMacros;
+    bool                                                 mRead{};
 };
 
 } // namespace nclangsrv
