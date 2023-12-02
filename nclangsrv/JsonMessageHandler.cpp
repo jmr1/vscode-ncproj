@@ -133,12 +133,13 @@ std::string getLangPrefix(parser::ELanguage lang)
 #define LOGGER (*mLogger)()
 
 JsonMessageHandler::JsonMessageHandler(Logger* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
-                                       bool              calculatePathTime,
+                                       bool calculatePathTime, const std::string& macrosDescUserPath,
                                        parser::ELanguage language /*= parser::ELanguage::English*/)
     : mLogger(logger)
     , mRootPath(rootPath)
     , mNcSettingsReader(ncSettingsReader)
     , mParser(logger, rootPath, ncSettingsReader, calculatePathTime)
+    , mMacrosDescUserPath(macrosDescUserPath)
     , mLanguage(language)
 {
 }
@@ -379,7 +380,7 @@ void JsonMessageHandler::fetch_macrosDesc()
                                       fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
                                       fs::path("desc") / fs::path("macros_desc_" + getLangPrefix(mLanguage) + ".json"))
                             .string();
-        mMacrosDesc = std::make_unique<MacrosDescReader>(descPath, mLogger);
+        mMacrosDesc = std::make_unique<MacrosDescReader>(descPath, mMacrosDescUserPath, mLogger);
         mMacrosDesc->read();
 
         for (const auto& v : mMacrosDesc->getMacros())

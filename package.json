@@ -54,6 +54,12 @@
                     "default": true,
                     "title": "Whether to calculate path and time",
                     "description": "Sets if path and time calculations should be performed"
+                },
+                "ncproj.macro.descriptions.path": {
+                    "type": "string",
+                    "default": "",
+                    "title": "Path to the user defined macro descriptions file",
+                    "description": "Specifies the path to the .json file. Requires a VSCode restart to take effect."
                 }
             }
         },
@@ -116,6 +122,14 @@
             {
                 "command": "ncproj.togglePathTimeCalculation",
                 "title": "NC Project: Toggle Path and Time Calculation"
+            },
+            {
+                "command": "ncproj.macroDescriptionsSelect",
+                "title": "NC Project: Select user defined macro descriptions"
+            },
+            {
+                "command": "ncproj.macroDescriptionsPlaceholder",
+                "title": "NC Project: Generate user defined macro descriptions placeholder"
             }
         ]
     },

@@ -1,7 +1,8 @@
 #pragma once
 
-#include <map>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 namespace nclangsrv {
@@ -10,7 +11,7 @@ class Logger;
 class MacrosDescReader
 {
 public:
-    MacrosDescReader(const std::string& path, Logger* logger);
+    MacrosDescReader(const std::string& path, const std::string& macrosDescUserPath, Logger* logger);
 
     bool read();
 
@@ -19,23 +20,25 @@ public:
 
     MacroDescPair getDesc(const std::string& code) const;
 
-    const std::map<std::string, MacroDescPair>& getDesc() const
+    const std::unordered_map<std::string, MacroDescPair>& getDesc() const
     {
         return mData;
     }
-    const std::vector<std::string>& getMacros() const
+    const std::unordered_set<std::string>& getMacros() const
     {
         return mMacros;
     }
 
 private:
+    bool readJson(const std::string& path);
     void readRanges();
 
     std::string                                          mPath;
+    std::string                                          mMacrosDescUserPath;
     Logger*                                              mLogger;
     std::vector<std::pair<MacroCodesRange, std::string>> mRanges;
-    std::map<std::string, MacroDescPair>                 mData;
-    std::vector<std::string>                             mMacros;
+    std::unordered_map<std::string, MacroDescPair>       mData;
+    std::unordered_set<std::string>                      mMacros;
     bool                                                 mRead{};
 };
 

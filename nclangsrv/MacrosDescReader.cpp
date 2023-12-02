@@ -15,8 +15,9 @@ namespace pt = boost::property_tree;
 
 namespace nclangsrv {
 
-MacrosDescReader::MacrosDescReader(const std::string& path, Logger* logger)
+MacrosDescReader::MacrosDescReader(const std::string& path, const std::string& macrosDescUserPath, Logger* logger)
     : mPath(path)
+    , mMacrosDescUserPath(macrosDescUserPath)
     , mLogger(logger)
 {
 }
@@ -26,18 +27,41 @@ bool MacrosDescReader::read()
     if (mRead)
         return true;
 
+    mData.clear();
+    mMacros.clear();
+
+    bool ret{};
+
+    if (not mMacrosDescUserPath.empty())
+    {
+        ret = readJson(mMacrosDescUserPath);
+        if (not ret)
+            return false;
+    }
+
+    ret = readJson(mPath);
+    if (not ret)
+        return false;
+
+    readRanges();
+
+    mRead = true;
+
+    return true;
+}
+
+bool MacrosDescReader::readJson(const std::string& path)
+{
     try
     {
         pt::ptree root;
-        pt::read_json(mPath, root);
+        pt::read_json(path, root);
 
-        mData.clear();
-        mMacros.clear();
         for (const auto& [code, titleDesc] : root.get_child("descriptions"))
         {
             for (const auto& [title, desc] : titleDesc)
                 mData.emplace(std::make_pair(code, std::make_pair(title, desc.get_value<std::string>())));
-            mMacros.emplace_back(code);
+            mMacros.insert(code);
         }
     }
     catch (const pt::json_parser_error& e)
@@ -58,10 +82,6 @@ bool MacrosDescReader::read()
         }
         return false;
     }
-
-    readRanges();
-
-    mRead = true;
 
     return true;
 }

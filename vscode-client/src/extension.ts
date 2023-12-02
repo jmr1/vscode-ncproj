@@ -106,6 +106,10 @@ async function startLangServerNCProj(executable: string, cwd: string) {
     if (calculatePathTime) {
         args.push("--calculate-path", String(calculatePathTime));
     }
+    const macroDescriptionsPath = config.get<string>("macro.descriptions.path");
+    if (macroDescriptionsPath) {
+        args.push("--macro-desc-path", macroDescriptionsPath);
+    }
 
     if (ncsettingFilePath) {
         setStatusText(ncsettingFilePath);
@@ -179,7 +183,12 @@ function startListeningConfigurationChanges() {
             ignoreNextConfigurationChange = false;
             return;
         }
-        for (const s of ["ncproj.debug.log.path", "ncproj.ncsetting.file.path", "ncproj.calculate.pathtime.enable"]) {
+        for (const s of [
+            "ncproj.debug.log.path",
+            "ncproj.ncsetting.file.path",
+            "ncproj.calculate.pathtime.enable",
+            "ncproj.macro.descriptions.path",
+        ]) {
             if (event.affectsConfiguration(s)) {
                 askReloadWindow('Please use the "Reload Window" action for changes in ' + s + " to take effect.");
                 return;
@@ -194,7 +203,7 @@ function startListeningConfigurationChanges() {
         const extension = path.extname(normalized);
         const dirpath = path.dirname(normalized);
 
-        // watching for changes in a specific file does not seem to work therefore need to watch for file pattern and the fileter other changes files out:
+        // watching for changes in a specific file does not seem to work therefore need to watch for file pattern and then filter other changed files out:
         // https://stackoverflow.com/questions/73914581/file-system-watcher-doesnt-work-when-used-full-filename-as-filter
         const watcher = workspace.createFileSystemWatcher(
             new RelativePattern(dirpath, "*" + extension),
@@ -228,7 +237,12 @@ function askWhenNoNcsettingSpecified(askMessage: string) {
     });
 }
 
-function askNcsettingFilePath(askMessage: string) {
+function askFilePath(
+    askMessage: string,
+    openLabelMsg: string,
+    configProperty: string,
+    filters: { [name: string]: string[] }
+) {
     const saveInUser = "Yes (save in user settings)";
     const saveInWorkspace = "Yes (save in workspace settings)";
 
@@ -237,11 +251,8 @@ function askNcsettingFilePath(askMessage: string) {
             window
                 .showOpenDialog({
                     canSelectMany: false,
-                    openLabel: "Select .ncsetting configuration",
-                    filters: {
-                        "NCSetting Files": ["ncsetting"],
-                        "All Files": ["*"],
-                    },
+                    openLabel: openLabelMsg,
+                    filters: filters,
                 })
                 .then(async (onfulfilled) => {
                     if (onfulfilled && onfulfilled.length > 0) {
@@ -251,7 +262,7 @@ function askNcsettingFilePath(askMessage: string) {
                         }
                         const config = workspace.getConfiguration("ncproj");
                         ignoreNextConfigurationChange = true;
-                        config.update("ncsetting.file.path", onfulfilled[0].fsPath, configurationTarget);
+                        config.update(configProperty, onfulfilled[0].fsPath, configurationTarget);
                         askReloadWindow(
                             'Please use the "Reload Window" action for setting ' +
                                 onfulfilled[0].fsPath +
@@ -275,6 +286,8 @@ export function activate(context: ExtensionContext) {
     registerCmdNcsettingCreate(context);
     registerCmdNcsettingSelect(context);
     registerCmdTogglePathTimeCalculation(context);
+    registerCmdMacroDescriptionsSelect(context);
+    registerMacroDescriptionsPlaceholder(context);
 
     checkNcsettingFilePathProperty();
 }
@@ -318,7 +331,16 @@ function checkNcsettingFilePathProperty() {
 
 function registerCmdNcsettingSelect(context: ExtensionContext) {
     const disposable = commands.registerCommand("ncproj.ncsettingSelect", () => {
-        askNcsettingFilePath("Do you want to select .ncsetting file?");
+        const ncsettingFilters = {
+            "NCSetting Files": ["ncsetting"],
+            "All Files": ["*"],
+        };
+        askFilePath(
+            "Do you want to select .ncsetting file?",
+            "Select .ncsetting configuration",
+            "ncsetting.file.path",
+            ncsettingFilters
+        );
     });
     context.subscriptions.push(disposable);
 }
@@ -347,6 +369,40 @@ function registerCmdTogglePathTimeCalculation(context: ExtensionContext) {
         ignoreNextConfigurationChange = true;
         config.update("calculate.pathtime.enable", !calculatePathTime, ConfigurationTarget.Global);
         askReloadWindow('Please use the "Reload Window" action for setting to take effect.');
+    });
+
+    context.subscriptions.push(disposable);
+}
+
+function registerCmdMacroDescriptionsSelect(context: ExtensionContext) {
+    const disposable = commands.registerCommand("ncproj.macroDescriptionsSelect", () => {
+        const ncsettingFilters = {
+            "JSON Files": ["json"],
+            "All Files": ["*"],
+        };
+        askFilePath(
+            "Do you want to select .json macro descriptions file?",
+            "Select .json macro descriptions",
+            "macro.descriptions.path",
+            ncsettingFilters
+        );
+    });
+    context.subscriptions.push(disposable);
+}
+
+function registerMacroDescriptionsPlaceholder(context: ExtensionContext) {
+    const disposable = commands.registerCommand("ncproj.macroDescriptionsPlaceholder", () => {
+        const placeholder = `{
+	"version": "1.0",
+	"descriptions": {
+		"7000": {"my macro" : "Description for macro #7000\\nAttribute: R"},
+		"7001": {"my macro" : "Description for macro #7001\\nAttribute: R/W"}
+	}
+}`;
+
+        workspace.openTextDocument({ content: placeholder, language: "json" }).then((document) => {
+            window.showTextDocument(document);
+        });
     });
 
     context.subscriptions.push(disposable);

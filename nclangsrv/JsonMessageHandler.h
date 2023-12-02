@@ -21,7 +21,8 @@ class JsonMessageHandler
 {
 public:
     JsonMessageHandler(Logger* logger, const std::string& rootPath, NCSettingsReader& ncSettingsReader,
-                       bool calculatePathTime, parser::ELanguage language = parser::ELanguage::English);
+                       bool calculatePathTime, const std::string& macrosDescUserPath,
+                       parser::ELanguage language = parser::ELanguage::English);
 
     bool parse(const std::string& json);
     bool exit() const
@@ -75,6 +76,7 @@ private:
     std::string                        mCurrentUri;
     NCSettingsReader&                  mNcSettingsReader;
     NCParser                           mParser;
+    std::string                        mMacrosDescUserPath;
     parser::ELanguage                  mLanguage;
     bool                               mExit{};
 };

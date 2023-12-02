@@ -44,6 +44,7 @@ int main(int argc, char* argv[])
     bool                       calculate_path_time{};
     bool                       rotate{};
     std::string                ncsetting_path;
+    std::string                macro_desc_path;
     std::string                log_path;
 
     // Declare the supported options.
@@ -57,6 +58,7 @@ int main(int argc, char* argv[])
         ("rotate", po::value<bool>(&rotate)->default_value(false), "whether to rotate carthesian system")
         ("rotate-option", po::value<parser::AxesRotatingOption>(&axes_rotating_option)->default_value(parser::AxesRotatingOption::Xrotate90degrees), "Axes rotating option: [X90, X180, X270, Y90, Y180, Y270, Z90, Z180, Z270]")
         ("ncsetting-path,n", po::value<std::string>(&ncsetting_path), "path to ncsettings file")
+        ("macro-desc-path,m", po::value<std::string>(&macro_desc_path), "path to macro descriptions json file")
         ("log-path,l", po::value<std::string>(&log_path), "path to log file")
     ;
     // clang-format on
@@ -89,12 +91,13 @@ int main(int argc, char* argv[])
         VERIFY_OPTION(LOGGER, "rotate-option", axes_rotating_option);
         OPTIONAL_OPTION(LOGGER, "log-path", log_path);
         OPTIONAL_OPTION(LOGGER, "ncsetting-path", ncsetting_path);
+        OPTIONAL_OPTION(LOGGER, "macro-desc-path", macro_desc_path);
     }
 
     const auto                    executablePath = fs::path(argv[0]);
     nclangsrv::NCSettingsReader   ncSettingsReader(ncsetting_path, logger.get());
     nclangsrv::JsonMessageHandler jsonMessageHandler(logger.get(), executablePath.parent_path().string(),
-                                                     ncSettingsReader, calculate_path_time);
+                                                     ncSettingsReader, calculate_path_time, macro_desc_path);
 
     if (logger)
         LOGGER << __func__ << ": Current path is " << fs::current_path() << std::endl;
