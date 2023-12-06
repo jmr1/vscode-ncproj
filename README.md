@@ -6,12 +6,12 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.4.3 released
+- Version 0.5.0 released
   - New Features
+    - On hover macro variables descriptions added
   - Enhancements
-    - The performance of Code Lens has been significantly improved, which affects the speed of the entire application. From now on, the calculated path and time appear after a single request for the entire visible area, rather than a request for a single line of CNC code as before.
+    - Defined values for `#3101` (Pi) and `#3102` (the base of natural logarithms)
   - Bug fixes
-    - Accumulation of time and path to the wrong, inactive tool. The tool is active when the M6 code is used or the tool_number_executes_exchange option is set.
 
 ## Features
 
@@ -29,6 +29,7 @@ Develop and validate CNC programs.
 - Syntax coloring
 - Status bar
 - Commands
+- On hover description of macro variables
 
 ## Current supported file extensions
 
