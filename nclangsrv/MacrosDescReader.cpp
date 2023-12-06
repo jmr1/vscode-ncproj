@@ -30,18 +30,9 @@ bool MacrosDescReader::read()
     mData.clear();
     mMacros.clear();
 
-    bool ret{};
-
     if (not mMacrosDescUserPath.empty())
-    {
-        ret = readJson(mMacrosDescUserPath);
-        if (not ret)
-            return false;
-    }
-
-    ret = readJson(mPath);
-    if (not ret)
-        return false;
+        readJson(mMacrosDescUserPath);
+    readJson(mPath);
 
     readRanges();
 
@@ -50,7 +41,7 @@ bool MacrosDescReader::read()
     return true;
 }
 
-bool MacrosDescReader::readJson(const std::string& path)
+void MacrosDescReader::readJson(const std::string& path)
 {
     try
     {
@@ -71,7 +62,7 @@ bool MacrosDescReader::readJson(const std::string& path)
             LOGGER << "MacrosDescReader::" << __func__ << ": ERR: " << e.what() << std::endl;
             mLogger->flush();
         }
-        return false;
+        throw json_parser_exception(e.what());
     }
     catch (const std::exception& e)
     {
@@ -80,10 +71,8 @@ bool MacrosDescReader::readJson(const std::string& path)
             LOGGER << "MacrosDescReader::" << __func__ << ": ERR: " << e.what() << std::endl;
             mLogger->flush();
         }
-        return false;
+        throw json_parser_exception(path + "(0): " + e.what());
     }
-
-    return true;
 }
 
 void MacrosDescReader::readRanges()

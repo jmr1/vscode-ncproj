@@ -125,11 +125,11 @@
             },
             {
                 "command": "ncproj.macroDescriptionsSelect",
-                "title": "NC Project: Select user defined macro descriptions"
+                "title": "NC Project: Select user macro descriptions"
             },
             {
                 "command": "ncproj.macroDescriptionsPlaceholder",
-                "title": "NC Project: Generate user defined macro descriptions placeholder"
+                "title": "NC Project: Create macro description from template"
             }
         ]
     },

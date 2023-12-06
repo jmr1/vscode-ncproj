@@ -395,8 +395,8 @@ function registerMacroDescriptionsPlaceholder(context: ExtensionContext) {
         const placeholder = `{
 	"version": "1.0",
 	"descriptions": {
-		"7000": {"my macro" : "Description for macro #7000\\nAttribute: R"},
-		"7001": {"my macro" : "Description for macro #7001\\nAttribute: R/W"}
+		"7000": {"My macro title" : "My description for macro #7000"},
+		"7001": {"My macro title" : "My description for macro #7001"}
 	}
 }`;
 

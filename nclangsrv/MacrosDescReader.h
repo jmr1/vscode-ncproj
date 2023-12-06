@@ -7,6 +7,14 @@
 
 namespace nclangsrv {
 
+struct json_parser_exception : std::runtime_error
+{
+    explicit json_parser_exception(const std::string& message)
+        : std::runtime_error(message.c_str())
+    {
+    }
+};
+
 class Logger;
 class MacrosDescReader
 {
@@ -30,7 +38,7 @@ public:
     }
 
 private:
-    bool readJson(const std::string& path);
+    void readJson(const std::string& path);
     void readRanges();
 
     std::string                                          mPath;

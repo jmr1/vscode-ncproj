@@ -48,6 +48,62 @@ rapidjson::Value makeRange(int line, size_t from, size_t to, rapidjson::Document
     return range;
 }
 
+rapidjson::Value prepareMacroDescDiagnostic(const std::string& macroDescErr, rapidjson::Document::AllocatorType& a)
+{
+    std::string file;
+    int         line{};
+    std::string msg;
+
+    const std::regex r("(.*)\\((\\d+)\\):\\s(.*)");
+    std::smatch      m;
+    if (std::regex_search(macroDescErr, m, r) and m.size() == 4)
+    {
+        file = m[1].str();
+        line = std::stoi(m[2].str());
+        msg  = m[3].str();
+    }
+    else
+    {
+        file = macroDescErr;
+        line = 1;
+        msg  = macroDescErr;
+    }
+
+    rapidjson::Value diagnostic(rapidjson::kObjectType);
+    {
+        diagnostic.AddMember("severity", 1, a); // Error, can be omitted
+        diagnostic.AddMember("range", makeRange(0, 0, 0, a), a);
+
+        std::string      msgTitle("Problem in user macro descriptions file");
+        rapidjson::Value messageTitle;
+        messageTitle.SetString(msgTitle.c_str(), static_cast<rapidjson::SizeType>(msgTitle.size()), a);
+        diagnostic.AddMember("message", messageTitle, a);
+
+        rapidjson::Value relatedInformations(rapidjson::kArrayType);
+
+        rapidjson::Value relatedInformation(rapidjson::kObjectType);
+
+        rapidjson::Value message;
+        message.SetString(msg.c_str(), static_cast<rapidjson::SizeType>(msg.size()), a);
+        relatedInformation.AddMember("message", message, a);
+
+        rapidjson::Value location(rapidjson::kObjectType);
+
+        rapidjson::Value uri;
+        uri.SetString(file.c_str(), static_cast<rapidjson::SizeType>(file.size()), a);
+        location.AddMember("uri", uri, a);
+        location.AddMember("range", makeRange(line - 1, 0, 0, a), a);
+
+        relatedInformation.AddMember("location", location, a);
+
+        relatedInformations.PushBack(relatedInformation, a);
+
+        diagnostic.AddMember("relatedInformation", relatedInformations, a);
+    }
+
+    return diagnostic;
+}
+
 void hoverMakeResult(const std::string& contents, int line, size_t from, size_t to, rapidjson::Value& result,
                      rapidjson::Document::AllocatorType& a)
 {
@@ -392,7 +448,6 @@ void JsonMessageHandler::textDocument_completion(int32_t id)
 {
     fetch_gCodesDesc();
     fetch_mCodesDesc();
-    fetch_macrosDesc();
 
     rapidjson::Document d;
     d.SetObject();
@@ -689,7 +744,6 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
                         contents = contents + " = " + parser::to_string_trunc(it->second);
                     }
 
-                    fetch_macrosDesc();
                     auto [macroTitle, macroDesc] = mMacrosDesc->getDesc(code);
                     if (not macroTitle.empty() or not macroDesc.empty())
                     {
@@ -963,6 +1017,16 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
     mFileContexts.erase(uri);
     mFileContexts.emplace(std::make_pair(uri, std::move(fileContext)));
 
+    std::string macroDescErr;
+    try
+    {
+        fetch_macrosDesc();
+    }
+    catch (const json_parser_exception& e)
+    {
+        macroDescErr = e.what();
+    }
+
     rapidjson::Document d;
     d.SetObject();
     rapidjson::Document::AllocatorType& a = d.GetAllocator();
@@ -979,6 +1043,12 @@ void JsonMessageHandler::textDocument_publishDiagnostics(const std::string& uri,
         }
 
         rapidjson::Value diagnostics(rapidjson::kArrayType);
+
+        if (not macroDescErr.empty())
+        {
+            auto diagnostic = prepareMacroDescDiagnostic(macroDescErr, a);
+            diagnostics.PushBack(diagnostic, a);
+        }
 
         for (const auto& error_message : messages)
         {
