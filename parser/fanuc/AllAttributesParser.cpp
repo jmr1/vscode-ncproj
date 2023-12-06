@@ -65,9 +65,17 @@ const macro_map& AllAttributesParser::get_macro_values() const
     return macro_values;
 }
 
-void AllAttributesParser::reset_macro_values()
+void AllAttributesParser::reset_macro_values(bool init /*= true*/)
 {
     macro_values.clear();
+    if (init)
+        init_macro_values();
+}
+
+void AllAttributesParser::init_macro_values()
+{
+    macro_values.insert(std::make_pair(macro_map_key{3101, -1}, M_PI));
+    macro_values.insert(std::make_pair(macro_map_key{3102, -1}, M_E));
 }
 
 void AllAttributesParser::reset_attributes_path_calculator()
@@ -108,7 +116,7 @@ void AllAttributesParser::set_ncsettings(EMachineTool machine_tool, EMachineTool
     this->machine_tool_type = machine_tool_type;
     this->zero_point        = std::move(zero_point);
     active_word_grammar     = cnc_default_values.default_driver_units == EDriverUnits::Millimeter ? &word_grammar.metric
-                                                                                                  : &word_grammar.imperial;
+                                                                                              : &word_grammar.imperial;
     MachinePointsData machine_points_data_zero_point;
 
     const std::map<std::string, double> zero_point_axis_map = {

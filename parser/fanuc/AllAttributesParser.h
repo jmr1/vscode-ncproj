@@ -56,7 +56,7 @@ public:
     virtual EDriverUnits get_unit_system() const override;
 
     const macro_map& get_macro_values() const;
-    void             reset_macro_values();
+    void             reset_macro_values(bool init = true);
 
     virtual void              reset_attributes_path_calculator() override;
     virtual const PathResult& get_path_result() const override;
@@ -116,6 +116,8 @@ private:
 
     bool simple_parse(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
                       bool single_line_msg);
+
+    void init_macro_values();
 
 private:
 #ifdef _MSC_VER

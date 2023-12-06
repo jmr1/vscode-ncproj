@@ -46,7 +46,7 @@ public:
     virtual EDriverUnits get_unit_system() const = 0;
 
     // virtual const macro_map& get_macro_values() const = 0;
-    // virtual void reset_macro_values() = 0;
+    // virtual void reset_macro_values(bool init = true) = 0;
 
     virtual void              reset_attributes_path_calculator() = 0;
     virtual const PathResult& get_path_result() const            = 0;
