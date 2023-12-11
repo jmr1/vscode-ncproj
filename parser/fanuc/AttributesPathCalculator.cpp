@@ -447,7 +447,8 @@ std::optional<U> get_optional_value(const std::map<T, U>& values, const std::str
     return std::nullopt;
 }
 
-void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& value, EDriverUnits units)
+void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& value, EDriverUnits units,
+                                        macro_map& macro_values, int line)
 {
     path_result.work_motion = 0;
     path_result.fast_motion = 0;
@@ -504,7 +505,10 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
 
         if (cnc_default_values.tool_number_executes_exchange ||
             (!cnc_default_values.tool_number_executes_exchange && was_m6))
+        {
             active_t = *t;
+            macro_values.insert(std::make_pair(macro_map_key{4120, line}, std::stod(active_t)));
+        }
 
         path_result.tool_id = time_result.tool_id = active_t;
 

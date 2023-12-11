@@ -116,10 +116,11 @@ void AttributesPathCalculatorTest::verify(fanuc::AttributesPathCalculator&   apc
 {
     prepare_expected_values(expected_word_range, path_value_map, expected_value, ewr);
 
+    fanuc::macro_map macro_values;
     if (expected_ret)
-        EXPECT_NO_THROW(apc.evaluate(data, EDriverUnits::Millimeter)) << msg;
+        EXPECT_NO_THROW(apc.evaluate(data, EDriverUnits::Millimeter, macro_values, 1)) << msg;
     else
-        EXPECT_THROW(apc.evaluate(data, EDriverUnits::Millimeter), fanuc::path_calc_exception) << msg;
+        EXPECT_THROW(apc.evaluate(data, EDriverUnits::Millimeter, macro_values, 1), fanuc::path_calc_exception) << msg;
 
     const double tolerance = 1e-8;
 

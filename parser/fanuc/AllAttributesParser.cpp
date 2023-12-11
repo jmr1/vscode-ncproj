@@ -238,7 +238,8 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
         if (parser_settings.calculate_path)
         {
             if (attr_path_calc.get())
-                attr_path_calc->evaluate(evaluated_code.empty() ? value : value2, get_unit_system());
+                attr_path_calc->evaluate(evaluated_code.empty() ? value : value2, get_unit_system(), macro_values,
+                                         line);
 
             if (parser_settings.zero_point_analysis && attr_path_calc.get())
                 RangeVerifier()(attr_path_calc->get_kinematics(), zero_point, attr_path_calc->get_word_range(),

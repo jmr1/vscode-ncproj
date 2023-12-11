@@ -42,7 +42,7 @@ public:
 
     void reset();
 
-    void evaluate(const std::vector<AttributeVariant>& value, EDriverUnits units);
+    void evaluate(const std::vector<AttributeVariant>& value, EDriverUnits units, macro_map& macro_values, int line);
 
     const PathResult& get_path_result() const
     {
