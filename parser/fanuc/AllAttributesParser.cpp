@@ -33,6 +33,7 @@
 #include "RangeVerifier.h"
 #include "RotationVerifier.h"
 #include "SameWordInBlockVerifier.h"
+#include "SystemMacroAssigner.h"
 #include "UniqueCode.h"
 
 #include "AllAttributesParserGrammar.h"
@@ -219,6 +220,8 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
             ret = qi::phrase_parse(position_begin2, position_end2, all_attr_gr, qi::blank, value2);
             GrammarSelector()(word_grammar, active_word_grammar, value2);
         }
+
+        SystemMacroAssigner()(macro_values, line, evaluated_code.empty() ? value : value2);
 
         if (parser_settings.ncsettings_code_analysis)
         {

@@ -507,9 +507,8 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
             (!cnc_default_values.tool_number_executes_exchange && was_m6))
         {
             active_t = *t;
-            macro_values.insert(std::make_pair(macro_map_key{4120, line}, std::stod(active_t)));
-            macro_values.insert(std::make_pair(macro_map_key{4320, line}, std::stod(active_t)));
-            macro_values.insert(std::make_pair(macro_map_key{4520, line}, std::stod(active_t)));
+            for (unsigned v : {4120, 4320, 4520})
+                macro_values.insert_or_assign(macro_map_key{v, line}, std::stod(active_t));
         }
 
         path_result.tool_id = time_result.tool_id = active_t;
