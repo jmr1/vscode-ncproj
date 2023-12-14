@@ -508,6 +508,8 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
         {
             active_t = *t;
             macro_values.insert(std::make_pair(macro_map_key{4120, line}, std::stod(active_t)));
+            macro_values.insert(std::make_pair(macro_map_key{4320, line}, std::stod(active_t)));
+            macro_values.insert(std::make_pair(macro_map_key{4520, line}, std::stod(active_t)));
         }
 
         path_result.tool_id = time_result.tool_id = active_t;

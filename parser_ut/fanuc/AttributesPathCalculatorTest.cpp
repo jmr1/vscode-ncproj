@@ -25,7 +25,8 @@ protected:
 
     void verify(fanuc::AttributesPathCalculator& apc, fanuc::word_range_map& expected_word_range,
                 std::map<std::string, PathResult>& path_value_map, PathResult&& expected_value, bool expected_ret,
-                std::map<std::string, double>&& ewr, std::vector<fanuc::AttributeVariant>&& data, std::string&& msg);
+                std::map<std::string, double>&& ewr, std::vector<fanuc::AttributeVariant>&& data, std::string&& msg,
+                fanuc::macro_map&& expected_macro_values = {});
 
     MachinePointsData machine_points_data;
     Kinematics        kinematics;
@@ -112,7 +113,8 @@ void AttributesPathCalculatorTest::verify(fanuc::AttributesPathCalculator&   apc
                                           std::map<std::string, PathResult>& path_value_map,
                                           PathResult&& expected_value, bool expected_ret,
                                           std::map<std::string, double>&&        ewr,
-                                          std::vector<fanuc::AttributeVariant>&& data, std::string&& msg)
+                                          std::vector<fanuc::AttributeVariant>&& data, std::string&& msg,
+                                          fanuc::macro_map&& expected_macro_values /*= {}*/)
 {
     prepare_expected_values(expected_word_range, path_value_map, expected_value, ewr);
 
@@ -144,6 +146,15 @@ void AttributesPathCalculatorTest::verify(fanuc::AttributesPathCalculator&   apc
         EXPECT_NEAR(expected_current, current, tolerance) << msg;
         EXPECT_NEAR(expected_max, max, tolerance) << msg;
     }
+
+    EXPECT_EQ(expected_macro_values.size(), macro_values.size()) << msg;
+    for (const auto& it : expected_macro_values)
+    {
+        EXPECT_TRUE(macro_values.count(it.first))
+            << msg << " (id, line) = (" << it.first.id << ", " << it.first.line << ")";
+        EXPECT_NEAR(it.second, macro_values.at(it.first), tolerance)
+            << msg << " (id, line) = (" << it.first.id << ", " << it.first.line << ")";
+    }
 }
 
 TEST_F(AttributesPathCalculatorTest, G90_absolute_programming)
@@ -156,7 +167,7 @@ TEST_F(AttributesPathCalculatorTest, G90_absolute_programming)
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")},
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
-           "T4 M6");
+           "T4 M6", {{{4120, 1}, 4.}, {{4320, 1}, 4.}, {{4520, 1}, 4.}});
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
@@ -227,7 +238,10 @@ TEST_F(AttributesPathCalculatorTest, G90_absolute_programming)
     verify(apc, wrm, pvm, {16.424879532, 0, 0, 0, "5"}, true, {},
            {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("5")},
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
-           "T5 M6");
+           "T5 M6", {{{4120, 1}, 5.}, {{4320, 1}, 5.}, {{4520, 1}, 5.}});
+
+    verify(apc, wrm, pvm, {16.424879532, 0, 0, 0, "5"}, true, {},
+           {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("5")}}, "T5");
 
     verify(apc, wrm, pvm, {0, 1.00323318660525, 0, 0, "5"}, true, {{"X", 2}, {"I", 2}, {"J", 3}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("3")},
@@ -249,7 +263,7 @@ TEST_F(AttributesPathCalculatorTest, Not_crash_test)
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")},
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
-           "T4 M6");
+           "T4 M6", {{{4120, 1}, 4.}, {{4320, 1}, 4.}, {{4520, 1}, 4.}});
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
@@ -294,7 +308,7 @@ TEST_F(AttributesPathCalculatorTest, Helix_360_full_arc_G90_absolute_programming
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")},
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
-           "T2 M6");
+           "T2 M6", {{{4120, 1}, 2.}, {{4320, 1}, 2.}, {{4520, 1}, 2.}});
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("90")},
@@ -354,7 +368,7 @@ TEST_F(AttributesPathCalculatorTest, Helix_4x90_arc_G90_absolute_programming)
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")},
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
-           "T2 M6");
+           "T2 M6", {{{4120, 1}, 2.}, {{4320, 1}, 2.}, {{4520, 1}, 2.}});
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("17")},
@@ -461,7 +475,7 @@ TEST_F(AttributesPathCalculatorTest, Helix_Archimedes_G90_absolute_programming)
     verify(apc, wrm, pvm, {0, 0, 0, 0, "22"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("22")},
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
-           "T22 M6");
+           "T22 M6", {{{4120, 1}, 22.}, {{4320, 1}, 22.}, {{4520, 1}, 22.}});
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "22"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
@@ -513,7 +527,7 @@ TEST_F(AttributesPathCalculatorTest, G91_incremental_programming)
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("4")},
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
-           "T4 M6");
+           "T4 M6", {{{4120, 1}, 4.}, {{4320, 1}, 4.}, {{4520, 1}, 4.}});
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "4"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"X", _, _, _, _, std::string("0")},
@@ -588,7 +602,7 @@ TEST_F(AttributesPathCalculatorTest, Helix_360_full_arc_G91_incremental_programm
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")},
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
-           "T2 M6");
+           "T2 M6", {{{4120, 1}, 2.}, {{4320, 1}, 2.}, {{4520, 1}, 2.}});
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("17")},
@@ -647,7 +661,7 @@ TEST_F(AttributesPathCalculatorTest, Helix_4x90_arc_G91_incremental_programming)
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"T", _, _, _, _, std::string("2")},
             fanuc::DecimalAttributeData{"M", _, _, _, _, std::string("6")}},
-           "T2 M6");
+           "T2 M6", {{{4120, 1}, 2.}, {{4320, 1}, 2.}, {{4520, 1}, 2.}});
 
     verify(apc, wrm, pvm, {0, 0, 0, 0, "2"}, true, {{"X", 0}, {"Y", 0}, {"Z", 0}},
            {fanuc::DecimalAttributeData{"G", _, _, _, _, std::string("17")},
