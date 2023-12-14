@@ -31,6 +31,9 @@
     <ClCompile Include="fanuc\SameWordInBlockVerifierTest.cpp">
       <Filter>Source Files\fanuc</Filter>
     </ClCompile>
+    <ClCompile Include="fanuc\SystemMacroAssignerTest.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
     <ClCompile Include="fanuc\UnitConverterTest.cpp">
       <Filter>Source Files\fanuc</Filter>
     </ClCompile>

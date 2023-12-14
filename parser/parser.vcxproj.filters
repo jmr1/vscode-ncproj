@@ -138,6 +138,9 @@
     <ClInclude Include="fanuc\SameWordInBlockVerifier.h">
       <Filter>Header Files\fanuc</Filter>
     </ClInclude>
+    <ClInclude Include="fanuc\SystemMacroAssigner.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -231,6 +234,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fanuc\SameWordInBlockVerifier.cpp">
+      <Filter>Source Files\fanuc</Filter>
+    </ClCompile>
+    <ClCompile Include="fanuc\SystemMacroAssigner.cpp">
       <Filter>Source Files\fanuc</Filter>
     </ClCompile>
     <ClCompile Include="heidenhain\AllAttributesParserDefines.cpp">

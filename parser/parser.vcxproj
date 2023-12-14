@@ -181,6 +181,7 @@
     <ClInclude Include="fanuc\Renumberer.h" />
     <ClInclude Include="fanuc\RotationVerifier.h" />
     <ClInclude Include="fanuc\SameWordInBlockVerifier.h" />
+    <ClInclude Include="fanuc\SystemMacroAssigner.h" />
     <ClInclude Include="fanuc\UniqueCode.h" />
     <ClInclude Include="fanuc\UnitConverter.h" />
     <ClInclude Include="fanuc\ValueCalculator.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="fanuc\Renumberer.cpp" />
     <ClCompile Include="fanuc\RotationVerifier.cpp" />
     <ClCompile Include="fanuc\SameWordInBlockVerifier.cpp" />
+    <ClCompile Include="fanuc\SystemMacroAssigner.cpp" />
     <ClCompile Include="fanuc\UniqueCode.cpp" />
     <ClCompile Include="fanuc\UnitConverter.cpp" />
     <ClCompile Include="fanuc\ValueCalculator.cpp" />

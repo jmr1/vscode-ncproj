@@ -61,6 +61,7 @@
     <ClCompile Include="fanuc\RenumbererTest.cpp" />
     <ClCompile Include="fanuc\RotationVerifierTest.cpp" />
     <ClCompile Include="fanuc\SameWordInBlockVerifierTest.cpp" />
+    <ClCompile Include="fanuc\SystemMacroAssignerTest.cpp" />
     <ClCompile Include="fanuc\UnitConverterTest.cpp" />
     <ClCompile Include="fanuc\ValueCalculatorTest.cpp" />
     <ClCompile Include="heidenhain\AllAttributesParserTest.cpp" />
