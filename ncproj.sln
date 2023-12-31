@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29326.143
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "parser", "parser\parser.vcxproj", "{315DD7CE-E5D8-4653-A0E1-5FEA5FEC04A0}"
 EndProject
@@ -13,6 +13,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nclangsrv", "nclangsrv\ncla
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cmtconfig", "cmtconfig\cmtconfig.csproj", "{7AD8CD8B-979D-465A-AA10-29C3F81332F1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{27E6EF08-ADB3-4F29-AC20-BF1D7B8BDCA9} = {27E6EF08-ADB3-4F29-AC20-BF1D7B8BDCA9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "parser_net", "parser_net\parser_net.csproj", "{27E6EF08-ADB3-4F29-AC20-BF1D7B8BDCA9}"
 EndProject

@@ -54,7 +54,7 @@ const execShell = (cmd: string, options: cp.ExecOptions) =>
                 console.log(err);
                 ncprojChannel.appendLine("Unable to start Control and Machine Tool configuration tool!");
                 if (process.platform == "win32") {
-                    ncprojChannel.appendLine("Installation of .NET Framework 4.5 redistributable may be required.");
+                    ncprojChannel.appendLine("Installation of .NET Framework 4.7.2 redistributable may be required.");
                 }
                 ncprojChannel.appendLine(
                     'To investigate more navigate to: "' +
@@ -126,7 +126,7 @@ async function startLangServerNCProj(executable: string, cwd: string) {
         ncprojChannel.appendLine("Unable to start Language Server!");
         if (process.platform == "win32") {
             ncprojChannel.appendLine(
-                "Installation of Microsoft Visual C++ Redistributable packages for Visual Studio 2019 may be required: https://aka.ms/vs/17/release/vc_redist.x64.exe"
+                "Installation of the latest Microsoft Visual C++ Redistributable packages for Visual Studio may be required: https://aka.ms/vs/17/release/vc_redist.x64.exe"
             );
         }
         ncprojChannel.appendLine(

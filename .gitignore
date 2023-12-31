@@ -38,7 +38,9 @@
 *.exp
 *.exe.recipe
 *.dll.recipe
+*.force
 *.res
+*.ilk
 *.iobj
 *.idb
 *.ipdb

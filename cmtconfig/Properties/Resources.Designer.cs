@@ -19,7 +19,7 @@ namespace cmtconfig.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -138,56 +138,6 @@ namespace cmtconfig.Properties {
         internal static string AUTOUPDATER_NO_UPDATE_AVAILABLE {
             get {
                 return ResourceManager.GetString("AUTOUPDATER_NO_UPDATE_AVAILABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap buttonControl {
-            get {
-                object obj = ResourceManager.GetObject("buttonControl", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap buttonMaszynaCNC {
-            get {
-                object obj = ResourceManager.GetObject("buttonMaszynaCNC", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap buttonParameter {
-            get {
-                object obj = ResourceManager.GetObject("buttonParameter", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap buttonUser {
-            get {
-                object obj = ResourceManager.GetObject("buttonUser", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap buttonZakres {
-            get {
-                object obj = ResourceManager.GetObject("buttonZakres", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -945,16 +895,6 @@ namespace cmtconfig.Properties {
         internal static string PROGRAM_SETTINGS_FORM_RESTART {
             get {
                 return ResourceManager.GetString("PROGRAM_SETTINGS_FORM_RESTART", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap question_button_blue {
-            get {
-                object obj = ResourceManager.GetObject("question-button_blue", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

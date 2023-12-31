@@ -64,6 +64,9 @@
     <ClCompile Include="heidenhain\AllAttributesParserTest.cpp">
       <Filter>Source Files\heidenhain</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\gtest\gtest-all.cc" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\gmock\gmock-all.cc" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\gtest\src\gtest_main.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

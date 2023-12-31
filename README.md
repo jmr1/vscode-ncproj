@@ -59,7 +59,7 @@ Please visit [GitHub Issues](https://github.com/jmr1/vscode-ncproj/issues) page 
 
 ### Extension does not seem to work
 
-Installation of Microsoft Visual C++ Redistributable packages for Visual Studio 2019 may be required: <https://aka.ms/vs/17/release/vc_redist.x64.exe>
+Installation of the latest Microsoft Visual C++ Redistributable packages for Visual Studio may be required: <https://aka.ms/vs/17/release/vc_redist.x64.exe>
 
 #### Further troubleshooting
 
@@ -70,7 +70,7 @@ Watch for any errors.
 
 ### Machine Tool and Driver configuration GUI window does not start
 
-Installation of .NET Framework 4.5 redistributable may be required.
+Installation of .NET Framework 4.7.2 redistributable may be required.
 
 #### Further troubleshooting
 
