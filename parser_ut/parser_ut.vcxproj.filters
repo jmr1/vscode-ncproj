@@ -66,7 +66,7 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\gtest\gtest-all.cc" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\gmock\gmock-all.cc" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)src\gtest\src\gtest_main.cc" />
+    <ClCompile Include="..\packages\google-testmock.1.14.0\build\native\src\gtest\src\gtest_main.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

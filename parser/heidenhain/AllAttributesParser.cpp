@@ -6,6 +6,7 @@
 #include "AllAttributesParser.h"
 
 #include <iomanip>
+#include <sstream>
 
 #ifndef NDEBUG
 #define BOOST_SPIRIT_DEBUG

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using parser;
 using System;
 using System.Collections.Generic;
@@ -104,7 +105,7 @@ namespace parser.Tests
                 language = Language.Polish
             };
 
-            Assert.IsNotNull(new HeidenhainAllAttributesParser(ref parser_settings, ref other_settings));
+            ClassicAssert.IsNotNull(new HeidenhainAllAttributesParser(ref parser_settings, ref other_settings));
         }
 
         [Test()]
@@ -123,18 +124,18 @@ namespace parser.Tests
             };
 
             var parser = new HeidenhainAllAttributesParser(ref parser_settings, ref other_settings);
-            Assert.IsNotNull(parser);
+            ClassicAssert.IsNotNull(parser);
             string msg;
-            Assert.AreEqual(true, parser.Parse(1, "25 DEP LCT X+10 Y+12 R8 F100 M2", out msg, true));
-            Assert.IsEmpty(msg);
+            ClassicAssert.AreEqual(true, parser.Parse(1, "25 DEP LCT X+10 Y+12 R8 F100 M2", out msg, true));
+            ClassicAssert.IsEmpty(msg);
 
-            Assert.AreEqual(false, parser.Parse(1, "BEGINPGM hei530_origins MM", out msg, true));
-            Assert.IsNotEmpty(msg);
-            //Assert.AreEqual("Brak wartości dla adresu [A]", msg);
+            ClassicAssert.AreEqual(false, parser.Parse(1, "BEGINPGM hei530_origins MM", out msg, true));
+            ClassicAssert.IsNotEmpty(msg);
+            //ClassicAssert.AreEqual("Brak wartości dla adresu [A]", msg);
 
-            /*Assert.AreEqual(false, parser.Parse(1, "X100 Y200 X200", out msg, true));
-            Assert.IsNotEmpty(msg);
-            Assert.AreEqual("Kod X musi być unikalny w obrębie bloku", msg);*/
+            /*ClassicAssert.AreEqual(false, parser.Parse(1, "X100 Y200 X200", out msg, true));
+            ClassicAssert.IsNotEmpty(msg);
+            ClassicAssert.AreEqual("Kod X musi być unikalny w obrębie bloku", msg);*/
         }
 
         [Test()]
@@ -153,7 +154,7 @@ namespace parser.Tests
             };
 
             var parser = new HeidenhainAllAttributesParser(ref parser_settings, ref other_settings);
-            Assert.IsNotNull(parser);
+            ClassicAssert.IsNotNull(parser);
             parser.Dispose();
         }
     }

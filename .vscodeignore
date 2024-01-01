@@ -24,6 +24,7 @@ vscode-client/tsconfig.json
 **/nunit.*
 **/NUnit3.*
 **/parser_net_test.*
+**/testcentric.*
 CMakeLists.txt
 docker
 *.json

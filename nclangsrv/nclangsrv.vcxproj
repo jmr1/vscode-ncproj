@@ -100,8 +100,9 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)packages\boost_program_options-vc142.1.84.0\lib\native;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>parser.lib;boost_program_options-vc142-mt-x64-1_84.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>boost_program_options-vc143-mt-x64-1_84.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(TargetDir)boost_program_options*.dll" for /D %%I in ("$(SolutionDir)packages\boost_program_options-vc*") do copy "%%~I\lib\native\boost_program_options-vc142-mt-x64-*.dll" "$(TargetDir)"</Command>
@@ -139,8 +140,9 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>parser.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration);$(SolutionDir)packages\boost_program_options-vc142.1.84.0\lib\native;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>parser.lib;boost_program_options-vc142-mt-gd-x64-1_84.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>boost_program_options-vc143-mt-gd-x64-1_84.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
       <Command>if not exist "$(TargetDir)boost_program_options*.dll" for /D %%I in ("$(SolutionDir)packages\boost_program_options-vc*") do copy "%%~I\lib\native\boost_program_options-vc142-mt-gd-x64-*.dll" "$(TargetDir)"</Command>
@@ -205,16 +207,16 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\boost.1.77.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.77.0.0\build\boost.targets')" />
-    <Import Project="..\packages\boost_program_options-vc142.1.77.0.0\build\boost_program_options-vc142.targets" Condition="Exists('..\packages\boost_program_options-vc142.1.77.0.0\build\boost_program_options-vc142.targets')" />
     <Import Project="..\packages\tencent.rapidjson.1.1.1\build\tencent.rapidjson.targets" Condition="Exists('..\packages\tencent.rapidjson.1.1.1\build\tencent.rapidjson.targets')" />
+    <Import Project="..\packages\boost.1.84.0\build\boost.targets" Condition="Exists('..\packages\boost.1.84.0\build\boost.targets')" />
+    <Import Project="..\packages\boost_program_options-vc142.1.84.0\build\boost_program_options-vc142.targets" Condition="Exists('..\packages\boost_program_options-vc142.1.84.0\build\boost_program_options-vc142.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\boost.1.77.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.77.0.0\build\boost.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_program_options-vc142.1.77.0.0\build\boost_program_options-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_program_options-vc142.1.77.0.0\build\boost_program_options-vc142.targets'))" />
     <Error Condition="!Exists('..\packages\tencent.rapidjson.1.1.1\build\tencent.rapidjson.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\tencent.rapidjson.1.1.1\build\tencent.rapidjson.targets'))" />
+    <Error Condition="!Exists('..\packages\boost.1.84.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.84.0\build\boost.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_program_options-vc142.1.84.0\build\boost_program_options-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_program_options-vc142.1.84.0\build\boost_program_options-vc142.targets'))" />
   </Target>
 </Project>

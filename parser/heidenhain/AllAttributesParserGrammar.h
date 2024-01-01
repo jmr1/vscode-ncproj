@@ -10,10 +10,10 @@
 
 #include <boost/fusion/include/adapt_struct.hpp>
 #include <boost/phoenix/bind.hpp>
+#include <boost/phoenix/core.hpp>
+#include <boost/phoenix/object.hpp> // construct
+#include <boost/phoenix/operator.hpp>
 #include <boost/spirit/include/classic_position_iterator.hpp>
-#include <boost/spirit/include/phoenix_core.hpp>
-#include <boost/spirit/include/phoenix_object.hpp> // construct
-#include <boost/spirit/include/phoenix_operator.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_symbols.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
