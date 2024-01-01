@@ -85,7 +85,7 @@ bool verify_range(const word_map& word_grammar, const AttributeData<T>& data, st
         return true;
     auto& grammar = it->second;
 
-    if (data.value < static_cast<T>(grammar.range_from) || data.value > static_cast<T>(grammar.range_to))
+    if (data.value < grammar.range_from || data.value > grammar.range_to)
     {
         message += make_message(MessageName::ValueNotInRange, language, std::to_string(data.value),
                                 std::to_string(grammar.range_from), std::to_string(grammar.range_to), grammar.word);

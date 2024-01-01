@@ -30,6 +30,18 @@
 namespace qi      = boost::spirit::qi;
 namespace classic = boost::spirit::classic;
 
+namespace {
+std::string operator"" _S(const char8_t* str, std::size_t)
+{
+    return reinterpret_cast<const char*>(str);
+}
+char const* operator"" _C(const char8_t* str, std::size_t)
+{
+    return reinterpret_cast<const char*>(str);
+}
+}
+
+
 namespace parser {
 namespace fanuc {
 
@@ -424,9 +436,9 @@ bool ValueCalculator::parse(const std::string& data, std::string& message, bool 
         {
             if (language == ELanguage::Polish)
             {
-                msg << u8"Błąd parsowania w linii " << pos.line << u8" kolumna " << pos.column << ":" << std::endl
+                msg << u8"Błąd parsowania w linii "_C << pos.line << u8" kolumna "_C << pos.column << ":" << std::endl
                     << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << u8"^- tutaj" << std::endl;
+                    << std::setw(pos.column) << " " << u8"^- tutaj"_C << std::endl;
             }
             else
             {

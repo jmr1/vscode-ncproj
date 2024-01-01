@@ -39,6 +39,17 @@
 
 #include "AllAttributesParserGrammar.h"
 
+namespace {
+std::string operator"" _S(const char8_t* str, std::size_t)
+{
+    return reinterpret_cast<const char*>(str);
+}
+char const* operator"" _C(const char8_t* str, std::size_t)
+{
+    return reinterpret_cast<const char*>(str);
+}
+}
+
 namespace parser {
 namespace fanuc {
 
@@ -266,9 +277,9 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
         {
             if (other_settings.language == ELanguage::Polish)
             {
-                msg << u8"Błąd parsowania w linii " << pos.line << u8" kolumna " << pos.column << ":" << std::endl
+                msg << u8"Błąd parsowania w linii "_C << pos.line << u8" kolumna "_C << pos.column << ":" << std::endl
                     << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj" : "^- " + message) << std::endl;
+                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj"_C : "^- " + message) << std::endl;
             }
             else
             {
@@ -358,9 +369,9 @@ bool AllAttributesParser::simple_parse(int line, const std::string& data, std::v
         {
             if (other_settings.language == ELanguage::Polish)
             {
-                msg << u8"Błąd parsowania w linii " << pos.line << u8" kolumna " << pos.column << ":" << std::endl
+                msg << u8"Błąd parsowania w linii "_C << pos.line << u8" kolumna "_C << pos.column << ":" << std::endl
                     << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj" : "^- " + message) << std::endl;
+                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj"_C : "^- " + message) << std::endl;
             }
             else
             {
