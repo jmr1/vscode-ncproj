@@ -31,10 +31,6 @@ namespace qi      = boost::spirit::qi;
 namespace classic = boost::spirit::classic;
 
 namespace {
-std::string operator"" _S(const char8_t* str, std::size_t)
-{
-    return reinterpret_cast<const char*>(str);
-}
 char const* operator"" _C(const char8_t* str, std::size_t)
 {
     return reinterpret_cast<const char*>(str);

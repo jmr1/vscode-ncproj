@@ -40,10 +40,6 @@
 #include "AllAttributesParserGrammar.h"
 
 namespace {
-std::string operator"" _S(const char8_t* str, std::size_t)
-{
-    return reinterpret_cast<const char*>(str);
-}
 char const* operator"" _C(const char8_t* str, std::size_t)
 {
     return reinterpret_cast<const char*>(str);
