@@ -650,7 +650,7 @@ namespace parser.Tests
 
             const double tolerance = 1e-8;
 
-            ret = parser.Parse(++line, "T4", out msg, true);
+            ret = parser.Parse(++line, "T4 M6", out msg, true);
             if (!ret)
                 Console.WriteLine(msg);
             ClassicAssert.AreEqual(true, ret);
