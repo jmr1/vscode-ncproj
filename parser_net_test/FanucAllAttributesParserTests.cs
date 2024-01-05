@@ -557,9 +557,10 @@ namespace parser.Tests
             ClassicAssert.AreEqual(false, parser.Parse(1, "G4 G5.1", out msg, true));
             ClassicAssert.IsNotEmpty(msg);
             ClassicAssert.AreEqual("G5.1 i G4 są w tej samej Grupie Kodów = 0", msg);
-            ClassicAssert.AreEqual(false, parser.Parse(1, "G10", out msg, true));
-            ClassicAssert.IsNotEmpty(msg);
-            ClassicAssert.AreEqual("G10 nie występuje w Grupie Kodów", msg);
+            ClassicAssert.AreEqual(true, parser.Parse(1, "G10", out msg, true));
+            // Now missing code in Code Groups is not failing parsing by default
+            // ClassicAssert.IsNotEmpty(msg);
+            // ClassicAssert.AreEqual("G10 nie występuje w Grupie Kodów", msg);
             ClassicAssert.AreEqual(true, parser.Parse(1, "#1=5.4", out msg, true));
             ClassicAssert.IsEmpty(msg);
             ClassicAssert.AreEqual(true, parser.Parse(1, "G2.2 G#1", out msg, true));
@@ -578,9 +579,10 @@ namespace parser.Tests
             ClassicAssert.AreEqual(false, parser.Parse(1, "M14 M15", out msg, true));
             ClassicAssert.IsNotEmpty(msg);
             ClassicAssert.AreEqual("M15 i M14 są w tej samej Grupie Kodów = 0", msg);
-            ClassicAssert.AreEqual(false, parser.Parse(1, "M10", out msg, true));
-            ClassicAssert.IsNotEmpty(msg);
-            ClassicAssert.AreEqual("M10 nie występuje w Grupie Kodów", msg);
+            ClassicAssert.AreEqual(true, parser.Parse(1, "M10", out msg, true));
+            // Now missing code in Code Groups is not failing parsing by default
+            // ClassicAssert.IsNotEmpty(msg);
+            // ClassicAssert.AreEqual("M10 nie występuje w Grupie Kodów", msg);
             ClassicAssert.AreEqual(true, parser.Parse(1, "#3=15", out msg, true));
             ClassicAssert.IsEmpty(msg);
             ClassicAssert.AreEqual(true, parser.Parse(1, "M22 M#3", out msg, true));
