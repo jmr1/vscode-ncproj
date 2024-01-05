@@ -6,11 +6,11 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.5.0 released
+- Version 0.5.1 released
   - New Features
-    - On hover macro variables descriptions added
+    - Support for system macros for words: B,D,E,F,H,M,N,S,T added
   - Enhancements
-    - Defined values for `#3101` (Pi) and `#3102` (the base of natural logarithms)
+    - Migration to VS2022, C++20, .Net Framework 4.7.2
   - Bug fixes
 
 ## Features
@@ -30,6 +30,7 @@ Develop and validate CNC programs.
 - Status bar
 - Commands
 - On hover description of macro variables
+- System macros for words: B,D,E,F,H,M,N,S,T
 
 ## Current supported file extensions
 
@@ -64,7 +65,7 @@ Installation of the latest Microsoft Visual C++ Redistributable packages for Vis
 #### Further troubleshooting
 
 Navigate to: "%USERPROFILE%\\.vscode\extensions"
-Then navigate to extension binaries folder: jrupar-mcieslik.ncproj-0.0.1\vscode-client\out
+Then navigate to extension binaries folder: jrupar-mcieslik.ncproj-*\vscode-client\out
 Execute: nclangsrv.exe
 Watch for any errors.
 
