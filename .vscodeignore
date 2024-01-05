@@ -27,6 +27,7 @@ vscode-client/tsconfig.json
 **/testcentric.*
 CMakeLists.txt
 docker
+vagrant
 *.json
 *.sln
 .*
