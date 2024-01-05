@@ -40,6 +40,33 @@ namespace parser
         millturn
     }
 
+    public enum MachineTool
+    {
+        mill_3axis,
+        mill_4axis,
+        mill_4axis_horizontal,
+        mill_4axis_horizontal_pinola,
+        mill_4axis_head_gantry,
+        mill_5axis_head_head_gantry,
+        mill_5axis_head_table_gantry,
+        mill_5axis_table_table,
+        mill_5axis_table_tilt,
+        mill_5axis_head_table,
+        mill_5axis_horizontal_table_table,
+        mill_5axis_horizontal_table_table_pinola,
+        lathe_zx,
+        lathe_zxc,
+        lathe_zxcy,
+        lathe_zxcy_steady,
+        millturn_XYZBC,
+        millturn_XYZBC_steady,
+        millturn_XYZBC_C2,
+        millturn_XYZBC_C2_steady,
+        millturn_XYZBC_C2_Lower_Left_Turret,
+        millturn_XYZBC_C2_Lower_Right_Turret,
+        millturn_XYZBC_C2_Lower_LeftRight_Turret,
+    };
+
     [StructLayout(LayoutKind.Sequential)]
     public class WordResultRange
     {
@@ -922,6 +949,7 @@ namespace parser
         [DllImport(dllname)]
         static private extern void SetNCSettings(
             IntPtr ptr,
+            MachineTool machine_tool,
             MachineToolType machine_tool_type,
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPStr)] string[] machine_base_point_default_keys,
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.R8)] double[] machine_base_point_default_vals,
@@ -938,6 +966,7 @@ namespace parser
 #else
         static private void SetNCSettings(
             IntPtr ptr,
+            MachineTool machine_tool,
             MachineToolType machine_tool_type,
             string[] machine_base_point_default_keys,
             double[] machine_base_point_default_vals,
@@ -1444,7 +1473,7 @@ namespace parser
             return ret;
         }
 
-        public void SetNCSettings(MachineToolType machineToolType, MachinePointsData machinePointsData, Kinematics kinematics, CncDefaultValues cncDefaultValues, Dictionary<string, double> zeroPointDict)
+        public void SetNCSettings(MachineTool machine_tool, MachineToolType machineToolType, MachinePointsData machinePointsData, Kinematics kinematics, CncDefaultValues cncDefaultValues, Dictionary<string, double> zeroPointDict)
         {
             var kinematicsWrapper = new KinematicsWrapper()
             {
@@ -1502,6 +1531,7 @@ namespace parser
             };
 
             SetNCSettings(pAllAttributesParser,
+                          machine_tool,
                           machineToolType,
                           machinePointsData.machine_base_point.Keys.ToArray(),
                           machinePointsData.machine_base_point.Values.ToArray(),

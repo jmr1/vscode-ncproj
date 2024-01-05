@@ -251,7 +251,7 @@ namespace parser.Tests
             string msg;
             WordValueWrapper[] values;
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             ClassicAssert.AreEqual(true, parser.Parse(1, "%", out values, out msg, true));
             ClassicAssert.IsEmpty(msg);
@@ -356,7 +356,7 @@ namespace parser.Tests
             string msg;
             WordValueWrapper[] values;
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             ClassicAssert.AreEqual(true, parser.Parse(1, "%", out values, out msg, true));
             ClassicAssert.IsEmpty(msg);
@@ -399,7 +399,7 @@ namespace parser.Tests
             var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
             ClassicAssert.IsNotNull(parser);
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             string msg;
             ClassicAssert.AreEqual(true, parser.Parse(1, "#1=5", out msg, true));
@@ -437,7 +437,7 @@ namespace parser.Tests
             var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
             ClassicAssert.IsNotNull(parser);
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             string msg;
             ClassicAssert.AreEqual(true, parser.Parse(1, "#1=5", out msg, true));
@@ -498,7 +498,7 @@ namespace parser.Tests
             var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
             ClassicAssert.IsNotNull(parser);
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             string msg;
             var macro_values = new Dictionary<MacroValuesKey, double>();
@@ -547,7 +547,7 @@ namespace parser.Tests
             var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
             ClassicAssert.IsNotNull(parser);
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             string msg;
             ClassicAssert.AreEqual(true, parser.Parse(1, "G04", out msg, true));
@@ -631,7 +631,7 @@ namespace parser.Tests
             var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
             ClassicAssert.IsNotNull(parser);
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             parser_settings.calculate_path = true;
             parser.SetParserSettings(ref parser_settings);
@@ -754,7 +754,7 @@ namespace parser.Tests
             var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
             ClassicAssert.IsNotNull(parser);
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
             string msg;
             WordValueWrapper[] values;
 
@@ -799,7 +799,7 @@ namespace parser.Tests
             var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
             ClassicAssert.IsNotNull(parser);
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
             string msg;
             WordValueWrapper[] values;
 
@@ -838,7 +838,7 @@ namespace parser.Tests
             var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
             ClassicAssert.IsNotNull(parser);
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
             string msg;
             WordValueWrapper[] values;
 
@@ -921,7 +921,7 @@ namespace parser.Tests
             var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
             ClassicAssert.IsNotNull(parser);
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
             string msg;
             WordValueWrapper[] values;
 
@@ -969,7 +969,7 @@ namespace parser.Tests
             string msg;
             WordValueWrapper[] values;
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             ClassicAssert.AreEqual(false, parser.Parse(1, "S30000", out values, out msg, true));
             ClassicAssert.IsNotEmpty(msg);
@@ -1013,7 +1013,7 @@ namespace parser.Tests
             string msg;
             WordValueWrapper[][][] values;
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             var fileSplitting = new FileSplitting()
             {
@@ -1093,7 +1093,7 @@ namespace parser.Tests
             ClassicAssert.IsNotNull(parser);
             string msg;
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             var fileSplitting = new FileSplitting()
             {
@@ -1163,7 +1163,7 @@ namespace parser.Tests
             string msg;
             WordValueWrapper[] values;
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             ClassicAssert.AreEqual(true, parser.RemoveComment(1, "A500 ,C-2.4 X1.055 G04 (This is comment! )", out values, out msg, true));
             ClassicAssert.IsEmpty(msg);
@@ -1193,7 +1193,7 @@ namespace parser.Tests
             string msg;
             WordValueWrapper[] values;
 
-            parser.SetNCSettings(MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
+            parser.SetNCSettings(MachineTool.mill_3axis, MachineToolType.mill, machinePointsData, kinematics, cncDefaultValues, zeroPoint);
 
             ClassicAssert.AreEqual(true, parser.RemoveOptionalBlock(1, "/5 A500", out values, out msg, true));
             ClassicAssert.IsEmpty(msg);
