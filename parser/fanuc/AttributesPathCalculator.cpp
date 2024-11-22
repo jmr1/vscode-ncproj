@@ -286,11 +286,29 @@ private:
     bool                                        tool_measurement{};
 }; // namespace fanuc
 
+auto get_ignore_g_codes()
+{
+static const std::map<std::string_view, std::vector<std::string_view>> ignore_g_codes = {
+    {"X", {"4", "10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
+    {"Y", {"10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
+    {"Z", {"10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
+    {"I", {"68.2", "68.4"}},
+    {"J", {"68.2", "68.4"}},
+    {"K", {"68.2", "68.4"}},
+    {"R", {"5", "5.1", "6.2", "10", "68", "68.3"}},
+    {"U", {"71", "72"}},
+    {"W", {"71", "72"}},
+};
+
+return ignore_g_codes;
+}
+
+
 struct copy_on_return
 {
     copy_on_return(const int& active_g, const EProgrammingType& active_g9091,
                    const std::map<std::string, double>& values, std::map<std::string, double>& prev_values,
-                   word_range_map& word_range, const std::vector<std::string>& other_g = {})
+                   word_range_map& word_range, const std::vector<std::string>* other_g = nullptr)
         : v(values)
         , pv(prev_values)
         , wr(word_range)
@@ -309,12 +327,13 @@ struct copy_on_return
             if (it.first == "Q" || it.first == "L")
                 continue;
 
-            if (!og.empty())
+            if (og && !og->empty())
             {
-                if (const auto& axis = ignore_g_codes.find(it.first); axis != std::end(ignore_g_codes))
+                const auto& ignore_g_codes = get_ignore_g_codes();
+                if (const auto& axis = ignore_g_codes.find(it.first); axis != std::cend(ignore_g_codes))
                 {
-                    if (std::any_of(std::begin(axis->second), std::end(axis->second), [&](const auto& axis_value) {
-                            return std::any_of(std::begin(og), std::end(og),
+                    if (std::any_of(std::cbegin(axis->second), std::cend(axis->second), [&](const auto& axis_value) {
+                            return std::any_of(std::cbegin(*og), std::cend(*og),
                                                [&](const auto& og_value) { return og_value == axis_value; });
                         }))
                         continue;
@@ -360,21 +379,10 @@ struct copy_on_return
     }
 
 private:
-    const std::map<std::string, std::vector<std::string>> ignore_g_codes = {
-        {"X", {"4", "10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
-        {"Y", {"10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
-        {"Z", {"10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
-        {"I", {"68.2", "68.4"}},
-        {"J", {"68.2", "68.4"}},
-        {"K", {"68.2", "68.4"}},
-        {"R", {"5", "5.1", "6.2", "10", "68", "68.3"}},
-        {"U", {"71", "72"}},
-        {"W", {"71", "72"}},
-    };
     const std::map<std::string, double>& v;
     std::map<std::string, double>&       pv;
     word_range_map&                      wr;
-    const std::vector<std::string>&      og;
+    const std::vector<std::string>*      og;
     const int&                           g;
     const EProgrammingType&              g9091;
 };
@@ -549,7 +557,7 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
 
             copy_on_return cr{
                 active_g,   active_g9091, values, prev_values,
-                word_range, other_g}; // save axis in case the start values are provided together with tool change
+                word_range, &other_g}; // save axis in case the start values are provided together with tool change
             return;
         }
     }
@@ -591,7 +599,7 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
                 active_g_return = *g_return;
             copy_on_return cr{
                 active_g,   active_g9091, values, prev_values,
-                word_range, other_g}; // save axis because here may be start values before any G code is being used
+                word_range, &other_g}; // save axis because here may be start values before any G code is being used
             return;
         }
 
@@ -1329,13 +1337,13 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
     if (move_to_tool_exchange_point)
         copy_on_return cr{
             active_g, EProgrammingType::Absolute, machine_points_data.tool_exchange_point, prev_values, word_range,
-            other_g};
+            &other_g};
     else if (move_to_machine_base_point)
         copy_on_return cr{
             active_g, EProgrammingType::Absolute, machine_points_data.machine_base_point, prev_values, word_range,
-            other_g};
+            &other_g};
     else
-        copy_on_return cr{active_g, active_g9091, values, prev_values, word_range, other_g};
+        copy_on_return cr{active_g, active_g9091, values, prev_values, word_range, &other_g};
 }
 
 } // namespace fanuc
