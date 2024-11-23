@@ -2,6 +2,7 @@
 
 #include "UnitConverter.h"
 
+#include <array>
 #include <iomanip>
 #include <sstream>
 

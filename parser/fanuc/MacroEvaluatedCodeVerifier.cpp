@@ -2,6 +2,7 @@
 
 #include "MacroEvaluatedCodeVerifier.h"
 
+#include <array>
 #include <iomanip>
 #include <sstream>
 
