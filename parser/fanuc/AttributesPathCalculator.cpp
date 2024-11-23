@@ -2,6 +2,7 @@
 
 #include "AttributesPathCalculator.h"
 
+#include <array>
 #include <optional>
 #include <string>
 #include <vector>
@@ -14,31 +15,34 @@
 namespace parser {
 namespace fanuc {
 
-const std::vector<EDrillGmode> drill_cycle = {EDrillGmode::G74, EDrillGmode::G81, EDrillGmode::G82, EDrillGmode::G84,
-                                              EDrillGmode::G85, EDrillGmode::G86, EDrillGmode::G88, EDrillGmode::G89};
-const std::vector<EDrillGmode> drill_cycle_qparam = {EDrillGmode::G73, EDrillGmode::G76, EDrillGmode::G83,
-                                                     EDrillGmode::G87};
+constexpr std::array<EDrillGmode, 8> drill_cycle = {EDrillGmode::G74, EDrillGmode::G81, EDrillGmode::G82,
+                                                    EDrillGmode::G84, EDrillGmode::G85, EDrillGmode::G86,
+                                                    EDrillGmode::G88, EDrillGmode::G89};
 
-bool is_drill_cycle(int value)
+constexpr std::array<EDrillGmode, 4> drill_cycle_qparam = {EDrillGmode::G73, EDrillGmode::G76, EDrillGmode::G83,
+                                                           EDrillGmode::G87};
+
+constexpr bool is_drill_cycle(int value)
 {
-    return std::any_of(std::begin(drill_cycle), std::end(drill_cycle),
+    return std::any_of(std::cbegin(drill_cycle), std::cend(drill_cycle),
                        [value](EDrillGmode gmode) { return static_cast<int>(gmode) == value; });
 }
-bool is_drill_cycle_qparam(int value)
+
+constexpr bool is_drill_cycle_qparam(int value)
 {
-    return std::any_of(std::begin(drill_cycle_qparam), std::end(drill_cycle_qparam),
+    return std::any_of(std::cbegin(drill_cycle_qparam), std::cend(drill_cycle_qparam),
                        [value](EDrillGmode gmode) { return static_cast<int>(gmode) == value; });
 }
 
 class AttributesPathCalculatorVisitor : public boost::static_visitor<>
 {
 public:
-    AttributesPathCalculatorVisitor(EMachineToolType machine_tool_type, const Kinematics& kinematics)
+    AttributesPathCalculatorVisitor(EMachineToolType machine_tool_type, const Kinematics& kinematics,
+                                    const std::set<std::string>& gcode_params)
         : machine_tool_type(machine_tool_type)
         , kinematics(kinematics)
+        , gcode_params(gcode_params)
     {
-        for (const auto& it : kinematics.cartesian_system_axis)
-            gcode_params.insert(it.first);
     }
 
     void operator()(const DecimalAttributeData& data)
@@ -55,13 +59,14 @@ public:
         auto itor = std::find_if(std::cbegin(gcode_params), std::cend(gcode_params),
                                  [&](const std::string& value) { return data.word == value; });
 
-        auto itor_other = std::find_if(std::cbegin(other_code_params), std::cend(other_code_params),
-                                       [&](const std::string& value) { return data.word == value; });
+        std::string_view word_view  = data.word;
+        auto             itor_other = std::find_if(std::cbegin(other_code_params), std::cend(other_code_params),
+                                                   [&](auto value) { return word_view == value; });
 
-        if (itor == std::end(gcode_params) && itor_other == std::end(other_code_params))
+        if (itor == std::cend(gcode_params) && itor_other == std::cend(other_code_params))
             return;
 
-        if (itor != std::end(gcode_params))
+        if (itor != std::cend(gcode_params))
         {
             if (!data.value && !data.dot)
                 return;
@@ -267,8 +272,7 @@ public:
 private:
     const EMachineToolType                      machine_tool_type;
     const Kinematics&                           kinematics;
-    std::set<std::string>                       gcode_params = {"X", "Y", "Z", "I", "J", "K", "R", "Q", "L", "P", "U"};
-    const std::vector<std::string>              other_code_params = {"G", "F", "M", "T", "S"};
+    const std::set<std::string>&                gcode_params;
     std::map<std::string, double>               values;
     std::optional<double>                       active_f;
     std::optional<double>                       active_s;
@@ -284,25 +288,26 @@ private:
     bool                                        was_comment{};
     bool                                        pallet_exchange{};
     bool                                        tool_measurement{};
+
+    static constexpr std::array<std::string_view, 5> other_code_params = {"G", "F", "M", "T", "S"};
 }; // namespace fanuc
 
 auto get_ignore_g_codes()
 {
-static const std::map<std::string_view, std::vector<std::string_view>> ignore_g_codes = {
-    {"X", {"4", "10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
-    {"Y", {"10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
-    {"Z", {"10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
-    {"I", {"68.2", "68.4"}},
-    {"J", {"68.2", "68.4"}},
-    {"K", {"68.2", "68.4"}},
-    {"R", {"5", "5.1", "6.2", "10", "68", "68.3"}},
-    {"U", {"71", "72"}},
-    {"W", {"71", "72"}},
-};
+    static const std::map<std::string_view, std::vector<std::string_view>> ignore_g_codes = {
+        {"X", {"4", "10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
+        {"Y", {"10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
+        {"Z", {"10", "50.1", "51.1", "52", "53", "68", "68.2", "68.3", "68.4", "92"}},
+        {"I", {"68.2", "68.4"}},
+        {"J", {"68.2", "68.4"}},
+        {"K", {"68.2", "68.4"}},
+        {"R", {"5", "5.1", "6.2", "10", "68", "68.3"}},
+        {"U", {"71", "72"}},
+        {"W", {"71", "72"}},
+    };
 
-return ignore_g_codes;
+    return ignore_g_codes;
 }
-
 
 struct copy_on_return
 {
@@ -404,6 +409,8 @@ AttributesPathCalculator::AttributesPathCalculator(EMachineTool machine_tool, EM
     , active_feed_mode(this->cnc_default_values.default_feed_mode)
 {
     copy_on_return cr{active_g, active_g9091, machine_points_data.machine_base_point, prev_values, word_range};
+    for (const auto& it : kinematics.cartesian_system_axis)
+        gcode_params.insert(it.first);
 }
 
 AttributesPathCalculator::AttributesPathCalculator(EMachineTool machine_tool, EMachineToolType machine_tool_type,
@@ -424,6 +431,8 @@ AttributesPathCalculator::AttributesPathCalculator(EMachineTool machine_tool, EM
     , active_feed_mode(this->cnc_default_values.default_feed_mode)
 {
     copy_on_return cr{active_g, active_g9091, machine_points_data.machine_base_point, prev_values, word_range};
+    for (const auto& it : kinematics.cartesian_system_axis)
+        gcode_params.insert(it.first);
 }
 
 void AttributesPathCalculator::reset()
@@ -466,7 +475,7 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
     if (value.size() == 0)
         return;
 
-    AttributesPathCalculatorVisitor attributes_visitor(machine_tool_type, kinematics);
+    AttributesPathCalculatorVisitor attributes_visitor(machine_tool_type, kinematics, gcode_params);
     for (size_t x = 0; x < value.size(); ++x)
         boost::apply_visitor(attributes_visitor, value[x]);
 
@@ -514,9 +523,10 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
         if (cnc_default_values.tool_number_executes_exchange ||
             (!cnc_default_values.tool_number_executes_exchange && was_m6))
         {
-            active_t = *t;
+            active_t          = *t;
+            double active_t_d = std::stod(active_t);
             for (unsigned v : {4120, 4320, 4520})
-                macro_values.insert_or_assign(macro_map_key{v, line}, std::stod(active_t));
+                macro_values.insert_or_assign(macro_map_key{v, line}, active_t_d);
         }
 
         path_result.tool_id = time_result.tool_id = active_t;
@@ -562,8 +572,8 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
         }
     }
 
-    if (std::find_if(std::begin(other_g), std::end(other_g),
-                     [](const std::string& val) { return val == "04" || val == "4"; }) != std::end(other_g))
+    if (std::find_if(std::cbegin(other_g), std::cend(other_g),
+                     [](const std::string& val) { return val == "04" || val == "4"; }) != std::cend(other_g))
     {
         if (const auto xit = values.find("X"); xit != std::cend(values))
             time_result.total += xit->second;
@@ -573,8 +583,8 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
             time_result.total += xit->second;
     }
 
-    if (std::find_if(std::begin(other_g), std::end(other_g), [](const std::string& val) { return val == "28"; }) !=
-        std::end(other_g))
+    if (std::find_if(std::cbegin(other_g), std::cend(other_g), [](const std::string& val) { return val == "28"; }) !=
+        std::cend(other_g))
         move_to_machine_base_point = true;
 
     if (move_to_tool_exchange_point || move_to_machine_base_point)
@@ -662,18 +672,15 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
             if (zit_prev == std::end(prev_values))
                 throw path_calc_exception(make_message(MessageName::MissingPreviousValue, language, "Z"));
 
-            const auto xit = !move_to_tool_exchange_point && !move_to_machine_base_point
-                                 ? values.find("X")
-                                 : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("X")
-                                                               : machine_points_data.machine_base_point.find("X");
-            const auto yit = !move_to_tool_exchange_point && !move_to_machine_base_point
-                                 ? values.find("Y")
-                                 : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Y")
-                                                               : machine_points_data.machine_base_point.find("Y");
-            const auto zit = !move_to_tool_exchange_point && !move_to_machine_base_point
-                                 ? values.find("Z")
-                                 : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Z")
-                                                               : machine_points_data.machine_base_point.find("Z");
+            const auto xit = !move_to_tool_exchange_point && !move_to_machine_base_point ? values.find("X")
+                             : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("X")
+                                                           : machine_points_data.machine_base_point.find("X");
+            const auto yit = !move_to_tool_exchange_point && !move_to_machine_base_point ? values.find("Y")
+                             : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Y")
+                                                           : machine_points_data.machine_base_point.find("Y");
+            const auto zit = !move_to_tool_exchange_point && !move_to_machine_base_point ? values.find("Z")
+                             : move_to_tool_exchange_point ? machine_points_data.tool_exchange_point.find("Z")
+                                                           : machine_points_data.machine_base_point.find("Z");
 
             const auto x_curr =
                 ((!move_to_tool_exchange_point && !move_to_machine_base_point && xit != std::cend(values)) ||
@@ -711,9 +718,9 @@ void AttributesPathCalculator::evaluate(const std::vector<AttributeVariant>& val
 
             if (xit == std::cend(values) && xit_prev == std::end(prev_values))
                 throw path_calc_exception(make_message(MessageName::MissingValue, language, "X"));
-            if (yit == std::end(values) && yit_prev == std::end(prev_values))
+            if (yit == std::cend(values) && yit_prev == std::end(prev_values))
                 throw path_calc_exception(make_message(MessageName::MissingValue, language, "Y"));
-            if (zit == std::end(values) && zit_prev == std::end(prev_values))
+            if (zit == std::cend(values) && zit_prev == std::end(prev_values))
                 throw path_calc_exception(make_message(MessageName::MissingValue, language, "Z"));
 
             const auto x_curr = xit != std::cend(values) ? xit->second : 0.;

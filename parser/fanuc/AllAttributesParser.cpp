@@ -5,6 +5,7 @@
 
 #include "AllAttributesParser.h"
 
+#include <array>
 #include <iomanip>
 #include <sstream>
 
@@ -44,7 +45,7 @@ char const* operator"" _C(const char8_t* str, std::size_t)
 {
     return reinterpret_cast<const char*>(str);
 }
-}
+} // namespace
 
 namespace parser {
 namespace fanuc {
@@ -133,7 +134,7 @@ void AllAttributesParser::set_ncsettings(EMachineTool machine_tool, EMachineTool
     this->machine_tool_type = machine_tool_type;
     this->zero_point        = std::move(zero_point);
     active_word_grammar     = cnc_default_values.default_driver_units == EDriverUnits::Millimeter ? &word_grammar.metric
-                                                                                              : &word_grammar.imperial;
+                                                                                                  : &word_grammar.imperial;
     MachinePointsData machine_points_data_zero_point;
 
     const std::map<std::string, double> zero_point_axis_map = {
@@ -163,7 +164,7 @@ void AllAttributesParser::build_symbols()
     char_sym.clear();
 
     char_sym.add(",", ",");
-    const std::vector<std::string> skip_symbols = {"%", "O", "/"};
+    constexpr std::array<std::string_view, 3> skip_symbols = {"%", "O", "/"};
     for (const auto& x : *active_word_grammar)
     {
         if (x.second.word_type == WordType::assignable)
@@ -172,8 +173,8 @@ void AllAttributesParser::build_symbols()
             continue;
         }
 
-        if (std::find_if(std::cbegin(skip_symbols), std::cend(skip_symbols),
-                         [&](const std::string& v) { return x.first == v; }) != std::cend(skip_symbols))
+        if (std::find_if(std::cbegin(skip_symbols), std::cend(skip_symbols), [&](auto v) { return x.first == v; }) !=
+            std::cend(skip_symbols))
             continue;
         else
             decimal_sym.add(x.first, x.first);
@@ -181,8 +182,8 @@ void AllAttributesParser::build_symbols()
 
     for (auto op : allowed_operations)
     {
-        if (std::find_if(std::cbegin(skip_symbols), std::cend(skip_symbols),
-                         [&](const std::string& v) { return op == v; }) != std::cend(skip_symbols))
+        if (std::find_if(std::cbegin(skip_symbols), std::cend(skip_symbols), [&](auto v) { return op == v; }) !=
+            std::cend(skip_symbols))
             continue;
         decimal_sym.add(op, op);
     }
@@ -275,7 +276,8 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
             {
                 msg << u8"Błąd parsowania w linii "_C << pos.line << u8" kolumna "_C << pos.column << ":" << std::endl
                     << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj"_C : "^- " + message) << std::endl;
+                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj"_C : "^- " + message)
+                    << std::endl;
             }
             else
             {
@@ -367,7 +369,8 @@ bool AllAttributesParser::simple_parse(int line, const std::string& data, std::v
             {
                 msg << u8"Błąd parsowania w linii "_C << pos.line << u8" kolumna "_C << pos.column << ":" << std::endl
                     << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj"_C : "^- " + message) << std::endl;
+                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj"_C : "^- " + message)
+                    << std::endl;
             }
             else
             {

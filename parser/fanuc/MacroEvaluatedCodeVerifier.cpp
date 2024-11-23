@@ -13,6 +13,8 @@
 namespace parser {
 namespace fanuc {
 
+constexpr std::array<std::string_view, 9> words{"#", "=", "+", "-", "*", "/", ":", "N", "GOTO"};
+
 class MacroEvaluatedCodeVisitor : public boost::static_visitor<>
 {
 public:
@@ -27,8 +29,8 @@ public:
 
     void operator()(const DecimalAttributeData& data)
     {
-        if (data.word != "#" && data.word != "=" && data.word != "+" && data.word != "-" && data.word != "*" &&
-            data.word != "/" && data.word != ":" && data.word != "N" && data.word != "GOTO")
+        std::string_view word_view = data.word;
+        if (std::none_of(words.cbegin(), words.cend(), [&](auto value) { return word_view == value; }))
         {
             auto it = std::find_if(std::begin(allowed_operations), std::end(allowed_operations),
                                    [&](const std::string& s) { return data.word == s; });

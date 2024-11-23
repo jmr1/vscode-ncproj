@@ -47,8 +47,9 @@ public:
         };
 
         auto macro_value_inserter = [&](const auto& list) {
+            double value = std::stod(value_extractor(data));
             for (auto v : list)
-                macro_values.insert_or_assign(macro_map_key{v, line}, std::stod(value_extractor(data)));
+                macro_values.insert_or_assign(macro_map_key{v, line}, value);
         };
 
         if (word_macros_map.count(data.word))

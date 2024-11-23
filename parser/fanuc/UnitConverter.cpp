@@ -83,9 +83,9 @@ public:
         if (was_g68)
         {
             auto itor = std::find_if(std::cbegin(gcode68_ignore_params), std::cend(gcode68_ignore_params),
-                                     [&](const std::string& value) { return data.word == value; });
+                                     [&](auto value) { return data.word == value; });
 
-            if (itor != std::end(gcode68_ignore_params))
+            if (itor != std::cend(gcode68_ignore_params))
                 return;
         }
 
@@ -150,13 +150,14 @@ public:
     }
 
 private:
-    const std::vector<std::string>  gcode68_ignore_params = {"I", "J", "K", "R"};
     const ConvWordGrammar&          word_grammar;
     const std::vector<std::string>& words;
     const UnitConversionType        conversion_type;
     bool                            was_first_item{};
     bool                            ignore_rest{};
     bool                            was_g68{};
+
+    static constexpr std::array<std::string_view, 4> gcode68_ignore_params = {"I", "J", "K", "R"};
 };
 
 UnitConverter::UnitConverter(const FanucWordGrammar& word_grammar)
@@ -169,7 +170,7 @@ UnitConverter::UnitConverter(const FanucWordGrammar& word_grammar)
 void UnitConverter::cache_grammar(const word_map& wm, ConvWordGrammar& conv_word_grammar,
                                   std::vector<std::string>& conv_words)
 {
-    std::for_each(std::begin(wm), std::end(wm), [&](const auto& wg) {
+    std::for_each(std::cbegin(wm), std::cend(wm), [&](const auto& wg) {
         if (wg.second.word_type == WordType::length || wg.second.word_type == WordType::feed)
         {
             conv_word_grammar.emplace(std::make_pair(wg.first, wg.second));

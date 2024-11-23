@@ -3,6 +3,7 @@
 #include "parser_export.h"
 
 #include <map>
+#include <set>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -86,6 +87,7 @@ private:
     std::map<std::string, double> t_path;
     std::map<std::string, double> t_time;
     word_range_map                word_range;
+    std::set<std::string>         gcode_params = {"X", "Y", "Z", "I", "J", "K", "R", "Q", "L", "P", "U"};
     double                        active_f{-1};
     double                        active_s{-1};
     int                           active_g{-1};
