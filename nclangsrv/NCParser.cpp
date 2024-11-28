@@ -306,7 +306,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
     {
         ++line_nbr;
 
-        boost::algorithm::trim(data);
+        boost::algorithm::trim_right(data);
         if (data.empty())
             continue;
 
