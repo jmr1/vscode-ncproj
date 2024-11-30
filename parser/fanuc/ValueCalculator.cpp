@@ -416,8 +416,8 @@ bool ValueCalculator::parse(const std::string& data, std::string& message, bool 
     }
     catch (const qi::expectation_failure<pos_iterator_type>& e)
     {
-        int line   = get_line(e.first);
-        int column = get_column(pos_begin, e.first);
+        size_t line   = get_line(e.first);
+        size_t column = get_column(pos_begin, e.first);
 
         std::stringstream msg;
         msg << line << ":" << column << ": " << std::string(e.first, e.last);

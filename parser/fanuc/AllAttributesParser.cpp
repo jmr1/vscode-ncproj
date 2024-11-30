@@ -268,8 +268,8 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
     }
     catch (const qi::expectation_failure<pos_iterator_type>& e)
     {
-        int line   = get_line(e.first);
-        int column = get_column(evaluated_code_part ? position_begin2 : position_begin, e.first);
+        size_t line   = get_line(e.first);
+        size_t column = get_column(evaluated_code_part ? position_begin2 : position_begin, e.first);
         message    = all_attr_grammar->get_message();
 
         std::stringstream msg;
@@ -342,8 +342,8 @@ bool AllAttributesParser::simple_parse(int line, const std::string& data, std::v
     }
     catch (const qi::expectation_failure<pos_iterator_type>& e)
     {
-        int line   = get_line(e.first);
-        int column = get_column(pos_begin, e.first);
+        size_t line   = get_line(e.first);
+        size_t column = get_column(pos_begin, e.first);
         message    = all_attr_grammar->get_message();
 
         std::stringstream msg;
