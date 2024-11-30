@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <iomanip>
+#include <string>
 
 #ifndef NDEBUG
 #define BOOST_SPIRIT_DEBUG
@@ -13,9 +14,9 @@
 #include <boost/phoenix/core.hpp>
 #include <boost/phoenix/object.hpp> // construct
 #include <boost/phoenix/operator.hpp>
-#include <boost/spirit/include/classic_position_iterator.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_symbols.hpp>
+#include <boost/spirit/include/support_line_pos_iterator.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 
 #include "get_spirit_parser.h"
@@ -23,11 +24,10 @@
 
 #include "AllAttributesParserDefines.h"
 
-namespace qi      = boost::spirit::qi;
-namespace ascii   = boost::spirit::ascii;
-namespace classic = boost::spirit::classic;
-namespace phx     = boost::phoenix;
-namespace fusion  = boost::fusion;
+namespace qi     = boost::spirit::qi;
+namespace ascii  = boost::spirit::ascii;
+namespace phx    = boost::phoenix;
+namespace fusion = boost::fusion;
 
 using word_symbols = qi::symbols<char, std::string>;
 
@@ -215,7 +215,7 @@ template <typename Iterator>
 class all_attributes_grammar : public qi::grammar<Iterator, std::vector<AttributeVariant>(), qi::blank_type>
 {
 public:
-    all_attributes_grammar(const word_symbols& sym, std::string& message)
+    all_attributes_grammar(const word_symbols& sym)
         : all_attributes_grammar::base_type(line_attribute_vec)
         , cycle_def_rule(was_cycle_def)
         , general_attribute_rule(sym, was_cycle_def)
@@ -224,6 +224,16 @@ public:
             (cycle_def_rule | cycle_param_rule | comment_rule | start_program_rule | general_attribute_rule);
         line_attribute_vec = -line_number_rule > +line_attribute > qi::eoi;
         BOOST_SPIRIT_DEBUG_NODES((line_attribute)(line_attribute_vec));
+    }
+
+    std::string get_message() const
+    {
+        return message;
+    }
+
+    void clear_message()
+    {
+        message.clear();
     }
 
 private:
@@ -235,13 +245,15 @@ private:
     general_attribute_grammar<Iterator>                                 general_attribute_rule;
     qi::rule<Iterator, AttributeVariant(), qi::blank_type>              line_attribute;
     qi::rule<Iterator, std::vector<AttributeVariant>(), qi::blank_type> line_attribute_vec;
+    std::string                                                         message;
     bool                                                                was_cycle_def{};
 };
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
 
-using pos_iterator_type = boost::spirit::classic::position_iterator2<boost::spirit::istream_iterator>;
+using pos_iterator_type = boost::spirit::line_pos_iterator<std::string::const_iterator>;
+
 extern template class all_attributes_grammar<pos_iterator_type>;
 
 } // namespace heidenhain

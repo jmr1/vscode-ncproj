@@ -9,6 +9,7 @@
 
 #include "AllAttributesParserBase.h"
 #include "AllAttributesParserDefines.h"
+#include "AllAttributesParserGrammar.h"
 #include "GeneralParserDefines.h"
 
 namespace qi = boost::spirit::qi;
@@ -26,13 +27,14 @@ struct HeidenhainAttributeData : public AttributeVariantData
 class PARSER_API AllAttributesParser final : public AllAttributesParserBase
 {
 public:
-    AllAttributesParser(ParserSettings&& parser_settings, OtherSettings&& other_settings);
+    AllAttributesParser(ParserSettings&& parser_settings, OtherSettings&& other_settings,
+                        bool instantiateWithoutNCSettings = false);
 
-    virtual ~AllAttributesParser()                  = default;
-    AllAttributesParser(const AllAttributesParser&) = delete;
-    AllAttributesParser(AllAttributesParser&&)      = default;
+    virtual ~AllAttributesParser()                             = default;
+    AllAttributesParser(const AllAttributesParser&)            = delete;
+    AllAttributesParser(AllAttributesParser&&)                 = default;
     AllAttributesParser& operator=(const AllAttributesParser&) = delete;
-    AllAttributesParser& operator=(AllAttributesParser&&) = default;
+    AllAttributesParser& operator=(AllAttributesParser&&)      = default;
 
     virtual bool parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
                        bool single_line_msg, const ParserSettings& parser_settings) override;
@@ -136,10 +138,11 @@ private:
         "K1X", "K1Y", "K1Z", "K2X", "K2Y", "K2Z", "K3X", "K3Y", "K3Z",
         "P01", "P02", "P03", "P04", "P05", "P06", "P07", "P1X", "P1Y",
     };
-    ZeroPoint      zero_point{};
-    word_symbols   sym;
-    ParserSettings parser_settings{};
-    OtherSettings  other_settings{};
+    ZeroPoint                                                  zero_point{};
+    word_symbols                                               sym;
+    ParserSettings                                             parser_settings{};
+    OtherSettings                                              other_settings{};
+    std::unique_ptr<all_attributes_grammar<pos_iterator_type>> all_attr_grammar;
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif

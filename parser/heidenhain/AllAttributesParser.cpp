@@ -14,26 +14,24 @@
 
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/config/warning_disable.hpp>
-#include <boost/spirit/include/classic_position_iterator.hpp>
+#include <boost/spirit/include/support_line_pos_iterator.hpp>
 
 #include "AllAttributesParserGrammar.h"
-
-namespace {
-char const* operator"" _C(const char8_t* str, std::size_t)
-{
-    return reinterpret_cast<const char*>(str);
-}
-}
-
 
 namespace parser {
 namespace heidenhain {
 
-AllAttributesParser::AllAttributesParser(ParserSettings&& parser_settings, OtherSettings&& other_settings)
+AllAttributesParser::AllAttributesParser(ParserSettings&& parser_settings, OtherSettings&& other_settings,
+                                         bool instantiateWithoutNCSettings /*= false*/)
     : parser_settings(std::move(parser_settings))
     , other_settings(other_settings)
 {
     build_symbols();
+
+    if (instantiateWithoutNCSettings)
+    {
+        all_attr_grammar = std::make_unique<all_attributes_grammar<pos_iterator_type>>(sym);
+    }
 }
 
 void AllAttributesParser::set_parser_settings(const ParserSettings& parser_settings)
@@ -69,6 +67,8 @@ void AllAttributesParser::set_ncsettings(EMachineTool machine_tool, EMachineTool
         machine_points_data_zero_point.machine_base_point["Z"] = it->second - zero_point.z;
     // attr_path_calc = std::make_unique<AttributesPathCalculator>(machine_points_data_zero_point, kinematics,
     // cnc_default_values);
+
+    all_attr_grammar = std::make_unique<all_attributes_grammar<pos_iterator_type>>(sym);
 }
 
 void AllAttributesParser::build_symbols()
@@ -89,42 +89,25 @@ bool AllAttributesParser::parse(int line, const std::string& data, AttributeVari
 bool AllAttributesParser::parse(int line, const std::string& data, std::vector<AttributeVariant>& value,
                                 std::string& message, bool single_line_msg, const ParserSettings& parser_settings)
 {
-    std::istringstream                                                                  input(data);
-    typedef boost::spirit::classic::position_iterator2<boost::spirit::istream_iterator> pos_iterator_type;
-    pos_iterator_type position_begin(boost::spirit::istream_iterator{input >> std::noskipws}, {}), position_end;
-
-    bool                                      ret = false;
-    all_attributes_grammar<pos_iterator_type> all_attr_gr(sym, message);
+    std::istringstream input(data);
+    pos_iterator_type  pos_begin(data.cbegin()), iter = pos_begin, pos_end(data.cend());
+    bool               ret{};
 
     try
     {
-        ret = qi::phrase_parse(position_begin, position_end, all_attr_gr, qi::blank, value);
+        all_attr_grammar->clear_message();
+        ret = qi::phrase_parse(iter, pos_end, *all_attr_grammar, qi::blank, value);
     }
     catch (const qi::expectation_failure<pos_iterator_type>& e)
     {
-        const classic::file_position_base<std::string>& pos = e.first.get_position();
-        std::stringstream                               msg;
-        if (single_line_msg)
-        {
-            msg << pos.line << ":" << pos.column << ": " << std::string(e.first, e.last);
-            if (!message.empty())
-                msg << " <- " << message;
-        }
-        else
-        {
-            if (other_settings.language == ELanguage::Polish)
-            {
-                msg << u8"Błąd parsowania w linii "_C << pos.line << u8" kolumna "_C << pos.column << ":" << std::endl
-                    << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj"_C : "^- " + message) << std::endl;
-            }
-            else
-            {
-                msg << "Parse error at line " << pos.line << " column " << pos.column << ":" << std::endl
-                    << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << (message.empty() ? "^- here" : "^- " + message) << std::endl;
-            }
-        }
+        int line   = get_line(e.first);
+        int column = get_column(pos_begin, e.first);
+        message    = all_attr_grammar->get_message();
+
+        std::stringstream msg;
+        msg << line << ":" << column << ": " << std::string(e.first, e.last);
+        if (!message.empty())
+            msg << " <- " << message;
         message = msg.str();
     }
     catch (const std::out_of_range& e)
@@ -145,42 +128,25 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::string& 
 bool AllAttributesParser::simple_parse(int line, const std::string& data, std::vector<AttributeVariant>& value,
                                        std::string& message, bool single_line_msg)
 {
-    std::istringstream                                                                  input(data);
-    typedef boost::spirit::classic::position_iterator2<boost::spirit::istream_iterator> pos_iterator_type;
-    pos_iterator_type position_begin(boost::spirit::istream_iterator{input >> std::noskipws}, {}), position_end;
-
-    bool                                      ret = false;
-    all_attributes_grammar<pos_iterator_type> all_attr_gr(sym, message);
+    std::istringstream input(data);
+    pos_iterator_type  pos_begin(data.cbegin()), iter = pos_begin, pos_end(data.cend());
+    bool               ret{};
 
     try
     {
-        ret = qi::phrase_parse(position_begin, position_end, all_attr_gr, qi::blank, value);
+        all_attr_grammar->clear_message();
+        ret = qi::phrase_parse(iter, pos_end, *all_attr_grammar, qi::blank, value);
     }
     catch (const qi::expectation_failure<pos_iterator_type>& e)
     {
-        const classic::file_position_base<std::string>& pos = e.first.get_position();
-        std::stringstream                               msg;
-        if (single_line_msg)
-        {
-            msg << pos.line << ":" << pos.column << ": " << std::string(e.first, e.last);
-            if (!message.empty())
-                msg << " <- " << message;
-        }
-        else
-        {
-            if (other_settings.language == ELanguage::Polish)
-            {
-                msg << u8"Błąd parsowania w linii "_C << pos.line << u8" kolumna "_C << pos.column << ":" << std::endl
-                    << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << (message.empty() ? u8"^- tutaj"_C : "^- " + message) << std::endl;
-            }
-            else
-            {
-                msg << "Parse error at line " << pos.line << " column " << pos.column << ":" << std::endl
-                    << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << (message.empty() ? "^- here" : "^- " + message) << std::endl;
-            }
-        }
+        int line   = get_line(e.first);
+        int column = get_column(pos_begin, e.first);
+        message    = all_attr_grammar->get_message();
+
+        std::stringstream msg;
+        msg << line << ":" << column << ": " << std::string(e.first, e.last);
+        if (!message.empty())
+            msg << " <- " << message;
         message = msg.str();
     }
     catch (const std::out_of_range& e)

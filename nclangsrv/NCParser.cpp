@@ -259,6 +259,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
     }
 
     std::unique_ptr<AllAttributesParserBase> ap;
+    std::unique_ptr<AttributeVariantData>    value;
     switch (cnc_type)
     {
     case ECncType::Fanuc:
@@ -274,6 +275,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
         apf->reset_macro_values();
         // apf->reset_attributes_path_calculator();
 
+        value = std::make_unique<fanuc::FanucAttributeData>();
         break;
     }
 
@@ -282,6 +284,8 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
                                                                               calculate_path, ncsettings_code_analysis,
                                                                               zero_point_analysis},
                                                                OtherSettings{mLanguage});
+
+        value = std::make_unique<heidenhain::HeidenhainAttributeData>();
         break;
     }
     }
@@ -310,19 +314,18 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
         if (data.empty())
             continue;
 
-        bool                                  ret{};
-        std::string                           message;
-        std::unique_ptr<AttributeVariantData> value;
+        bool        ret{};
+        std::string message;
         switch (cnc_type)
         {
         case ECncType::Fanuc:
         case ECncType::Haas:
         case ECncType::Makino:
         case ECncType::Generic:
-            value = std::make_unique<fanuc::FanucAttributeData>();
+            static_cast<fanuc::FanucAttributeData&>(*value).value.clear();
             break;
         case ECncType::Heidenhain:
-            value = std::make_unique<heidenhain::HeidenhainAttributeData>();
+            static_cast<heidenhain::HeidenhainAttributeData&>(*value).value.clear();
             break;
         }
 

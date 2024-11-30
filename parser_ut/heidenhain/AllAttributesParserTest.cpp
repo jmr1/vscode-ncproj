@@ -62,7 +62,7 @@ void AllAttributesParserHHTest::verify(std::string&& data, std::vector<heidenhai
     std::string message;
 
     heidenhain::HeidenhainAttributeData av;
-    heidenhain::AllAttributesParser     ap{{false, false, false}, {ELanguage::Polish}};
+    heidenhain::AllAttributesParser     ap{{false, false, false}, {ELanguage::Polish}, true};
 
     auto ret = ap.parse(1, data, av, message, true);
 

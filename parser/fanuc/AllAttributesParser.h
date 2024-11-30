@@ -9,6 +9,7 @@
 
 #include "AllAttributesParserBase.h"
 #include "AllAttributesParserDefines.h"
+#include "AllAttributesParserGrammar.h"
 #include "AttributesPathCalculator.h"
 #include "CodeGroupsDefines.h"
 #include "MacroDefines.h"
@@ -33,13 +34,13 @@ class PARSER_API AllAttributesParser final : public AllAttributesParserBase
 public:
     AllAttributesParser(FanucWordGrammar&& grammar, std::vector<std::string>&& operations, code_groups_map&& gcodes,
                         code_groups_map&& mcodes, ParserSettings&& parser_settings, OtherSettings&& other_settings,
-                        EFanucParserType fanuc_parser_type);
+                        EFanucParserType fanuc_parser_type, bool instantiateWithoutNCSettings = false);
 
-    virtual ~AllAttributesParser()                  = default;
-    AllAttributesParser(const AllAttributesParser&) = delete;
-    AllAttributesParser(AllAttributesParser&&)      = default;
+    virtual ~AllAttributesParser()                             = default;
+    AllAttributesParser(const AllAttributesParser&)            = delete;
+    AllAttributesParser(AllAttributesParser&&)                 = default;
     AllAttributesParser& operator=(const AllAttributesParser&) = delete;
-    AllAttributesParser& operator=(AllAttributesParser&&) = default;
+    AllAttributesParser& operator=(AllAttributesParser&&)      = default;
 
     virtual bool parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
                        bool single_line_msg, const ParserSettings& parser_settings) override;
@@ -124,25 +125,26 @@ private:
 #pragma warning(push)
 #pragma warning(disable : 4251)
 #endif
-    FanucWordGrammar                          word_grammar;
-    const word_map*                           active_word_grammar{};
-    std::vector<std::string>                  allowed_operations;
-    code_groups_map                           gcode_groups;
-    code_groups_map                           mcode_groups;
-    ZeroPoint                                 zero_point{};
-    std::unique_ptr<AttributesPathCalculator> attr_path_calc;
-    UnitConverter                             unit_converter;
-    Renumberer                                renumberer;
-    RotationVerifier                          rotation_verifier;
-    macro_map                                 macro_values;
-    word_symbols                              assignable_sym;
-    word_symbols                              decimal_sym;
-    word_symbols                              char_sym;
-    ParserSettings                            parser_settings{};
-    OtherSettings                             other_settings{};
-    EMachineTool                              machine_tool{};
-    EMachineToolType                          machine_tool_type{};
-    EFanucParserType                          fanuc_parser_type;
+    FanucWordGrammar                                           word_grammar;
+    const word_map*                                            active_word_grammar{};
+    std::vector<std::string>                                   allowed_operations;
+    code_groups_map                                            gcode_groups;
+    code_groups_map                                            mcode_groups;
+    ZeroPoint                                                  zero_point{};
+    std::unique_ptr<AttributesPathCalculator>                  attr_path_calc;
+    std::unique_ptr<all_attributes_grammar<pos_iterator_type>> all_attr_grammar;
+    UnitConverter                                              unit_converter;
+    Renumberer                                                 renumberer;
+    RotationVerifier                                           rotation_verifier;
+    macro_map                                                  macro_values;
+    word_symbols                                               assignable_sym;
+    word_symbols                                               decimal_sym;
+    word_symbols                                               char_sym;
+    ParserSettings                                             parser_settings{};
+    OtherSettings                                              other_settings{};
+    EMachineTool                                               machine_tool{};
+    EMachineToolType                                           machine_tool_type{};
+    EFanucParserType                                           fanuc_parser_type;
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif

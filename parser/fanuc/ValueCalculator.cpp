@@ -21,22 +21,13 @@
 #include <boost/config/warning_disable.hpp>
 #include <boost/fusion/include/adapt_struct.hpp>
 #include <boost/phoenix/bind.hpp>
-#include <boost/spirit/include/classic_position_iterator.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_symbols.hpp>
+#include <boost/spirit/include/support_line_pos_iterator.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 #include <boost/variant.hpp>
 
-namespace qi      = boost::spirit::qi;
-namespace classic = boost::spirit::classic;
-
-namespace {
-char const* operator"" _C(const char8_t* str, std::size_t)
-{
-    return reinterpret_cast<const char*>(str);
-}
-}
-
+namespace qi = boost::spirit::qi;
 
 namespace parser {
 namespace fanuc {
@@ -403,18 +394,21 @@ void ValueCalculator::build_symbols()
 bool ValueCalculator::parse(const std::string& data, std::string& message, bool single_line_msg,
                             const macro_map& macro_values, double& value, ELanguage language)
 {
-    std::istringstream                                                                  input(data);
-    typedef boost::spirit::classic::position_iterator2<boost::spirit::istream_iterator> pos_iterator_type;
-    pos_iterator_type position_begin(boost::spirit::istream_iterator{input >> std::noskipws}, {}), position_end;
+    using pos_iterator_type = boost::spirit::line_pos_iterator<std::string::const_iterator>;
 
-    bool ret = false;
+    std::istringstream input(data);
+    pos_iterator_type  pos_begin(data.cbegin()), iter = pos_begin, pos_end(data.cend());
+
+    bool ret{};
+
+    calculator<pos_iterator_type> calc(sym);
 
     try
     {
-        calculator<pos_iterator_type> calc(sym);
-        program                       p;
+        program p;
 
-        ret = qi::phrase_parse(position_begin, position_end, calc, qi::blank, p);
+        ret = qi::phrase_parse(iter, pos_end, calc, qi::blank, p);
+
 #ifndef NDEBUG
         printer()(p);
 #endif
@@ -422,28 +416,11 @@ bool ValueCalculator::parse(const std::string& data, std::string& message, bool 
     }
     catch (const qi::expectation_failure<pos_iterator_type>& e)
     {
-        const classic::file_position_base<std::string>& pos = e.first.get_position();
-        std::stringstream                               msg;
-        if (single_line_msg)
-        {
-            msg << pos.line << ":" << pos.column << ": " << std::string(e.first, e.last);
-        }
-        else
-        {
-            if (language == ELanguage::Polish)
-            {
-                msg << u8"Błąd parsowania w linii "_C << pos.line << u8" kolumna "_C << pos.column << ":" << std::endl
-                    << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " " << u8"^- tutaj"_C << std::endl;
-            }
-            else
-            {
-                msg << "Parse error at line " << pos.line << " column " << pos.column << ":" << std::endl
-                    << "'" << e.first.get_currentline() << "'" << std::endl
-                    << std::setw(pos.column) << " "
-                    << "^- here" << std::endl;
-            }
-        }
+        int line   = get_line(e.first);
+        int column = get_column(pos_begin, e.first);
+
+        std::stringstream msg;
+        msg << line << ":" << column << ": " << std::string(e.first, e.last);
         message = msg.str();
     }
     catch (const eval_exception& e)

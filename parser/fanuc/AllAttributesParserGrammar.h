@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <iomanip>
+#include <string>
 
 #ifndef NDEBUG
 #define BOOST_SPIRIT_DEBUG
@@ -13,9 +14,9 @@
 #include <boost/phoenix/core.hpp>
 #include <boost/phoenix/object.hpp> // construct
 #include <boost/phoenix/operator.hpp>
-#include <boost/spirit/include/classic_position_iterator.hpp>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/qi_symbols.hpp>
+#include <boost/spirit/include/support_line_pos_iterator.hpp>
 #include <boost/spirit/include/support_multi_pass.hpp>
 
 #include "MessageTextImpl.h"
@@ -23,11 +24,10 @@
 
 #include "AllAttributesParserDefines.h"
 
-namespace qi      = boost::spirit::qi;
-namespace ascii   = boost::spirit::ascii;
-namespace classic = boost::spirit::classic;
-namespace phx     = boost::phoenix;
-namespace fusion  = boost::fusion;
+namespace qi     = boost::spirit::qi;
+namespace ascii  = boost::spirit::ascii;
+namespace phx    = boost::phoenix;
+namespace fusion = boost::fusion;
 
 using word_symbols = qi::symbols<char, std::string>;
 
@@ -453,7 +453,7 @@ class all_attributes_grammar : public qi::grammar<Iterator, std::vector<Attribut
 {
 public:
     all_attributes_grammar(const word_map& word_grammar, const word_symbols& char_sym, const word_symbols& decimal_sym,
-                           const word_symbols& assignable_sym, std::string& message, ELanguage language)
+                           const word_symbols& assignable_sym, ELanguage language)
         : all_attributes_grammar::base_type(line_attribute_vec)
         , char_eag_rule(char_sym)
         , optional_block_rule(word_grammar, message, language, st)
@@ -467,6 +467,16 @@ public:
         BOOST_SPIRIT_DEBUG_NODES((line_attribute)(line_attribute_vec));
     }
 
+    std::string get_message() const
+    {
+        return message;
+    }
+
+    void clear_message()
+    {
+        message.clear();
+    }
+
 private:
     space_empty_attribute_grammar<Iterator>                             char_eag_rule;
     optional_block_grammar<Iterator, int>                               optional_block_rule;
@@ -478,10 +488,12 @@ private:
     program_name_grammar<Iterator>                                      program_name_rule;
     qi::rule<Iterator, AttributeVariant(), qi::blank_type>              line_attribute;
     qi::rule<Iterator, std::vector<AttributeVariant>(), qi::blank_type> line_attribute_vec;
+    std::string                                                         message;
     status                                                              st{};
 };
 
-using pos_iterator_type = boost::spirit::classic::position_iterator2<boost::spirit::istream_iterator>;
+using pos_iterator_type = boost::spirit::line_pos_iterator<std::string::const_iterator>;
+
 extern template class all_attributes_grammar<pos_iterator_type>;
 
 } // namespace fanuc

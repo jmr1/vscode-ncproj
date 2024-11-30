@@ -73,7 +73,8 @@ void AllAttributesParserTest::verify(std::string&& data, std::vector<fanuc::Attr
                                   {},
                                   {false, false, false},
                                   {ELanguage::Polish},
-                                  EFanucParserType::FanucMill};
+                                  EFanucParserType::FanucMill,
+                                  true};
 
     auto ret = ap.parse(1, data, av, message, true);
 
@@ -106,7 +107,8 @@ void AllAttributesParserTest::verify_remove_comment(std::string&&               
                                   {},
                                   {false, false, false},
                                   {ELanguage::Polish},
-                                  EFanucParserType::FanucMill};
+                                  EFanucParserType::FanucMill,
+                                  true};
 
     auto ret = ap.remove_comment(1, data, av, message, true);
 
@@ -139,7 +141,8 @@ void AllAttributesParserTest::verify_remove_optional_block(std::string&&        
                                   {},
                                   {false, false, false},
                                   {ELanguage::Polish},
-                                  EFanucParserType::FanucMill};
+                                  EFanucParserType::FanucMill,
+                                  true};
 
     auto ret = ap.remove_optional_block(1, data, av, message, true);
 
