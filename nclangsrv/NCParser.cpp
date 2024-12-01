@@ -127,21 +127,21 @@ std::string formatTime(double doubleSeconds)
     int64_t msInt  = static_cast<int64_t>(std::round(doubleSeconds * 1000.0));
     int64_t absInt = std::abs(msInt);
 
-    auto hours        = absInt / (1000 * 60 * 60);
-    auto minutes      = (absInt / (1000 * 60)) % 60;
-    auto secondsx     = (absInt / 1000) % 60;
-    auto milliseconds = absInt % 1000;
+    int64_t hours        = absInt / (1000 * 60 * 60);
+    int64_t minutes      = (absInt / (1000 * 60)) % 60;
+    int64_t secondsx     = (absInt / 1000) % 60;
+    int64_t milliseconds = absInt % 1000;
 
     if (hours > 0)
     {
         // Include hours in the format
-        std::snprintf(buffer, BUFFER_SIZE, "%s%ld:%02ld:%02ld.%03ld", (msInt < 0 ? "-" : ""), hours, minutes, secondsx,
+        std::snprintf(buffer, BUFFER_SIZE, "%s%lld:%02lld:%02lld.%03lld", (msInt < 0 ? "-" : ""), hours, minutes, secondsx,
                       milliseconds);
     }
     else
     {
         // Omit hours for shorter format
-        std::snprintf(buffer, BUFFER_SIZE, "%s%ld:%02ld.%03ld", (msInt < 0 ? "-" : ""), minutes, secondsx,
+        std::snprintf(buffer, BUFFER_SIZE, "%s%lld:%02lld.%03lld", (msInt < 0 ? "-" : ""), minutes, secondsx,
                       milliseconds);
     }
 
