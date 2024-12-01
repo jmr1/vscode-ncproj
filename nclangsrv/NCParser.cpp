@@ -3,6 +3,7 @@
 #include "NCParser.h"
 
 #include <filesystem>
+#include <inttypes.h>
 #include <iostream>
 #include <memory>
 #include <string_view>
@@ -135,14 +136,14 @@ std::string formatTime(double doubleSeconds)
     if (hours > 0)
     {
         // Include hours in the format
-        std::snprintf(buffer, BUFFER_SIZE, "%s%lld:%02lld:%02lld.%03lld", (msInt < 0 ? "-" : ""), hours, minutes, secondsx,
-                      milliseconds);
+        std::snprintf(buffer, BUFFER_SIZE, "%s%" PRId64 ":%02" PRId64 ":%02" PRId64 ".%03" PRId64,
+                      (msInt < 0 ? "-" : ""), hours, minutes, secondsx, milliseconds);
     }
     else
     {
         // Omit hours for shorter format
-        std::snprintf(buffer, BUFFER_SIZE, "%s%lld:%02lld.%03lld", (msInt < 0 ? "-" : ""), minutes, secondsx,
-                      milliseconds);
+        std::snprintf(buffer, BUFFER_SIZE, "%s%" PRId64 ":%02" PRId64 ".%03" PRId64, (msInt < 0 ? "-" : ""), minutes,
+                      secondsx, milliseconds);
     }
 
     return std::string(buffer);
