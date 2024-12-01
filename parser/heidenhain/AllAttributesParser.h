@@ -3,6 +3,7 @@
 #include "parser_export.h"
 
 #include <string>
+#include <string_view>
 #include <vector>
 
 #include <boost/spirit/include/qi_symbols.hpp>
@@ -36,11 +37,11 @@ public:
     AllAttributesParser& operator=(const AllAttributesParser&) = delete;
     AllAttributesParser& operator=(AllAttributesParser&&)      = default;
 
-    virtual bool parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+    virtual bool parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                        bool single_line_msg, const ParserSettings& parser_settings) override;
-    virtual bool parse(int line, const std::string& data, AttributeVariantData& attr, std::string& message,
+    virtual bool parse(int line, std::string_view data, AttributeVariantData& attr, std::string& message,
                        bool single_line_msg) override;
-    virtual bool parse(int line, const std::string& data, std::string& message, bool single_line_msg) override;
+    virtual bool parse(int line, std::string_view data, std::string& message, bool single_line_msg) override;
 
     virtual void set_parser_settings(const ParserSettings& parser_settings) override;
 
@@ -70,7 +71,7 @@ public:
 
     // virtual const word_range_map& get_word_range() const override;
 
-    virtual bool convert_length(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+    virtual bool convert_length(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                                 bool single_line_msg, UnitConversionType conversion_type) override
     {
         return false;
@@ -93,7 +94,7 @@ public:
     {
     }
 
-    virtual bool rotate_axes(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+    virtual bool rotate_axes(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                              bool single_line_msg, AxesRotatingOption axes_rotating_options) override
     {
         return false;
@@ -119,9 +120,9 @@ public:
     }
 
 private:
-    bool parse(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
+    bool parse(int line, std::string_view data, std::vector<AttributeVariant>& value, std::string& message,
                bool single_line_msg, const ParserSettings& parser_settings);
-    bool parse(int line, const std::string& data, std::vector<AttributeVariant>& attr, std::string& message,
+    bool parse(int line, std::string_view data, std::vector<AttributeVariant>& attr, std::string& message,
                bool single_line_msg);
 
     void build_symbols();

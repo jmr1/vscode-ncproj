@@ -3,6 +3,7 @@
 #include "parser_export.h"
 
 #include <string>
+#include <string_view>
 #include <vector>
 
 #include <boost/spirit/include/qi_symbols.hpp>
@@ -42,10 +43,10 @@ public:
     AllAttributesParser& operator=(const AllAttributesParser&) = delete;
     AllAttributesParser& operator=(AllAttributesParser&&)      = default;
 
-    virtual bool parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+    virtual bool parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                        bool single_line_msg, const ParserSettings& parser_settings) override;
-    virtual bool parse(int line, const std::string& data, std::string& message, bool single_line_msg) override;
-    virtual bool parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+    virtual bool parse(int line, std::string_view data, std::string& message, bool single_line_msg) override;
+    virtual bool parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                        bool single_line_msg) override;
 
     virtual void set_parser_settings(const ParserSettings& parser_settings) override;
@@ -65,7 +66,7 @@ public:
 
     const word_range_map& get_word_range() const;
 
-    virtual bool convert_length(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+    virtual bool convert_length(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                                 bool single_line_msg, UnitConversionType conversion_type) override;
 
     virtual bool remove_numbering(int line, const std::string& data, AttributeVariantData& value, std::string& message,
@@ -75,7 +76,7 @@ public:
     virtual void set_renumber_start_value(unsigned int value) override;
     virtual void renumber_reset() override;
 
-    virtual bool rotate_axes(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+    virtual bool rotate_axes(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                              bool single_line_msg, AxesRotatingOption axes_rotating_options) override;
 
     bool split_file(std::vector<std::string>&& data, std::vector<std::vector<std::vector<AttributeVariant>>>& value,
@@ -88,12 +89,12 @@ public:
                                        std::string& message, bool single_line_msg) override;
 
 private:
-    bool parse(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
+    bool parse(int line, std::string_view data, std::vector<AttributeVariant>& value, std::string& message,
                bool single_line_msg, const ParserSettings& parser_settings);
-    bool parse(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
+    bool parse(int line, std::string_view data, std::vector<AttributeVariant>& value, std::string& message,
                bool single_line_msg);
 
-    bool convert_length(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
+    bool convert_length(int line, std::string_view data, std::vector<AttributeVariant>& value, std::string& message,
                         bool single_line_msg, UnitConversionType conversion_type);
 
     bool remove_numbering(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
@@ -101,7 +102,7 @@ private:
     bool renumber(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
                   bool single_line_msg, const RenumberSettings& renumber_settings);
 
-    bool rotate_axes(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
+    bool rotate_axes(int line, std::string_view data, std::vector<AttributeVariant>& value, std::string& message,
                      bool single_line_msg, AxesRotatingOption axes_rotating_options);
 
     // bool split_file(std::vector<std::string> &&data, std::vector<std::vector<std::vector<AttributeVariant>>> &value,
@@ -115,7 +116,7 @@ private:
 
     void build_symbols();
 
-    bool simple_parse(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
+    bool simple_parse(int line, std::string_view data, std::vector<AttributeVariant>& value, std::string& message,
                       bool single_line_msg);
 
     void init_macro_values();

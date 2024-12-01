@@ -154,8 +154,11 @@ int main(int argc, char* argv[])
             buffer += c;
             break;
         }
-        for (uint32_t x = 1; x < length; ++x)
-            buffer += std::cin.get();
+        std::string tmp(length, '\0');
+        std::cin.read(&tmp[0], length - 1);
+        tmp.resize(std::cin.gcount());
+        buffer += tmp;
+
         if (logger)
             LOGGER << __func__ << ": " << buffer << std::endl;
 

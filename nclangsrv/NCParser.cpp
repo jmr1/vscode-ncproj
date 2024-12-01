@@ -5,9 +5,7 @@
 #include <filesystem>
 #include <iostream>
 #include <memory>
-#include <sstream>
-
-#include <boost/algorithm/string/trim.hpp>
+#include <string_view>
 
 #include <fanuc/AllAttributesParser.h>
 #include <heidenhain/AllAttributesParser.h>
@@ -118,29 +116,125 @@ void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& tex
 namespace nclangsrv {
 
 namespace {
+
+constexpr double tolerance = 0.01;
+
 std::string formatTime(double doubleSeconds)
 {
-    int64_t msInt = int64_t(std::round(doubleSeconds * 1000.0));
+    constexpr size_t BUFFER_SIZE = 32;
+    static char      buffer[BUFFER_SIZE];
 
+    int64_t msInt  = static_cast<int64_t>(std::round(doubleSeconds * 1000.0));
     int64_t absInt = std::abs(msInt);
 
-    std::stringstream s;
-
-    if (msInt < 0)
-        s << "-";
-
     auto hours        = absInt / (1000 * 60 * 60);
-    auto minutes      = absInt / (1000 * 60) % 60;
-    auto secondsx     = absInt / 1000 % 60;
+    auto minutes      = (absInt / (1000 * 60)) % 60;
+    auto secondsx     = (absInt / 1000) % 60;
     auto milliseconds = absInt % 1000;
 
     if (hours > 0)
-        s << std::setfill('0') << hours << ":";
+    {
+        // Include hours in the format
+        std::snprintf(buffer, BUFFER_SIZE, "%s%ld:%02ld:%02ld.%03ld", (msInt < 0 ? "-" : ""), hours, minutes, secondsx,
+                      milliseconds);
+    }
+    else
+    {
+        // Omit hours for shorter format
+        std::snprintf(buffer, BUFFER_SIZE, "%s%ld:%02ld.%03ld", (msInt < 0 ? "-" : ""), minutes, secondsx,
+                      milliseconds);
+    }
 
-    s << minutes << std::setfill('0') << ":" << std::setw(2) << secondsx << "." << std::setw(3) << milliseconds;
-
-    return s.str();
+    return std::string(buffer);
 }
+
+std::string formatPathTimeResult(const PathResult& pr, const TimeResult& tr, double total_work_motion_path,
+                                 double total_work_motion_time, double total_fast_motion_path,
+                                 double total_fast_motion_time)
+{
+    constexpr size_t BUFFER_SIZE = 256;
+    static char      buffer[BUFFER_SIZE];
+    std::string      result;
+    result.reserve(512);
+
+    if (pr.total >= tolerance)
+    {
+        auto written = std::snprintf(buffer, BUFFER_SIZE, " | Total path = %.2f", pr.total);
+        result.append(buffer, written);
+    }
+    if (tr.total >= tolerance)
+    {
+        auto formattedTime = formatTime(tr.total);
+        auto written       = std::snprintf(buffer, BUFFER_SIZE, " | Total time = %s", formattedTime.c_str());
+        result.append(buffer, written);
+    }
+    if (pr.tool_total >= tolerance && pr.total - pr.tool_total >= tolerance)
+    {
+        auto written =
+            std::snprintf(buffer, BUFFER_SIZE, " | T%s total path = %.2f", pr.tool_id.c_str(), pr.tool_total);
+        result.append(buffer, written);
+    }
+    if (pr.fast_motion >= tolerance)
+    {
+        auto written = std::snprintf(buffer, BUFFER_SIZE, " | Total rapid path = %.2f", total_fast_motion_path);
+        result.append(buffer, written);
+    }
+    if (tr.fast_motion >= tolerance)
+    {
+        auto formattedTime = formatTime(total_fast_motion_time);
+        auto written       = std::snprintf(buffer, BUFFER_SIZE, " | Total rapid time = %s", formattedTime.c_str());
+        result.append(buffer, written);
+    }
+    if (pr.work_motion >= tolerance)
+    {
+        auto written = std::snprintf(buffer, BUFFER_SIZE, " | Total cut path = %.2f", total_work_motion_path);
+        result.append(buffer, written);
+    }
+    if (tr.work_motion >= tolerance)
+    {
+        auto formattedTime = formatTime(total_work_motion_time);
+        auto written       = std::snprintf(buffer, BUFFER_SIZE, " | Total cut time = %s", formattedTime.c_str());
+        result.append(buffer, written);
+    }
+
+    return result;
+}
+
+std::string_view rtrim(std::string_view line)
+{
+    // Trim right trailing whitespace or carriage return
+    while (!line.empty() && (std::isspace(line.back()) || line.back() == '\r'))
+    {
+        line.remove_suffix(1);
+    }
+    return line;
+}
+
+std::vector<std::string_view> splitLines(const std::string& code)
+{
+    std::vector<std::string_view> lines;
+
+    size_t start = 0, end = 0;
+    while (end < code.size())
+    {
+        if (code[end] == '\n')
+        {
+            auto line = std::string_view(code.data() + start, end - start);
+            lines.emplace_back(rtrim(line));
+            start = end + 1;
+        }
+        ++end;
+    }
+    // Handle the last line (if not ending with a newline)
+    if (start < code.size())
+    {
+        auto line = std::string_view(code.data() + start, code.size() - start);
+        lines.emplace_back(rtrim(line));
+    }
+
+    return lines;
+}
+
 } // namespace
 
 #define LOGGER (*mLogger)()
@@ -295,7 +389,6 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
 
     size_t                   line_nbr{};
     size_t                   line_err{};
-    std::string              data;
     std::string              text;
     const std::string        line_str("line 1");
     double                   prev_time_total{};
@@ -303,14 +396,14 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
     double                   total_work_motion_time{};
     double                   total_fast_motion_path{};
     double                   total_fast_motion_time{};
-    std::stringstream        ss(code);
     std::vector<std::string> messages;
     PathTimeResult           pathTimeResult;
-    while (std::getline(ss, data))
+    auto                     lines = splitLines(code);
+
+    for (auto data : lines)
     {
         ++line_nbr;
 
-        boost::algorithm::trim_right(data);
         if (data.empty())
             continue;
 
@@ -387,8 +480,7 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
             auto tr = ap->get_time_result();
             if (tr.total != prev_time_total /*|| pr.fast_motion != 0 || pr.work_motion != 0*/)
             {
-                constexpr double tolerance = 1e-2;
-                prev_time_total            = tr.total;
+                prev_time_total = tr.total;
                 if (pr.fast_motion != 0)
                     total_fast_motion_path += pr.fast_motion;
                 if (tr.fast_motion != 0)
@@ -397,24 +489,10 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
                     total_work_motion_path += pr.work_motion;
                 if (tr.work_motion != 0)
                     total_work_motion_time += tr.work_motion;
-                std::ostringstream ostr;
-                ostr << std::fixed << std::setprecision(2) << " | ";
-                if (pr.total >= tolerance)
-                    ostr << "Total path = " << pr.total << " | ";
-                if (tr.total >= tolerance)
-                    ostr << "Total time = " << formatTime(tr.total) << " | ";
-                if (pr.tool_total >= tolerance && pr.total - pr.tool_total >= tolerance)
-                    ostr << "T" << pr.tool_id << " total path = " << pr.tool_total << " | ";
-                if (pr.fast_motion >= tolerance)
-                    ostr << "Total rapid path = " << total_fast_motion_path << " | ";
-                if (tr.fast_motion >= tolerance)
-                    ostr << "Total rapid time = " << formatTime(total_fast_motion_time) << " | ";
-                if (pr.work_motion >= tolerance)
-                    ostr << "Total cut path = " << total_work_motion_path << " | ";
-                if (tr.work_motion >= tolerance)
-                    ostr << "Total cut time = " << formatTime(total_work_motion_time) << " | ";
 
-                pathTimeResult.emplace_hint(pathTimeResult.end(), line_nbr - 1, std::string(ostr.str().c_str()));
+                pathTimeResult.emplace_hint(pathTimeResult.end(), line_nbr - 1,
+                                            formatPathTimeResult(pr, tr, total_work_motion_path, total_work_motion_time,
+                                                                 total_fast_motion_path, total_fast_motion_time));
             }
         }
     }

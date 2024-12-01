@@ -79,19 +79,18 @@ void AllAttributesParser::build_symbols()
         sym.add(op, op);
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+bool AllAttributesParser::parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                                 bool single_line_msg, const ParserSettings& parser_settings)
 {
     return parse(line, data, static_cast<HeidenhainAttributeData&>(value).value, message, single_line_msg,
                  parser_settings);
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, std::vector<AttributeVariant>& value,
+bool AllAttributesParser::parse(int line, std::string_view data, std::vector<AttributeVariant>& value,
                                 std::string& message, bool single_line_msg, const ParserSettings& parser_settings)
 {
-    std::istringstream input(data);
-    pos_iterator_type  pos_begin(data.cbegin()), iter = pos_begin, pos_end(data.cend());
-    bool               ret{};
+    pos_iterator_type pos_begin(data.cbegin()), iter = pos_begin, pos_end(data.cend());
+    bool              ret{};
 
     try
     {
@@ -102,7 +101,7 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
     {
         size_t line   = get_line(e.first);
         size_t column = get_column(pos_begin, e.first);
-        message    = all_attr_grammar->get_message();
+        message       = all_attr_grammar->get_message();
 
         std::stringstream msg;
         msg << line << ":" << column << ": " << std::string(e.first, e.last);
@@ -119,7 +118,7 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
     return ret;
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, std::string& message, bool single_line_msg)
+bool AllAttributesParser::parse(int line, std::string_view data, std::string& message, bool single_line_msg)
 {
     std::vector<AttributeVariant> value;
     return parse(line, data, value, message, single_line_msg);
@@ -128,9 +127,9 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::string& 
 bool AllAttributesParser::simple_parse(int line, const std::string& data, std::vector<AttributeVariant>& value,
                                        std::string& message, bool single_line_msg)
 {
-    std::istringstream input(data);
-    pos_iterator_type  pos_begin(data.cbegin()), iter = pos_begin, pos_end(data.cend());
-    bool               ret{};
+    std::string_view  data_view = data;
+    pos_iterator_type pos_begin(data_view.cbegin()), iter = pos_begin, pos_end(data_view.cend());
+    bool              ret{};
 
     try
     {
@@ -141,7 +140,7 @@ bool AllAttributesParser::simple_parse(int line, const std::string& data, std::v
     {
         size_t line   = get_line(e.first);
         size_t column = get_column(pos_begin, e.first);
-        message    = all_attr_grammar->get_message();
+        message       = all_attr_grammar->get_message();
 
         std::stringstream msg;
         msg << line << ":" << column << ": " << std::string(e.first, e.last);
@@ -158,13 +157,13 @@ bool AllAttributesParser::simple_parse(int line, const std::string& data, std::v
     return ret;
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+bool AllAttributesParser::parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                                 bool single_line_msg)
 {
     return parse(line, data, static_cast<HeidenhainAttributeData&>(value).value, message, single_line_msg);
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, std::vector<AttributeVariant>& value,
+bool AllAttributesParser::parse(int line, std::string_view data, std::vector<AttributeVariant>& value,
                                 std::string& message, bool single_line_msg)
 {
     return parse(line, data, value, message, single_line_msg, parser_settings);

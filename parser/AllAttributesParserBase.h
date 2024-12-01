@@ -4,6 +4,7 @@
 
 #include <map>
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace parser {
@@ -31,11 +32,11 @@ public:
     {
     }
 
-    virtual bool parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
-                       bool single_line_msg, const ParserSettings& parser_settings)                   = 0;
-    virtual bool parse(int line, const std::string& data, std::string& message, bool single_line_msg) = 0;
-    virtual bool parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
-                       bool single_line_msg)                                                          = 0;
+    virtual bool parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
+                       bool single_line_msg, const ParserSettings& parser_settings)                       = 0;
+    virtual bool parse(int line, const std::string_view data, std::string& message, bool single_line_msg) = 0;
+    virtual bool parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
+                       bool single_line_msg)                                                              = 0;
 
     virtual void set_parser_settings(const ParserSettings& parser_settings) = 0;
 
@@ -54,7 +55,7 @@ public:
 
     // virtual const word_range_map& get_word_range() const = 0;
 
-    virtual bool convert_length(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+    virtual bool convert_length(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                                 bool single_line_msg, UnitConversionType conversion_type) = 0;
 
     virtual bool remove_numbering(int line, const std::string& data, AttributeVariantData& value, std::string& message,
@@ -64,7 +65,7 @@ public:
     virtual void set_renumber_start_value(unsigned int value)                              = 0;
     virtual void renumber_reset()                                                          = 0;
 
-    virtual bool rotate_axes(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+    virtual bool rotate_axes(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                              bool single_line_msg, AxesRotatingOption axes_rotating_options) = 0;
 
     // virtual bool split_file(std::vector<std::string> &&data, std::vector<std::vector<AttributeVariantData>> &value,

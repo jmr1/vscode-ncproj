@@ -2,6 +2,7 @@
 
 #include <iomanip>
 #include <string>
+#include <string_view>
 
 #ifndef NDEBUG
 #define BOOST_SPIRIT_DEBUG
@@ -252,7 +253,7 @@ private:
 #pragma GCC diagnostic pop
 #endif
 
-using pos_iterator_type = boost::spirit::line_pos_iterator<std::string::const_iterator>;
+using pos_iterator_type = boost::spirit::line_pos_iterator<std::string_view::const_iterator>;
 
 extern template class all_attributes_grammar<pos_iterator_type>;
 

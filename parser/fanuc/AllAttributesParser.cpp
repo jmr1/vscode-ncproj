@@ -192,20 +192,19 @@ void AllAttributesParser::build_symbols()
     }
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+bool AllAttributesParser::parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                                 bool single_line_msg, const ParserSettings& parser_settings)
 {
     return parse(line, data, static_cast<FanucAttributeData&>(value).value, message, single_line_msg, parser_settings);
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, std::vector<AttributeVariant>& value,
+bool AllAttributesParser::parse(int line, std::string_view data, std::vector<AttributeVariant>& value,
                                 std::string& message, bool single_line_msg, const ParserSettings& parser_settings)
 {
-    bool               ret{};
-    bool               evaluated_code_part{};
-    std::istringstream input(data);
-    pos_iterator_type  position_begin(data.cbegin()), iter = position_begin, position_end(data.cend());
-    pos_iterator_type  position_begin2;
+    bool              ret{};
+    bool              evaluated_code_part{};
+    pos_iterator_type position_begin(data.cbegin()), iter = position_begin, position_end(data.cend());
+    pos_iterator_type position_begin2;
 
     try
     {
@@ -226,9 +225,10 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
             MacroEvaluatedCodeVerifier()(allowed_operations, macro_values, line, value, other_settings.language);
         if (!evaluated_code.empty())
         {
-            std::istringstream input2(evaluated_code);
-            position_begin2         = pos_iterator_type(evaluated_code.cbegin());
-            pos_iterator_type iter2 = position_begin2, position_end2(evaluated_code.cend());
+            std::string_view evaluated_code_view = evaluated_code;
+
+            position_begin2         = pos_iterator_type(evaluated_code_view.cbegin());
+            pos_iterator_type iter2 = position_begin2, position_end2(evaluated_code_view.cend());
             evaluated_code_part     = true;
             ret                     = qi::phrase_parse(iter2, position_end2, *all_attr_grammar, qi::blank, value2);
             evaluated_code_part     = false;
@@ -270,7 +270,7 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
     {
         size_t line   = get_line(e.first);
         size_t column = get_column(evaluated_code_part ? position_begin2 : position_begin, e.first);
-        message    = all_attr_grammar->get_message();
+        message       = all_attr_grammar->get_message();
 
         std::stringstream msg;
         msg << line << ":" << column << ": " << std::string(e.first, e.last);
@@ -322,18 +322,17 @@ bool AllAttributesParser::parse(int line, const std::string& data, std::vector<A
     return ret;
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, std::string& message, bool single_line_msg)
+bool AllAttributesParser::parse(int line, std::string_view data, std::string& message, bool single_line_msg)
 {
     std::vector<AttributeVariant> value;
     return parse(line, data, value, message, single_line_msg);
 }
 
-bool AllAttributesParser::simple_parse(int line, const std::string& data, std::vector<AttributeVariant>& value,
+bool AllAttributesParser::simple_parse(int line, std::string_view data, std::vector<AttributeVariant>& value,
                                        std::string& message, bool single_line_msg)
 {
-    bool               ret{};
-    std::istringstream input(data);
-    pos_iterator_type  pos_begin(data.cbegin()), iter = pos_begin, pos_end(data.cend());
+    bool              ret{};
+    pos_iterator_type pos_begin(data.cbegin()), iter = pos_begin, pos_end(data.cend());
 
     try
     {
@@ -344,7 +343,7 @@ bool AllAttributesParser::simple_parse(int line, const std::string& data, std::v
     {
         size_t line   = get_line(e.first);
         size_t column = get_column(pos_begin, e.first);
-        message    = all_attr_grammar->get_message();
+        message       = all_attr_grammar->get_message();
 
         std::stringstream msg;
         msg << line << ":" << column << ": " << std::string(e.first, e.last);
@@ -361,26 +360,26 @@ bool AllAttributesParser::simple_parse(int line, const std::string& data, std::v
     return ret;
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, AttributeVariantData& value, std::string& message,
+bool AllAttributesParser::parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
                                 bool single_line_msg)
 {
     return parse(line, data, static_cast<FanucAttributeData&>(value).value, message, single_line_msg);
 }
 
-bool AllAttributesParser::parse(int line, const std::string& data, std::vector<AttributeVariant>& value,
+bool AllAttributesParser::parse(int line, std::string_view data, std::vector<AttributeVariant>& value,
                                 std::string& message, bool single_line_msg)
 {
     return parse(line, data, value, message, single_line_msg, parser_settings);
 }
 
-bool AllAttributesParser::convert_length(int line, const std::string& data, AttributeVariantData& value,
+bool AllAttributesParser::convert_length(int line, std::string_view data, AttributeVariantData& value,
                                          std::string& message, bool single_line_msg, UnitConversionType conversion_type)
 {
     return convert_length(line, data, static_cast<FanucAttributeData&>(value).value, message, single_line_msg,
                           conversion_type);
 }
 
-bool AllAttributesParser::convert_length(int line, const std::string& data, std::vector<AttributeVariant>& value,
+bool AllAttributesParser::convert_length(int line, std::string_view data, std::vector<AttributeVariant>& value,
                                          std::string& message, bool single_line_msg, UnitConversionType conversion_type)
 {
     if (!simple_parse(line, data, value, message, single_line_msg))
@@ -435,7 +434,7 @@ bool AllAttributesParser::renumber(int line, const std::string& data, std::vecto
     return ret;
 }
 
-bool AllAttributesParser::rotate_axes(int line, const std::string& data, AttributeVariantData& value,
+bool AllAttributesParser::rotate_axes(int line, std::string_view data, AttributeVariantData& value,
                                       std::string& message, bool single_line_msg,
                                       AxesRotatingOption axes_rotating_options)
 {
@@ -443,7 +442,7 @@ bool AllAttributesParser::rotate_axes(int line, const std::string& data, Attribu
                        axes_rotating_options);
 }
 
-bool AllAttributesParser::rotate_axes(int line, const std::string& data, std::vector<AttributeVariant>& value,
+bool AllAttributesParser::rotate_axes(int line, std::string_view data, std::vector<AttributeVariant>& value,
                                       std::string& message, bool single_line_msg,
                                       AxesRotatingOption axes_rotating_options)
 {
