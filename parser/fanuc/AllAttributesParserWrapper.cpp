@@ -41,7 +41,8 @@ AllAttributesParserWrapperBase* CreateFanucAllAttributesParser(
     int* mcode_groups_values_length,
     const ParserSettings* parser_settings,
     const OtherSettings* other_settings,
-    EFanucParserType fanuc_parser_type)
+    EFanucParserType fanuc_parser_type,
+    bool instantiateWithoutNCSettings /*= false*/)
 // clang-format on
 {
     FanucWordGrammar word_grammar{};
@@ -77,7 +78,7 @@ AllAttributesParserWrapperBase* CreateFanucAllAttributesParser(
         ParserSettings{parser_settings->evaluate_macro, parser_settings->verify_code_groups,
                        parser_settings->calculate_path, parser_settings->ncsettings_code_analysis,
                        parser_settings->zero_point_analysis},
-        OtherSettings{other_settings->language}, fanuc_parser_type, true);
+        OtherSettings{other_settings->language}, fanuc_parser_type, instantiateWithoutNCSettings);
 
     return new AllAttributesParserWrapper(std::move(parser));
 }

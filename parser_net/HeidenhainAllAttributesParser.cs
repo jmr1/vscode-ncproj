@@ -10,13 +10,13 @@ namespace parser
 {
     public class HeidenhainAllAttributesParser : AllAttributesParser
     {
-        public HeidenhainAllAttributesParser(ref ParserSettings parserSettings, ref OtherSettings otherSettings)
+        public HeidenhainAllAttributesParser(ref ParserSettings parserSettings, ref OtherSettings otherSettings, bool instantiateWithoutNCSettings = false)
         {
             var parserSettingsWrapper = (ParserSettingsWrapper)parserSettings;
             var otherSettingsWrapper = (OtherSettingsWrapper)otherSettings;
 
             pAllAttributesParser = 
-                CreateHeidenhainAllAttributesParser(ref parserSettingsWrapper, ref otherSettingsWrapper);
+                CreateHeidenhainAllAttributesParser(ref parserSettingsWrapper, ref otherSettingsWrapper, instantiateWithoutNCSettings);
         }
     }
 }

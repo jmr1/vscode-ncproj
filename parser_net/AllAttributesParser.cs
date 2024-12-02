@@ -571,7 +571,8 @@ namespace parser
             [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.I4)] int[] mcode_groups_values_length,
             ref ParserSettingsWrapper parser_settings,
             ref OtherSettingsWrapper other_settings,
-            FanucParserType fanuc_parser_type);
+            FanucParserType fanuc_parser_type,
+            bool instantiateWithoutNCSettings);
 #else
         static protected IntPtr CreateFanucAllAttributesParser(
             string[] metric_grammar_keys,
@@ -592,7 +593,8 @@ namespace parser
             int[] mcode_groups_values_length,
             ref ParserSettingsWrapper parser_settings,
             ref OtherSettingsWrapper other_settings,
-            FanucParserType fanuc_parser_type)
+            FanucParserType fanuc_parser_type,
+            bool instantiateWithoutNCSettings)
         {
             return IntPtr.Zero;
         }
@@ -602,11 +604,13 @@ namespace parser
         [DllImport(dllname)]
         static protected extern IntPtr CreateHeidenhainAllAttributesParser(
             ref ParserSettingsWrapper parser_settings,
-            ref OtherSettingsWrapper other_settings);
+            ref OtherSettingsWrapper other_settings,
+            bool instantiateWithoutNCSettings);
 #else
         static protected IntPtr CreateHeidenhainAllAttributesParser(
             ref ParserSettingsWrapper parser_settings,
-            ref OtherSettingsWrapper other_settings)
+            ref OtherSettingsWrapper other_settings,
+            bool instantiateWithoutNCSettings)
         {
             return IntPtr.Zero;
         }

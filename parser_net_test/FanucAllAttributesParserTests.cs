@@ -190,7 +190,7 @@ namespace parser.Tests
                 language = Language.Polish
             };
 
-            var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill);
+            var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.FanucMill, true);
             ClassicAssert.IsNotNull(parser);
             string msg;
             ClassicAssert.AreEqual(true, parser.Parse(1, "A500", out msg, true));
@@ -220,7 +220,7 @@ namespace parser.Tests
                 language = Language.Polish
             };
 
-            var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.HaasLathe);
+            var parser = new FanucAllAttributesParser(fanuc_grammar, operations, gCodeGroupsMap, mCodeGroupsMap, ref parser_settings, ref other_settings, FanucParserType.HaasLathe, true);
             ClassicAssert.IsNotNull(parser);
             string msg;
             ClassicAssert.AreEqual(true, parser.Parse(1, "M10", out msg, true));

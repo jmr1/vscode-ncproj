@@ -123,7 +123,7 @@ namespace parser.Tests
                 language = Language.Polish
             };
 
-            var parser = new HeidenhainAllAttributesParser(ref parser_settings, ref other_settings);
+            var parser = new HeidenhainAllAttributesParser(ref parser_settings, ref other_settings, true);
             ClassicAssert.IsNotNull(parser);
             string msg;
             ClassicAssert.AreEqual(true, parser.Parse(1, "25 DEP LCT X+10 Y+12 R8 F100 M2", out msg, true));

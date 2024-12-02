@@ -61,7 +61,8 @@ extern "C" {
 #endif
 
 extern PARSER_API AllAttributesParserWrapperBase*
-                  CreateHeidenhainAllAttributesParser(const ParserSettings* parser_settings, const OtherSettings* other_settings);
+CreateHeidenhainAllAttributesParser(const ParserSettings*                   parser_settings,
+                                    const OtherSettings* other_settings, bool instantiateWithoutNCSettings = false);
 
 #ifdef __cplusplus
 }

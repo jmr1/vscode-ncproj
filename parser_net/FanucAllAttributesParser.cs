@@ -18,7 +18,8 @@ namespace parser
                                         CodeGroupsMap mCodeGroups,
                                         ref ParserSettings parserSettings,
                                         ref OtherSettings otherSettings,
-                                        FanucParserType fanuc_parser_type)
+                                        FanucParserType fanuc_parser_type,
+                                        bool instantiateWithoutNCSettings = false)
         {
             int cnt = 0;
             var gcode_values_length = new int[gCodeGroups.Keys.Count()];
@@ -62,7 +63,8 @@ namespace parser
                                                mcode_values_length,
                                                ref parserSettingsWrapper,
                                                ref otherSettingsWrapper,
-                                               fanuc_parser_type);
+                                               fanuc_parser_type,
+                                               instantiateWithoutNCSettings);
         }
     }
 }

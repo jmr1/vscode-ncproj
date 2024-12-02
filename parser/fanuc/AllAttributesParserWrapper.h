@@ -98,7 +98,8 @@ extern PARSER_API AllAttributesParserWrapperBase* CreateFanucAllAttributesParser
     int* mcode_groups_values_length,
     const ParserSettings* parser_settings,
     const OtherSettings* other_settings,
-    EFanucParserType fanuc_parser_type);
+    EFanucParserType fanuc_parser_type,
+    bool instantiateWithoutNCSettings = false);
 // clang-format on
 
 #ifdef __cplusplus
