@@ -214,10 +214,16 @@ bool AllAttributesParser::parse(int line, std::string_view data, std::vector<Att
         UniqueCode()(*active_word_grammar, value, other_settings.language);
 
         if (!parser_settings.evaluate_macro)
+        {
+            message = all_attr_grammar->get_message();
             return ret;
+        }
 
         if (!MacroEvaluator::evaluate(macro_values, line, value, message, single_line_msg, other_settings.language))
+        {
+            message = all_attr_grammar->get_message();
             return false;
+        }
 
         std::vector<AttributeVariant> value2;
 
