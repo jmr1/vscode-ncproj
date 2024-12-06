@@ -5,6 +5,9 @@
 #include <array>
 #include <iomanip>
 #include <sstream>
+#include <string>
+#include <string_view>
+#include <vector>
 
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/variant.hpp>

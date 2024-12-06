@@ -6,6 +6,7 @@
 #include <inttypes.h>
 #include <iostream>
 #include <memory>
+#include <string>
 #include <string_view>
 
 #include <fanuc/AllAttributesParser.h>
