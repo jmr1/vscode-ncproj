@@ -6,12 +6,12 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.5.1 released
+- Version 0.5.2 released
   - New Features
-    - Support for system macros for words: B,D,E,F,H,M,N,S,T added
   - Enhancements
-    - Migration to VS2022, C++20, .Net Framework 4.7.2
+    - Performance Improvements: NC code parsing is now approximately 2x faster, enabling quicker processing and analysis.
   - Bug fixes
+    - Resolved an issue where the calculation of the code column in NC code errors was incorrect when a space was the first character on an NC code line.
 
 ## Features
 
@@ -22,7 +22,7 @@ Develop and validate CNC programs.
 
   ![macro](./images/macro.png)
   ![macro2](./images/macro2.png)
-- Code Lens showing computed path and time for given line of CNC code
+- Code Lens showing computed path and time for given line of CNC code  
   Switch to toggle Code Lens: "NC Project: Toggle Path and Time Calculation"
   ![macro](./images/codelens.png)
 - Machine Tool and Driver configuration creation/selection
