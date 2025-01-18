@@ -6,12 +6,12 @@ Develop and validate CNC programs.
 
 ## News
 
-- Version 0.5.2 released
+- Version 0.5.3 released
   - New Features
   - Enhancements
-    - Performance Improvements: NC code parsing is now approximately 2x faster, enabling quicker processing and analysis.
+    - Extend inch units for addresses and operations to 5 decimal digits.
   - Bug fixes
-    - Resolved an issue where the calculation of the code column in NC code errors was incorrect when a space was the first character on an NC code line.
+    - Disable decimal units for the D address on FANUC lathe, mill, and mill-turn, as well as for Makino mill.
 
 ## Features
 
