@@ -10,7 +10,6 @@ services:
     image: alpine-ncproj
     container_name: alpine-ncproj
     volumes:
-      - build_vol:/usr/app
       - ../../out:/usr/app/out
     build:
       context: ../../

@@ -1,4 +1,4 @@
-FROM node:lts-bullseye-slim
+FROM node:lts-bookworm-slim
 
 WORKDIR /usr/app
 
@@ -10,12 +10,15 @@ RUN apt-get install -y ccache
 RUN apt-get install -y valgrind
 RUN apt-get install -y rapidjson-dev
 RUN apt-get install -y libboost-dev libboost-program-options-dev
-RUN apt-get install -y git
-RUN cd .. && if [ ! -d googletest ]; then git clone https://github.com/google/googletest.git; fi && cd googletest && mkdir -p build && cd build && cmake .. -DBUILD_SHARED_LIBS=ON -DINSTALL_GTEST=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr && make -j && make install && ldconfig && cd /usr/app
+RUN apt-get install -y googletest google-mock
+RUN mkdir -p /usr/src/gtest_build && cd /usr/src/gtest_build && \
+    cmake /usr/src/googletest \
+    -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_INSTALL_PREFIX=/usr && \
+    make -j$(nproc) && \
+    make install && \
+    ldconfig
 
-RUN apt-get install -y python3
-RUN apt-get install -y pkg-config
-RUN apt-get install -y libsecret-1-dev
 RUN npm install -g vsce
 
 COPY . .
