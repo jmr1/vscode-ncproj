@@ -84,12 +84,18 @@ public:
             {
                 std::string tmp(code + std::to_string(cgv.code));
                 if (cgv.rest != 0)
-                    tmp += "." + std::to_string(cgv.rest);
+                {
+                    tmp += ".";
+                    tmp += std::to_string(cgv.rest);
+                }
 
                 auto        cgv_occ = occ_itor->second;
                 std::string tmp2    = code + std::to_string(cgv_occ->code);
                 if (cgv_occ->rest != 0)
-                    tmp2 += "." + std::to_string(cgv_occ->rest);
+                {
+                    tmp2 += ".";
+                    tmp2 += std::to_string(cgv_occ->rest);
+                }
                 throw code_groups_exception(make_message2(MessageName::InSameCodeGroup, language, tmp, tmp2, gr));
             }
 

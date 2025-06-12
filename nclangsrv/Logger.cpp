@@ -16,7 +16,7 @@ std::ofstream& Logger::operator()()
 {
     tm     buf;
     time_t now = std::time(nullptr);
-#ifdef _MSC_VER
+#ifdef _WIN32
     localtime_s(&buf, &now);
 #else
     localtime_r(&now, &buf);

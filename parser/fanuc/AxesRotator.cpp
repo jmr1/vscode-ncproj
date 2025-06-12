@@ -2,6 +2,7 @@
 
 #include "AxesRotator.h"
 
+#include <algorithm>
 #include <string>
 #include <unordered_map>
 
@@ -178,8 +179,8 @@ public:
         if (data.word == "X" || data.word == "Y" || data.word == "Z" || data.word == "I" || data.word == "J" ||
             data.word == "K")
         {
-            const auto wt_item = find_if(std::begin(wtm), std::end(wtm),
-                                         [&data](const auto& value) { return value.first.word == data.word; });
+            const auto wt_item = std::find_if(std::begin(wtm), std::end(wtm),
+                                              [&data](const auto& value) { return value.first.word == data.word; });
             data.word          = wt_item->second.word;
             if (wt_item->second.value == -1)
             {

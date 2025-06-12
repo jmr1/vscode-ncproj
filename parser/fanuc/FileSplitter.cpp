@@ -8,14 +8,12 @@
 
 #include <boost/variant.hpp>
 
+#include "DrillCycle.h"
 #include "MessageTextImpl.h"
 #include "PathCalculator.h"
 
 namespace parser {
 namespace fanuc {
-
-extern bool is_drill_cycle(int data);
-extern bool is_drill_cycle_qparam(int data);
 
 class FileSplitterAttributesVisitor : public boost::static_visitor<>
 {
