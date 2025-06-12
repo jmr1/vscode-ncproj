@@ -167,6 +167,7 @@
     <ClInclude Include="fanuc\AxesRotator.h" />
     <ClInclude Include="fanuc\CodeGroupsDefines.h" />
     <ClInclude Include="fanuc\CodeGroupsVerifier.h" />
+    <ClInclude Include="fanuc\DrillCycle.h" />
     <ClInclude Include="fanuc\FileSplitter.h" />
     <ClInclude Include="fanuc\GrammarSelector.h" />
     <ClInclude Include="fanuc\MacroDefines.h" />

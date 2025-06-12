@@ -147,6 +147,9 @@
     <ClInclude Include="fanuc\RotationVerifier.h">
       <Filter>Header Files\fanuc</Filter>
     </ClInclude>
+    <ClInclude Include="fanuc\DrillCycle.h">
+      <Filter>Header Files\fanuc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
