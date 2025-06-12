@@ -3,13 +3,13 @@ version: "3"
 volumes:
   build_vol:
 
-
 services:
 
   plugin:
     image: debian-ncproj
     container_name: debian-ncproj
     volumes:
+      - build_vol:/usr/app
       - ../../out:/usr/app/out
     build:
       context: ../../
@@ -17,4 +17,4 @@ services:
     working_dir: /usr/app/build
     environment:
       - MSYS_NO_PATHCONV=1
-    command: sh -c "cmake .. && make -j && make test && cd .. && npm install && npm run compile && vsce package --target linux-x64 && cp ./*.vsix ./out/"
+    command: sh -c "cmake .. && make -j3 && make test && cd .. && npm install && npm run compile && vsce package --target linux-x64 && cp ./*.vsix ./out/"
