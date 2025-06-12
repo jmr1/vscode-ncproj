@@ -1,4 +1,4 @@
-find_package(GMock REQUIRED)
+find_package(GTest REQUIRED)
 
 FILE (GLOB_RECURSE test_SRCS *.cpp *.cxx *.cc *.C *.c *.h *.hpp)
 LIST(REMOVE_ITEM test_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.cpp ${CMAKE_CURRENT_SOURCE_DIR}/targetver.h ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h)
