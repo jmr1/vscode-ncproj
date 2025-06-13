@@ -30,12 +30,18 @@ import {
     StatusBarItem,
     StatusBarAlignment,
     OutputChannel,
+    extensions,
+    version,
 } from "vscode";
 import { LanguageClientOptions } from "vscode-languageclient";
 import { LanguageClient, ServerOptions } from "vscode-languageclient/node";
 import * as cp from "child_process";
+import * as os from "os";
 import path = require("path");
 import fs = require("fs");
+import { userInfo } from "os";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 let langServer: LanguageClient;
 let currentWorkingDirectory: string;
@@ -43,6 +49,47 @@ let exeSrvPath: string;
 let exeCmtconfigPath: string;
 let statusBarItem: StatusBarItem;
 let ncprojChannel: OutputChannel;
+const telemetryProperties: { [key: string]: string } = {};
+
+const POSTHOG_API_KEY = "phc_innipPSEWaflUduNeALLQz7WlOflkTVHbYorUnmGV2u";
+const POSTHOG_API_HOST = "https://eu.i.posthog.com";
+
+let cachedUserId: string | undefined;
+
+function getUserId(context: ExtensionContext): string {
+    if (cachedUserId) return cachedUserId;
+
+    const key = "ncproj.uniqueUserId";
+    let userId = context.globalState.get<string>(key);
+
+    if (!userId) {
+        userId = uuidv4();
+        context.globalState.update(key, userId);
+    }
+
+    cachedUserId = userId;
+    return userId;
+}
+
+function sendTelemetryEvent(eventName: string, properties: Record<string, any> = {}) {
+    const config = workspace.getConfiguration("ncproj");
+    if (!config.get("telemetry.enable")) return;
+
+    axios
+        .post(`${POSTHOG_API_HOST}/capture/`, {
+            event: eventName,
+            properties,
+            distinct_id: cachedUserId,
+            api_key: POSTHOG_API_KEY,
+        })
+        .then((res) => {
+            console.log("Telemetry response status:", res.status);
+            console.log("Telemetry response body:", res.data);
+        })
+        .catch((err) => {
+            console.error("Telemetry send error:", err.message);
+        });
+}
 
 let cmtConfigRunning = false;
 const execShell = (cmd: string, options: cp.ExecOptions) =>
@@ -64,6 +111,10 @@ const execShell = (cmd: string, options: cp.ExecOptions) =>
                         '"'
                 );
                 ncprojChannel.show(true);
+
+                const errorProperties: { [key: string]: string } = {};
+                errorProperties["errorMessage"] = anonymizePaths(err.message);
+                sendTelemetryEvent("cmtErrorEvent", errorProperties);
                 return reject(err);
             }
             return resolve(out);
@@ -86,6 +137,11 @@ function startLangServerIO(command: string, args: string[], cwd: string, documen
     return new LanguageClient(command, serverOptions, clientOptions);
 }
 
+function anonymizePaths(input: string) {
+    if (input == null) return input;
+    return input.replace(new RegExp("\\" + path.sep + userInfo().username, "g"), path.sep + "anon");
+}
+
 function afterStartLangServer(executable: string) {
     // Register additional things (for instance, debugger).
 }
@@ -93,26 +149,64 @@ function afterStartLangServer(executable: string) {
 async function startLangServerNCProj(executable: string, cwd: string) {
     const config = workspace.getConfiguration("ncproj");
 
+    const extensionId = "jrupar-mcieslik.ncproj";
+    const extension = extensions.getExtension(extensionId);
+    const extensionVersion = extension.packageJSON.version;
+    telemetryProperties["extensionVersion"] = extensionVersion;
+
+    telemetryProperties["osPlatform"] = os.platform();
+    telemetryProperties["osRelease"] = os.release();
+    telemetryProperties["osArch"] = os.arch();
+    telemetryProperties["vscodeVersion"] = version;
+
     const args: Array<string> = [];
     const ncsettingFilePath = config.get<string>("ncsetting.file.path");
     if (ncsettingFilePath) {
         args.push("--ncsetting-path", ncsettingFilePath);
+    } else {
+        telemetryProperties["driver"] = "default";
+        telemetryProperties["machine_tool"] = "default";
     }
     const logFilePath = config.get<string>("debug.log.path");
     if (logFilePath) {
         args.push("--log-path", logFilePath);
+        telemetryProperties["logPath"] = "set";
     }
     const calculatePathTime = config.get<boolean>("calculate.pathtime.enable");
     if (calculatePathTime) {
         args.push("--calculate-path", String(calculatePathTime));
+        telemetryProperties["calculatePath"] = String(calculatePathTime);
     }
     const macroDescriptionsPath = config.get<string>("macro.descriptions.path");
     if (macroDescriptionsPath) {
         args.push("--macro-desc-path", macroDescriptionsPath);
+        telemetryProperties["macroDescPath"] = "set";
     }
 
     if (ncsettingFilePath) {
+        fs.readFile(ncsettingFilePath, function (err, data) {
+            if (err) {
+                console.error(err);
+            } else {
+                try {
+                    const obj = JSON.parse(data.toString());
+                    if (obj) {
+                        telemetryProperties["driver"] = obj.driver;
+                        telemetryProperties["machine_tool"] = obj.machine_tool;
+                        sendTelemetryEvent("activate", telemetryProperties);
+                    }
+                } catch (error) {
+                    console.error(error);
+                    const errorProperties: { [key: string]: string } = {};
+                    errorProperties["errorMessage"] = error.message;
+                    sendTelemetryEvent("jsonParseErrorEvent", errorProperties);
+                }
+            }
+        });
+
         setStatusText(ncsettingFilePath);
+    } else {
+        sendTelemetryEvent("activate", telemetryProperties);
     }
 
     langServer = startLangServerIO(executable, args, cwd, ["ncproj"]);
@@ -123,6 +217,10 @@ async function startLangServerNCProj(executable: string, cwd: string) {
 
     await langServer.start().catch((error) => {
         console.log(error);
+        const errorProperties: { [key: string]: string } = {};
+        errorProperties["errorMessage"] = error.message;
+        sendTelemetryEvent("langServerErrorEvent", errorProperties);
+
         ncprojChannel.appendLine("Unable to start Language Server!");
         if (process.platform == "win32") {
             ncprojChannel.appendLine(
@@ -275,6 +373,8 @@ function askFilePath(
 }
 
 export function activate(context: ExtensionContext) {
+    getUserId(context);
+
     ncprojChannel = window.createOutputChannel("NC Project");
 
     setupPaths(context);
@@ -290,6 +390,8 @@ export function activate(context: ExtensionContext) {
     registerMacroDescriptionsPlaceholder(context);
 
     checkNcsettingFilePathProperty();
+
+    sendTelemetryEvent("extensionActivated");
 }
 
 function createStatusBarItem(context: ExtensionContext) {
@@ -331,6 +433,7 @@ function checkNcsettingFilePathProperty() {
 
 function registerCmdNcsettingSelect(context: ExtensionContext) {
     const disposable = commands.registerCommand("ncproj.ncsettingSelect", () => {
+        sendTelemetryEvent("ncsettingSelect");
         const ncsettingFilters = {
             "NCSetting Files": ["ncsetting"],
             "All Files": ["*"],
@@ -347,6 +450,7 @@ function registerCmdNcsettingSelect(context: ExtensionContext) {
 
 function registerCmdNcsettingCreate(context: ExtensionContext) {
     const disposable = commands.registerCommand("ncproj.ncsettingCreate", () => {
+        sendTelemetryEvent("ncsettingCreate");
         if (process.platform != "win32") {
             window.showInformationMessage("Function not supported.");
         }
@@ -363,6 +467,7 @@ function registerCmdNcsettingCreate(context: ExtensionContext) {
 
 function registerCmdTogglePathTimeCalculation(context: ExtensionContext) {
     const disposable = commands.registerCommand("ncproj.togglePathTimeCalculation", () => {
+        sendTelemetryEvent("togglePathTimeCalculation");
         const config = workspace.getConfiguration("ncproj");
         const calculatePathTime = config.get<boolean>("calculate.pathtime.enable");
 
@@ -376,6 +481,7 @@ function registerCmdTogglePathTimeCalculation(context: ExtensionContext) {
 
 function registerCmdMacroDescriptionsSelect(context: ExtensionContext) {
     const disposable = commands.registerCommand("ncproj.macroDescriptionsSelect", () => {
+        sendTelemetryEvent("macroDescriptionsSelect");
         const ncsettingFilters = {
             "JSON Files": ["json"],
             "All Files": ["*"],
@@ -392,6 +498,7 @@ function registerCmdMacroDescriptionsSelect(context: ExtensionContext) {
 
 function registerMacroDescriptionsPlaceholder(context: ExtensionContext) {
     const disposable = commands.registerCommand("ncproj.macroDescriptionsPlaceholder", () => {
+        sendTelemetryEvent("macroDescriptionsPlaceholder");
         const placeholder = `{
 	"version": "1.0",
 	"descriptions": {

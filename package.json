@@ -53,7 +53,12 @@
                     "type": "boolean",
                     "default": true,
                     "title": "Whether to calculate path and time",
-                    "description": "Sets if path and time calculations should be performed"
+                    "description": "Sets if path and time calculations should be performed."
+                },
+                "ncproj.telemetry.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Allow the extension to send anonymous usage data."
                 }
             }
         },
@@ -129,7 +134,9 @@
         "lint:fix": "eslint \"vscode-client/src/**/*.{js,ts}\" --fix && npx prettier --write \"vscode-client/src/**/*.{js,ts}\""
     },
     "dependencies": {
+        "axios": "^1.9.0",
         "path-exists": "^4.0.0",
+        "uuid": "^8.3.2",
         "vscode-languageclient": "^8.0.2"
     },
     "devDependencies": {
