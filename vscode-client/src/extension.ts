@@ -34,7 +34,7 @@ import {
     version,
 } from "vscode";
 import { LanguageClientOptions } from "vscode-languageclient";
-import { LanguageClient, ServerOptions } from "vscode-languageclient/node";
+import { LanguageClient, ServerOptions, StreamInfo } from "vscode-languageclient/node";
 import * as cp from "child_process";
 import * as os from "os";
 import path = require("path");
@@ -127,6 +127,28 @@ function startLangServerIO(command: string, args: string[], cwd: string, documen
         args,
         options: { cwd: cwd },
     };
+
+    /// Using named pipes
+    /// Create Two Named Pipes in terminal:
+    // mkfifo /tmp/lsp-in
+    // mkfifo /tmp/lsp-out
+    /// /tmp/lsp-in: VSCode writes to this → server reads
+    /// /tmp/lsp-out: server writes to this → VSCode reads
+    /// Manually run the server:
+    // /home/$USER/projects/vscode-ncproj/vscode-client/out/nclangsrv --ncsetting-path /home/$USER/Downloads/nc_files/fanuc_mill_range.ncsetting --log-path /tmp/ncproj.log --calculate-path true --stdio < /tmp/lsp-in > /tmp/lsp-out
+    /// Uncomment below server options to use named pipes
+    // const serverOptions = () => {
+    //     const input = fs.createReadStream("/tmp/lsp-out");
+    //     const output = fs.createWriteStream("/tmp/lsp-in");
+
+    //     const streamInfo: StreamInfo = {
+    //         reader: input,
+    //         writer: output,
+    //     };
+
+    //     return Promise.resolve(streamInfo);
+    // };
+
     const clientOptions: LanguageClientOptions = {
         documentSelector: documentSelector,
         synchronize: {
