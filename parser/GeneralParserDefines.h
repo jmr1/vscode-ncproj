@@ -12,6 +12,8 @@ namespace parser {
 
 class AttributeVariantData
 {
+public:
+    virtual ~AttributeVariantData() = default;
 };
 
 enum class ECncType

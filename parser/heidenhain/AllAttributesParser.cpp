@@ -125,11 +125,16 @@ bool AllAttributesParser::parse(int line, std::string_view data, std::string& me
     return parse(line, data, value, message, single_line_msg);
 }
 
-bool AllAttributesParser::simple_parse(int line, const std::string& data, std::vector<AttributeVariant>& value,
+bool AllAttributesParser::simple_parse(int line, std::string_view data, AttributeVariantData& value,
                                        std::string& message, bool single_line_msg)
 {
-    std::string_view  data_view = data;
-    pos_iterator_type pos_begin(data_view.cbegin()), iter = pos_begin, pos_end(data_view.cend());
+    return simple_parse(line, data, static_cast<HeidenhainAttributeData&>(value).value, message, single_line_msg);
+}
+
+bool AllAttributesParser::simple_parse(int line, std::string_view data, std::vector<AttributeVariant>& value,
+                                       std::string& message, bool single_line_msg)
+{
+    pos_iterator_type pos_begin(data.cbegin()), iter = pos_begin, pos_end(data.cend());
     bool              ret{};
 
     try

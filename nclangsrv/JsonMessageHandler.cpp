@@ -4,11 +4,15 @@
 
 #include <chrono>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <memory>
 #include <regex>
 #include <sstream>
+#include <stdexcept>
+#include <string>
 #include <thread>
+#include <vector>
 
 #include <boost/algorithm/string/trim.hpp>
 #include <rapidjson/stringbuffer.h>
@@ -40,6 +44,24 @@ rapidjson::Value makeRange(int line, size_t from, size_t to, rapidjson::Document
     rapidjson::Value end(rapidjson::kObjectType);
     end.AddMember("line", line, a);
     end.AddMember("character", to, a);
+
+    rapidjson::Value range(rapidjson::kObjectType);
+    range.AddMember("start", start, a);
+    range.AddMember("end", end, a);
+
+    return range;
+}
+
+rapidjson::Value makeRange(int line_from, size_t char_from, int line_to, size_t char_to,
+                           rapidjson::Document::AllocatorType& a)
+{
+    rapidjson::Value start(rapidjson::kObjectType);
+    start.AddMember("line", line_from, a);
+    start.AddMember("character", char_from, a);
+
+    rapidjson::Value end(rapidjson::kObjectType);
+    end.AddMember("line", line_to, a);
+    end.AddMember("character", char_to, a);
 
     rapidjson::Value range(rapidjson::kObjectType);
     range.AddMember("start", start, a);
@@ -161,6 +183,157 @@ std::string markdownFormatHover(const std::string& contents, const std::string& 
     return "**" + contents + ": " + title + "** \n\n---\n\n" + replaceAll(description, "\n", "\n\n");
 }
 
+std::string decode_uri(const std::string& uri)
+{
+    std::ostringstream decoded;
+    for (size_t i = 0; i < uri.length(); ++i)
+    {
+        if (uri[i] == '%' && i + 2 < uri.length())
+        {
+            std::istringstream iss(uri.substr(i + 1, 2));
+            int                hex = 0;
+            if (iss >> std::hex >> hex)
+            {
+                decoded << static_cast<char>(hex);
+                i += 2;
+            }
+            else
+            {
+                decoded << '%'; // leave it as-is if decode fails
+            }
+        }
+        else
+        {
+            decoded << uri[i];
+        }
+    }
+    return decoded.str();
+}
+
+fs::path sanitizeFileUri(const std::string& uri)
+{
+    const std::string prefix = "file://";
+
+    std::string filepath = uri.rfind(prefix, 0) == 0 ? uri.substr(prefix.length()) : uri;
+    filepath             = decode_uri(filepath);
+
+#ifdef _WIN64
+    // Fix paths like "/z:/..." -> "z:/..."
+    if (filepath.size() > 2 && filepath[0] == '/' && filepath[2] == ':')
+    {
+        filepath = filepath.substr(1);
+    }
+#endif
+
+    fs::path path(filepath);
+    if (!fs::exists(path))
+    {
+        throw std::runtime_error("File does not exist: " + path.string());
+    }
+    if (!fs::is_regular_file(path))
+    {
+        throw std::runtime_error("Not a regular file: " + path.string());
+    }
+
+    return path;
+}
+
+std::vector<std::string> readFileLines(const std::string& uri)
+{
+    auto path = sanitizeFileUri(uri);
+
+    std::ifstream file(path);
+    if (!file)
+    {
+        throw std::runtime_error("Failed to open file: " + path.string());
+    }
+
+    std::vector<std::string> lines;
+    std::string              line;
+    while (std::getline(file, line))
+    {
+        if (!line.empty() && line.back() == '\r')
+        {
+            line.pop_back(); // Normalize Windows line endings
+        }
+        lines.push_back(std::move(line));
+    }
+
+    return lines;
+}
+
+std::vector<std::string> readFileLines(const std::string& uri, int lineFrom, int charFrom, int lineTo, int charTo)
+{
+    if (lineFrom < 0 || lineTo < 0 || lineFrom > lineTo)
+    {
+        throw std::invalid_argument("Invalid line range specified");
+    }
+
+    if (charFrom < 0 || charTo < 0 || (lineFrom == lineTo && charFrom > charTo))
+    {
+        throw std::invalid_argument("Invalid character range specified");
+    }
+
+    auto path = sanitizeFileUri(uri);
+
+    std::ifstream file(path);
+    if (!file)
+    {
+        throw std::runtime_error("Failed to open file: " + path.string());
+    }
+
+    int                      cnt{};
+    std::vector<std::string> lines;
+    std::string              line;
+    while (std::getline(file, line))
+    {
+        if (cnt < lineFrom)
+        {
+            ++cnt;
+            continue; // Skip lines before lineFrom
+        }
+        if (cnt > lineTo)
+        {
+            break; // Stop reading after lineTo
+        }
+        if (!line.empty() && line.back() == '\r')
+        {
+            line.pop_back(); // Normalize Windows line endings
+        }
+        if (cnt == lineFrom && charFrom > 0)
+        {
+            if (charFrom >= static_cast<int>(line.size()))
+            {
+                line.clear(); // If charFrom is beyond the line length, clear the line
+            }
+            else
+            {
+                line = line.substr(charFrom); // Trim to charFrom
+            }
+        }
+        if (cnt == lineTo && cnt == lineFrom && charTo > 0)
+        {
+            if (charTo - charFrom < static_cast<int>(line.size()))
+            {
+                line = line.substr(0, charTo - charFrom); // Trim to charTo
+            }
+        }
+        else if (cnt == lineTo && charTo > 0)
+        {
+            if (charTo < static_cast<int>(line.size()))
+            {
+                line = line.substr(0, charTo); // Trim to charTo
+            }
+        }
+        ++cnt;
+        if (line.empty())
+            continue; // Skip empty lines
+        lines.push_back(std::move(line));
+    }
+
+    return lines;
+}
+
 std::string parserType_str(parser::EFanucParserType parserType)
 {
     std::ostringstream ostr;
@@ -273,6 +446,14 @@ bool JsonMessageHandler::parse(const std::string& json)
     {
         textDocument_hover(d);
     }
+    else if (method == "textDocument/formatting")
+    {
+        textDocument_formatting(d);
+    }
+    else if (method == "textDocument/rangeFormatting")
+    {
+        textDocument_rangeFormatting(d);
+    }
     else if (method == "textDocument/codeLens")
     {
         textDocument_codeLens(d);
@@ -336,6 +517,8 @@ void JsonMessageHandler::initialize(int32_t id)
             capabilities.AddMember("completionProvider", completionProvider, a);
             capabilities.AddMember("hoverProvider", true, a);
             capabilities.AddMember("codeLensProvider", codeLensProvider, a);
+            capabilities.AddMember("documentFormattingProvider", true, a);
+            capabilities.AddMember("documentRangeFormattingProvider", true, a);
         }
 
         result.AddMember("capabilities", capabilities, a);
@@ -399,8 +582,8 @@ void JsonMessageHandler::fetch_gCodesDesc()
     {
         auto fsRootPath = fs::path(mRootPath);
         auto descPath   = fs::canonical(fsRootPath / fs::path("conf") /
-                                      fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
-                                      fs::path("desc") / fs::path("gcode_desc_" + getLangPrefix(mLanguage) + ".json"))
+                                        fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
+                                        fs::path("desc") / fs::path("gcode_desc_" + getLangPrefix(mLanguage) + ".json"))
                             .string();
         mGCodes = std::make_unique<CodesReader>(descPath, mLogger);
         mGCodes->read();
@@ -416,8 +599,8 @@ void JsonMessageHandler::fetch_mCodesDesc()
     {
         auto fsRootPath = fs::path(mRootPath);
         auto descPath   = fs::canonical(fsRootPath / fs::path("conf") /
-                                      fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
-                                      fs::path("desc") / fs::path("mcode_desc_" + getLangPrefix(mLanguage) + ".json"))
+                                        fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
+                                        fs::path("desc") / fs::path("mcode_desc_" + getLangPrefix(mLanguage) + ".json"))
                             .string();
         mMCodes = std::make_unique<CodesReader>(descPath, mLogger);
         mMCodes->read();
@@ -433,8 +616,8 @@ void JsonMessageHandler::fetch_macrosDesc()
     {
         auto fsRootPath = fs::path(mRootPath);
         auto descPath   = fs::canonical(fsRootPath / fs::path("conf") /
-                                      fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
-                                      fs::path("desc") / fs::path("macros_desc_" + getLangPrefix(mLanguage) + ".json"))
+                                        fs::path(parserType_str(mNcSettingsReader.getFanucParserType())) /
+                                        fs::path("desc") / fs::path("macros_desc_" + getLangPrefix(mLanguage) + ".json"))
                             .string();
         mMacrosDesc = std::make_unique<MacrosDescReader>(descPath, mMacrosDescUserPath, mLogger);
         mMacrosDesc->read();
@@ -788,6 +971,209 @@ void JsonMessageHandler::textDocument_hover(const rapidjson::Document& request)
 
     std::cout << "Content-Length: " << response.size() << MSG_ENDL << MSG_ENDL << response;
     std::cout.flush();
+}
+
+void JsonMessageHandler::send_window_showMessage(MessageType type, const std::string& message)
+{
+    rapidjson::Document d;
+    d.SetObject();
+    rapidjson::Document::AllocatorType& a = d.GetAllocator();
+
+    d.AddMember("jsonrpc", "2.0", a);
+
+    const std::string methodName("window/showMessage");
+    rapidjson::Value  method;
+    method.SetString(methodName.c_str(), static_cast<rapidjson::SizeType>(methodName.size()), a);
+    d.AddMember("method", method, a);
+
+    rapidjson::Value params(rapidjson::kObjectType);
+    {
+        params.AddMember("type", static_cast<int>(type), a); // 1 = Error, 2 = Warning, 3 = Info
+
+        {
+            rapidjson::Value value;
+            value.SetString(message.c_str(), static_cast<rapidjson::SizeType>(message.size()), a);
+            params.AddMember("message", value, a);
+        }
+    }
+
+    d.AddMember("params", params, a);
+
+    rapidjson::StringBuffer                    stringBuffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+    d.Accept(writer);
+
+    std::string response{stringBuffer.GetString()};
+
+    if (mLogger)
+    {
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
+        mLogger->flush();
+    }
+
+    std::cout << "Content-Length: " << response.size() << MSG_ENDL << MSG_ENDL << response;
+    std::cout.flush();
+}
+
+void JsonMessageHandler::textDocument_formatting(const rapidjson::Document& request)
+{
+    const auto&       params       = request["params"];
+    const auto&       textDocument = params["textDocument"];
+    const std::string uri          = textDocument["uri"].GetString();
+    // const auto& options      = textDocument["options"];
+
+    std::string              newText;
+    std::string              errorMessage;
+    std::vector<std::string> messages;
+    std::vector<std::string> contentLines;
+
+    try
+    {
+        contentLines                = readFileLines(uri);
+        std::tie(messages, newText) = mParser.formatContent(contentLines);
+    }
+    catch (const std::exception& e)
+    {
+        errorMessage = e.what();
+    }
+
+    rapidjson::Document d;
+    d.SetObject();
+    rapidjson::Document::AllocatorType& a = d.GetAllocator();
+
+    d.AddMember("jsonrpc", "2.0", a);
+    d.AddMember("id", request["id"].GetInt(), a);
+
+    if (!errorMessage.empty())
+    {
+        d.AddMember("error", rapidjson::Value(rapidjson::kObjectType), a);
+        d["error"].AddMember("code", -32603, a); // Internal error
+        d["error"].AddMember("message", rapidjson::Value(errorMessage.c_str(), a), a);
+    }
+    else
+    {
+        rapidjson::Value result(rapidjson::kArrayType);
+        {
+            rapidjson::Value entry(rapidjson::kObjectType);
+
+            entry.AddMember(
+                "range",
+                makeRange(0, 0, static_cast<int>(contentLines.size()), static_cast<int>(contentLines.back().size()), a),
+                a);
+
+            {
+                rapidjson::Value data;
+                data.SetString(newText.c_str(), static_cast<rapidjson::SizeType>(newText.size()), a);
+                entry.AddMember("newText", data, a);
+            }
+
+            result.PushBack(entry, a);
+        }
+
+        d.AddMember("result", result, a);
+    }
+
+    rapidjson::StringBuffer                    stringBuffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+    d.Accept(writer);
+
+    std::string response{stringBuffer.GetString()};
+
+    if (mLogger)
+    {
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
+        mLogger->flush();
+    }
+
+    std::cout << "Content-Length: " << response.size() << MSG_ENDL << MSG_ENDL << response;
+    std::cout.flush();
+
+    if (!messages.empty())
+        send_window_showMessage(MessageType::Warning, "Some lines could not be formatted due to syntax errors.");
+}
+
+void JsonMessageHandler::textDocument_rangeFormatting(const rapidjson::Document& request)
+{
+    const auto&       params         = request["params"];
+    const auto&       textDocument   = params["textDocument"];
+    const std::string uri            = textDocument["uri"].GetString();
+    const auto&       range          = params["range"];
+    const auto&       start          = range["start"];
+    const int         startLine      = start["line"].GetInt();
+    const int         startCharacter = start["character"].GetInt();
+    const auto&       end            = range["end"];
+    const int         endLine        = end["line"].GetInt();
+    const int         endCharacter   = end["character"].GetInt();
+    // const auto& options      = params["options"];
+
+    std::string              newText;
+    std::string              errorMessage;
+    std::vector<std::string> messages;
+    std::vector<std::string> contentLines;
+
+    try
+    {
+        contentLines                = readFileLines(uri, startLine, startCharacter, endLine, endCharacter);
+        std::tie(messages, newText) = mParser.formatContent(contentLines);
+    }
+    catch (const std::exception& e)
+    {
+        errorMessage = e.what();
+    }
+
+    rapidjson::Document d;
+    d.SetObject();
+    rapidjson::Document::AllocatorType& a = d.GetAllocator();
+
+    d.AddMember("jsonrpc", "2.0", a);
+    d.AddMember("id", request["id"].GetInt(), a);
+
+    if (!errorMessage.empty())
+    {
+        d.AddMember("error", rapidjson::Value(rapidjson::kObjectType), a);
+        d["error"].AddMember("code", -32603, a); // Internal error
+        d["error"].AddMember("message", rapidjson::Value(errorMessage.c_str(), a), a);
+    }
+    else
+    {
+        rapidjson::Value result(rapidjson::kArrayType);
+        {
+            rapidjson::Value entry(rapidjson::kObjectType);
+
+            entry.AddMember("range", makeRange(startLine, startCharacter, endLine, endCharacter, a), a);
+
+            {
+                rapidjson::Value data;
+                data.SetString(newText.c_str(), static_cast<rapidjson::SizeType>(newText.size()), a);
+                entry.AddMember("newText", data, a);
+            }
+
+            result.PushBack(entry, a);
+        }
+
+        d.AddMember("result", result, a);
+    }
+
+    rapidjson::StringBuffer                    stringBuffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(stringBuffer);
+    d.Accept(writer);
+
+    std::string response{stringBuffer.GetString()};
+
+    if (mLogger)
+    {
+        LOGGER << "JsonMessageHandler::" << __func__ << ": Content-Length: " << response.size() << std::endl
+               << "[" << response << "]" << std::endl;
+        mLogger->flush();
+    }
+
+    std::cout << "Content-Length: " << response.size() << MSG_ENDL << MSG_ENDL << response;
+    std::cout.flush();
+
+    if (!messages.empty())
+        send_window_showMessage(MessageType::Warning, "Some lines could not be formatted due to syntax errors.");
 }
 
 void JsonMessageHandler::textDocument_codeLens(const rapidjson::Document& request)

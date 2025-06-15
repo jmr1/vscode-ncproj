@@ -31,6 +31,13 @@ public:
     }
 
 private:
+    enum class MessageType
+    {
+        Error   = 1,
+        Warning = 2,
+        Info    = 3,
+    };
+
     void initialize(int32_t id);
     void initialized();
     void workspace_didChangeConfiguration(const rapidjson::Document& request);
@@ -40,11 +47,14 @@ private:
     void textDocument_completion(int32_t id);
     void completionItem_resolve(const rapidjson::Document& request);
     void textDocument_hover(const rapidjson::Document& request);
+    void textDocument_formatting(const rapidjson::Document& request);
+    void textDocument_rangeFormatting(const rapidjson::Document& request);
     void textDocument_codeLens(const rapidjson::Document& request);
     void codeLens_resolve(const rapidjson::Document& request);
     void cancelRequest();
     void shutdown(int32_t id);
     void textDocument_publishDiagnostics(const std::string& uri, const std::string& content);
+    void send_window_showMessage(MessageType type, const std::string& message);
 
     void fetch_gCodesDesc();
     void fetch_mCodesDesc();

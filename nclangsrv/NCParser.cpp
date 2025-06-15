@@ -17,6 +17,12 @@
 
 namespace fs = std::filesystem;
 
+#ifdef _WIN64
+const std::string newline = "\r\n";
+#else
+const std::string newline = "\n";
+#endif
+
 using namespace parser;
 
 namespace parser {
@@ -32,6 +38,8 @@ public:
 
     void operator()(const DecimalAttributeData& data) const
     {
+        if (!text.empty() && text.back() == ' ' && (data.word == "=" || data.word == "-" || data.word == "+"))
+            text.pop_back(); // remove space before =+-
         text += data.word;
         if (data.assign)
             text += *data.assign;
@@ -74,8 +82,9 @@ void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& tex
 {
     for (size_t x = 0; x < v.size(); ++x)
     {
+        if (x > 0)
+            text += " ";
         boost::apply_visitor(AttributesVisitor(text), v[x]);
-        text += " ";
     }
 }
 
@@ -106,8 +115,9 @@ void fill_parsed_values(const std::vector<AttributeVariant>& v, std::string& tex
 {
     /*for(size_t x = 0; x < v.size(); ++x)
     {
+        if (x > 0)
+            text += " ";
         boost::apply_visitor(AttributesVisitor(text), v[x]);
-        text += " ";
     }*/
 }
 
@@ -517,6 +527,221 @@ std::tuple<std::vector<std::string>, fanuc::macro_map, PathTimeResult> NCParser:
     }
 
     return std::make_tuple(messages, macro_m, pathTimeResult);
+}
+
+std::tuple<std::vector<std::string>, std::string> NCParser::formatContent(const std::vector<std::string>& contentLines)
+{
+    if (!mNcSettingsReader.getNcSettingsPath().empty() && !mNcSettingsReader.read())
+        return {{"ERROR: Couldn't read .ncsetting file"}, {}};
+
+    const auto fanuc_parser_type = mNcSettingsReader.getFanucParserType();
+    const auto machine_tool      = mNcSettingsReader.getMachineTool();
+    const auto machine_tool_type = mNcSettingsReader.getMachineToolType();
+
+    if (!mWordGrammarReader.get())
+    {
+        const auto         fsRootPath = fs::path(mRootPath);
+        std::ostringstream ostr;
+        ostr << mNcSettingsReader.getFanucParserType();
+        const std::string grammarPath =
+            fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("grammar.json")).string();
+        if (mLogger)
+            LOGGER << "NCParser::" << __func__ << ": grammarPath: " << grammarPath << std::endl;
+        mWordGrammarReader = std::make_unique<WordGrammarReader>(grammarPath, mLogger);
+
+        if (!mWordGrammarReader->read())
+            return {{"ERROR: Couldn't read word grammar settings"}, {}};
+    }
+
+    if (!mGCodeGroupsReader.get())
+    {
+        const auto         fsRootPath = fs::path(mRootPath);
+        std::ostringstream ostr;
+        ostr << mNcSettingsReader.getFanucParserType();
+        const std::string gCodeGroupsPath =
+            fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("gcode_groups.json"))
+                .string();
+        if (mLogger)
+            LOGGER << "NCParser::" << __func__ << ": gCodeGroupsPath: " << gCodeGroupsPath << std::endl;
+        mGCodeGroupsReader = std::make_unique<CodeGroupsReader>(gCodeGroupsPath, mLogger);
+
+        if (!mGCodeGroupsReader->read())
+            return {{"ERROR: Couldn't read gcode groups settings"}, {}};
+    }
+
+    if (!mMCodeGroupsReader.get())
+    {
+        const auto         fsRootPath = fs::path(mRootPath);
+        std::ostringstream ostr;
+        ostr << mNcSettingsReader.getFanucParserType();
+        const std::string mCodeGroupsPath =
+            fs::canonical(fsRootPath / fs::path("conf") / fs::path(ostr.str()) / fs::path("mcode_groups.json"))
+                .string();
+        if (mLogger)
+            LOGGER << "NCParser::" << __func__ << ": mCodeGroupsPath: " << mCodeGroupsPath << std::endl;
+        mMCodeGroupsReader = std::make_unique<CodeGroupsReader>(mCodeGroupsPath, mLogger);
+
+        if (!mMCodeGroupsReader->read())
+            return {{"ERROR: Couldn't read mcode groups settings"}, {}};
+    }
+
+    auto word_grammar = mWordGrammarReader->getWordGrammar();
+    auto operations   = mWordGrammarReader->getOperations();
+
+    auto gcode_groups = mGCodeGroupsReader->getCodeGroups();
+    auto mcode_groups = mMCodeGroupsReader->getCodeGroups();
+
+    auto machine_points_data = mNcSettingsReader.getMachinePointsData();
+    auto kinematics          = mNcSettingsReader.getKinematics();
+    auto cnc_default_values  = mNcSettingsReader.getCncDefaultValues();
+    auto zero_point          = mNcSettingsReader.getZeroPoint();
+
+    ECncType cnc_type = ECncType::Fanuc;
+
+    switch (fanuc_parser_type)
+    {
+    case EFanucParserType::FanucLatheSystemA:
+    case EFanucParserType::FanucLatheSystemB:
+    case EFanucParserType::FanucLatheSystemC:
+    case EFanucParserType::FanucMill:
+    case EFanucParserType::FanucMillturnSystemA:
+    case EFanucParserType::FanucMillturnSystemB:
+        cnc_type = ECncType::Fanuc;
+        break;
+    case EFanucParserType::GenericLathe:
+    case EFanucParserType::GenericMill:
+        cnc_type = ECncType::Generic;
+        break;
+    case EFanucParserType::HaasLathe:
+    case EFanucParserType::HaasMill:
+        cnc_type = ECncType::Haas;
+        break;
+    case EFanucParserType::MakinoMill:
+        cnc_type = ECncType::Makino;
+        break;
+    }
+
+    std::unique_ptr<AllAttributesParserBase> ap;
+    std::unique_ptr<AttributeVariantData>    value;
+    switch (cnc_type)
+    {
+    case ECncType::Fanuc:
+    case ECncType::Haas:
+    case ECncType::Makino:
+    case ECncType::Generic: {
+        ap = std::make_unique<fanuc::AllAttributesParser>(
+            fanuc::AllAttributesParser(std::move(word_grammar), std::move(operations), std::move(gcode_groups),
+                                       std::move(mcode_groups), {}, {mLanguage}, fanuc_parser_type));
+
+        auto apf = dynamic_cast<fanuc::AllAttributesParser*>(ap.get());
+        apf->reset_macro_values();
+        // apf->reset_attributes_path_calculator();
+
+        value = std::make_unique<fanuc::FanucAttributeData>();
+        break;
+    }
+
+    case ECncType::Heidenhain: {
+        ap = std::make_unique<heidenhain::AllAttributesParser>(ParserSettings{}, OtherSettings{mLanguage});
+
+        value = std::make_unique<heidenhain::HeidenhainAttributeData>();
+        break;
+    }
+    }
+
+    ap->set_ncsettings(machine_tool, machine_tool_type, std::move(machine_points_data), std::move(kinematics),
+                       std::move(cnc_default_values), std::move(zero_point));
+
+    size_t                   line_nbr{};
+    size_t                   line_err{};
+    std::string              text;
+    const std::string        line_str("line 1");
+    std::vector<std::string> messages;
+
+    for (const auto& line : contentLines)
+    {
+        ++line_nbr;
+
+        std::string_view data = rtrim(line);
+        if (data.empty())
+        {
+            text += newline;
+            continue;
+        }
+
+        bool        ret{};
+        std::string message;
+        switch (cnc_type)
+        {
+        case ECncType::Fanuc:
+        case ECncType::Haas:
+        case ECncType::Makino:
+        case ECncType::Generic:
+            static_cast<fanuc::FanucAttributeData&>(*value).value.clear();
+            break;
+        case ECncType::Heidenhain:
+            static_cast<heidenhain::HeidenhainAttributeData&>(*value).value.clear();
+            break;
+        }
+
+        ret = ap->simple_parse(static_cast<int>(line_nbr), data, *value, message, single_line_output ? true : false);
+
+        if (!ret)
+        {
+            ++line_err;
+            auto pos = message.find(line_str);
+            if (pos != std::string::npos)
+            {
+                message.replace(pos, line_str.size(), "line " + std::to_string(line_nbr));
+            }
+            else
+            {
+                if (message.empty())
+                {
+                    message = data;
+                    message = std::to_string(line_nbr) + R"(: ')" + message + R"(')";
+                }
+                else if (message[0] == '1')
+                {
+                    message = std::to_string(line_nbr) + message.substr(1);
+                }
+                else
+                {
+                    message = std::to_string(line_nbr) + ": " + message;
+                }
+            }
+            messages.push_back(message);
+        }
+        if (!text.empty())
+            text += newline;
+        if (ret)
+        {
+            std::string textLine;
+            switch (cnc_type)
+            {
+            case ECncType::Fanuc:
+            case ECncType::Haas:
+            case ECncType::Makino:
+            case ECncType::Generic:
+                fanuc::fill_parsed_values(static_cast<fanuc::FanucAttributeData&>(*value).value, textLine);
+                break;
+            case ECncType::Heidenhain:
+                heidenhain::fill_parsed_values(static_cast<heidenhain::HeidenhainAttributeData&>(*value).value,
+                                               textLine);
+                break;
+            }
+            if (!textLine.empty())
+                text += textLine;
+            else
+                text += data; // If no attributes were parsed, keep the original line
+        }
+        else
+        {
+            text += data; // If parsing failed, keep the original line
+        }
+    }
+
+    return std::make_tuple(messages, text);
 }
 
 } // namespace nclangsrv

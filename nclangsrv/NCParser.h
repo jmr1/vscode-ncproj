@@ -26,6 +26,8 @@ public:
 
     std::tuple<std::vector<std::string>, parser::fanuc::macro_map, PathTimeResult> parse(const std::string& code);
 
+    std::tuple<std::vector<std::string>, std::string> formatContent(const std::vector<std::string>& contentLines);
+
 private:
     Logger*                            mLogger;
     parser::UnitConversionType         unit_conversion_type;

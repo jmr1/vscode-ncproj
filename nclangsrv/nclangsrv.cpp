@@ -60,6 +60,7 @@ int main(int argc, char* argv[])
         ("ncsetting-path,n", po::value<std::string>(&ncsetting_path), "path to ncsettings file")
         ("macro-desc-path,m", po::value<std::string>(&macro_desc_path), "path to macro descriptions json file")
         ("log-path,l", po::value<std::string>(&log_path), "path to log file")
+        ("stdio", "for using named pipe, stdin/stdout will be used for communication with nclangsrv")
     ;
     // clang-format on
 
@@ -137,8 +138,8 @@ int main(int argc, char* argv[])
 
         uint32_t length = std::atoi(str.c_str());
         if (logger)
-            LOGGER << __func__ << ": Content-Length: [" << str << "(" << str.size() << ")"
-                   << "], " << length << std::endl;
+            LOGGER << __func__ << ": Content-Length: [" << str << "(" << str.size() << ")" << "], " << length
+                   << std::endl;
         if (length == 0)
         {
             continue;

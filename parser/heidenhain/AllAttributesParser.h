@@ -43,6 +43,9 @@ public:
                        bool single_line_msg) override;
     virtual bool parse(int line, std::string_view data, std::string& message, bool single_line_msg) override;
 
+    virtual bool simple_parse(int line, std::string_view data, AttributeVariantData& value, std::string& message,
+                              bool single_line_msg) override;
+
     virtual void set_parser_settings(const ParserSettings& parser_settings) override;
 
     virtual void set_ncsettings(EMachineTool machine_tool, EMachineToolType machine_tool_type,
@@ -127,7 +130,7 @@ private:
 
     void build_symbols();
 
-    bool simple_parse(int line, const std::string& data, std::vector<AttributeVariant>& value, std::string& message,
+    bool simple_parse(int line, std::string_view data, std::vector<AttributeVariant>& value, std::string& message,
                       bool single_line_msg);
 
 private:
