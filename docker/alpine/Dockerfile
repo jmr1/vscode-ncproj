@@ -9,7 +9,6 @@ RUN apk add ccache
 RUN apk add valgrind valgrind-dev
 RUN apk add rapidjson-dev
 RUN apk add boost-dev
-RUN apk add gtest-dev
 
 RUN npm install -g vsce
 

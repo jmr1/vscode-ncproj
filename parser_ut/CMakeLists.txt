@@ -1,35 +1,49 @@
-find_package(GTest REQUIRED)
+include(FetchContent)
 
-FILE (GLOB_RECURSE test_SRCS *.cpp *.cxx *.cc *.C *.c *.h *.hpp)
-LIST(REMOVE_ITEM test_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.cpp ${CMAKE_CURRENT_SOURCE_DIR}/targetver.h ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h)
-SET (test_LIBS ${LIBPARSER_NAME} ${Boost_LIBRARIES} ${GTEST_BOTH_LIBRARIES} ${GMOCK_BOTH_LIBRARIES})
-SET (test_BIN ${LIBPARSER_NAME_UT})
-INCLUDE_DIRECTORIES(${GTEST_INCLUDE_DIRS} ${GMOCK_INCLUDE_DIRS})
+# Disable install for GTest, use it as a subproject
+set(INSTALL_GTEST OFF)
+set(BUILD_GMOCK ON)
 
-include (CTest)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(googletest)
+
+# Collect test sources
+FILE(GLOB_RECURSE test_SRCS *.cpp *.cc *.cxx *.C)
+LIST(REMOVE_ITEM test_SRCS
+  ${CMAKE_CURRENT_SOURCE_DIR}/stdafx.cpp)
+
+# Define test binary and required libraries
+SET(test_BIN ${LIBPARSER_NAME_UT})
+SET(test_LIBS ${LIBPARSER_NAME} ${Boost_LIBRARIES} gmock gmock_main gtest gtest_main)
+
 ADD_EXECUTABLE(${test_BIN} ${test_SRCS})
-IF (project_build_shared)
+
+# Link to either shared or static parser
+IF(project_build_shared)
   ADD_DEPENDENCIES(${test_BIN} ${LIBPARSER_NAME_SHARED})
-ELSE (project_build_shared)
+ELSE()
   ADD_DEPENDENCIES(${test_BIN} ${LIBPARSER_NAME_STATIC})
-ENDIF (project_build_shared)
-TARGET_LINK_LIBRARIES(${test_BIN} ${test_LIBS})
+ENDIF()
 
-IF (LEAKCHECK)
+TARGET_COMPILE_OPTIONS(${test_BIN} PRIVATE -Wno-restrict -Wno-error)
+TARGET_LINK_LIBRARIES(${test_BIN} PRIVATE ${test_LIBS})
+
+# Leak check command setup
+IF(LEAKCHECK)
   IF(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/output)
-    FILE (MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/output)
-  ENDIF(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/output)
-  SET (TEST_EXEC_CMD ${VALGRIND_PROGRAM} ${VALGRIND_CONFIG} --xml=yes --xml-file=${PROJECT_SOURCE_DIR}/output/${LIBPARSER_NAME}-ut-leakcheck.xml  ${PLUGIN_OUT_FOLDER}/${test_BIN})
-ELSE (LEAKCHECK)
-    SET (TEST_EXEC_CMD ${ENV} ${PLUGIN_OUT_FOLDER}/${test_BIN})
-ENDIF (LEAKCHECK)
+    FILE(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/output)
+  ENDIF()
+  SET(TEST_EXEC_CMD ${VALGRIND_PROGRAM} ${VALGRIND_CONFIG}
+    --xml=yes
+    --xml-file=${PROJECT_SOURCE_DIR}/output/${LIBPARSER_NAME}-ut-leakcheck.xml
+    ${PLUGIN_OUT_FOLDER}/${test_BIN})
+ELSE()
+  SET(TEST_EXEC_CMD ${ENV} ${PLUGIN_OUT_FOLDER}/${test_BIN})
+ENDIF()
 
-ADD_TEST(${LIBPARSER_NAME}-ut-test ${PLUGIN_OUT_FOLDER}/${test_BIN})
-#ADD_CUSTOM_TARGET(${LIBPARSER_NAME}-ut-test
-#                    ${AUTORUN_TESTS}
-#                    ${TEST_EXEC_CMD}
-#                    DEPENDS ${test_BIN}
-#                    WORKING_DIRECTORY "${MAINFOLDER}"
-#                    COMMENT "Executing ${LIBPARSER_NAME}-ut-test unit tests..."
-#                    VERBATIM
-#                    SOURCES ${test_SRCS})
+# Register test with CTest
+ADD_TEST(NAME ${LIBPARSER_NAME}-ut-test COMMAND ${PLUGIN_OUT_FOLDER}/${test_BIN})
