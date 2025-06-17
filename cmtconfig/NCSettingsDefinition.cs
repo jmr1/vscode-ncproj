@@ -3,11 +3,132 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 using System.IO;
-using parser;
 using Newtonsoft.Json.Linq;
 
 namespace cmtconfig
 {
+    public enum MachineToolType
+    {
+        mill,
+        lathe,
+        millturn
+    }
+
+    public enum DepthProgrammingType
+    {
+        absolute = 0,
+        incremental
+    }
+
+    public class AxisParameters
+    {
+        public double range_min { get; set; }
+        public double range_max { get; set; }
+    }
+
+    public class MachinePointsData
+    {
+        public Dictionary<string, double> tool_exchange_point { get; set; }
+        public Dictionary<string, double> machine_base_point { get; set; }
+    }
+
+    public class Kinematics
+    {
+        public Dictionary<string, AxisParameters> cartesian_system_axis { get; set; }
+        public double max_working_feed { get; set; }
+        public double max_fast_feed { get; set; }
+        public int maximum_spindle_speed { get; set; }
+        public int numer_of_items_in_the_warehouse { get; set; }
+        public int tool_exchange_time { get; set; }
+        public int pallet_exchange_time { get; set; }
+        public int tool_measurement_time { get; set; }
+        public bool diameter_programming_2x { get; set; }
+        public bool auto_measure_after_tool_selection { get; set; }
+        public string pallet_exchange_code { get; set; }
+        public string pallet_exchange_code_value { get; set; }
+        public string tool_measurement_code { get; set; }
+        public string tool_measurement_code_value { get; set; }
+    }
+
+    public class CncDefaultValues
+    {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Motion default_motion { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public WorkPlane default_work_plane { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public DriverUnits default_driver_units { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ProgrammingType default_programming { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public FeedMode default_feed_mode { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public RotationDirection default_rotation_direction { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public DepthProgrammingType drill_cycle_z_value { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public DrillCycleReturnValue drill_cycle_return_value { get; set; }
+        public int default_rotation { get; set; }
+        public bool rapid_traverse_cancel_cycle { get; set; }
+        public bool linear_interpolation_cancel_cycle { get; set; }
+        public bool circular_interpolation_cw_cancel_cycle { get; set; }
+        public bool circular_interpolation_ccw_cancel_cycle { get; set; }
+        public bool cycle_cancel_starts_rapid_traverse { get; set; }
+        public bool operator_turns_on_rotation { get; set; }
+        public bool tool_number_executes_exchange { get; set; }
+        public bool auto_rapid_traverse_after_tool_exchange { get; set; }
+    }
+
+    public enum Motion
+    {
+        rapid_traverse = 0, // G0
+        linear_interpolation // G1
+    }
+
+    public enum WorkPlane
+    {
+        XY = 17,
+        XZ,
+        YZ
+    }
+
+    public enum DriverUnits
+    {
+        millimeter,
+        inch
+    }
+
+    public enum ProgrammingType
+    {
+        absolute = 90,
+        incremental
+    }
+
+    public enum FeedMode
+    {
+        feed_per_minute = 94,
+        feed_per_revolution
+    }
+
+    public enum RotationDirection
+    {
+        right = 3,  // M03, CLW (clockwise)
+        left,       // M04, CCLW (counterclockwise)
+        stop        // M05
+    }
+
+    public enum DrillCycleReturnValue
+    {
+        beginning = 98,
+        point_r
+    }
+
+    public enum Language
+    {
+        English,
+        Polish,
+    }
+
     public class AuthorData
     {
         public string name { get; set; }

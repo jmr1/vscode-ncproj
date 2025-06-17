@@ -160,12 +160,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\parser_net\parser_net.csproj">
-      <Project>{27e6ef08-adb3-4f29-ac20-bf1d7b8bdca9}</Project>
-      <Name>parser_net</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>(robocopy "$(ProjectDir)img" "$(TargetDir)img" /mir) ^&amp; IF %25ERRORLEVEL%25 LEQ 1 exit 0</PreBuildEvent>
